@@ -8,8 +8,8 @@ NextDNS agent skills repository providing specialized knowledge for AI agents to
 
 - **Purpose**: Empowering AI agents with expert DNS management capabilities.
 - **Content**: Markdown-based skills and rules with standardized metadata.
-- **Package Manager**: pnpm ≥ 10.24
-- **Tools**: markdownlint-cli, case-police
+- **Package Manager**: PNPM.
+- **Tools**: markdownlint-cli, case-police.
 
 ## Development Commands
 
