@@ -1,0 +1,48 @@
+{
+  "name": "nextdns-skills",
+  "version": "1.0.0",
+  "description": "Comprehensive AI agent skills for NextDNS management, covering API integration, CLI operations, and Web UI configuration best practices.",
+  "author": "Tuan Duc Tran <tuanductran.dev@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/tuanductran/nextdns-skills#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuanductran/nextdns-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tuanductran/nextdns-skills/issues"
+  },
+  "packageManager": "pnpm@10.24.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "lint": "markdownlint --ignore-path=.gitignore . && case-police 'skills/**/*.md'",
+    "lint:fix": "markdownlint --ignore-path=.gitignore . --fix && case-police 'skills/**/*.md' --fix"
+  },
+  "keywords": [
+    "nextdns",
+    "dns",
+    "security",
+    "privacy",
+    "parental-control",
+    "ddns",
+    "denylist",
+    "allowlist",
+    "analytics",
+    "logs",
+    "configuration",
+    "threat-modeling",
+    "setup-optimization",
+    "troubleshooting",
+    "api",
+    "cli",
+    "ui",
+    "agent-skills",
+    "ai-agent"
+  ],
+  "devDependencies": {
+    "case-police": "^2.1.1",
+    "markdownlint-cli": "^0.47.0"
+  }
+}
