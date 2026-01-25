@@ -1,0 +1,170 @@
+{
+  "id": "abc123",
+  "fingerprint": "abc12",
+  "name": "Home Network",
+  "security": {
+    "threatIntelligenceFeeds": true,
+    "aiThreatDetection": true,
+    "googleSafeBrowsing": false,
+    "cryptojacking": true,
+    "dnsRebinding": true,
+    "idnHomographs": true,
+    "typosquatting": true,
+    "dga": true,
+    "nrd": true,
+    "ddns": false,
+    "parking": true,
+    "csam": true,
+    "tlds": [
+      "zip",
+      "mov",
+      "country"
+    ]
+  },
+  "privacy": {
+    "blocklists": [
+      {
+        "id": "hagezi-multi-pro",
+        "name": "HaGeZi - Multi PRO"
+      },
+      {
+        "id": "oisd-full",
+        "name": "OISD - Full"
+      },
+      {
+        "id": "hostsvn",
+        "name": "hostsVN"
+      }
+    ],
+    "natives": [
+      "apple",
+      "samsung",
+      "xiaomi",
+      "windows",
+      "alexa",
+      "roku",
+      "sonos",
+      "huawei"
+    ],
+    "disguisedTrackers": true,
+    "allowAffiliate": true
+  },
+  "parentalControl": {
+    "services": [
+      "tiktok",
+      "facebook",
+      "instagram",
+      "twitter",
+      "youtube"
+    ],
+    "categories": [
+      "gambling",
+      "dating",
+      "piracy"
+    ],
+    "safeSearch": true,
+    "youtubeRestrictedMode": true,
+    "blockBypass": true,
+    "recreation": {
+      "enabled": true,
+      "monday": {
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "tuesday": {
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "wednesday": {
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "thursday": {
+        "start": "18:00",
+        "end": "21:00"
+      },
+      "friday": {
+        "start": "18:00",
+        "end": "23:00"
+      },
+      "saturday": {
+        "start": "10:00",
+        "end": "23:00"
+      },
+      "sunday": {
+        "start": "10:00",
+        "end": "21:00"
+      }
+    }
+  },
+  "denylist": [
+    "ads.example.com",
+    "tracker.example.net",
+    "malicious.example.org"
+  ],
+  "allowlist": [
+    "important-service.com",
+    "business-app.example.com",
+    "email-tracking.service.net"
+  ],
+  "settings": {
+    "logs": {
+      "enabled": true,
+      "location": "ch",
+      "retention": 2592000
+    },
+    "blockPage": {
+      "enabled": true
+    },
+    "performance": {
+      "ecs": true,
+      "cacheBoost": true,
+      "cnameFlattening": true
+    },
+    "rewrites": [
+      {
+        "name": "local-server.home",
+        "answer": "192.168.1.100"
+      },
+      {
+        "name": "nas.home",
+        "answer": "192.168.1.50"
+      }
+    ]
+  },
+  "analytics": {
+    "enabled": true,
+    "retention": 90
+  },
+  "setup": {
+    "linkedIp": {
+      "enabled": true,
+      "autodetect": true,
+      "ddnsHostname": "my-router.ddns.net",
+      "updateToken": "abc123xyz789"
+    },
+    "devices": [
+      {
+        "id": "device1",
+        "name": "John's iPhone",
+        "model": "iPhone 14 Pro",
+        "icon": "iphone",
+        "profile": "abc123"
+      },
+      {
+        "id": "device2",
+        "name": "Smart TV",
+        "model": "Samsung 2023",
+        "icon": "tv",
+        "profile": "abc123"
+      },
+      {
+        "id": "device3",
+        "name": "Home Router",
+        "model": "OpenWrt",
+        "icon": "router",
+        "profile": "abc123"
+      }
+    ]
+  }
+}
