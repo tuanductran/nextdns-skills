@@ -82,6 +82,7 @@ jobs:
             skill_name=$(basename "$skill_dir")
             
             # Extract rule references from markdown links like [rule-name](rules/rule-name.md)
+            # Note: Uses grep -P (Perl regex) which is available on GitHub Actions Ubuntu runners
             referenced_rules=$(grep -oP '\[.*?\]\(rules/\K[^)]+(?=\))' "$skill_file" || true)
             
             if [ -n "$referenced_rules" ]; then
@@ -163,8 +164,8 @@ jobs:
               ERRORS_FOUND=1
             fi
             
-            # Check for Impact Line after H1 (skip blank lines)
-            line_after_h1=$(sed -n '/^# /{n; /^$/n; p}' "$rule_file" | head -1)
+            # Check for Impact Line after H1 (skip all blank lines)
+            line_after_h1=$(awk '/^# /{found=1; next} found && NF {print; exit}' "$rule_file")
             if ! echo "$line_after_h1" | grep -q '^\*\*Impact:'; then
               echo -e "${RED}❌ ERROR: Missing Impact Line after H1 title in $rule_file${NC}"
               ERRORS_FOUND=1
