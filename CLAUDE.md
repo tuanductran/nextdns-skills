@@ -29,6 +29,7 @@ The repository is organized by skill directories inside the `skills/` folder:
 - `skills/nextdns-api` - Rules for API integration (Auth, Analytics, Logs, Profiles).
 - `skills/nextdns-cli` - Rules for CLI installation, daemon control, and advanced routing.
 - `skills/nextdns-ui` - Rules for Web Dashboard settings based on best practices and threat modeling.
+- `skills/integrations` - Rules for third-party platform integrations (Tailscale, Home Assistant, Ubiquiti, etc.).
 
 Each skill directory follows this internal structure:
 - `SKILL.md` - Entry point containing skill metadata and a table mapping rules to keywords.
@@ -71,18 +72,23 @@ Immediately following the H1 heading, a bolded summary must exist:
 - `skills/nextdns-api/SKILL.md` - Schema and mapping for API-related tasks.
 - `skills/nextdns-cli/SKILL.md` - Schema and mapping for CLI/Terminal tasks.
 - `skills/nextdns-ui/SKILL.md` - Schema and mapping for Web UI/Configuration tasks.
+- `skills/integrations/SKILL.md` - Schema and mapping for third-party integration tasks.
+- `templates/rule-template.md` - Standardized template for creating new rules.
+- `data/schemas/profile.json` - Mock NextDNS Profile API response for testing.
 - `package.json` - Defines linting scripts and project metadata.
 - `.markdownlint.yml` - Global markdown styling rules.
+- `.github/workflows/validate-rules.yml` - CI/CD workflow for automated validation.
 
 ## Making Changes
 
 ### Adding a New Rule
 
-1. Create a new markdown file in the relevant `skills/<name>/rules/` folder using `kebab-case.md`.
-2. Add the required YAML frontmatter at the top.
-3. Include the H1 title followed by the bolded Impact Line.
-4. Add the entry to the Capability or Efficiency table in the parent `SKILL.md`.
-5. Run `pnpm lint:fix` to ensure compliance.
+1. Use the template from `templates/rule-template.md` as a starting point.
+2. Create a new markdown file in the relevant `skills/<name>/rules/` folder using `kebab-case.md`.
+3. Add the required YAML frontmatter at the top.
+4. Include the H1 title followed by the bolded Impact Line.
+5. Add the entry to the Capability or Efficiency table in the parent `SKILL.md`.
+6. Run `pnpm lint:fix` to ensure compliance.
 
 ### Updating Technical Knowledge
 
