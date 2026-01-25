@@ -13,22 +13,13 @@ metadata:
 
 | Rule | Keywords | Description |
 |------|----------|-------------|
-| [tailscale-integration](rules/tailscale-integration.md) | tailscale, mesh VPN, DNS settings, private network | Integrate NextDNS with Tailscale VPN |
-| [home-assistant-integration](rules/home-assistant-integration.md) | home assistant, smart home, automation, DNS integration | Integrate NextDNS with Home Assistant |
-| [ubiquiti-integration](rules/ubiquiti-integration.md) | unifi, dream machine, ubiquiti, network controller | Configure NextDNS on Ubiquiti devices |
-| [openwrt-integration](rules/openwrt-integration.md) | openwrt, router firmware, LUCI, DNS over HTTPS | Deploy NextDNS on OpenWrt routers |
-| [pfsense-integration](rules/pfsense-integration.md) | pfsense, firewall, router, DNS resolver | Integrate NextDNS with pfSense |
-| [docker-integration](rules/docker-integration.md) | docker, container, compose, DNS configuration | Run NextDNS in Docker containers |
-| [kubernetes-integration](rules/kubernetes-integration.md) | kubernetes, k8s, cluster DNS, deployment | Deploy NextDNS in Kubernetes clusters |
-| [synology-integration](rules/synology-integration.md) | synology, NAS, DSM, network settings | Configure NextDNS on Synology NAS |
+| *No capability rules yet* | | Add integration rules here |
 
 ## Efficiency Rules
 
 | Rule | Keywords | Description |
 |------|----------|-------------|
-| [multi-platform-strategy](rules/multi-platform-strategy.md) | strategy, planning, architecture, deployment | Strategic approach to multi-platform NextDNS deployment |
-| [testing-integration](rules/testing-integration.md) | testing, validation, DNS leak, verification | Validate NextDNS integration is working correctly |
-| [backup-failover](rules/backup-failover.md) | redundancy, failover, high availability, backup DNS | Configure backup DNS for high availability |
+| *No efficiency rules yet* | | Add efficiency rules here |
 
 ## Adding New Integration Rules
 
@@ -40,6 +31,25 @@ When adding a new integration rule:
 4. Add troubleshooting steps for common issues
 5. Register the rule in the appropriate table above
 6. Run `pnpm lint:fix` to ensure compliance
+
+### Example Integration Platforms
+
+Consider creating rules for these popular platforms:
+
+**Capability Rules**:
+- Tailscale (mesh VPN)
+- Home Assistant (smart home automation)
+- Ubiquiti UniFi (network controller)
+- OpenWrt (router firmware)
+- pfSense (firewall/router)
+- Docker (containerization)
+- Kubernetes (orchestration)
+- Synology NAS (network storage)
+
+**Efficiency Rules**:
+- Multi-platform deployment strategy
+- Integration testing and validation
+- Backup DNS and failover configuration
 
 ## Reference
 
