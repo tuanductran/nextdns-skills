@@ -13,7 +13,7 @@ metadata:
 
 | Rule | Keywords | Description |
 |------|----------|-------------|
-| *No capability rules yet* | | Add integration rules here |
+| [OpenWrt Integration](rules/openwrt.md) | openwrt, router, installation, upgrade, troubleshooting, ssh, luci | Installation, upgrade, and troubleshooting guidance for NextDNS on OpenWrt routers |
 
 ## Efficiency Rules
 
