@@ -32,7 +32,7 @@ NextDNS operates the following public DNS servers for unlinked devices:
 **DNS over TLS (DoT) / Android Private DNS:**
 - Hostname: `dns.nextdns.io`
 
-## Browser Setup (Capability Rules)
+## Browser Setup
 
 ### Chrome and Edge
 
@@ -55,7 +55,7 @@ Configure DNS over HTTPS in Firefox:
 4. Select **Max Protection**
 5. Choose **NextDNS** from the provider list
 
-## Operating System Setup (Capability Rules)
+## Operating System Setup
 
 ### Windows 11
 
@@ -89,7 +89,7 @@ Configure Private DNS for system-wide encrypted DNS:
 
 iOS requires installing a configuration profile:
 
-1. Visit the Apple configuration generator at `apple.nextdns.io`
+1. Visit the [Apple configuration generator](https://apple.nextdns.io)
 2. Generate and download the `.mobileconfig` profile for your configuration
 3. Install the profile on your iOS device
 4. Navigate to **Settings** → **General** → **VPN & Device Management**
@@ -97,7 +97,7 @@ iOS requires installing a configuration profile:
 
 **Note:** The profile must be generated from the official NextDNS Apple generator to ensure proper signing and compatibility.
 
-## AdGuard Home Integration (Capability Rules)
+## AdGuard Home Integration
 
 ### Upstream DNS Servers
 
@@ -113,9 +113,9 @@ https://dns2.nextdns.io/
 - **DNS over TLS:** Use `tls://dns1.nextdns.io/` and `tls://dns2.nextdns.io/`
 - **DNS over QUIC:** Use `quic://dns1.nextdns.io/` and `quic://dns2.nextdns.io/`
 
-### Bootstrap DNS Servers (Efficiency Rule)
+### Bootstrap DNS Servers
 
-**Critical:** Bootstrap DNS servers must be configured to ensure EDNS Client Subnet (ECS) works correctly for local servers.
+**Critical:** Bootstrap DNS servers must be configured to ensure AdGuard Home can resolve NextDNS upstream hostnames and maintain EDNS Client Subnet (ECS) functionality for optimal routing.
 
 **Recommended Bootstrap Servers:**
 ```conf
