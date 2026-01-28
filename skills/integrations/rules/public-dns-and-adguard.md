@@ -159,7 +159,6 @@ These public resolvers ensure that AdGuard Home can properly resolve the NextDNS
 
 ## Reference
 
-- [NextDNS Setup Guide](https://help.nextdns.io)
-- [NextDNS Public DNS Information](https://my.nextdns.io/start)
+- [NextDNS Setup Guide](https://help.nextdns.io/tag/setup)
 - [AdGuard Home Configuration](https://github.com/AdguardTeam/AdGuardHome/wiki/Configuration)
 - [Apple Configuration Generator](https://apple.nextdns.io)
