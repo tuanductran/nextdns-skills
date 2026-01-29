@@ -1,0 +1,24 @@
+name: Broken Link Check
+
+on:
+  schedule:
+    # Run monthly on the 1st at midnight UTC
+    - cron: '0 0 1 * *'
+  workflow_dispatch: # Allow manual triggering
+  repository_dispatch:
+    types: [check-link]
+
+jobs:
+  check:
+    name: Check Broken Links
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Broken Link Check
+        uses: technote-space/broken-link-checker-action@v2
+        with:
+          TARGET: 'https://github.com/${{ github.repository }}'
+          RECURSIVE: 'true'
+          LABELS: 'bug,documentation'
+          TITLE: 'Broken link found: ${URL}'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
