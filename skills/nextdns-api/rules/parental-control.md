@@ -198,4 +198,3 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/categories/g
 
 - [NextDNS Parental Control](https://help.nextdns.io/)
 - [Available Services](https://github.com/nextdns/services)
-- [Available Categories](https://github.com/nextdns/piracy-blocklists)
