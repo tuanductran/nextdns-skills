@@ -14,6 +14,7 @@ metadata:
 | Rule | Keywords | Description |
 |------|----------|-------------|
 | [installation](rules/installation.md) | install, setup, curl, nextdns install | Install NextDNS CLI on various platforms |
+| [windows-installation](rules/windows-installation.md) | Windows, GUI, CLI, installation, Systray, EXE | Windows-specific installation methods |
 | [daemon-control](rules/daemon-control.md) | start, stop, restart, status, daemon | Control NextDNS daemon service |
 | [system-configuration](rules/system-configuration.md) | activate, deactivate, DNS resolver | Configure system DNS settings |
 | [profile-configuration](rules/profile-configuration.md) | config, profile ID, settings | Configure NextDNS profile and settings |
