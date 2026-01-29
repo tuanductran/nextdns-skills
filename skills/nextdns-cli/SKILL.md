@@ -14,6 +14,7 @@ metadata:
 | Rule | Keywords | Description |
 |------|----------|-------------|
 | [installation](rules/installation.md) | install, setup, curl, nextdns install | Install NextDNS CLI on various platforms |
+| [macos-installation](rules/macos-installation.md) | macOS, Homebrew, App Store, installer | Install and configure NextDNS CLI on macOS |
 | [daemon-control](rules/daemon-control.md) | start, stop, restart, status, daemon | Control NextDNS daemon service |
 | [system-configuration](rules/system-configuration.md) | activate, deactivate, DNS resolver | Configure system DNS settings |
 | [profile-configuration](rules/profile-configuration.md) | config, profile ID, settings | Configure NextDNS profile and settings |
@@ -21,6 +22,7 @@ metadata:
 | [monitoring](rules/monitoring.md) | log, cache-stats, discovered clients | Monitor and debug DNS queries |
 | [platform-specific](rules/platform-specific.md) | router, OpenWrt, pfSense, Synology | Platform-specific configurations |
 | [ddwrt-installation](rules/ddwrt-installation.md) | DD-WRT, JFFS, NTP, router, time sync, dnsmasq | DD-WRT router installation and setup |
+| [docker-deployment](rules/docker-deployment.md) | docker, container, DockerHub, host network, port mapping | Deploy NextDNS CLI via Docker containers |
 | [troubleshooting](rules/troubleshooting.md) | diagnostic, connection test, DNS leak | Troubleshoot DNS issues |
 
 ## Efficiency Rules
