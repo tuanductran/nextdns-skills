@@ -196,5 +196,5 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/categories/g
 
 ## Reference
 
-- [NextDNS Help Center](https://help.nextdns.io/)
+- [NextDNS Help Center](https://help.nextdns.io)
 - [Available Services](https://github.com/nextdns/services)

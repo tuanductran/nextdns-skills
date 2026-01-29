@@ -209,4 +209,4 @@ try {
 
 ## Reference
 
-- [NextDNS Help Center](https://help.nextdns.io/)
+- [NextDNS Help Center](https://help.nextdns.io)
