@@ -209,4 +209,4 @@ try {
 
 ## Reference
 
-- [NextDNS Allowlist/Denylist](https://help.nextdns.io/t/g9hmv0k/what-is-the-allowlist-and-denylist)
+- [NextDNS Allowlist/Denylist](https://help.nextdns.io/)

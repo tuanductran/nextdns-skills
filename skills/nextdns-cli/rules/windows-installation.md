@@ -79,6 +79,6 @@ You should see active status and the configured profile ID.
 
 ## Reference
 
-- [NextDNS Downloads](https://nextdns.io/download)
+- [NextDNS Windows Downloads](https://nextdns.io/download/windows/stable)
 - [NextDNS CLI GitHub](https://github.com/nextdns/nextdns)
 - [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)
