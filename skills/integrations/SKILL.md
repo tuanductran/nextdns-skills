@@ -54,6 +54,6 @@ Consider creating rules for these popular platforms:
 
 ## Reference
 
-- [NextDNS Setup Guide](https://help.nextdns.io)
+- [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)
 - [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)
 - [NextDNS API Documentation](https://nextdns.github.io/api/)

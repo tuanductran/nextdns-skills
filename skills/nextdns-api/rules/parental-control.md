@@ -196,6 +196,6 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/categories/g
 
 ## Reference
 
-- [NextDNS Parental Control](https://help.nextdns.io/t/g9hmv0h/what-is-parental-control)
-- [Available Services](https://github.com/nextdns/metadata/tree/master/parentalcontrol/services)
-- [Available Categories](https://github.com/nextdns/metadata/tree/master/parentalcontrol/categories)
+- [NextDNS Parental Control](https://help.nextdns.io/tag/parental-control)
+- [Available Services](https://github.com/nextdns/services)
+- [NextDNS Metadata](https://github.com/nextdns/metadata)

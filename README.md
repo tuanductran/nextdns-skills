@@ -257,7 +257,7 @@ Skills are tested with:
 
 - [NextDNS API Documentation](https://nextdns.github.io/api/)
 - [NextDNS Account](https://my.nextdns.io/account)
-- [NextDNS Help Center](https://help.nextdns.io)
+- [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)
 
 ## License
 
