@@ -50,10 +50,10 @@ jobs:
 
       - name: Create Issue From File
         # Only create issues on scheduled runs or manual triggers
-        # v6.0.0
         if: failure() && github.event_name != 'pull_request'
-        uses: >-
-          peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710
+        # v6.0.0
+        # yamllint disable-line rule:line-length
+        uses: peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710
         with:
           title: Broken Links Detected
           content-filepath: ./lychee/out.md
