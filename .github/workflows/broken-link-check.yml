@@ -1,4 +1,11 @@
 ---
+# Note: The original broken-link-checker-action
+# (technote-space/broken-link-checker-action) was archived in Nov 2022
+# and is no longer maintained. This workflow uses lychee-action,
+# a well-maintained alternative that provides similar functionality
+# with better performance. If you specifically need the original action,
+# you can switch back to: uses: technote-space/broken-link-checker-action@v2
+
 name: Broken Link Check
 
 "on":
@@ -6,8 +13,8 @@ name: Broken Link Check
     # Run monthly on the 1st at midnight UTC
     - cron: '0 0 1 * *'
   workflow_dispatch:  # Allow manual triggering
-  repository_dispatch:
-    types: [check-link]
+  pull_request:
+    branches: [main, develop]
 
 jobs:
   check:
@@ -15,11 +22,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Broken Link Check
-        uses: technote-space/broken-link-checker-action@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check links with lychee
+        uses: lycheeverse/lychee-action@v2
         with:
-          TARGET: 'https://github.com/${{ github.repository }}'
-          RECURSIVE: 'true'
-          LABELS: 'bug,documentation'
-          TITLE: 'Broken link found: ${URL}'
+          # Check all markdown files in repository
+          args: --verbose --no-progress './**/*.md'
+          # Fail action on broken links
+          fail: true
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Issue From File
+        if: failure()
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Broken Links Detected
+          content-filepath: ./lychee/out.md
+          labels: |
+            bug
+            documentation
