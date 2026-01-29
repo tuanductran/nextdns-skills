@@ -14,6 +14,7 @@ metadata:
 | Rule | Keywords | Description |
 |------|----------|-------------|
 | [installation](rules/installation.md) | install, setup, curl, nextdns install | Install NextDNS CLI on various platforms |
+| [macos-installation](rules/macos-installation.md) | macOS, Homebrew, App Store, installer | Install and configure NextDNS CLI on macOS |
 | [daemon-control](rules/daemon-control.md) | start, stop, restart, status, daemon | Control NextDNS daemon service |
 | [system-configuration](rules/system-configuration.md) | activate, deactivate, DNS resolver | Configure system DNS settings |
 | [profile-configuration](rules/profile-configuration.md) | config, profile ID, settings | Configure NextDNS profile and settings |
