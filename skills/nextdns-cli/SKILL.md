@@ -20,6 +20,7 @@ metadata:
 | [advanced-features](rules/advanced-features.md) | conditional forwarder, MAC address, subnet | Advanced routing and filtering |
 | [monitoring](rules/monitoring.md) | log, cache-stats, discovered clients | Monitor and debug DNS queries |
 | [platform-specific](rules/platform-specific.md) | router, OpenWrt, pfSense, Synology | Platform-specific configurations |
+| [ddwrt-installation](rules/ddwrt-installation.md) | DD-WRT, JFFS, NTP, router, time sync, DNSMasq | DD-WRT router installation and setup |
 | [troubleshooting](rules/troubleshooting.md) | diagnostic, connection test, DNS leak | Troubleshoot DNS issues |
 
 ## Efficiency Rules
