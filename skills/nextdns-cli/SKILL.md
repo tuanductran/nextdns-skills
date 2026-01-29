@@ -20,6 +20,7 @@ metadata:
 | [advanced-features](rules/advanced-features.md) | conditional forwarder, MAC address, subnet | Advanced routing and filtering |
 | [monitoring](rules/monitoring.md) | log, cache-stats, discovered clients | Monitor and debug DNS queries |
 | [platform-specific](rules/platform-specific.md) | router, OpenWrt, pfSense, Synology | Platform-specific configurations |
+| [docker-deployment](rules/docker-deployment.md) | docker, container, DockerHub, host network, port mapping | Deploy NextDNS CLI via Docker containers |
 | [troubleshooting](rules/troubleshooting.md) | diagnostic, connection test, DNS leak | Troubleshoot DNS issues |
 
 ## Efficiency Rules
