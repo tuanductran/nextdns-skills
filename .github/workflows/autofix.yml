@@ -1,2 +1,37 @@
-- name: autofix.ci
-  uses: autofix-ci/action@v1.3.2
+name: autofix.ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - develop
+
+permissions:
+  contents: read
+
+jobs:
+  autofix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.2
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run autofix
+        run: pnpm lint:fix
+
+      - name: autofix.ci
+        uses: autofix-ci/action@v1.3.2
