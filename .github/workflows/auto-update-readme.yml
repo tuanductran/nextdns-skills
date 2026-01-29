@@ -202,7 +202,7 @@ jobs:
           PYTHON_SCRIPT
 
       - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: 'docs: auto-update README.md with latest rules'
           file_pattern: 'README.md'
