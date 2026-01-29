@@ -1,0 +1,56 @@
+name: Link Checker
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  link-checker:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Scan all markdown files in the repository
+          args: >-
+            --verbose
+            --no-progress
+            --exclude-path './node_modules'
+            --exclude-path './pnpm-lock.yaml'
+            --exclude '^file://'
+            --exclude '^mailto:'
+            --scheme https
+            --accept 200,201,202,203,204,206,300,301,302,303,307,308,429
+            --timeout 30
+            --max-retries 3
+            --retry-wait-time 5
+            'skills/**/*.md'
+            'templates/**/*.md'
+            'README.md'
+            'CLAUDE.md'
+          # Fail the build if broken links are found
+          fail: true
+        env:
+          # Use GitHub token to avoid rate limiting
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Output link checker results
+        if: always()
+        run: |
+          echo "📊 Link checker results are available in the workflow logs above."
+          echo ""
+          echo "To view detailed results:"
+          echo "1. Go to the 'Actions' tab in the GitHub repository"
+          echo "2. Select this workflow run"
+          echo "3. Click on the 'link-checker' job"
+          echo "4. Expand the 'Link Checker' step to see detailed results"
+          echo ""
+          echo "ℹ️  The workflow will fail if any broken links (404s, timeouts, etc.) are detected."
+          echo "ℹ️  Only external HTTPS links are checked. Local file paths and mailto links are excluded."
