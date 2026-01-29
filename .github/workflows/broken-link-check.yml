@@ -31,8 +31,8 @@ jobs:
 
       - name: Check links with lychee
         # Pin to specific commit SHA for security and reproducibility
-        # v2.1.0
-        uses: lycheeverse/lychee-action@2b973e86fc5d6f3e1e3b8ad7123e5e09c19fcab7
+        # v2.7.0
+        uses: lycheeverse/lychee-action@a8c4c7cb88f0c7386610c35eb25108e448569cb0
         with:
           # Check all markdown files in repository
           args: >-
@@ -50,8 +50,10 @@ jobs:
 
       - name: Create Issue From File
         # Only create issues on scheduled runs or manual triggers
+        # v6.0.0
         if: failure() && github.event_name != 'pull_request'
-        uses: peter-evans/create-issue-from-file@v5
+        uses: >-
+          peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710
         with:
           title: Broken Links Detected
           content-filepath: ./lychee/out.md
