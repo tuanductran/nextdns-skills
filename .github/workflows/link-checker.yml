@@ -16,18 +16,16 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@v2.7.0
         with:
           # Scan all markdown files in the repository
           args: >-
             --verbose
             --no-progress
-            --exclude-path './node_modules'
-            --exclude-path './pnpm-lock.yaml'
             --exclude '^file://'
             --exclude '^mailto:'
             --scheme https
-            --accept 200,201,202,203,204,206,300,301,302,303,307,308,429
+            --accept 200,201,202,203,204,300,301,302,303,307,308
             --timeout 30
             --max-retries 3
             --retry-wait-time 5
