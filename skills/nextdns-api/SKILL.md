@@ -40,4 +40,3 @@ metadata:
 
 - [NextDNS API Documentation](https://nextdns.github.io/api/)
 - [NextDNS Account](https://my.nextdns.io/account)
-- [NextDNS API Documentation](https://nextdns.github.io/api/)

@@ -33,4 +33,3 @@ metadata:
 
 - [NextDNS Dashboard](https://my.nextdns.io)
 - [NextDNS-Config Guidelines](https://github.com/yokoffing/NextDNS-Config)
-- [NextDNS Dashboard](https://my.nextdns.io)
