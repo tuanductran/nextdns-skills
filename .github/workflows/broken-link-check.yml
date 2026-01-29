@@ -16,6 +16,10 @@ name: Broken Link Check
   pull_request:
     branches: [main, develop]
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   check:
     name: Check Broken Links
@@ -26,17 +30,27 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check links with lychee
-        uses: lycheeverse/lychee-action@v2
+        # Pin to specific commit SHA for security and reproducibility
+        # v2.1.0
+        uses: lycheeverse/lychee-action@2b973e86fc5d6f3e1e3b8ad7123e5e09c19fcab7
         with:
           # Check all markdown files in repository
-          args: --verbose --no-progress './**/*.md'
+          args: >-
+            --verbose
+            --no-progress
+            --max-retries 3
+            --timeout 30
+            './**/*.md'
+          # Output results to file for issue creation
+          output: ./lychee/out.md
           # Fail action on broken links
           fail: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Issue From File
-        if: failure()
+        # Only create issues on scheduled runs or manual triggers
+        if: failure() && github.event_name != 'pull_request'
         uses: peter-evans/create-issue-from-file@v5
         with:
           title: Broken Links Detected
