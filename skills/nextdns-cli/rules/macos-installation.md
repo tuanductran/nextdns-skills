@@ -17,7 +17,7 @@ This rule provides comprehensive guidance for installing and configuring NextDNS
 The recommended method for installing NextDNS CLI on macOS is using the universal one-liner command:
 
 ```bash
-sh -c "$(curl -sL https://nextdns.io/install)"
+sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ```
 
 This command will:
@@ -35,7 +35,7 @@ Follow the on-screen instructions to complete the installation. The installer wi
 To upgrade NextDNS CLI to the latest version, simply re-run the installer command:
 
 ```bash
-sh -c "$(curl -sL https://nextdns.io/install)"
+sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ```
 
 The installer will detect the existing installation and automatically upgrade to the new version if available. No additional steps are required for upgrades.
@@ -95,7 +95,7 @@ The Mac App Store version provides the same functionality as the CLI but with a 
 If you encounter issues during installation or configuration, you can enable debug mode for detailed logging:
 
 ```bash
-DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"
+DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ```
 
 This will provide verbose output to help diagnose installation problems. Common issues and their solutions:
