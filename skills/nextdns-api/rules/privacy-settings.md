@@ -157,4 +157,4 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/natives/apple', {
 ## Reference
 
 - [NextDNS Privacy Settings](https://help.nextdns.io/tag/privacy)
-- [Available Blocklists](https://github.com/nextdns/blocklists)
+- [Available Blocklists](https://github.com/nextdns/metadata/tree/d51f71bf491181f964dec7742322c8fcdb133e12/privacy/blocklists)
