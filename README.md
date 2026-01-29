@@ -35,23 +35,32 @@ NextDNS API integration best practices covering authentication, profile manageme
 | Capability | 15    | Authentication, Profile management, Security settings, Privacy settings, Parental control, Analytics queries, Time series data, Logs streaming, Error handling, Pagination |
 | Efficiency | 2     | Response format parsing, Logs download                                                                                                                                         |
 
-### nextdns-cli (10 rules)
+### nextdns-cli (14 rules)
 
 NextDNS CLI client best practices for installation, configuration, and management of DNS-over-HTTPS proxy.
 
 | Type       | Count | Examples                                                                                                                                                   |
 |:-----------|:------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Capability | 8     | Installation, Daemon control, System configuration, Profile configuration, Advanced features, Monitoring, Platform-specific, Troubleshooting                 |
-| Efficiency | 2     | Upgrade/uninstall, Best practices                                                                                                                          |
+| Capability | 11    | Installation, Daemon control, System configuration, Profile configuration, Advanced features, Monitoring, Platform-specific, Troubleshooting                 |
+| Efficiency | 3     | Upgrade/uninstall, Best practices, Docker deployment                                                                                                       |
 
-### nextdns-ui (8 rules)
+### nextdns-ui (10 rules)
 
 NextDNS Web UI configuration and management best practices via the web dashboard.
 
 | Type       | Count | Examples                                                                                                                                                   |
 |:-----------|:------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Capability | 6     | Security settings, Privacy settings, Parental control, Denylist/Allowlist, Analytics & Logs, Configuration management                                      |
-| Efficiency | 2     | Setup optimization, Troubleshooting via UI                                                                                                                 |
+| Capability | 7     | Security settings, Privacy settings, Parental control, Denylist/Allowlist, DDNS settings, Analytics & Logs, Configuration management                       |
+| Efficiency | 3     | Threat modeling, Setup optimization, Troubleshooting via UI                                                                                                |
+
+### integrations (3 rules)
+
+NextDNS integration guides for third-party platforms and services including routers, network management, and home automation.
+
+| Type       | Count | Examples                                                                                                                                                   |
+|:-----------|:------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Capability | 3     | DNSMasq integration, Public DNS and AdGuard Home, OpenWrt installation and troubleshooting                                                                  |
+| Efficiency | 0     | Future: Multi-platform deployment, Integration testing                                                                                                     |
 
 ## Rule Types
 
@@ -129,13 +138,32 @@ Rules are classified into two categories:
 - **Privacy Settings**: Blocklists and tracking protection
 - **Parental Control**: Advanced filtering and schedules
 - **Denylist/Allowlist**: Manual domain management
+- **DDNS Settings**: Dynamic DNS configuration
 
 #### Monitoring & Management
 
 - **Analytics & Logs**: Identify and analyze network traffic
 - **Configuration Management**: Profile settings and performance
+- **Threat Modeling**: Security risk assessment and mitigation
 - **Setup Optimization**: Best practices for dashboard setup
 - **Troubleshooting UI**: Debugging issues using the web interface
+
+### NextDNS Integration Skills
+
+#### Platform Integration
+
+- **DNSMasq Integration**: Configure DNSMasq and NextDNS together while maintaining client reporting
+- **Public DNS Setup**: Configure NextDNS public DNS servers on browsers and operating systems
+- **AdGuard Home**: Integrate NextDNS with AdGuard Home as upstream DNS provider
+- **OpenWrt**: Installation, upgrade, and troubleshooting on OpenWrt routers
+
+#### Supported Platforms
+
+- Routers: OpenWrt, pfSense, Ubiquiti UniFi, DD-WRT
+- Network: DNSMasq, AdGuard Home, conditional DNS forwarding
+- Automation: Home Assistant, Tailscale
+- Containers: Docker, Kubernetes
+- NAS: Synology, QNAP
 
 ## Quick Examples
 
@@ -227,6 +255,52 @@ nextdns cache-stats
 nextdns discovered
 ```
 
+### Integration Examples
+
+#### DNSMasq with NextDNS
+
+```bash
+# Configure DNSMasq to use NextDNS on custom port
+# In /etc/dnsmasq.conf
+server=127.0.0.1#5342
+no-resolv
+
+# Configure NextDNS CLI to listen on port 5342
+sudo nextdns config set -listen=127.0.0.1:5342
+sudo nextdns restart
+```
+
+#### OpenWrt Installation
+
+```bash
+# SSH into OpenWrt router
+ssh root@192.168.1.1
+
+# Install NextDNS
+sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+
+# Configure profile ID
+nextdns config set -profile=abc123
+
+# Install and start service
+nextdns install
+/etc/init.d/nextdns start
+/etc/init.d/nextdns enable
+```
+
+#### AdGuard Home Integration
+
+Configure NextDNS as upstream DNS in AdGuard Home settings:
+
+```text
+# Upstream DNS Servers
+https://dns.nextdns.io/abc123
+
+# Bootstrap DNS Servers
+1.1.1.1
+1.0.0.1
+```
+
 ## Methodology
 
 Every skill in this repository is created through a rigorous, evidence-based process:
@@ -255,9 +329,50 @@ Skills are tested with:
 
 ## Resources
 
+### Official Documentation
+
 - [NextDNS API Documentation](https://nextdns.github.io/api/)
-- [NextDNS Account](https://my.nextdns.io/account)
+- [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)
 - [NextDNS Help Center](https://help.nextdns.io)
+- [NextDNS Account Management](https://my.nextdns.io/account)
+
+### Community Resources
+
+- [NextDNS-Config Community Guidelines](https://github.com/yokoffing/NextDNS-Config)
+
+## Contributing
+
+This repository follows strict quality standards to ensure AI agents can reliably use the skills.
+
+### Development Setup
+
+```bash
+# Install dependencies
+pnpm install
+
+# Run linting
+pnpm lint
+
+# Fix linting issues
+pnpm lint:fix
+```
+
+### Adding a New Rule
+
+1. Use the template from `templates/rule-template.md`
+2. Create a new file in `skills/<skill-name>/rules/` using kebab-case naming
+3. Add required YAML frontmatter (title, impact, impactDescription, type, tags)
+4. Include the H1 title followed by the bolded Impact Line
+5. Add the entry to the skill's capability or efficiency table in `SKILL.md`
+6. Run `pnpm lint:fix` to ensure compliance
+
+### Quality Requirements
+
+- **Language**: All content must be in English
+- **Indentation**: Use 4-space indentation for lists
+- **Filenames**: Use kebab-case for all rule files
+- **Case Police**: Follow technical term casing (NextDNS, OpenWrt, macOS, etc.)
+- **Code Blocks**: Always specify language for syntax highlighting
 
 ## License
 
