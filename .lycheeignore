@@ -1,8 +1,5 @@
 # Lychee ignore file
 # Sites that may have transient 503 errors should be excluded from breaking the build
 
-# NextDNS help center - occasionally returns 503
-https://help.nextdns.io*
-
 # DD-WRT wiki - occasionally returns 503
 https://wiki.dd-wrt.com*
