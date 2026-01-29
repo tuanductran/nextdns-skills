@@ -13,6 +13,7 @@ metadata:
 
 | Rule | Keywords | Description |
 |------|----------|-------------|
+| [DNSMasq Integration](rules/dnsmasq-integration.md) | dnsmasq, dns, router, client reporting, conditional configuration, port configuration, setup-router | Configure DNSMasq and NextDNS to run together while maintaining client reporting and conditional configuration features |
 | [Public DNS and AdGuard Home Integration](rules/public-dns-and-adguard.md) | public dns, adguard, anycast, doh, dot, browser setup, windows, android, ios, upstream dns, bootstrap dns | Configure NextDNS public DNS servers on browsers and operating systems, and integrate with AdGuard Home as upstream DNS provider |
 | [OpenWrt Integration](rules/openwrt.md) | openwrt, router, installation, upgrade, troubleshooting, ssh, luci | Installation, upgrade, and troubleshooting guidance for NextDNS on OpenWrt routers |
 
