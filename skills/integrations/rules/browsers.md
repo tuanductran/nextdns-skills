@@ -75,7 +75,7 @@ Settings
                  └─ Use secure DNS
                       └─ With: Custom
                            └─ Enter custom provider
-```bash
+```
 
 ## Firefox Configuration
 
@@ -97,7 +97,7 @@ Firefox has its own implementation of DNS-over-HTTPS with slightly different ter
 5. Enter your NextDNS DoH URL:
     ```text
     https://dns.nextdns.io/<config_id>
-```text
+    ```
     Replace `<config_id>` with your actual NextDNS Configuration ID
 
 6. Changes apply automatically
@@ -112,7 +112,7 @@ Settings
                  └─ Choose provider
                       └─ Custom
                            └─ Enter custom DNS URL
-```bash
+```
 
 ### Firefox Protection Modes
 
@@ -171,4 +171,57 @@ Temporarily use an invalid configuration ID to verify the browser is actually us
 
 ```text
 https://dns.nextdns.io/invalid
-```text
+```
+
+If DNS queries fail after setting this invalid ID, your browser is correctly using DoH. Restore your real configuration ID to resume normal operation.
+
+### Chrome/Edge: "Secure DNS Unavailable" Warning
+
+If you see a warning that secure DNS is unavailable:
+
+1. Check if your network blocks port 443 to dns.nextdns.io
+2. Try temporarily disabling browser extensions that modify network traffic
+3. Clear browser cache and DNS cache
+4. Restart the browser
+
+### Firefox: Fallback to System DNS
+
+If Firefox falls back to system DNS (when using "Increased Protection" mode):
+
+1. Switch to "Max Protection" mode to prevent fallback
+2. Verify the custom URL is entered correctly
+3. Check browser console (F12) for DNS-related errors
+
+## Best Practices
+
+- **Use Max Protection** (Firefox) or enable DoH unconditionally (Chrome/Edge) for maximum security
+- **Verify configuration** using test.nextdns.io after setup
+- **Monitor Logs** in NextDNS dashboard to ensure queries are being received
+- **Document Settings** for easier reconfiguration on new devices
+- **Consider System-Wide Setup** for comprehensive protection beyond just browser traffic
+
+## Limitations and Considerations
+
+### Browser-Only Protection
+
+Browser DoH only protects DNS queries originating from that browser. Other applications on your system (email clients, games, system updates, etc.) will use the system's default DNS settings.
+
+### Performance
+
+DoH adds minimal latency (typically 5-15ms) compared to unencrypted DNS. This is generally imperceptible for normal browsing.
+
+### Network Policies
+
+Some corporate or school networks may:
+- Block DoH traffic entirely
+- Require using specific DNS servers for policy enforcement
+- Monitor DNS queries for security purposes
+
+Always respect organizational policies when configuring DoH in managed environments.
+
+## Reference
+
+- [NextDNS Setup Guide](https://help.nextdns.io)
+- [Chrome Secure DNS Documentation](https://www.chromium.org/developers/dns-over-https/)
+- [Firefox DNS-over-HTTPS Documentation](https://support.mozilla.org/en-US/kb/firefox-dns-over-https)
+- [NextDNS Test Page](https://test.nextdns.io)
