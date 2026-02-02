@@ -1,5 +1,7 @@
 # nextdns-skills
 
+![NextDNS Skills](thumbnail.jpeg)
+
 Agent skills for NextDNS API integration and DNS management.
 
 > 🚧 **Early Experiment**
