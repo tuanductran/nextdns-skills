@@ -1,11 +1,10 @@
 ---
-title: Mobile Native Encrypted DNS Configuration
-impact: HIGH
-impactDescription: Native encrypted DNS support on mobile devices provides lightweight protection without battery-draining background apps. Without this guidance, users may unnecessarily install third-party apps when the OS provides built-in encrypted DNS capabilities.
-type: capability
-tags: mobile, android, ios, iphone, ipad, private-dns, dot, dns-over-tls, configuration-profile, mobileconfig, native, lightweight
+title: "Mobile Native Encrypted DNS Configuration"
+impact: "HIGH"
+impactDescription: "Native encrypted DNS support on mobile devices provides lightweight protection without battery-draining background apps. Without this guidance, users may unnecessarily install third-party apps when the OS provides built-in encrypted DNS capabilities."
+type: "capability"
+tags: "mobile, android, ios, iphone, ipad, private-dns, dot, dns-over-tls, configuration-profile, mobileconfig, native, lightweight"
 ---
-
 # Mobile Native Encrypted DNS Configuration
 
 **Impact: HIGH** - Enables NextDNS protection on mobile devices using built-in OS features without battery-draining background apps

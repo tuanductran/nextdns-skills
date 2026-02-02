@@ -1,11 +1,10 @@
 ---
-title: Best Practices
-impact: MEDIUM
-impactDescription: Optimization, security, and performance recommendations for the CLI
-type: efficiency
-tags: performance, security, optimization, best practices
+title: "Best Practices"
+impact: "MEDIUM"
+impactDescription: "Optimization, security, and performance recommendations for the CLI"
+type: "efficiency"
+tags: "performance, security, optimization, best practices"
 ---
-
 # Best Practices
 
 **Impact: MEDIUM** - Optimizing your NextDNS CLI setup for stability and speed

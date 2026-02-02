@@ -1,11 +1,10 @@
 ---
-title: Parental Control
-impact: HIGH
-impactDescription: Configure parental controls, safe search, and content filtering
-type: capability
-tags: parental control, safe search, youtube restricted mode, content filtering, services blocking
+title: "Parental Control"
+impact: "HIGH"
+impactDescription: "Configure parental controls, safe search, and content filtering"
+type: "capability"
+tags: "parental control, safe search, youtube restricted mode, content filtering, services blocking"
 ---
-
 # Parental Control
 
 **Impact: HIGH** - Configure parental controls and content filtering

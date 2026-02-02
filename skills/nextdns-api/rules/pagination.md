@@ -1,11 +1,10 @@
 ---
-title: Pagination
-impact: HIGH
-impactDescription: Correctly paginate through API responses
-type: capability
-tags: pagination, cursor, limit, next page, page size
+title: "Pagination"
+impact: "HIGH"
+impactDescription: "Correctly paginate through API responses"
+type: "capability"
+tags: "pagination, cursor, limit, next page, page size"
 ---
-
 # Pagination
 
 **Impact: HIGH** - Properly paginate through large result sets

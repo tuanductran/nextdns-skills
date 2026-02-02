@@ -1,11 +1,10 @@
 ---
-title: Configuration Management
-impact: MEDIUM
-impactDescription: Global profile settings, log retention, and performance optimization
-type: capability
-tags: profile name, log retention, storage location, performance, cache boost, cname flattening
+title: "Configuration Management"
+impact: "MEDIUM"
+impactDescription: "Global profile settings, log retention, and performance optimization"
+type: "capability"
+tags: "profile name, log retention, storage location, performance, cache boost, cname flattening"
 ---
-
 # Configuration Management
 
 **Impact: MEDIUM** - System-level profile settings and performance

@@ -1,11 +1,10 @@
 ---
-title: Logs Download
-impact: MEDIUM
-impactDescription: Download logs as a file
-type: efficiency
-tags: download logs, export logs, redirect, file download
+title: "Logs Download"
+impact: "MEDIUM"
+impactDescription: "Download logs as a file"
+type: "efficiency"
+tags: "download logs, export logs, redirect, file download"
 ---
-
 # Logs Download
 
 **Impact: MEDIUM** - Download DNS logs as a file

@@ -1,11 +1,10 @@
 ---
-title: Daemon Control
-impact: MEDIUM
-impactDescription: Managing the NextDNS service state and background processes
-type: capability
-tags: start, stop, restart, status, daemon, service
+title: "Daemon Control"
+impact: "MEDIUM"
+impactDescription: "Managing the NextDNS service state and background processes"
+type: "capability"
+tags: "start, stop, restart, status, daemon, service"
 ---
-
 # Daemon Control
 
 **Impact: MEDIUM** - Controlling the background service process

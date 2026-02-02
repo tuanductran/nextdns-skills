@@ -1,11 +1,10 @@
 ---
-title: Installation
-impact: HIGH
-impactDescription: Proper installation of NextDNS CLI on various platforms
-type: capability
-tags: install, setup, curl, nextdns install, router installation
+title: "Installation"
+impact: "HIGH"
+impactDescription: "Proper installation of NextDNS CLI on various platforms"
+type: "capability"
+tags: "install, setup, curl, nextdns install, router installation"
 ---
-
 # Installation
 
 **Impact: HIGH** - Essential setup and platform-specific installation

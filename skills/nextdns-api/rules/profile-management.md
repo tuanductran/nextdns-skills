@@ -1,11 +1,10 @@
 ---
-title: Profile Management
-impact: HIGH
-impactDescription: Create, read, update, and delete NextDNS profiles
-type: capability
-tags: profiles, CRUD, create profile, update profile, delete profile, settings
+title: "Profile Management"
+impact: "HIGH"
+impactDescription: "Create, read, update, and delete NextDNS profiles"
+type: "capability"
+tags: "profiles, CRUD, create profile, update profile, delete profile, settings"
 ---
-
 # Profile Management
 
 **Impact: HIGH** - Manage NextDNS profiles via API endpoints

@@ -1,11 +1,10 @@
 ---
-title: Analytics and Logs
-impact: MEDIUM
-impactDescription: Monitoring network activity and identifying blocked queries
-type: capability
-tags: monitoring, logs, blocked queries, query count, analytics, traffic analysis
+title: "Analytics and Logs"
+impact: "MEDIUM"
+impactDescription: "Monitoring network activity and identifying blocked queries"
+type: "capability"
+tags: "monitoring, logs, blocked queries, query count, analytics, traffic analysis"
 ---
-
 # Analytics and Logs
 
 **Impact: MEDIUM** - Visibility and troubleshooting tools

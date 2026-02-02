@@ -1,11 +1,10 @@
 ---
-title: Home Assistant Integration
-impact: MEDIUM
-impactDescription: Without this integration guidance, users cannot leverage Home Assistant for automated DNS control and monitoring. This prevents the creation of time-based parental controls, smart blocking rules, and real-time analytics tracking for home automation systems.
-type: capability
-tags: home assistant, hass, integration, automation, parental control, api, sensors, switches, blocklist
+title: "Home Assistant Integration"
+impact: "MEDIUM"
+impactDescription: "Without this integration guidance, users cannot leverage Home Assistant for automated DNS control and monitoring. This prevents the creation of time-based parental controls, smart blocking rules, and real-time analytics tracking for home automation systems."
+type: "capability"
+tags: "home assistant, hass, integration, automation, parental control, api, sensors, switches, blocklist"
 ---
-
 # Home Assistant Integration
 
 **Impact: MEDIUM** - Enables automated DNS control and monitoring through Home Assistant smart home platform

@@ -1,11 +1,10 @@
 ---
-title: Docker Deployment
-impact: HIGH
-impactDescription: Proper Docker deployment ensures NextDNS CLI runs efficiently with correct network configuration for host detection and client IP visibility
-type: capability
-tags: docker, container, DockerHub, host network, port mapping, deployment
+title: "Docker Deployment"
+impact: "HIGH"
+impactDescription: "Proper Docker deployment ensures NextDNS CLI runs efficiently with correct network configuration for host detection and client IP visibility"
+type: "capability"
+tags: "docker, container, DockerHub, host network, port mapping, deployment"
 ---
-
 # Docker Deployment
 
 **Impact: HIGH** - Essential container deployment patterns for optimal DNS resolution and client tracking

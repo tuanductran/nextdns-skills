@@ -1,11 +1,10 @@
 ---
-title: Ubiquiti (UniFi) Integration
-impact: HIGH
-impactDescription: Without proper Ubiquiti integration guidance, users risk conflicts between NextDNS and UniFi's built-in filtering features, leading to DNS resolution failures and network outages. This rule prevents critical misconfigurations on UDM/UXG devices that could disrupt network-wide DNS services.
-type: capability
-tags: ubiquiti, unifi, udm, uxg, dream machine, gateway, content filtering, ad blocking, ssh, cli, dns shield
+title: "Ubiquiti (UniFi) Integration"
+impact: "HIGH"
+impactDescription: "Without proper Ubiquiti integration guidance, users risk conflicts between NextDNS and UniFi's built-in filtering features, leading to DNS resolution failures and network outages. This rule prevents critical misconfigurations on UDM/UXG devices that could disrupt network-wide DNS services."
+type: "capability"
+tags: "ubiquiti, unifi, udm, uxg, dream machine, gateway, content filtering, ad blocking, ssh, cli, dns shield"
 ---
-
 # Ubiquiti (UniFi) Integration
 
 **Impact: HIGH** - Essential for preventing DNS conflicts on Ubiquiti UniFi Dream Machines and Gateways

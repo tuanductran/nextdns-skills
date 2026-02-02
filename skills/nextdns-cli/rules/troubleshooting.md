@@ -1,11 +1,10 @@
 ---
-title: Troubleshooting
-impact: HIGH
-impactDescription: Diagnosing and fixing DNS resolution and connectivity issues
-type: capability
-tags: diagnostic, connection test, DNS leak, debug
+title: "Troubleshooting"
+impact: "HIGH"
+impactDescription: "Diagnosing and fixing DNS resolution and connectivity issues"
+type: "capability"
+tags: "diagnostic, connection test, DNS leak, debug"
 ---
-
 # Troubleshooting
 
 **Impact: HIGH** - Essential steps to resolve DNS outages and misconfigurations
