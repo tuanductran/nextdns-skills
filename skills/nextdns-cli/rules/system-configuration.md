@@ -18,7 +18,7 @@ To point your local system resolver to the NextDNS CLI proxy:
 
 ```bash
 sudo nextdns activate
-```text
+```
 
 This command will:
 - Modify `/etc/resolv.conf` on Linux/macOS.
@@ -31,7 +31,7 @@ To restore the system's original DNS settings:
 
 ```bash
 sudo nextdns deactivate
-```text
+```
 
 This should be used if you want to bypass the local proxy or if you are uninstalling the CLI.
 
@@ -41,4 +41,4 @@ You can configure the daemon to automatically activate/deactivate at startup and
 
 ```bash
 sudo nextdns config set -auto-activate=true
-```text
+```

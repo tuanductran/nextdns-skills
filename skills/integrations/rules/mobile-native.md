@@ -80,7 +80,7 @@ Settings
             └─ Private DNS
                  └─ Private DNS provider hostname
                       └─ [Enter hostname]
-```bash
+```
 
 ### Verification on Android
 
@@ -116,7 +116,7 @@ Settings
 4. **Clear DNS cache:**
     ```text
     Settings → Apps → Show system apps → DNS Client → Storage → Clear cache
-```bash
+    ```
 
 ## iOS Configuration (Version 14+)
 

@@ -40,7 +40,7 @@ const securitySettings = {
     ]
   }
 };
-```bash
+```
 
 ## Update Security Settings
 
@@ -63,7 +63,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security', {
     ]
   })
 });
-```bash
+```
 
 ## Add/Remove TLDs
 
@@ -85,7 +85,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security/tlds/xyz', {
   method: 'DELETE',
   headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });
-```bash
+```
 
 ## Security Features Explained
 
@@ -131,7 +131,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security/tlds/xyz', {
     ]
   }
 }
-```bash
+```
 
 ## Reference
 

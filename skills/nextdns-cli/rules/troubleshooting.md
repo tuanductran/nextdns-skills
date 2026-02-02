@@ -19,7 +19,7 @@ First, verify if NextDNS is actually being used:
 ```bash
 # Test command to check NextDNS status
 curl https://test.nextdns.io
-```text
+```
 
 The output will tell you if you are using NextDNS, which protocol (DoH, DoT), and which profile ID is active.
 

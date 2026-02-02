@@ -57,7 +57,7 @@ If the installation fails or encounters errors, run the installer in debug mode 
 
 ```conf
 DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```text
+```
 
 This will output verbose information that can help identify the root cause of installation issues.
 
@@ -83,18 +83,18 @@ opkg update && opkg install curl
 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 
 # Follow the prompts to complete installation
-```bash
+```
 
 ### Debug Mode Installation
 
 ```bash
 # Run installer with debug output
 DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```bash
+```
 
 ### Upgrade Existing Installation
 
 ```bash
 # Re-run the installer to upgrade
 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```text
+```

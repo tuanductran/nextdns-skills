@@ -14,7 +14,7 @@ tags: SSE, real-time, streaming, Server-sent events, live logs, EventSource
 
 ```http
 GET /profiles/:profile/logs/stream
-```bash
+```
 
 ## Basic Usage
 
@@ -37,7 +37,7 @@ eventSource.onerror = (error) => {
   console.error('Stream error:', error);
   eventSource.close();
 };
-```bash
+```
 
 ## Event Format
 
@@ -47,7 +47,7 @@ Each event contains:
 // Event
 id: 64v32d9r6rwkcctg6cu38e9g60
 data: {"timestamp":"2021-03-16T04:40:30.344Z","domain":"g.whatsapp.net","root":"whatsapp.net","encrypted":true,"protocol":"DNS-over-HTTPS","clientIp":"2a01:e0a:2cd:87a0:5540:d573:57cd:aa1d","client":"apple-profile","device":{"id":"8TD1G","name":"Romain's iPhone","model":"iPhone 12 Pro Max"},"status":"default","reasons":[]}
-```bash
+```
 
 ## Resume from Last Event
 
@@ -64,7 +64,7 @@ const eventSource = new EventSource(
     }
   }
 );
-```bash
+```
 
 ## Stitch Recent Logs with Stream
 
@@ -91,7 +91,7 @@ const eventSource = new EventSource(
 );
 
 // Now you have all recent logs + new logs without duplicates or gaps
-```bash
+```
 
 ## Query Parameters
 
@@ -122,7 +122,7 @@ url.searchParams.set('raw', '1');
 const eventSource = new EventSource(url.toString(), {
   headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });
-```bash
+```
 
 ## Complete Example - React
 
@@ -176,7 +176,7 @@ function LogsStream({ profileId, apiKey }) {
     </div>
   );
 }
-```bash
+```
 
 ## Complete Example - Node.js
 
@@ -239,7 +239,7 @@ const stream = streamLogs('abc123', process.env.NEXTDNS_API_KEY, {
 
 // Stop streaming
 // stream.close();
-```bash
+```
 
 ## Filtering Blocked Domains
 
@@ -255,7 +255,7 @@ eventSource.onmessage = (event) => {
   console.log(`Blocked: ${log.domain}`);
   console.log(`Reasons: ${log.reasons.map(r => r.name).join(', ')}`);
 };
-```bash
+```
 
 ## Monitor Specific Device
 
@@ -269,7 +269,7 @@ eventSource.onmessage = (event) => {
   const log = JSON.parse(event.data);
   console.log(`Device query: ${log.domain}`);
 };
-```bash
+```
 
 ## Error Handling and Reconnection
 
@@ -320,7 +320,7 @@ function createReconnectingStream(profileId, apiKey, options = {}) {
     close: () => eventSource?.close()
   };
 }
-```bash
+```
 
 ## Do NOT Use
 
@@ -339,7 +339,7 @@ const eventSource = new EventSource(url);
 eventSource.onmessage = (event) => {
   saveLastEventId(event.lastEventId);
 };
-```bash
+```
 
 ## Browser Compatibility
 
@@ -347,11 +347,11 @@ EventSource is supported in all modern browsers. For older browsers or Node.js, 
 
 ```bash
 pnpm install eventsource
-```text
+```
 
 ```javascript
 import EventSource from 'eventsource';
-```bash
+```
 
 ## Reference
 

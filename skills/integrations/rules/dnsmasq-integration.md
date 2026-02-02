@@ -25,7 +25,7 @@ NextDNS must be configured to listen on a different port to avoid conflicts with
 ```bash
 # Configure NextDNS to listen on port 5555 on localhost
 nextdns install -listen 127.0.0.1:5555
-```text
+```
 
 This configuration ensures NextDNS binds to port 5555 instead of the default port 53, allowing DNSMasq to continue operating on port 53.
 
@@ -42,7 +42,7 @@ Add the following parameters to your DNSMasq configuration to forward DNS querie
 
 # Include client subnet information (IPv4: /32, IPv6: /128)
 --add-subnet=32,128
-```text
+```
 
 These parameters ensure that:
 
@@ -59,7 +59,7 @@ When running NextDNS installation on such routers, use the `-setup-router` param
 ```bash
 # Automatic router setup (handles DNSMasq configuration)
 nextdns install -setup-router
-```text
+```
 
 The `-setup-router` flag automatically detects DNSMasq and configures both services to work together without manual intervention. This is the recommended approach for router environments.
 
@@ -87,7 +87,7 @@ netstat -tulpn | grep :53
 
 # Verify NextDNS is listening on the configured port
 netstat -tulpn | grep :5555
-```bash
+```
 
 ### Client Reporting Not Working
 

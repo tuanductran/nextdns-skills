@@ -16,7 +16,7 @@ All analytics endpoints follow the pattern:
 
 ```text
 https://api.nextdns.io/profiles/:profile/analytics/{endpoint}
-```bash
+```
 
 ## Status Analytics
 
@@ -36,7 +36,7 @@ const response = await fetch(
     { "status": "allowed", "queries": 6923 }
   ]
 }
-```bash
+```
 
 ## Domains Analytics
 
@@ -75,7 +75,7 @@ const roots = await fetch(
     }
   ]
 }
-```bash
+```
 
 ## Blocking Reasons
 
@@ -107,7 +107,7 @@ const reasons = await fetch(
     }
   ]
 }
-```bash
+```
 
 ## Client IPs
 
@@ -141,7 +141,7 @@ const ips = await fetch(
     }
   ]
 }
-```bash
+```
 
 ## Devices
 
@@ -175,7 +175,7 @@ const devices = await fetch(
     }
   ]
 }
-```bash
+```
 
 ## Protocols
 
@@ -195,7 +195,7 @@ const protocols = await fetch(
     { "protocol": "UDP", "queries": 2334 }
   ]
 }
-```bash
+```
 
 ## Query Types
 
@@ -215,7 +215,7 @@ const queryTypes = await fetch(
     { "type": 65, "name": "HTTPS", "queries": 260478 }
   ]
 }
-```bash
+```
 
 ## IP Versions
 
@@ -234,7 +234,7 @@ const ipVersions = await fetch(
     { "version": 4, "queries": 174308 }
   ]
 }
-```bash
+```
 
 ## DNSSEC
 
@@ -253,7 +253,7 @@ const dnssec = await fetch(
     { "validated": true, "queries": 8199 }
   ]
 }
-```bash
+```
 
 ## Encryption
 
@@ -272,7 +272,7 @@ const encryption = await fetch(
     { "encrypted": false, "queries": 1 }
   ]
 }
-```bash
+```
 
 ## Destinations - Countries
 
@@ -306,7 +306,7 @@ const countries = await fetch(
     }
   ]
 }
-```bash
+```
 
 ## Destinations - GAFAM
 
@@ -329,7 +329,7 @@ const gafam = await fetch(
     { "company": "microsoft", "queries": 28901 }
   ]
 }
-```bash
+```
 
 ## Helper Function
 
@@ -355,7 +355,7 @@ const blockedDomains = await getAnalytics('abc123', 'domains', {
   from: '-30d',
   limit: 100
 });
-```bash
+```
 
 ## Reference
 

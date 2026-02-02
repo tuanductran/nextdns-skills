@@ -19,7 +19,7 @@ Setting the primary NextDNS profile is the most important configuration step:
 ```bash
 # Set the primary profile ID
 sudo nextdns config set -profile=abc123
-```bash
+```
 
 ## Configuration Management
 
@@ -46,6 +46,6 @@ If you use `nextdns config edit`, the file format is a simple list of flags:
 profile abc123
 report-client-info true
 auto-activate true
-```text
+```
 
 **Note**: After editing the configuration file manually or using `config set`, you typically need to `nextdns restart` for the changes to take effect.

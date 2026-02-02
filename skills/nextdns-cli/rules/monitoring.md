@@ -24,7 +24,7 @@ nextdns log
 sudo nextdns config set -debug=true
 sudo nextdns restart
 nextdns log
-```bash
+```
 
 ## Cache Statistics
 
@@ -33,7 +33,7 @@ If you have caching enabled, you can monitor its performance:
 ```bash
 # View cache usage and hit rates
 nextdns cache-stats
-```bash
+```
 
 ## Client Discovery
 
@@ -42,7 +42,7 @@ See which clients are currently being discovered on the local network (useful fo
 ```bash
 # List discovered clients and their names
 nextdns discovered
-```bash
+```
 
 ## Query Logging
 
@@ -52,6 +52,6 @@ Enable direct logging of DNS queries to the console (useful for debugging specif
 sudo nextdns config set -log-queries=true
 sudo nextdns restart
 nextdns log
-```text
+```
 
 **Note**: Query logging can produce a lot of data and is not recommended for long-term use in high-traffic environments.
