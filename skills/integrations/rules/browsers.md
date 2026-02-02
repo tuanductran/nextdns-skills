@@ -50,7 +50,7 @@ Google Chrome and Microsoft Edge share the same Chromium-based architecture and 
 6. Select **With: Custom**
 
 7. Enter your NextDNS DoH URL:
-    ```text
+    ```bash
     https://dns.nextdns.io/<config_id>
     ```
     Replace `<config_id>` with your actual NextDNS Configuration ID
@@ -94,7 +94,7 @@ Firefox has its own implementation of DNS-over-HTTPS with slightly different ter
 4. In the dropdown, select **Custom**
 
 5. Enter your NextDNS DoH URL:
-    ```text
+    ```bash
     https://dns.nextdns.io/<config_id>
     ```
     Replace `<config_id>` with your actual NextDNS Configuration ID
@@ -168,7 +168,7 @@ After configuration, verify that DoH is working correctly:
 
 Temporarily use an invalid configuration ID to verify the browser is actually using DoH:
 
-```text
+```bash
 https://dns.nextdns.io/invalid
 ```
 
@@ -220,7 +220,7 @@ Always respect organizational policies when configuring DoH in managed environme
 
 ## Reference
 
-- [NextDNS Setup Guide](https://help.nextdns.io)
+- [NextDNS Help Center](https://help.nextdns.io)
 - [Chrome Secure DNS Documentation](https://www.chromium.org/developers/dns-over-https/)
 - [Firefox DNS-over-HTTPS Documentation](https://support.mozilla.org/en-US/kb/firefox-dns-over-https)
 - [NextDNS Test Page](https://test.nextdns.io)
