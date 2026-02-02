@@ -66,4 +66,3 @@ NextDNS provides a diagnostic tool to help support staff:
 # Run a full diagnostic check and output a link to results
 sudo nextdns diagnostics
 ```
-Visit the generated URL to see detailed information about your connection to NextDNS.

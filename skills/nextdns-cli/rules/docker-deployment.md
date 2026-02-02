@@ -139,16 +139,3 @@ Check logs for errors:
 ```bash
 docker logs nextdns
 ```
-
-Common issues:
-- Invalid profile ID
-- Port conflicts
-- Network configuration errors
-- Insufficient permissions
-
-## Reference
-
-- [NextDNS CLI GitHub](https://github.com/nextdns/nextdns)
-- [NextDNS Docker Hub](https://hub.docker.com/r/nextdns/nextdns)
-- [Docker Networking Documentation](https://docs.docker.com/engine/network/)
-- [Docker Restart Policies](https://docs.docker.com/config/containers/start-containers-automatically/)

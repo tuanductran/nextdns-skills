@@ -97,14 +97,14 @@ Firefox has its own implementation of DNS-over-HTTPS with slightly different ter
 5. Enter your NextDNS DoH URL:
     ```text
     https://dns.nextdns.io/<config_id>
-    ```
+```text
     Replace `<config_id>` with your actual NextDNS Configuration ID
 
 6. Changes apply automatically
 
 ### Visual Path Reference
 
-```text
+```
 Settings
   └─ Privacy & Security
        └─ DNS over HTTPS
@@ -112,7 +112,7 @@ Settings
                  └─ Choose provider
                       └─ Custom
                            └─ Enter custom DNS URL
-```
+```bash
 
 ### Firefox Protection Modes
 
@@ -169,45 +169,6 @@ After configuration, verify that DoH is working correctly:
 
 Temporarily use an invalid configuration ID to verify the browser is actually using DoH:
 
-```text
-https://dns.nextdns.io/invalid
 ```
-
-If you can't browse, DoH is working (browser is not falling back to regular DNS).
-
-### Corporate Proxy Issues
-
-Some corporate proxies inspect HTTPS traffic:
-
-- **Symptoms**: Certificate errors, DoH not working
-- **Solutions**:
-    - Check with IT department about SSL/TLS inspection policies
-    - Use Firefox with **Increased Protection** mode (allows fallback)
-    - Consider using the NextDNS app on personal devices instead
-
-## Comparison with System-Wide Configuration
-
-| Feature | Browser DoH | System-Wide NextDNS |
-|---------|-------------|---------------------|
-| **Admin Rights** | ❌ Not required | ✅ Required |
-| **Coverage** | Browser only | All applications |
-| **Setup Time** | < 1 minute | 5-10 minutes |
-| **Device Analytics** | ❌ Not available | ✅ Full analytics |
-| **Per-User Config** | ✅ Yes | ❌ Shared |
-| **Corporate Networks** | ✅ Usually works | ⚠️ May be blocked |
-
-## Best Practices
-
-- **Use Max Protection in Firefox** for the strongest security posture
-- **Test before deploying**: Visit test.nextdns.io to verify configuration
-- **Document your setup**: Keep a record of which browsers are configured
-- **Combine with extensions**: Use with privacy extensions for enhanced protection
-- **Check logs regularly**: Monitor NextDNS dashboard to ensure queries are being processed
-- **Consider system-wide for personal devices**: Browser-level DoH is best for restricted environments
-
-## Reference
-
-- [Chrome Secure DNS Documentation](https://www.chromium.org/developers/dns-over-https)
-- [Firefox DNS-over-HTTPS Guide](https://support.mozilla.org/kb/firefox-dns-over-https)
-- [NextDNS Setup Guide](https://help.nextdns.io)
-- [DNS-over-HTTPS (RFC 8484)](https://datatracker.ietf.org/doc/html/rfc8484)
+https://dns.nextdns.io/invalid
+```text

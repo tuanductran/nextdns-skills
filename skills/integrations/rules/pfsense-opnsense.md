@@ -142,7 +142,7 @@ After configuration, verify that NextDNS is working correctly:
 1. Check DNS resolution:
     ```bash
     nslookup example.com 127.0.0.1
-    ```
+```text
 
 2. Verify NextDNS is being used:
     - Visit [https://test.nextdns.io](https://test.nextdns.io)
@@ -156,37 +156,22 @@ After configuration, verify that NextDNS is working correctly:
 
 ### DNS Resolution Not Working
 
-```bash
+```
 # Check Unbound status
 pfctl -s state | grep 53
 # or on OPNsense
 service unbound status
-```
+```bash
 
 ### Verify DoT Connection
 
-```bash
+```
 # Test TLS connection to NextDNS
 openssl s_client -connect 45.90.28.0:853 -servername <config_id>.dns1.nextdns.io
-```
+```bash
 
 ### Debug Mode Installation (CLI Method)
 
-```bash
-DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"
 ```
-
-## Best Practices
-
-- **OPNsense users**: Prefer Method 1 (DoT UI) for easier management and better user experience
-- **pfSense users**: Be aware of CNAME chasing behavior and test blocking rules thoroughly
-- **Both platforms**: Consider using the CLI method if you need advanced features like conditional routing or per-device analytics
-- **High-availability**: Configure both primary and secondary NextDNS servers for redundancy
-- **Monitoring**: Regularly check NextDNS logs to ensure traffic is being processed correctly
-
-## Reference
-
-- [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)
-- [pfSense DNS Resolver Documentation](https://docs.netgate.com/pfsense/en/latest/services/dns/resolver.html)
-- [OPNsense Unbound Documentation](https://docs.opnsense.org/manual/unbound.html)
-- [Unbound DNS-over-TLS](https://nlnetlabs.nl/documentation/unbound/unbound.conf/)
+DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"
+```text

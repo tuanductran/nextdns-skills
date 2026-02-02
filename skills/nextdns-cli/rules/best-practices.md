@@ -49,16 +49,3 @@ Ensure NextDNS takes over system DNS automatically at boot.
 ```bash
 sudo nextdns config set -auto-activate=true
 ```
-
-## Security
-
-### 1. Avoid Fallback (Unless Necessary)
-Be cautious with `-detect-captive-portals`. While useful at hotels, it can allow an attacker to force your DNS to leak unencrypted traffic. Only enable it when needed.
-
-### 2. Device Identification
-Always enable `-report-client-info=true`. This allows you to identify which specific device on your network is making a request in the NextDNS dashboard, making it much easier to debug which device is compromised or misconfigured.
-
-## Maintenance
-
-- **Regular Upgrades**: Periodically run the installer script to check for newer versions of the CLI.
-- **Log Management**: If query logging is enabled, monitor your disk space, or use the default mDNS discovery which provides identification without excessive logging.

@@ -51,6 +51,7 @@ Download the latest Windows binary from [GitHub Releases](https://github.com/nex
       -report-client-info ^
       -auto-activate
     ```
+```text
 
     **Note**: Replace `<your_config_id>` with your actual NextDNS Configuration ID (e.g., `abc123`).
 
@@ -64,21 +65,6 @@ Download the latest Windows binary from [GitHub Releases](https://github.com/nex
 
 After installation, verify NextDNS is running:
 
-```dos
-"C:\Program Files\NextDNS\nextdns.exe" status
 ```
-
-You should see active status and the configured profile ID.
-
-## Important Considerations
-
-- **Administrator Rights**: Both installation methods require Administrator privileges.
-- **Windows Firewall**: The installer automatically configures firewall rules.
-- **DNS Conflicts**: Disable other DNS services or VPN DNS overrides if they conflict.
-- **Updates**: The GUI app can auto-update. For CLI installations, manually download new releases.
-
-## Reference
-
-- [NextDNS Downloads](https://nextdns.io/download)
-- [NextDNS CLI GitHub](https://github.com/nextdns/nextdns)
-- [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)
+"C:\Program Files\NextDNS\nextdns.exe" status
+```text

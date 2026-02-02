@@ -186,17 +186,3 @@ url.searchParams.set('page', '2');     // Use 'cursor' instead
 // ❌ Hardcoded cursor values
 cursor: 'page2'  // Must use cursor from API response
 ```
-
-## Best Practices
-
-1. **Use relative dates** for recent data: `-7d`, `-24h`, `-1M`
-2. **Use ISO 8601** for specific dates: `2024-01-15T00:00:00Z`
-3. **Start with small limits** (10-50) and increase if needed
-4. **Always check for cursor** in response before requesting next page
-5. **Handle null cursor** to detect end of pagination
-6. **Use device filtering** to reduce data volume when analyzing specific devices
-
-## Reference
-
-- [NextDNS API - Analytics](https://nextdns.github.io/api/#analytics)
-- [NextDNS API - Query Parameters](https://nextdns.github.io/api/#query-string-parameters)

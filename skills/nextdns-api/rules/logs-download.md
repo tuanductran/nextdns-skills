@@ -264,15 +264,3 @@ if (response.errors) {
 }
 window.location.href = response.data.url;
 ```
-
-## Notes
-
-- Log files are generated on-demand
-- Large date ranges may take longer to generate
-- Files are temporarily hosted and may expire
-- Use `redirect=0` when you need to show a loading indicator
-- Downloaded files are in CSV format
-
-## Reference
-
-- [NextDNS API - Download Logs](https://nextdns.github.io/api/#download)
