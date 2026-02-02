@@ -153,8 +153,3 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/natives/apple', {
   }
 }
 ```
-
-## Reference
-
-- [NextDNS Privacy Features](https://help.nextdns.io/t/g9hmv09/what-are-the-privacy-features)
-- [Available Blocklists](https://github.com/nextdns/metadata/tree/master/privacy/blocklists)

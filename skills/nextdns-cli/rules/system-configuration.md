@@ -42,11 +42,3 @@ You can configure the daemon to automatically activate/deactivate at startup and
 ```bash
 sudo nextdns config set -auto-activate=true
 ```
-
-## Troubleshooting Activation
-
-If `nextdns activate` fails or if the system is still using old DNS servers:
-1. Check if `systemd-resolved` is overriding the settings (Linux).
-2. Ensure no other VPN or DNS software is managing the network settings.
-3. Use `nslookup google.com` or `dig google.com` to verify which server is being used.
-4. Run `nextdns status` to ensure the proxy is actually running on port 53.

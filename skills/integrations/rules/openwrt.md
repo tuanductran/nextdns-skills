@@ -55,7 +55,7 @@ To upgrade an existing NextDNS installation on OpenWrt:
 
 If the installation fails or encounters errors, run the installer in debug mode to generate detailed logs:
 
-```bash
+```conf
 DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ```
 
@@ -98,17 +98,3 @@ DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 # Re-run the installer to upgrade
 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ```
-
-## Best Practices
-
-- **Prefer Method A** for maximum compatibility and reliability across all OpenWrt versions
-- **Use debug mode** when troubleshooting installation issues to capture detailed logs
-- **Regular updates** ensure you have the latest security patches and features
-- **Backup configuration** before performing upgrades to avoid losing custom settings
-- **Test connectivity** after installation to ensure DNS resolution is working correctly
-
-## Reference
-
-- [OpenWrt Official Documentation](https://openwrt.org/docs/start)
-- [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)
-- [NextDNS Setup Guide](https://help.nextdns.io)

@@ -1,5 +1,7 @@
 # nextdns-skills
 
+![NextDNS Skills](thumbnail.jpeg)
+
 Agent skills for NextDNS API integration and DNS management.
 
 > 🚧 **Early Experiment**
@@ -76,7 +78,7 @@ Rules are classified into two categories:
 
 #### Authentication & Setup
 
-- **Authentication**: Proper API key usage with X-Api-Key header
+- **Authentication**: Proper API key usage with X-API-Key header
 - **Error Handling**: Handle API errors and validation responses correctly
 - **Response Format**: Parse API response structure (data, meta, errors)
 
@@ -94,7 +96,7 @@ Rules are classified into two categories:
 - **Analytics Queries**: Use correct query parameters for analytics endpoints
 - **Analytics Endpoints**: Access various analytics endpoints (status, domains, reasons, devices, protocols, etc.)
 - **Time Series Data**: Retrieve time series data for charts and visualizations
-- **Date Formats**: Use correct date formats (ISO 8601, Unix timestamp, relative dates)
+- **Date Formats**: Use correct date formats (ISO 8601, UNIX timestamp, relative dates)
 
 #### Logs Management
 
@@ -122,7 +124,7 @@ Rules are classified into two categories:
 #### Advanced Features
 
 - **Advanced Features**: Conditional forwarders, profile selection, client detection
-- **Platform Specific**: Platform-specific configurations (OpenWRT, pfSense, Synology, Ubiquiti)
+- **Platform Specific**: Platform-specific configurations (OpenWrt, pfSense, Synology, Ubiquiti)
 
 #### Monitoring & Troubleshooting
 
@@ -175,7 +177,7 @@ Rules are classified into two categories:
 const profile = await fetch('https://api.nextdns.io/profiles', {
   method: 'POST',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
@@ -196,7 +198,7 @@ const profile = await fetch('https://api.nextdns.io/profiles', {
 ```javascript
 const analytics = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/domains?from=-7d&limit=50',
-  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 ```
 
@@ -205,7 +207,7 @@ const analytics = await fetch(
 ```javascript
 const eventSource = new EventSource(
   'https://api.nextdns.io/profiles/abc123/logs/stream?status=blocked',
-  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
 );
 
 eventSource.onmessage = (event) => {
@@ -342,9 +344,26 @@ Skills are tested with:
 
 ## Contributing
 
-This repository follows strict quality standards to ensure AI agents can reliably use the skills.
+This repository follows strict quality standards governed by the **10-Point Protocol System** to ensure AI agents can reliably use the skills.
 
-### Development Setup
+### Governance
+
+All contributions MUST adhere to the [**Ultimate Governance Constitution**](CLAUDE.md) defined in `CLAUDE.md`. This includes:
+
+- **Protocol 1**: Strict Conventional Commits (`type(scope): description`)
+- **Protocol 2**: Atomic Update Workflow (file + SKILL.md updates together)
+- **Protocol 3**: Automated Quality Assurance (`pnpm lint` validation)
+- **Protocol 4**: Terminology Precision (case-police enforcement)
+- **Protocol 5**: Template Adherence (use `rule-template.md`)
+- **Protocol 6**: Security & Privacy (zero-PII policy)
+- **Protocol 7**: Navigation & Indexing (concise README format)
+- **Protocol 8**: Code Block Standardization (language tags required)
+- **Protocol 9**: Directory Structure Enforcement (strict placement)
+- **Protocol 10**: Link Integrity & Validation (no broken links)
+
+📖 **Read the full governance documentation**: [CLAUDE.md](CLAUDE.md)
+
+### Quick Start
 
 ```bash
 # Install dependencies
@@ -359,20 +378,16 @@ pnpm lint:fix
 
 ### Adding a New Rule
 
-1. Use the template from `templates/rule-template.md`
-2. Create a new file in `skills/<skill-name>/rules/` using kebab-case naming
-3. Add required YAML frontmatter (title, impact, impactDescription, type, tags)
-4. Include the H1 title followed by the bolded Impact Line
-5. Add the entry to the skill's capability or efficiency table in `SKILL.md`
-6. Run `pnpm lint:fix` to ensure compliance
+Follow the complete workflow in [CLAUDE.md](CLAUDE.md#workflow-adding-a-new-rule):
 
-### Quality Requirements
+1. Use template: `cp templates/rule-template.md skills/<category>/rules/<name>.md`
+2. Fill YAML frontmatter with correct metadata
+3. Write content following Protocols 3, 4, 8
+4. **IMMEDIATELY** update `skills/<category>/SKILL.md` (Protocol 2 - CRITICAL)
+5. Validate: `pnpm lint:fix`
+6. Commit both files: `feat(<category>): add <rule-name> rule`
 
-- **Language**: All content must be in English
-- **Indentation**: Use 4-space indentation for lists
-- **Filenames**: Use kebab-case for all rule files
-- **Case Police**: Follow technical term casing (NextDNS, OpenWrt, macOS, etc.)
-- **Code Blocks**: Always specify language for syntax highlighting
+⚠️ **CRITICAL**: Step 4 is mandatory. Creating orphan files without updating SKILL.md will result in PR rejection.
 
 ## License
 

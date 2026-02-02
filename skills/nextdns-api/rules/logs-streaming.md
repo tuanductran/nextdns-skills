@@ -346,7 +346,7 @@ eventSource.onmessage = (event) => {
 EventSource is supported in all modern browsers. For older browsers or Node.js, use:
 
 ```bash
-npm install eventsource
+pnpm install eventsource
 ```
 
 ```javascript

@@ -335,7 +335,3 @@ async function fetchAllPagesWithRateLimit(url, apiKey, delayMs = 100) {
   return allData;
 }
 ```
-
-## Reference
-
-- [NextDNS API - Pagination](https://nextdns.github.io/api/#pagination)

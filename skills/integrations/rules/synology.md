@@ -189,28 +189,3 @@ netstat -tulnp | grep :53
 # Then restart NextDNS
 nextdns restart
 ```
-
-### SSH Connection Times Out
-
-**Cause:** Firewall rules may be blocking SSH port 22.
-
-**Solution:**
-1. Check firewall rules in Control Panel → Security
-2. Ensure port 22 is allowed for your IP range
-3. Temporarily disable firewall to test (not recommended for production)
-
-## Best Practices
-
-- **Use static IP**: Always assign a static IP to your Synology device to prevent DNS resolution failures
-- **Strong passwords**: Use strong, unique passwords for SSH access, especially on SRM
-- **Regular updates**: Keep DSM/SRM and NextDNS CLI up to date for security patches
-- **Monitor logs**: Check NextDNS dashboard regularly to ensure queries are being processed
-- **Backup configuration**: Document your configuration for disaster recovery
-- **Test before deployment**: Verify DNS resolution works correctly before rolling out to all network devices
-
-## Reference
-
-- [Synology DSM Documentation](https://kb.synology.com/en-global/DSM)
-- [Synology SRM Documentation](https://kb.synology.com/en-global/SRM)
-- [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)
-- [NextDNS Setup Guide](https://help.nextdns.io)
