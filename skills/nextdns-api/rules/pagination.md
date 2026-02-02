@@ -23,7 +23,7 @@ Most endpoints that return arrays use cursor-based pagination:
     }
   }
 }
-```
+```bash
 
 ## Basic Pagination
 
@@ -43,7 +43,7 @@ if (data.meta.pagination.cursor) {
     { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
   );
 }
-```
+```bash
 
 ## Limit Parameter
 
@@ -61,7 +61,7 @@ limit: 500  // Maximum for analytics
 
 limit: 10   // Minimum for logs
 limit: 1000 // Maximum for logs
-```
+```bash
 
 ## Fetch All Pages
 
@@ -99,7 +99,7 @@ const allDomains = await fetchAllPages(
   'https://api.nextdns.io/profiles/abc123/analytics/domains?from=-7d&limit=100',
   process.env.NEXTDNS_API_KEY
 );
-```
+```bash
 
 ## Fetch with Progress
 
@@ -152,7 +152,7 @@ const domains = await fetchAllPagesWithProgress(
     console.log(`Page ${progress.page}: ${progress.totalItems} items loaded...`);
   }
 );
-```
+```bash
 
 ## Fetch with Limit
 
@@ -199,7 +199,7 @@ const top1000 = await fetchUpToLimit(
   process.env.NEXTDNS_API_KEY,
   1000
 );
-```
+```bash
 
 ## Async Iterator
 
@@ -241,7 +241,7 @@ for await (const page of paginateEndpoint(
     console.log(domain.domain, domain.queries);
   });
 }
-```
+```bash
 
 ## Paginated Endpoints
 
@@ -279,7 +279,7 @@ const oldCursor = 'abc123';  // Cursors expire
 
 // ✅ Correct - use cursor from response
 cursor: data.meta.pagination.cursor
-```
+```bash
 
 ## Cursor Behavior
 
@@ -334,4 +334,4 @@ async function fetchAllPagesWithRateLimit(url, apiKey, delayMs = 100) {
   
   return allData;
 }
-```
+```text

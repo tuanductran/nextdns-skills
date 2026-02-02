@@ -46,7 +46,7 @@ const parentalControlSettings = {
     blockBypass: true              // Block VPNs and proxies
   }
 };
-```
+```bash
 
 ## Update Parental Control Settings
 
@@ -63,7 +63,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl', {
     blockBypass: true
   })
 });
-```
+```bash
 
 ## Manage Services
 
@@ -93,7 +93,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tik
   method: 'DELETE',
   headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });
-```
+```bash
 
 ## Manage Categories
 
@@ -117,7 +117,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/categories/g
   },
   body: JSON.stringify({ active: false })
 });
-```
+```bash
 
 ## Popular Services
 
@@ -192,4 +192,4 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/categories/g
     ]
   }
 }
-```
+```text

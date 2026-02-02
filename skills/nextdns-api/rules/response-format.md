@@ -21,7 +21,7 @@ All API responses with `200` or `400` status follow one of these formats:
   "data": {...},  // or [...], depending on the endpoint
   "meta": {...}   // optional
 }
-```
+```bash
 
 ### Error Response
 
@@ -29,7 +29,7 @@ All API responses with `200` or `400` status follow one of these formats:
 {
   "errors": [...]
 }
-```
+```bash
 
 ## Data Types
 
@@ -56,7 +56,7 @@ Single object endpoints return an object in `data`:
     "tlds": [...]
   }
 }
-```
+```bash
 
 ### Array Response
 
@@ -81,7 +81,7 @@ List endpoints return an array in `data`:
     }
   }
 }
-```
+```bash
 
 ## Meta Section
 
@@ -98,7 +98,7 @@ The `meta` section contains additional information:
     }
   }
 }
-```
+```bash
 
 ### Time Series
 
@@ -118,7 +118,7 @@ The `meta` section contains additional information:
     }
   }
 }
-```
+```bash
 
 ### Stream ID
 
@@ -131,7 +131,7 @@ The `meta` section contains additional information:
     }
   }
 }
-```
+```bash
 
 ## Parsing Responses
 
@@ -166,7 +166,7 @@ const { data, meta } = await makeRequest(
 
 console.log('Domains:', data);
 console.log('Next cursor:', meta?.pagination?.cursor);
-```
+```bash
 
 ## TypeScript Types
 
@@ -221,7 +221,7 @@ interface Domain {
   root?: string;
   queries: number;
 }
-```
+```bash
 
 ## Response Wrapper
 
@@ -282,7 +282,7 @@ if (wrapped.hasErrors()) {
     console.log('Next cursor:', wrapped.getNextCursor());
   }
 }
-```
+```bash
 
 ## Common Patterns
 
@@ -290,14 +290,14 @@ if (wrapped.hasErrors()) {
 
 ```javascript
 const { data } = await fetch(url, { headers }).then(r => r.json());
-```
+```bash
 
 ### Extract Data and Cursor
 
 ```javascript
 const { data, meta } = await fetch(url, { headers }).then(r => r.json());
 const cursor = meta?.pagination?.cursor;
-```
+```bash
 
 ### Check for Errors
 
@@ -307,7 +307,7 @@ if (result.errors) {
   throw new Error('API Error');
 }
 const data = result.data;
-```
+```bash
 
 ## Do NOT Use
 
@@ -328,7 +328,7 @@ const data = result.data;
 if (Array.isArray(data)) {
   const items = data.map(...);
 }
-```
+```bash
 
 ## Reference
 
