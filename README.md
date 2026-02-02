@@ -384,7 +384,7 @@ Follow the complete workflow in [CLAUDE.md](CLAUDE.md#workflow-adding-a-new-rule
 2. Fill YAML frontmatter with correct metadata
 3. Write content following Protocols 3, 4, 8
 4. **IMMEDIATELY** update `skills/<category>/SKILL.md` (Protocol 2 - CRITICAL)
-5. Validate: `pnpm lint:fix && pnpm lint`
+5. Validate: `pnpm lint:fix`
 6. Commit both files: `feat(<category>): add <rule-name> rule`
 
 ⚠️ **CRITICAL**: Step 4 is mandatory. Creating orphan files without updating SKILL.md will result in PR rejection.
