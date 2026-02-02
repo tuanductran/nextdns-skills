@@ -40,7 +40,7 @@ const privacySettings = {
     allowAffiliate: false             // Block affiliate & tracking links
   }
 };
-```bash
+```
 
 ## Update Privacy Settings
 
@@ -56,7 +56,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy', {
     allowAffiliate: false
   })
 });
-```bash
+```
 
 ## Manage Blocklists
 
@@ -78,7 +78,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists/stevenbla
   method: 'DELETE',
   headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });
-```bash
+```
 
 ## Manage Native Tracking Protection
 
@@ -98,7 +98,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/natives/apple', {
   method: 'DELETE',
   headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });
-```bash
+```
 
 ## Popular Blocklists
 
@@ -152,4 +152,4 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/natives/apple', {
     ]
   }
 }
-```text
+```

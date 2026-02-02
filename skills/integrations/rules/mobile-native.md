@@ -49,7 +49,7 @@ Android 9 (Pie) and later include **Private DNS** support using DNS-over-TLS (Do
 5. Enter your NextDNS hostname:
     ```text
     <config_id>.dns.nextdns.io
-```bash
+    ```
     Replace `<config_id>` with your actual NextDNS Configuration ID
 
 6. Tap **Save**
@@ -70,7 +70,7 @@ Settings
             └─ Private DNS
                  └─ Private DNS provider hostname
                       └─ [Enter hostname]
-```text
+```
 
 **Samsung (One UI):**
 ```text
@@ -80,7 +80,7 @@ Settings
             └─ Private DNS
                  └─ Private DNS provider hostname
                       └─ [Enter hostname]
-```bash
+```
 
 ### Verification on Android
 
@@ -116,7 +116,7 @@ Settings
 4. **Clear DNS cache:**
     ```text
     Settings → Apps → Show system apps → DNS Client → Storage → Clear cache
-```bash
+    ```
 
 ## iOS Configuration (Version 14+)
 
@@ -176,4 +176,4 @@ Settings
                  └─ Enter Passcode
                       └─ Install (confirm)
                            └─ Done
-```text
+```

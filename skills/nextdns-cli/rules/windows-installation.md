@@ -65,6 +65,6 @@ Download the latest Windows binary from [GitHub Releases](https://github.com/nex
 
 After installation, verify NextDNS is running:
 
-```text
+```
 "C:\Program Files\NextDNS\nextdns.exe" status
 ```text

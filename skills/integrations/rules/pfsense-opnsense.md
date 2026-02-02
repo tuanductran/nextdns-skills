@@ -35,7 +35,7 @@ server:
     forward-addr: 2a07:a8c0::#<config_id>.dns1.nextdns.io
     forward-addr: 45.90.30.0#<config_id>.dns2.nextdns.io
     forward-addr: 2a07:a8c1::#<config_id>.dns2.nextdns.io
-```text
+```
 
 1. Replace `<config_id>` with your actual NextDNS Configuration ID
 2. Click **Save** and **Apply Changes**
@@ -66,7 +66,7 @@ ssh admin@your-pfsense-ip
 sh -c "$(curl -sL https://nextdns.io/install)"
 
 # Follow the interactive prompts
-```text
+```
 
 **Advantages:**
 - Avoids CNAME chasing issues
@@ -123,7 +123,7 @@ ssh root@your-opnsense-ip
 sh -c "$(curl -sL https://nextdns.io/install)"
 
 # Follow the interactive prompts
-```bash
+```
 
 ## Comparison: pfSense vs OPNsense
 
@@ -156,7 +156,7 @@ After configuration, verify that NextDNS is working correctly:
 
 ### DNS Resolution Not Working
 
-```bash
+```
 # Check Unbound status
 pfctl -s state | grep 53
 # or on OPNsense
@@ -165,13 +165,13 @@ service unbound status
 
 ### Verify DoT Connection
 
-```bash
+```
 # Test TLS connection to NextDNS
 openssl s_client -connect 45.90.28.0:853 -servername <config_id>.dns1.nextdns.io
 ```bash
 
 ### Debug Mode Installation (CLI Method)
 
-```conf
+```
 DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"
 ```text

@@ -17,7 +17,7 @@ Pass your API key via the `X-API-Key` header for every API call:
 ```bash
 curl -H "X-API-Key: a8f4e42e896ff37f181e3e8a42a9737e1423d8e7" \
   https://api.nextdns.io/profiles
-```text
+```
 
 ```javascript
 const headers = {
@@ -28,7 +28,7 @@ const headers = {
 fetch('https://api.nextdns.io/profiles', { headers })
   .then(response => response.json())
   .then(data => console.log(data));
-```text
+```
 
 ```python
 import requests
@@ -39,7 +39,7 @@ headers = {
 
 response = requests.get('https://api.nextdns.io/profiles', headers=headers)
 data = response.json()
-```bash
+```
 
 ## Finding Your API Key
 
@@ -57,7 +57,7 @@ curl -H "Authorization: Bearer a8f4e42e896ff37f181e3e8a42a9737e1423d8e7" \
 
 # ❌ Passing API key as query parameter
 curl https://api.nextdns.io/profiles?api_key=a8f4e42e896ff37f181e3e8a42a9737e1423d8e7
-```bash
+```
 
 ## Security Best Practices
 

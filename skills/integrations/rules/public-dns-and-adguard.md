@@ -107,7 +107,7 @@ Configure NextDNS as upstream DNS in AdGuard Home for load balancing:
 ```conf
 https://dns1.nextdns.io/
 https://dns2.nextdns.io/
-```javascript
+```
 
 **Alternative Protocols:**
 - **DNS over TLS:** Use `tls://dns1.nextdns.io/` and `tls://dns2.nextdns.io/`
@@ -122,7 +122,7 @@ https://dns2.nextdns.io/
 8.8.8.8
 9.9.9.11
 208.67.222.222
-```text
+```
 
 These public resolvers ensure that AdGuard Home can properly resolve the NextDNS upstream hostnames and maintain ECS functionality for optimal routing.
 

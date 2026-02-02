@@ -28,7 +28,7 @@ const lists = {
     { id: "work-app.company.com", active: true }
   ]
 };
-```bash
+```
 
 ## Add Domain to Denylist
 
@@ -45,7 +45,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
     active: true 
   })
 });
-```bash
+```
 
 ## Add Domain to Allowlist
 
@@ -62,7 +62,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/allowlist', {
     active: true 
   })
 });
-```bash
+```
 
 ## Update Domain Status
 
@@ -86,7 +86,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/badwebsite.com', {
   },
   body: JSON.stringify({ active: true })
 });
-```bash
+```
 
 ## Remove Domain
 
@@ -102,7 +102,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/allowlist/goodwebsite.com', 
   method: 'DELETE',
   headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });
-```bash
+```
 
 ## Get All Entries
 
@@ -116,7 +116,7 @@ const denylist = await fetch('https://api.nextdns.io/profiles/abc123/denylist', 
 const allowlist = await fetch('https://api.nextdns.io/profiles/abc123/allowlist', {
   headers: { 'X-API-Key': 'YOUR_API_KEY' }
 }).then(r => r.json());
-```bash
+```
 
 ## Domain Format
 
@@ -131,7 +131,7 @@ Domains can include:
 
 // Wildcard (blocks all subdomains)
 { id: "*.ads-network.com", active: true }
-```bash
+```
 
 ## Use Cases
 
@@ -155,7 +155,7 @@ Allowlist has **higher priority** than denylist and all other blocking rules:
 
 ```text
 Allowlist > Denylist > Parental Control > Privacy > Security
-```bash
+```
 
 ## Error Handling
 
@@ -179,7 +179,7 @@ try {
 } catch (error) {
   console.error('Request failed:', error);
 }
-```bash
+```
 
 ## Do NOT Use
 
@@ -205,7 +205,7 @@ try {
     { id: "good.com", active: true }
   ]
 }
-```bash
+```
 
 ## Reference
 

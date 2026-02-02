@@ -80,7 +80,7 @@ const response = await fetch('https://api.nextdns.io/profiles', {
 
 const result = await response.json();
 // { "data": { "id": "abc123" } }
-```bash
+```
 
 ## Get Profile
 
@@ -92,7 +92,7 @@ const response = await fetch('https://api.nextdns.io/profiles/abc123', {
 });
 
 const profile = await response.json();
-```bash
+```
 
 ## Update Profile
 
@@ -114,7 +114,7 @@ await fetch('https://api.nextdns.io/profiles/abc123', {
   },
   body: JSON.stringify(updates)
 });
-```bash
+```
 
 ## Delete Profile
 
@@ -125,7 +125,7 @@ await fetch('https://api.nextdns.io/profiles/abc123', {
   method: 'DELETE',
   headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });
-```bash
+```
 
 ## Profile ID Usage
 
@@ -140,7 +140,7 @@ const analytics = await fetch(
   `https://api.nextdns.io/profiles/${profileId}/analytics/status`,
   { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
 );
-```bash
+```
 
 ## Do NOT Use
 
@@ -155,7 +155,7 @@ await fetch('https://api.nextdns.io/profiles/abc123', {
 const response = await createProfile(data);
 // Don't hardcode or guess the ID
 const wrongId = "myprofile"; // ❌
-```bash
+```
 
 ## Reference
 

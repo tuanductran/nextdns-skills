@@ -18,7 +18,7 @@ The easiest way to upgrade is to simply re-run the universal installation script
 
 ```bash
 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```text
+```
 
 The installer will detect your existing installation and offer an **Upgrade** option if a newer version is available. It will preserve your configuration settings.
 
@@ -28,7 +28,7 @@ To remove NextDNS CLI from your system, use the same universal script:
 
 ```bash
 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```text
+```
 
 1. Select the **Uninstall** option from the menu.
 2. The script will:

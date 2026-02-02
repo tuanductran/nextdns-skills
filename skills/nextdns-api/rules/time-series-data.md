@@ -18,7 +18,7 @@ Append `;series` to any analytics endpoint to get time series data:
 /profiles/:profile/analytics/status;series
 /profiles/:profile/analytics/domains;series
 /profiles/:profile/analytics/protocols;series
-```bash
+```
 
 ## Basic Usage
 
@@ -29,7 +29,7 @@ const response = await fetch(
 );
 
 const data = await response.json();
-```bash
+```
 
 ## Response Format
 
@@ -67,7 +67,7 @@ Instead of single `queries` value, you get an array:
     }
   }
 }
-```bash
+```
 
 ## Query Parameters
 
@@ -86,7 +86,7 @@ interval: 86400   // 1 day
 interval: '1h'    // 1 hour
 interval: '1d'    // 1 day
 interval: '1w'    // 1 week
-```yaml
+```
 
 If not specified, API chooses appropriate interval based on date range.
 
@@ -106,7 +106,7 @@ alignment: 'start'
 
 // Align to clock (useful with timezone)
 alignment: 'clock'
-```bash
+```
 
 ### timezone
 
@@ -127,7 +127,7 @@ alignment: 'clock'
 // Get timezone in JavaScript
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 // "Europe/Paris"
-```bash
+```
 
 ### partials
 
@@ -148,7 +148,7 @@ partials: 'end'
 
 // Include both
 partials: 'all'
-```bash
+```
 
 ## Complete Example
 
@@ -192,7 +192,7 @@ const hourly = await getTimeSeries('abc123', 'protocols', {
   from: '-24h',
   interval: '1h'
 });
-```bash
+```
 
 ## Creating Charts
 
@@ -216,7 +216,7 @@ async function createChart(profileId) {
     datasets
   };
 }
-```bash
+```
 
 ## Common Intervals
 
@@ -235,7 +235,7 @@ async function createChart(profileId) {
 
 // Monthly for last year
 { from: '-1y', interval: '30d' }
-```bash
+```
 
 ## Timezone Examples
 
@@ -253,7 +253,7 @@ async function createChart(profileId) {
 
 // Get user's timezone in browser
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-```bash
+```
 
 ## Do NOT Use
 
@@ -276,7 +276,7 @@ interval: '1 day'  // No spaces
 // ✅ Correct
 interval: '1d'
 interval: 86400
-```bash
+```
 
 ## Best Practices
 
