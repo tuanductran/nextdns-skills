@@ -469,7 +469,6 @@ Edit the YAML frontmatter with correct values.
 
 ```bash
 pnpm lint:fix
-pnpm lint
 ```
 
 ### Step 6: Commit (Protocol 1)
@@ -507,7 +506,7 @@ All rules must align with official documentation:
 | 7. Simple README | MANDATORY | Manual review |
 | 8. Code Blocks | MANDATORY | CI/CD pipeline |
 | 9. Directory Structure | MANDATORY | Automated check |
-| 10. Link Integrity | MANDATORY | Pre-commit hook |
+| 10. Link Integrity | MANDATORY | Manual review |
 
 **Violation Consequences**:
 
