@@ -48,7 +48,7 @@ The output will tell you if you are using NextDNS, which protocol (DoH, DoT), an
 If the initial installation script fails, run it in debug mode to see more detailed output:
 ```bash
 DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```bash
+```
 
 ### Port 53 Conflict
 If NextDNS fails to start, another service might be using port 53 (common on Linux with `dnsmasq` or `systemd-resolved`).
@@ -65,4 +65,4 @@ NextDNS provides a diagnostic tool to help support staff:
 ```bash
 # Run a full diagnostic check and output a link to results
 sudo nextdns diagnostics
-```text
+```

@@ -19,7 +19,7 @@ Local caching significantly reduces latency by avoiding unnecessary network roun
 ```bash
 sudo nextdns config set -cache-size=10MB
 sudo nextdns restart
-```bash
+```
 
 ### 2. Lower Client TTL
 Use `-max-ttl` to prevent devices on your network from caching DNS records for too long. This ensures changes in your NextDNS web dashboard apply quickly.
@@ -27,14 +27,14 @@ Use `-max-ttl` to prevent devices on your network from caching DNS records for t
 # Set client-side TTL to 5 seconds
 sudo nextdns config set -max-ttl=5s
 sudo nextdns restart
-```bash
+```
 
 ### 3. Use EDNS Client Subnet (ECS)
 EDNS allows NextDNS to see which regional network you are on, helping CDNs (like Netflix or Akamai) serve content from the closest server to you.
 ```bash
 # Optimization: This is usually enabled by default in the CLI for performance.
 sudo nextdns config set -report-client-info=true
-```bash
+```
 
 ## Reliability and Resilience
 
@@ -42,10 +42,10 @@ sudo nextdns config set -report-client-info=true
 If you use split-horizon DNS, specify multiple local servers for failover.
 ```bash
 sudo nextdns config set -forwarder local.domain=192.168.1.1,192.168.1.2
-```bash
+```
 
 ### 2. Auto-Activation
 Ensure NextDNS takes over system DNS automatically at boot.
 ```bash
 sudo nextdns config set -auto-activate=true
-```text
+```
