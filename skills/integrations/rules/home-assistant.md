@@ -120,6 +120,16 @@ The integration uses different polling intervals for various data types:
 
 These intervals balance real-time updates with API rate limits.
 
+## Verification
+
+After setting up the integration, verify it's working correctly:
+
+1. Check that all entities appear in **Developer Tools → States**
+2. Search for entities starting with `sensor.nextdns_`, `switch.nextdns_`, `binary_sensor.nextdns_`, and `button.nextdns_`
+3. Visit [https://test.nextdns.io](https://test.nextdns.io) from a device on your network to confirm NextDNS is active
+4. Verify the connection status sensor shows "Connected"
+5. Check the NextDNS dashboard to see recent queries from your network
+
 ## Best Practices
 
 - **Use Profile-Specific Integrations**: Set up separate integrations for each family member's profile to enable granular control
