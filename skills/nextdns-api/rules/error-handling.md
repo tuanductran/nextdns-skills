@@ -31,7 +31,7 @@ Invalid requests return `400` status with errors array:
     }
   ]
 }
-```
+```bash
 
 ### 2. User Errors (200 OK)
 
@@ -50,7 +50,7 @@ Business logic errors return `200` status with errors array:
     }
   ]
 }
-```
+```bash
 
 ## Error Object Structure
 
@@ -63,7 +63,7 @@ interface Error {
     pointer?: string;     // JSON pointer (for 200 errors)
   };
 }
-```
+```bash
 
 ## Common Error Codes
 
@@ -141,7 +141,7 @@ class HttpError extends Error {
     this.status = status;
   }
 }
-```
+```bash
 
 ## Validation Examples
 
@@ -166,7 +166,7 @@ const response = await fetch(
     }
   ]
 }
-```
+```bash
 
 ### Invalid Domain
 
@@ -193,7 +193,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
     }
   ]
 }
-```
+```bash
 
 ### Duplicate Entry
 
@@ -220,7 +220,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
     }
   ]
 }
-```
+```bash
 
 ## Comprehensive Error Handler
 
@@ -272,7 +272,7 @@ try {
 } catch (error) {
   console.error('Error:', error.message);
 }
-```
+```bash
 
 ## Retry Logic
 
@@ -302,7 +302,7 @@ async function nextdnsApiWithRetry(endpoint, options = {}, maxRetries = 3) {
   
   throw lastError;
 }
-```
+```bash
 
 ## Do NOT Use
 
@@ -326,7 +326,7 @@ if (!response.ok) {
   throw new HttpError(response.status);
 }
 return data;
-```
+```bash
 
 ## Best Practices
 

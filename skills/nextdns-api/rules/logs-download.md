@@ -14,7 +14,7 @@ tags: download logs, export logs, redirect, file download
 
 ```http
 GET /profiles/:profile/logs/download
-```
+```bash
 
 ## Basic Usage
 
@@ -37,7 +37,7 @@ const a = document.createElement('a');
 a.href = url;
 a.download = 'nextdns-logs.csv';
 a.click();
-```
+```bash
 
 ## Get URL Without Redirect
 
@@ -53,7 +53,7 @@ const result = await response.json();
 // { "data": { "url": "https://..." } }
 
 const downloadUrl = result.data.url;
-```
+```bash
 
 ## With Loading Indicator
 
@@ -86,7 +86,7 @@ async function downloadLogs(profileId, apiKey) {
     hideLoader();
   }
 }
-```
+```bash
 
 ## React Example
 
@@ -127,7 +127,7 @@ function LogsDownloadButton({ profileId, apiKey }) {
     </button>
   );
 }
-```
+```bash
 
 ## Node.js Example
 
@@ -163,7 +163,7 @@ await downloadLogs(
   process.env.NEXTDNS_API_KEY,
   './nextdns-logs.csv'
 );
-```
+```bash
 
 ## File Format
 
@@ -195,7 +195,7 @@ url.searchParams.set('redirect', '0');
 const response = await fetch(url, {
   headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });
-```
+```bash
 
 ### Supported Parameters
 
@@ -244,7 +244,7 @@ const downloadUrl = await downloadFilteredLogs('abc123', process.env.NEXTDNS_API
 });
 
 window.location.href = downloadUrl;
-```
+```bash
 
 ## Do NOT Use
 
@@ -263,4 +263,4 @@ if (response.errors) {
   throw new Error('Failed to generate log file');
 }
 window.location.href = response.data.url;
-```
+```text

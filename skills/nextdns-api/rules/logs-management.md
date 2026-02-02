@@ -19,7 +19,7 @@ const response = await fetch(
 );
 
 const logs = await response.json();
-```
+```bash
 
 ## Query Parameters
 
@@ -35,7 +35,7 @@ from: '-24h'
 // Specific time range
 from: '2024-01-15T00:00:00Z'
 to: '2024-01-15T23:59:59Z'
-```
+```bash
 
 ### Sorting
 
@@ -45,7 +45,7 @@ sort: 'desc'
 
 // Oldest first
 sort: 'asc'
-```
+```bash
 
 ### Pagination
 
@@ -55,7 +55,7 @@ limit: 100
 
 // Next page
 cursor: 'abc123xyz'
-```
+```bash
 
 ### Device Filtering
 
@@ -65,7 +65,7 @@ device: '8TD1G'
 
 // All unidentified devices
 device: '__UNIDENTIFIED__'
-```
+```bash
 
 ### Status Filtering
 
@@ -81,7 +81,7 @@ status: 'default'
 
 // Errors
 status: 'error'
-```
+```bash
 
 ### Search
 
@@ -91,7 +91,7 @@ search: 'facebook'  // Matches facebook.com, facebook.hello.com, etc.
 
 // Search for specific domain
 search: 'facebook.com'
-```
+```bash
 
 ### Raw Logs
 
@@ -101,7 +101,7 @@ raw: false
 
 // All DNS queries, no deduplication
 raw: true
-```
+```bash
 
 ## Response Format
 
@@ -155,7 +155,7 @@ raw: true
     }
   }
 }
-```
+```bash
 
 ## Complete Example
 
@@ -209,7 +209,7 @@ const rawLogs = await getLogs('abc123', {
   from: '-1h',
   limit: 1000
 });
-```
+```bash
 
 ## Paginate Through All Logs
 
@@ -237,7 +237,7 @@ const allBlocked = await getAllLogs('abc123', {
   status: 'blocked',
   from: '-24h'
 });
-```
+```bash
 
 ## Raw vs Deduplicated Logs
 
@@ -268,7 +268,7 @@ const blocked = await getLogs('abc123', {
 });
 
 const domains = [...new Set(blocked.data.map(log => log.domain))];
-```
+```bash
 
 ### Search for specific domain
 
@@ -277,7 +277,7 @@ const facebookLogs = await getLogs('abc123', {
   search: 'facebook',
   from: '-7d'
 });
-```
+```bash
 
 ### Get unidentified device queries
 
@@ -286,7 +286,7 @@ const unidentified = await getLogs('abc123', {
   device: '__UNIDENTIFIED__',
   from: '-24h'
 });
-```
+```bash
 
 ### Debug DNS issues
 
@@ -296,7 +296,7 @@ const debugLogs = await getLogs('abc123', {
   search: 'problematic-domain.com',
   from: '-1h'
 });
-```
+```bash
 
 ## Do NOT Use
 
@@ -313,7 +313,7 @@ raw: 'true'  // Use boolean or '1'/'0'
 // ✅ Correct
 raw: true
 raw: '1'
-```
+```bash
 
 ## Performance Tips
 

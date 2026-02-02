@@ -25,7 +25,7 @@ url.searchParams.set('to', 'now');
 const response = await fetch(url, {
   headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });
-```
+```bash
 
 ### Date Format Options
 
@@ -47,7 +47,7 @@ from: 'now'   // Current time
 
 // Common date formats
 from: '2024-01-15'
-```
+```bash
 
 ### Pagination
 
@@ -57,7 +57,7 @@ url.searchParams.set('limit', '50');  // Default: 10, Max: 500
 
 // Get next page using cursor from previous response
 url.searchParams.set('cursor', 'j2k3zl3b4v');
-```
+```bash
 
 ### Device Filtering
 
@@ -67,7 +67,7 @@ url.searchParams.set('device', '8TD1G');
 
 // Filter for all unidentified devices
 url.searchParams.set('device', '__UNIDENTIFIED__');
-```
+```bash
 
 ## Complete Example
 
@@ -116,7 +116,7 @@ do {
   allData = allData.concat(response.data);
   cursor = response.meta?.pagination?.cursor;
 } while (cursor);
-```
+```bash
 
 ## Endpoint-Specific Parameters
 
@@ -128,7 +128,7 @@ url.searchParams.set('status', 'blocked');  // default | blocked | allowed
 
 // Show root domains only
 url.searchParams.set('root', 'true');
-```
+```bash
 
 ### Status Endpoint
 
@@ -154,7 +154,7 @@ limit: 100    // Recommended for balance
 limit: 0      // Too small
 limit: 1000   // Too large
 limit: "50"   // Should be number in code, string in URL
-```
+```bash
 
 ## Response with Pagination
 
@@ -167,7 +167,7 @@ limit: "50"   // Should be number in code, string in URL
     }
   }
 }
-```
+```bash
 
 ## Do NOT Use
 
@@ -185,4 +185,4 @@ url.searchParams.set('page', '2');     // Use 'cursor' instead
 
 // ❌ Hardcoded cursor values
 cursor: 'page2'  // Must use cursor from API response
-```
+```text

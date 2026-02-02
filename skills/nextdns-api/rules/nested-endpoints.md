@@ -31,7 +31,7 @@ Profile configuration has nested objects and arrays:
     }
   }
 }
-```
+```bash
 
 ## Child Endpoints
 
@@ -46,7 +46,7 @@ All nested objects and arrays have their own API endpoints:
 /profiles/:profile/settings                  # Nested object
 /profiles/:profile/settings/performance      # Deeply nested object
 /profiles/:profile/denylist                  # Top-level array
-```
+```bash
 
 ## HTTP Methods by Endpoint Type
 
@@ -73,7 +73,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security', {
     typosquatting: true
   })
 });
-```
+```bash
 
 ### Array Endpoints
 
@@ -108,7 +108,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists', {
     { id: 'oisd' }
   ])
 });
-```
+```bash
 
 ### Array Item Endpoints
 
@@ -130,7 +130,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/badsite.com', {
   method: 'DELETE',
   headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });
-```
+```bash
 
 ## Using First Key as ID
 
@@ -154,7 +154,7 @@ For array items, use the first key as the ID in the URL:
 
 // URL
 /profiles/abc123/parentalControl/services/tiktok
-```
+```bash
 
 ## Complete Examples
 
@@ -174,7 +174,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security', {
     typosquatting: true
   })
 });
-```
+```bash
 
 ### Manage TLDs
 
@@ -208,7 +208,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security/tlds', {
     { id: 'tk' }
   ])
 });
-```
+```bash
 
 ### Update Performance Settings
 
@@ -226,7 +226,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/settings/performance', {
     cnameFlattening: true
   })
 });
-```
+```bash
 
 ### Manage Parental Control Services
 
@@ -256,7 +256,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tik
   method: 'DELETE',
   headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });
-```
+```bash
 
 ## Endpoint Patterns
 
@@ -298,7 +298,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/0', {
 await fetch('https://api.nextdns.io/profiles/abc123/denylist/bad.com', {
   method: 'DELETE'
 });
-```
+```bash
 
 ## Helper Class
 
@@ -376,7 +376,7 @@ await profile.post('/denylist', { id: 'bad.com', active: true });
 
 // Remove from denylist
 await profile.delete('/denylist/bad.com');
-```
+```bash
 
 ## Reference
 

@@ -22,21 +22,21 @@ Standard ISO 8601 format with timezone:
 from: '2024-01-15T16:34:05.203Z'
 from: '2024-01-15T16:34:05Z'
 from: '2024-01-15T00:00:00Z'
-```
+```bash
 
 ### 2. UNIX Timestamp (Seconds)
 
 ```javascript
 from: 1615826071
 from: '1615826071'
-```
+```bash
 
 ### 3. UNIX Timestamp (Milliseconds)
 
 ```javascript
 from: 1615826071284
 from: '1615826071284'
-```
+```bash
 
 ### 4. Relative Dates
 
@@ -63,14 +63,14 @@ from: '-1y'   // 1 year ago
 
 // Now
 from: 'now'   // Current time
-```
+```bash
 
 ### 5. Common Date Formats
 
 ```javascript
 from: '2024-01-15'
 from: '2024-01-15 16:34:05'
-```
+```bash
 
 ## Usage Examples
 
@@ -81,7 +81,7 @@ const response = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/status?from=-7d&to=now',
   { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
 );
-```
+```bash
 
 ### Specific Date Range
 
@@ -90,7 +90,7 @@ const response = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/domains?from=2024-01-01&to=2024-01-31',
   { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
 );
-```
+```bash
 
 ### Last 24 Hours
 
@@ -99,7 +99,7 @@ const response = await fetch(
   'https://api.nextdns.io/profiles/abc123/logs?from=-24h',
   { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
 );
-```
+```bash
 
 ### Custom Time Range
 
@@ -108,7 +108,7 @@ const response = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/devices?from=2024-01-15T00:00:00Z&to=2024-01-15T23:59:59Z',
   { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
 );
-```
+```bash
 
 ## Helper Functions
 
@@ -146,7 +146,7 @@ function formatDateForApi(date) {
   }
   return date;
 }
-```
+```bash
 
 ### Python
 
@@ -180,7 +180,7 @@ def format_date_for_api(date):
     if isinstance(date, (int, float)):
         return str(int(date))
     return date
-```
+```bash
 
 ## Date Range Builder
 
@@ -260,7 +260,7 @@ const queryString = new DateRangeBuilder()
   .lastHours(24)
   .toQueryString();
 // "from=-24h&to=now"
-```
+```bash
 
 ## Common Patterns
 
@@ -297,7 +297,7 @@ const queryString = new DateRangeBuilder()
   from: new Date().toISOString().split('T')[0],
   to: 'now'
 }
-```
+```bash
 
 ## Do NOT Use
 
@@ -322,7 +322,7 @@ from: '2024-01-15T16:34:05Z'
 from: '-7d'
 from: 1615826071
 from: 'now'
-```
+```bash
 
 ## Timezone Considerations
 
