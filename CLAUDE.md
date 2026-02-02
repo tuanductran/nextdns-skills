@@ -128,14 +128,14 @@ All commit messages MUST follow the Conventional Commits specification:
 | Correct | Incorrect |
 |---------|-----------|
 | NextDNS | nextdns, NextDns, NEXTDNS |
-| GitHub | Github, github, GITHUB |
-| pnpm | PNPM, npm, Npm |
+| GitHub | GitHub, github, GITHUB |
+| pnpm | PNPM, npm, npm |
 | iOS | ios, IOS |
-| macOS | macos, MacOS, Mac OS |
-| OpenWrt | Openwrt, openwrt, OpenWRT |
-| JavaScript | Javascript, javascript |
-| TypeScript | Typescript, typescript |
-| PayPal | Paypal, paypal |
+| macOS | macos, macOS, Mac OS |
+| OpenWrt | OpenWrt, openwrt, OpenWrt |
+| JavaScript | JavaScript, javascript |
+| TypeScript | TypeScript, typescript |
+| PayPal | PayPal, paypal |
 | AdGuard | Adguard, adguard |
 | DNSMasq | dnsmasq, Dnsmasq |
 
@@ -213,12 +213,12 @@ Immediately after H1 heading:
 ```javascript
 // ✅ CORRECT
 fetch('https://api.nextdns.io/profiles/abc123', {
-  headers: { 'X-Api-Key': 'YOUR_API_KEY' }
+  headers: { 'X-API-Key': 'YOUR_API_KEY' }
 });
 
 // ❌ WRONG - Real API key exposed
 fetch('https://api.nextdns.io/profiles/a1b2c3', {
-  headers: { 'X-Api-Key': 'sk_live_abc123xyz...' }
+  headers: { 'X-API-Key': 'sk_live_abc123xyz...' }
 });
 ```
 

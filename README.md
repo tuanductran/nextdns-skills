@@ -78,7 +78,7 @@ Rules are classified into two categories:
 
 #### Authentication & Setup
 
-- **Authentication**: Proper API key usage with X-Api-Key header
+- **Authentication**: Proper API key usage with X-API-Key header
 - **Error Handling**: Handle API errors and validation responses correctly
 - **Response Format**: Parse API response structure (data, meta, errors)
 
@@ -96,7 +96,7 @@ Rules are classified into two categories:
 - **Analytics Queries**: Use correct query parameters for analytics endpoints
 - **Analytics Endpoints**: Access various analytics endpoints (status, domains, reasons, devices, protocols, etc.)
 - **Time Series Data**: Retrieve time series data for charts and visualizations
-- **Date Formats**: Use correct date formats (ISO 8601, Unix timestamp, relative dates)
+- **Date Formats**: Use correct date formats (ISO 8601, UNIX timestamp, relative dates)
 
 #### Logs Management
 
@@ -124,7 +124,7 @@ Rules are classified into two categories:
 #### Advanced Features
 
 - **Advanced Features**: Conditional forwarders, profile selection, client detection
-- **Platform Specific**: Platform-specific configurations (OpenWRT, pfSense, Synology, Ubiquiti)
+- **Platform Specific**: Platform-specific configurations (OpenWrt, pfSense, Synology, Ubiquiti)
 
 #### Monitoring & Troubleshooting
 
@@ -177,7 +177,7 @@ Rules are classified into two categories:
 const profile = await fetch('https://api.nextdns.io/profiles', {
   method: 'POST',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
@@ -198,7 +198,7 @@ const profile = await fetch('https://api.nextdns.io/profiles', {
 ```javascript
 const analytics = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/domains?from=-7d&limit=50',
-  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 ```
 
@@ -207,7 +207,7 @@ const analytics = await fetch(
 ```javascript
 const eventSource = new EventSource(
   'https://api.nextdns.io/profiles/abc123/logs/stream?status=blocked',
-  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
 );
 
 eventSource.onmessage = (event) => {
