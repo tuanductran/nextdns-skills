@@ -151,14 +151,14 @@ jobs:
             done
             
             # Validate impact value
-            impact_value=$(echo "$frontmatter" | grep "^impact:" | cut -d':' -f2 | tr -d ' ')
+            impact_value=$(echo "$frontmatter" | grep "^impact:" | cut -d':' -f2 | tr -d ' "')
             if [[ ! "$impact_value" =~ ^(HIGH|MEDIUM|LOW)$ ]]; then
               echo -e "${RED}❌ ERROR: Invalid impact value '$impact_value' in $rule_file (must be HIGH, MEDIUM, or LOW)${NC}"
               ERRORS_FOUND=1
             fi
             
             # Validate type value
-            type_value=$(echo "$frontmatter" | grep "^type:" | cut -d':' -f2 | tr -d ' ')
+            type_value=$(echo "$frontmatter" | grep "^type:" | cut -d':' -f2 | tr -d ' "')
             if [[ ! "$type_value" =~ ^(capability|efficiency)$ ]]; then
               echo -e "${RED}❌ ERROR: Invalid type value '$type_value' in $rule_file (must be capability or efficiency)${NC}"
               ERRORS_FOUND=1
