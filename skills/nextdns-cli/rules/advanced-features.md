@@ -1,11 +1,10 @@
 ---
-title: Advanced Features
-impact: HIGH
-impactDescription: Advanced routing, conditional forwarders, and caching configurations
-type: capability
-tags: conditional forwarder, MAC address, subnet, routing, client detection, split-horizon, cache
+title: "Advanced Features"
+impact: "HIGH"
+impactDescription: "Advanced routing, conditional forwarders, and caching configurations"
+type: "capability"
+tags: "conditional forwarder, MAC address, subnet, routing, client detection, split-horizon, cache"
 ---
-
 # Advanced Features
 
 **Impact: HIGH** - Complex routing and performance optimizations

@@ -1,11 +1,10 @@
 ---
-title: DNSMasq Integration
-impact: MEDIUM
-impactDescription: Running DNSMasq alongside NextDNS without proper configuration can result in loss of client reporting and conditional configuration features. This guidance ensures both services work together seamlessly while maintaining full NextDNS functionality.
-type: capability
-tags: dnsmasq, dns, router, client reporting, conditional configuration, port configuration, setup-router
+title: "DNSMasq Integration"
+impact: "MEDIUM"
+impactDescription: "Running DNSMasq alongside NextDNS without proper configuration can result in loss of client reporting and conditional configuration features. This guidance ensures both services work together seamlessly while maintaining full NextDNS functionality."
+type: "capability"
+tags: "dnsmasq, dns, router, client reporting, conditional configuration, port configuration, setup-router"
 ---
-
 # DNSMasq Integration
 
 **Impact: MEDIUM** - Enables DNSMasq and NextDNS to run together while preserving client reporting and conditional configuration capabilities

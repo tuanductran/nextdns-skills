@@ -1,11 +1,10 @@
 ---
-title: Security Settings
-impact: HIGH
-impactDescription: Configure threat protection and security features
-type: capability
-tags: security, threat intelligence, cryptojacking, DNS rebinding, typosquatting, DGA, NRD, CSAM
+title: "Security Settings"
+impact: "HIGH"
+impactDescription: "Configure threat protection and security features"
+type: "capability"
+tags: "security, threat intelligence, cryptojacking, DNS rebinding, typosquatting, DGA, NRD, CSAM"
 ---
-
 # Security Settings
 
 **Impact: HIGH** - Configure comprehensive security features for DNS filtering

@@ -1,11 +1,10 @@
 ---
-title: pfSense and OPNsense Integration
-impact: HIGH
-impactDescription: Proper configuration of NextDNS on pfSense and OPNsense firewalls enables network-wide DNS protection with encrypted DNS transport. Without this guidance, users may face CNAME chasing issues on pfSense or fail to leverage OPNsense's native DoT capabilities.
-type: capability
-tags: pfsense, opnsense, firewall, router, unbound, dns-over-tls, dot, freebsd, dns resolver
+title: "pfSense and OPNsense Integration"
+impact: "HIGH"
+impactDescription: "Proper configuration of NextDNS on pfSense and OPNsense firewalls enables network-wide DNS protection with encrypted DNS transport. Without this guidance, users may face CNAME chasing issues on pfSense or fail to leverage OPNsense's native DoT capabilities."
+type: "capability"
+tags: "pfsense, opnsense, firewall, router, unbound, dns-over-tls, dot, freebsd, dns resolver"
 ---
-
 # pfSense and OPNsense Integration
 
 **Impact: HIGH** - Critical for deploying NextDNS on enterprise-grade firewalls with proper encrypted DNS configuration and awareness of platform-specific limitations

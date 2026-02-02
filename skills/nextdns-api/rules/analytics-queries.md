@@ -1,11 +1,10 @@
 ---
-title: Analytics Query Parameters
-impact: HIGH
-impactDescription: Use correct query parameters for analytics endpoints
-type: capability
-tags: analytics, query parameters, filtering, date range, device filtering, pagination
+title: "Analytics Query Parameters"
+impact: "HIGH"
+impactDescription: "Use correct query parameters for analytics endpoints"
+type: "capability"
+tags: "analytics, query parameters, filtering, date range, device filtering, pagination"
 ---
-
 # Analytics Query Parameters
 
 **Impact: HIGH** - Correctly filter and paginate analytics data

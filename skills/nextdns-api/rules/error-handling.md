@@ -1,11 +1,10 @@
 ---
-title: Error Handling
-impact: HIGH
-impactDescription: Handle API errors and validation responses correctly
-type: capability
-tags: error handling, validation, 400 error, error format, error response
+title: "Error Handling"
+impact: "HIGH"
+impactDescription: "Handle API errors and validation responses correctly"
+type: "capability"
+tags: "error handling, validation, 400 error, error format, error response"
 ---
-
 # Error Handling
 
 **Impact: HIGH** - Properly handle API errors and validation failures

@@ -1,11 +1,10 @@
 ---
-title: Upgrade and Uninstall
-impact: MEDIUM
-impactDescription: Safely updating or removing the NextDNS CLI service
-type: efficiency
-tags: upgrade, uninstall, remove, update
+title: "Upgrade and Uninstall"
+impact: "MEDIUM"
+impactDescription: "Safely updating or removing the NextDNS CLI service"
+type: "efficiency"
+tags: "upgrade, uninstall, remove, update"
 ---
-
 # Upgrade and Uninstall
 
 **Impact: MEDIUM** - Maintaining or cleaning up the NextDNS installation

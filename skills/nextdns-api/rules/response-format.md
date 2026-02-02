@@ -1,11 +1,10 @@
 ---
-title: Response Format
-impact: MEDIUM
-impactDescription: Parse API response structure correctly
-type: efficiency
-tags: response format, data, meta, errors, response structure
+title: "Response Format"
+impact: "MEDIUM"
+impactDescription: "Parse API response structure correctly"
+type: "efficiency"
+tags: "response format, data, meta, errors, response structure"
 ---
-
 # Response Format
 
 **Impact: MEDIUM** - Understand and parse API response structure

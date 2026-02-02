@@ -1,11 +1,10 @@
 ---
-title: Public DNS and AdGuard Home Integration
-impact: HIGH
-impactDescription: Without proper public DNS and AdGuard Home configuration, users may experience degraded performance, connectivity issues, or inability to leverage NextDNS features for unlinked devices and third-party DNS forwarders.
-type: capability
-tags: public dns, adguard, anycast, doh, dot, browser setup, windows, android, ios, upstream dns, bootstrap dns
+title: "Public DNS and AdGuard Home Integration"
+impact: "HIGH"
+impactDescription: "Without proper public DNS and AdGuard Home configuration, users may experience degraded performance, connectivity issues, or inability to leverage NextDNS features for unlinked devices and third-party DNS forwarders."
+type: "capability"
+tags: "public dns, adguard, anycast, doh, dot, browser setup, windows, android, ios, upstream dns, bootstrap dns"
 ---
-
 # Public DNS and AdGuard Home Integration
 
 **Impact: HIGH** - Critical for unlinked device setup and AdGuard Home upstream configuration

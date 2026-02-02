@@ -1,11 +1,10 @@
 ---
-title: Logs Management
-impact: HIGH
-impactDescription: Query, filter, and search DNS logs
-type: capability
-tags: logs, filtering, search, raw logs, deduplication, query logs
+title: "Logs Management"
+impact: "HIGH"
+impactDescription: "Query, filter, and search DNS logs"
+type: "capability"
+tags: "logs, filtering, search, raw logs, deduplication, query logs"
 ---
-
 # Logs Management
 
 **Impact: HIGH** - Query and filter DNS logs for debugging and analysis

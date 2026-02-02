@@ -1,11 +1,10 @@
 ---
-title: Date Formats
-impact: HIGH
-impactDescription: Use correct date formats in query parameters
-type: capability
-tags: date format, ISO 8601, UNIX timestamp, relative dates, date parsing
+title: "Date Formats"
+impact: "HIGH"
+impactDescription: "Use correct date formats in query parameters"
+type: "capability"
+tags: "date format, ISO 8601, UNIX timestamp, relative dates, date parsing"
 ---
-
 # Date Formats
 
 **Impact: HIGH** - Use correct date formats for time-based queries

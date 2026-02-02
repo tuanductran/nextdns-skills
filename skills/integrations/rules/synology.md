@@ -1,11 +1,10 @@
 ---
-title: Synology Integration (DSM and SRM)
-impact: MEDIUM
-impactDescription: Proper installation of NextDNS on Synology devices (DSM NAS and SRM routers) enables network-wide DNS protection. Without this guidance, users may struggle with SSH access, especially the critical step of enabling the admin user on SRM for root access.
-type: capability
-tags: synology, dsm, srm, nas, router, ssh, cli, dhcp, network
+title: "Synology Integration (DSM and SRM)"
+impact: "MEDIUM"
+impactDescription: "Proper installation of NextDNS on Synology devices (DSM NAS and SRM routers) enables network-wide DNS protection. Without this guidance, users may struggle with SSH access, especially the critical step of enabling the admin user on SRM for root access."
+type: "capability"
+tags: "synology, dsm, srm, nas, router, ssh, cli, dhcp, network"
 ---
-
 # Synology Integration (DSM and SRM)
 
 **Impact: MEDIUM** - Essential for deploying NextDNS on Synology NAS (DSM) and routers (SRM) with proper SSH access and network configuration

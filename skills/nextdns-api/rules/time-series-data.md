@@ -1,11 +1,10 @@
 ---
-title: Time Series Data
-impact: HIGH
-impactDescription: Retrieve time series data for charts and visualizations
-type: capability
-tags: time series, charts, interval, alignment, timezone, tumbling windows
+title: "Time Series Data"
+impact: "HIGH"
+impactDescription: "Retrieve time series data for charts and visualizations"
+type: "capability"
+tags: "time series, charts, interval, alignment, timezone, tumbling windows"
 ---
-
 # Time Series Data
 
 **Impact: HIGH** - Get time series data for creating charts and trend analysis

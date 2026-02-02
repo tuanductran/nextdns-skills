@@ -1,11 +1,10 @@
 ---
-title: Browser Native DoH Configuration
-impact: MEDIUM
-impactDescription: Configuring DNS-over-HTTPS directly in browsers enables encrypted DNS without system-wide changes or requiring administrator privileges. Without this guidance, users in restricted environments may be unable to leverage NextDNS protection when software installation is blocked.
-type: capability
-tags: browser, chrome, edge, firefox, doh, dns-over-https, secure-dns, encrypted-dns, corporate, proxy
+title: "Browser Native DoH Configuration"
+impact: "MEDIUM"
+impactDescription: "Configuring DNS-over-HTTPS directly in browsers enables encrypted DNS without system-wide changes or requiring administrator privileges. Without this guidance, users in restricted environments may be unable to leverage NextDNS protection when software installation is blocked."
+type: "capability"
+tags: "browser, chrome, edge, firefox, doh, dns-over-https, secure-dns, encrypted-dns, corporate, proxy"
 ---
-
 # Browser Native DoH Configuration
 
 **Impact: MEDIUM** - Enables NextDNS protection in restricted environments without system-wide changes or administrative privileges

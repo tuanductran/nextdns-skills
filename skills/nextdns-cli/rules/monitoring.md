@@ -1,11 +1,10 @@
 ---
-title: Monitoring
-impact: MEDIUM
-impactDescription: Monitoring DNS queries, logs, and client activity
-type: capability
-tags: log, cache-stats, discovered clients, monitoring, debug
+title: "Monitoring"
+impact: "MEDIUM"
+impactDescription: "Monitoring DNS queries, logs, and client activity"
+type: "capability"
+tags: "log, cache-stats, discovered clients, monitoring, debug"
 ---
-
 # Monitoring
 
 **Impact: MEDIUM** - Real-time observation and metrics of DNS traffic

@@ -1,11 +1,10 @@
 ---
-title: Parental Control
-impact: HIGH
-impactDescription: Management of content filtering, app restrictions, and schedules
-type: capability
-tags: apps, games, categories, recreation time, safesearch, restricted mode, bypass methods
+title: "Parental Control"
+impact: "HIGH"
+impactDescription: "Management of content filtering, app restrictions, and schedules"
+type: "capability"
+tags: "apps, games, categories, recreation time, safesearch, restricted mode, bypass methods"
 ---
-
 # Parental Control
 
 **Impact: HIGH** - Content filtering and usage monitoring for family members

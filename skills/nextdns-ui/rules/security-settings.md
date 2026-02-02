@@ -1,11 +1,10 @@
 ---
-title: Security Settings
-impact: HIGH
-impactDescription: Configuration of advanced threat protection and security features
-type: capability
-tags: threat intelligence, google safe browsing, cryptojacking, dns rebinding, security, TLDs
+title: "Security Settings"
+impact: "HIGH"
+impactDescription: "Configuration of advanced threat protection and security features"
+type: "capability"
+tags: "threat intelligence, google safe browsing, cryptojacking, dns rebinding, security, TLDs"
 ---
-
 # Security Settings
 
 **Impact: HIGH** - Advanced threat protection and security configuration
