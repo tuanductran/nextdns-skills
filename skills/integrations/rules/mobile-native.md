@@ -63,7 +63,7 @@ Android 9 (Pie) and later include **Private DNS** support using DNS-over-TLS (Do
 ### Visual Path Reference
 
 **Stock Android:**
-```
+```text
 Settings
   └─ Network & internet
        └─ Advanced
@@ -73,7 +73,7 @@ Settings
 ```text
 
 **Samsung (One UI):**
-```
+```text
 Settings
   └─ Connections
        └─ More connection settings
@@ -116,7 +116,7 @@ Settings
 4. **Clear DNS cache:**
     ```text
     Settings → Apps → Show system apps → DNS Client → Storage → Clear cache
-```
+```bash
 
 ## iOS Configuration (Version 14+)
 
@@ -176,4 +176,4 @@ Settings
                  └─ Enter Passcode
                       └─ Install (confirm)
                            └─ Done
-```
+```text

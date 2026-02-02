@@ -18,7 +18,7 @@ The following command works for most Linux distributions (Debian, Ubuntu, CentOS
 
 ```bash
 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```
+```bash
 
 ### Installation Workflow
 

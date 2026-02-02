@@ -75,7 +75,7 @@ Settings
                  └─ Use secure DNS
                       └─ With: Custom
                            └─ Enter custom provider
-```
+```bash
 
 ## Firefox Configuration
 
@@ -104,7 +104,7 @@ Firefox has its own implementation of DNS-over-HTTPS with slightly different ter
 
 ### Visual Path Reference
 
-```
+```text
 Settings
   └─ Privacy & Security
        └─ DNS over HTTPS
@@ -169,6 +169,6 @@ After configuration, verify that DoH is working correctly:
 
 Temporarily use an invalid configuration ID to verify the browser is actually using DoH:
 
-```
+```text
 https://dns.nextdns.io/invalid
 ```text

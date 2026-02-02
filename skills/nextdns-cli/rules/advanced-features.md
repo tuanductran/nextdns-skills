@@ -21,7 +21,7 @@ sudo nextdns config set \
     -forwarder mycompany.com=1.2.3.4,1.2.3.5 \
     -forwarder mycompany2.com=https://doh.mycompany.com/dns-query#1.2.3.4
 sudo nextdns restart
-```
+```bash
 
 ## Conditional Profile Selection
 
@@ -33,7 +33,7 @@ sudo nextdns config set \
     -profile 00:1c:42:2e:60:4a=67890 \
     -profile abcdef  # Default profile for everyone else
 sudo nextdns restart
-```
+```bash
 
 ## Cache Configuration
 
@@ -51,7 +51,7 @@ sudo nextdns config set -cache-max-age=1h
 sudo nextdns config set -max-ttl=5s
 
 sudo nextdns restart
-```
+```bash
 
 ## Other Advanced Flags
 
@@ -67,4 +67,4 @@ NextDNS CLI can act as a proxy for any DoH provider:
 ```bash
 sudo nextdns config set -profile=https://dns.google/dns-query
 sudo nextdns restart
-```
+```text

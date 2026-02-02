@@ -37,7 +37,7 @@ ssh admin@synology-nas-ip
 
 # You may be prompted to accept the SSH fingerprint
 # Type 'yes' and press Enter
-```
+```bash
 
 ### Step 3: Install NextDNS CLI
 
@@ -49,7 +49,7 @@ sh -c "$(curl -sL https://nextdns.io/install)"
 # - Enter your NextDNS Configuration ID
 # - Choose whether to report device names
 # - Configure additional options as needed
-```
+```bash
 
 ## SRM (Router) Installation
 
@@ -84,7 +84,7 @@ SRM requires an additional critical step to enable root access via the admin use
 ssh root@synology-router-ip
 
 # Use the password you set for the admin user
-```
+```bash
 
 ### Step 4: Install NextDNS CLI
 
@@ -93,7 +93,7 @@ ssh root@synology-router-ip
 sh -c "$(curl -sL https://nextdns.io/install)"
 
 # Follow the interactive prompts
-```
+```bash
 
 ## Post-Installation: Network Configuration
 
@@ -143,7 +143,7 @@ nextdns status
 
 # Test DNS resolution
 nslookup example.com 127.0.0.1
-```
+```text
 
 Visit [https://test.nextdns.io](https://test.nextdns.io) from a device on your network to confirm NextDNS is active.
 
@@ -155,7 +155,7 @@ If the installation fails or you encounter issues, run the installer in debug mo
 
 ```bash
 DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"
-```
+```text
 
 This will output verbose information to help identify the problem.
 
@@ -188,4 +188,4 @@ netstat -tulnp | grep :53
 # Stop conflicting services if necessary
 # Then restart NextDNS
 nextdns restart
-```
+```text

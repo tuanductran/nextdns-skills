@@ -75,7 +75,7 @@ automation:
       - action: switch.turn_off
         target:
           entity_id: switch.kids_block_social_networks
-```
+```bash
 
 ### Morning Unblock Automation
 
@@ -91,7 +91,7 @@ automation:
       - action: switch.turn_on
         target:
           entity_id: switch.kids_block_social_networks
-```
+```bash
 
 ### High Threat Response
 
@@ -108,4 +108,4 @@ automation:
       - action: button.press
         target:
           entity_id: button.nextdns_clear_logs
-```
+```text

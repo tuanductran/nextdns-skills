@@ -18,7 +18,7 @@ Using host network mode allows the NextDNS CLI container to see actual LAN IP ad
 
 ```bash
 docker run -d --network host --restart unless-stopped nextdns/nextdns run -listen=:53 -profile=abc123
-```
+```bash
 
 ### Why Host Network Mode?
 
@@ -39,7 +39,7 @@ When host network mode is not available or desired, use port mapping:
 
 ```bash
 docker run -d -p 53:53/tcp -p 53:53/udp --restart unless-stopped nextdns/nextdns run -listen=:53 -profile=abc123
-```
+```bash
 
 ### Limitations
 
@@ -63,7 +63,7 @@ docker run -d \
     --network host \
     --restart unless-stopped \
     nextdns/nextdns run -listen=:53 -profile=abc123
-```
+```bash
 
 ### Restart Policy Options
 
@@ -83,7 +83,7 @@ docker run -d \
     --restart unless-stopped \
     -v /etc/nextdns:/etc/nextdns \
     nextdns/nextdns run -listen=:53 -profile=abc123
-```
+```javascript
 
 This allows the CLI to store and read configuration from `/etc/nextdns` on the host system.
 
@@ -112,7 +112,7 @@ docker rm nextdns
 
 # Pull latest image
 docker pull nextdns/nextdns:latest
-```
+```bash
 
 ## Troubleshooting
 
@@ -130,7 +130,7 @@ sudo netstat -tulpn | grep :53
 # Disable systemd-resolved if needed
 sudo systemctl disable systemd-resolved
 sudo systemctl stop systemd-resolved
-```
+```bash
 
 ### Container Not Starting
 
@@ -138,4 +138,4 @@ Check logs for errors:
 
 ```bash
 docker logs nextdns
-```
+```text

@@ -18,7 +18,7 @@ The recommended method for installing NextDNS CLI on macOS is using the universa
 
 ```bash
 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```
+```text
 
 This command will:
 
@@ -36,7 +36,7 @@ To upgrade NextDNS CLI to the latest version, simply re-run the installer comman
 
 ```bash
 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```
+```text
 
 The installer will detect the existing installation and automatically upgrade to the new version if available. No additional steps are required for upgrades.
 
@@ -48,7 +48,7 @@ For users who prefer package management via Homebrew, NextDNS CLI is available t
 
 ```bash
 brew install nextdns/tap/nextdns
-```
+```bash
 
 ### Configuration for Workstation
 
@@ -56,7 +56,7 @@ For a personal workstation or laptop, use the following configuration:
 
 ```bash
 sudo nextdns install -config <id> -report-client-info -auto-activate
-```
+```text
 
 Replace `<id>` with your NextDNS configuration ID. This command will:
 
@@ -70,7 +70,7 @@ For a router or server setup where NextDNS acts as a DNS proxy for other devices
 
 ```bash
 sudo nextdns install -config <id> -report-client-info -setup-router
-```
+```javascript
 
 Replace `<id>` with your NextDNS configuration ID. This command will:
 
@@ -96,7 +96,7 @@ If you encounter issues during installation or configuration, you can enable deb
 
 ```bash
 DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```
+```yaml
 
 This will provide verbose output to help diagnose installation problems. Common issues and their solutions:
 

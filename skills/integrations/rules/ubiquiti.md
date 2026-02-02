@@ -67,13 +67,13 @@ DNS Shield is a native feature that provides DNS-over-HTTPS without requiring co
 
 ```bash
 ssh root@setup.ui.com
-```
+```text
 
 Or use the device's IP address:
 
 ```bash
 ssh root@192.168.1.1
-```
+```bash
 
 ##### Step 3: Run NextDNS Installer
 
@@ -81,7 +81,7 @@ Execute the official installer script:
 
 ```bash
 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```
+```text
 
 Follow the interactive prompts to complete installation.
 
@@ -119,7 +119,7 @@ If installation fails, run the installer with debug output enabled:
 
 ```bash
 DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```
+```text
 
 This generates verbose logs that help identify the root cause of failures.
 
@@ -132,7 +132,7 @@ If you encounter APT repository errors (common on older UDM firmware), the Debia
 ```bash
 sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list
 apt update
-```
+```text
 
 Then retry the NextDNS installation.
 
@@ -144,7 +144,7 @@ Verify the NextDNS service is running:
 
 ```bash
 nextdns status
-```
+```text
 
 Expected output: `running`
 
@@ -152,13 +152,13 @@ Expected output: `running`
 
 ```bash
 nextdns restart
-```
+```bash
 
 #### Check Configuration
 
 ```bash
 nextdns config
-```
+```text
 
 Verify your profile ID is correctly configured.
 

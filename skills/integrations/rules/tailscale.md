@@ -39,7 +39,7 @@ This configuration applies NextDNS to all devices in your Tailscale network (tai
 Example Configuration:
 Nameserver: 2a07:a8c0::ab:cd12
 ☑ Override local DNS
-```
+```bash
 
 ### Step 3: Enable Override DNS Servers (Critical)
 
@@ -74,7 +74,7 @@ You can specify which NextDNS profile each device should use through ACL policie
         }
     ]
 }
-```
+```text
 
 **Explanation**:
 - `target`: Specifies which devices/users this rule applies to (uses Tailscale tags or autogroups)
@@ -103,7 +103,7 @@ You can specify which NextDNS profile each device should use through ACL policie
         }
     ]
 }
-```
+```bash
 
 ### Disabling Device Metadata Sharing
 
@@ -118,7 +118,7 @@ If you prefer not to share device information with NextDNS, use the `no-device-i
         }
     ]
 }
-```
+```text
 
 This prevents Tailscale from sending device names, operating systems, and other metadata to NextDNS.
 

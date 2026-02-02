@@ -41,7 +41,7 @@ Connect to your DD-WRT router via SSH and run the universal installer:
 
 ```bash
 sh -c "$(curl -sL https://nextdns.io/install)"
-```
+```text
 
 The installer will:
 - Detect DD-WRT as the platform
@@ -55,7 +55,7 @@ To upgrade an existing NextDNS CLI installation, re-run the same installer comma
 
 ```bash
 sh -c "$(curl -sL https://nextdns.io/install)"
-```
+```text
 
 The installer automatically detects existing installations and performs an upgrade.
 
@@ -65,7 +65,7 @@ DD-WRT may experience x509 certificate errors during boot due to incorrect syste
 
 ```bash
 /jffs/nextdns/nextdns config set forwarder 2.pool.ntp.org
-```
+```conf
 
 This ensures that NTP queries for `2.pool.ntp.org` are forwarded to your upstream DNS, preventing certificate validation failures during the boot sequence when the system clock hasn't synchronized yet.
 
@@ -98,7 +98,7 @@ If you encounter issues during installation, run the installer in debug mode to 
 
 ```bash
 DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"
-```
+```text
 
 Common issues and solutions:
 
