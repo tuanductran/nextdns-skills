@@ -188,4 +188,4 @@ netstat -tulnp | grep :53
 # Stop conflicting services if necessary
 # Then restart NextDNS
 nextdns restart
-```text
+```

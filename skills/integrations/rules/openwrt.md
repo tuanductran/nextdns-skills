@@ -46,7 +46,7 @@ To upgrade an existing NextDNS installation on OpenWrt:
 1. Re-run the installer script:
     ```bash
     sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
-```bash
+    ```
 2. The installer will detect the existing installation and offer an upgrade option if a new version is available.
 
 ## Troubleshooting
