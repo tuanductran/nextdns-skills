@@ -1,8 +1,8 @@
 ---
 title: "Analytics Endpoints"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Access various analytics endpoints for DNS query insights"
-type: "capability"
+type: capability
 tags: "analytics, status, domains, reasons, devices, protocols, query types, destinations"
 ---
 # Analytics Endpoints

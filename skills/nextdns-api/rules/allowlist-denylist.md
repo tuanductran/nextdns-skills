@@ -1,8 +1,8 @@
 ---
 title: "Allowlist and Denylist"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Manage domain allowlists and denylists for custom filtering"
-type: "capability"
+type: capability
 tags: "allowlist, denylist, whitelist, blacklist, domain blocking, domain allowing"
 ---
 # Allowlist and Denylist

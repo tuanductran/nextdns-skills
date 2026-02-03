@@ -1,8 +1,8 @@
 ---
 title: "Best Practices"
-impact: "MEDIUM"
+impact: MEDIUM
 impactDescription: "Optimization, security, and performance recommendations for the CLI"
-type: "efficiency"
+type: efficiency
 tags: "performance, security, optimization, best practices"
 ---
 # Best Practices

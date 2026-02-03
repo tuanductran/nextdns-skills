@@ -1,8 +1,8 @@
 ---
 title: "Security Settings"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Configure threat protection and security features"
-type: "capability"
+type: capability
 tags: "security, threat intelligence, cryptojacking, DNS rebinding, typosquatting, DGA, NRD, CSAM"
 ---
 # Security Settings

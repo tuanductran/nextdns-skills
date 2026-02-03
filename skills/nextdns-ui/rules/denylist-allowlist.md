@@ -1,8 +1,8 @@
 ---
 title: "Denylist and Allowlist"
-impact: "MEDIUM"
+impact: MEDIUM
 impactDescription: "Manual management of domain-specific accessibility rules"
-type: "capability"
+type: capability
 tags: "block domain, allow domain, whitelist, blacklist, custom rules, apple, windows"
 ---
 # Denylist and Allowlist

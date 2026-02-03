@@ -1,8 +1,8 @@
 ---
 title: "Response Format"
-impact: "MEDIUM"
+impact: MEDIUM
 impactDescription: "Parse API response structure correctly"
-type: "efficiency"
+type: efficiency
 tags: "response format, data, meta, errors, response structure"
 ---
 # Response Format

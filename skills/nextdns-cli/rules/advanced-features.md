@@ -1,8 +1,8 @@
 ---
 title: "Advanced Features"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Advanced routing, conditional forwarders, and caching configurations"
-type: "capability"
+type: capability
 tags: "conditional forwarder, MAC address, subnet, routing, client detection, split-horizon, cache"
 ---
 # Advanced Features

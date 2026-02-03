@@ -1,8 +1,8 @@
 ---
 title: "Logs Streaming"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Stream DNS logs in real-time using Server-Sent Events"
-type: "capability"
+type: capability
 tags: "SSE, real-time, streaming, Server-sent events, live logs, EventSource"
 ---
 # Logs Streaming

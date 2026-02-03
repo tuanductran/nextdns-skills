@@ -1,8 +1,8 @@
 ---
 title: "Authentication"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Authenticate all NextDNS API requests with API key"
-type: "capability"
+type: capability
 tags: "authentication, API key, X-API-Key, authorization, security"
 ---
 # Authentication

@@ -1,8 +1,8 @@
 ---
 title: "Configuration Management"
-impact: "MEDIUM"
+impact: MEDIUM
 impactDescription: "Global profile settings, log retention, and performance optimization"
-type: "capability"
+type: capability
 tags: "profile name, log retention, storage location, performance, cache boost, cname flattening"
 ---
 # Configuration Management

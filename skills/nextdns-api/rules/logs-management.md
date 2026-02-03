@@ -1,8 +1,8 @@
 ---
 title: "Logs Management"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Query, filter, and search DNS logs"
-type: "capability"
+type: capability
 tags: "logs, filtering, search, raw logs, deduplication, query logs"
 ---
 # Logs Management

@@ -1,8 +1,8 @@
 ---
 title: "Analytics and Logs"
-impact: "MEDIUM"
+impact: MEDIUM
 impactDescription: "Monitoring network activity and identifying blocked queries"
-type: "capability"
+type: capability
 tags: "monitoring, logs, blocked queries, query count, analytics, traffic analysis"
 ---
 # Analytics and Logs

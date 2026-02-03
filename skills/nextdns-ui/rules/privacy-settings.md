@@ -1,8 +1,8 @@
 ---
 title: "Privacy Settings"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Management of privacy blocklists and anti-tracking features"
-type: "capability"
+type: capability
 tags: "blocklists, native tracking, disguised trackers, privacy, oisd, hostsVN, Hagezi"
 ---
 # Privacy Settings

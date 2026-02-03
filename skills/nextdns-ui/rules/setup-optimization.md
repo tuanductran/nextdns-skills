@@ -1,8 +1,8 @@
 ---
 title: "Setup Optimization"
-impact: "LOW"
+impact: LOW
 impactDescription: "Efficiency best practices for dashboard configuration and performance"
-type: "efficiency"
+type: efficiency
 tags: "performance, best practices, optimization, profile management"
 ---
 # Setup Optimization

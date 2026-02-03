@@ -1,8 +1,8 @@
 ---
 title: "Platform Specific"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Platform-specific installation and configuration requirements"
-type: "capability"
+type: capability
 tags: "router, OpenWrt, pfSense, Synology, Ubiquiti, UnifiOS"
 ---
 # Platform Specific

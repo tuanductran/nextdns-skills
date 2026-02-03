@@ -1,8 +1,8 @@
 ---
 title: "Tailscale Integration"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Without proper Tailscale integration, users cannot protect their mesh VPN traffic with NextDNS filtering. This leaves devices vulnerable to threats when accessing resources through Tailscale tunnels and prevents centralized DNS policy enforcement across distributed networks."
-type: "capability"
+type: capability
 tags: "tailscale, vpn, mesh network, doh, dns-over-https, acl, nodeattrs, global nameserver, split dns"
 ---
 # Tailscale Integration
