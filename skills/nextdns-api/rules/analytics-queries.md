@@ -1,13 +1,20 @@
 ---
-title: "Analytics Query Parameters"
+title: 'Analytics Query Parameters'
 impact: HIGH
-impactDescription: "Use correct query parameters for analytics endpoints"
+impactDescription: 'Use correct query parameters for analytics endpoints'
 type: capability
-tags: "analytics, query parameters, filtering, date range, device filtering, pagination"
+tags:
+  - analytics
+  - query parameters
+  - filtering
+  - date range
+  - device filtering
+  - pagination
 ---
+
 # Analytics Query Parameters
 
-**Impact: HIGH** - Correctly filter and paginate analytics data
+Correctly filter and paginate analytics data
 
 ## Common Query Parameters
 
@@ -22,7 +29,7 @@ url.searchParams.set('from', '-7d');
 url.searchParams.set('to', 'now');
 
 const response = await fetch(url, {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' }
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -30,29 +37,29 @@ const response = await fetch(url, {
 
 ```javascript
 // ISO 8601
-from: '2024-01-15T16:34:05.203Z'
+from: '2024-01-15T16:34:05.203Z';
 
 // UNIX timestamp (seconds)
-from: '1615826071'
+from: '1615826071';
 
 // UNIX timestamp (milliseconds)
-from: '1615826071284'
+from: '1615826071284';
 
 // Relative dates
-from: '-7d'   // 7 days ago
-from: '-6h'   // 6 hours ago
-from: '-1M'   // 1 month ago
-from: 'now'   // Current time
+from: '-7d'; // 7 days ago
+from: '-6h'; // 6 hours ago
+from: '-1M'; // 1 month ago
+from: 'now'; // Current time
 
 // Common date formats
-from: '2024-01-15'
+from: '2024-01-15';
 ```
 
 ### Pagination
 
 ```javascript
 // Limit results per page
-url.searchParams.set('limit', '50');  // Default: 10, Max: 500
+url.searchParams.set('limit', '50'); // Default: 10, Max: 500
 
 // Get next page using cursor from previous response
 url.searchParams.set('cursor', 'j2k3zl3b4v');
@@ -73,23 +80,23 @@ url.searchParams.set('device', '__UNIDENTIFIED__');
 ```javascript
 async function getAnalytics(profileId, options = {}) {
   const url = new URL(`https://api.nextdns.io/profiles/${profileId}/analytics/domains`);
-  
+
   // Date range
   if (options.from) url.searchParams.set('from', options.from);
   if (options.to) url.searchParams.set('to', options.to);
-  
+
   // Filtering
   if (options.device) url.searchParams.set('device', options.device);
   if (options.status) url.searchParams.set('status', options.status);
-  
+
   // Pagination
   if (options.limit) url.searchParams.set('limit', options.limit.toString());
   if (options.cursor) url.searchParams.set('cursor', options.cursor);
-  
+
   const response = await fetch(url, {
-    headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY }
+    headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY },
   });
-  
+
   return response.json();
 }
 
@@ -98,7 +105,7 @@ const data = await getAnalytics('abc123', {
   from: '-7d',
   to: 'now',
   device: '8TD1G',
-  limit: 100
+  limit: 100,
 });
 
 // Paginate through all results
@@ -109,9 +116,9 @@ do {
   const response = await getAnalytics('abc123', {
     from: '-7d',
     limit: 100,
-    cursor
+    cursor,
   });
-  
+
   allData = allData.concat(response.data);
   cursor = response.meta?.pagination?.cursor;
 } while (cursor);
@@ -123,7 +130,7 @@ do {
 
 ```javascript
 // Filter by status
-url.searchParams.set('status', 'blocked');  // default | blocked | allowed
+url.searchParams.set('status', 'blocked'); // default | blocked | allowed
 
 // Show root domains only
 url.searchParams.set('root', 'true');
@@ -145,14 +152,14 @@ Check specific endpoint documentation for additional parameters.
 
 ```javascript
 // ✅ Valid limit values
-limit: 1      // Minimum
-limit: 500    // Maximum
-limit: 100    // Recommended for balance
+limit: 1; // Minimum
+limit: 500; // Maximum
+limit: 100; // Recommended for balance
 
 // ❌ Invalid limit values
-limit: 0      // Too small
-limit: 1000   // Too large
-limit: "50"   // Should be number in code, string in URL
+limit: 0; // Too small
+limit: 1000; // Too large
+limit: '50'; // Should be number in code, string in URL
 ```
 
 ## Response with Pagination
@@ -172,16 +179,20 @@ limit: "50"   // Should be number in code, string in URL
 
 ```javascript
 // ❌ Invalid date format
-from: '01/15/2024'  // Use ISO 8601 or relative dates
+from: '01/15/2024'; // Use ISO 8601 or relative dates
 
 // ❌ Limit out of range
-limit: 5000  // Max is 500
+limit: 5000; // Max is 500
 
 // ❌ Wrong parameter names
-url.searchParams.set('start', '-7d');  // Should be 'from'
-url.searchParams.set('end', 'now');    // Should be 'to'
-url.searchParams.set('page', '2');     // Use 'cursor' instead
+url.searchParams.set('start', '-7d'); // Should be 'from'
+url.searchParams.set('end', 'now'); // Should be 'to'
+url.searchParams.set('page', '2'); // Use 'cursor' instead
 
 // ❌ Hardcoded cursor values
-cursor: 'page2'  // Must use cursor from API response
+cursor: 'page2'; // Must use cursor from API response
 ```
+
+## Reference
+
+- [NextDNS API - Analytics](https://nextdns.github.io/api/#analytics)

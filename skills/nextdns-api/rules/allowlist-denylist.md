@@ -1,13 +1,20 @@
 ---
-title: "Allowlist and Denylist"
+title: 'Allowlist and Denylist'
 impact: HIGH
-impactDescription: "Manage domain allowlists and denylists for custom filtering"
+impactDescription: 'Manage domain allowlists and denylists for custom filtering'
 type: capability
-tags: "allowlist, denylist, whitelist, blacklist, domain blocking, domain allowing"
+tags:
+  - allowlist
+  - denylist
+  - whitelist
+  - blacklist
+  - domain blocking
+  - domain allowing
 ---
+
 # Allowlist and Denylist
 
-**Impact: HIGH** - Manage custom domain allow/deny lists
+Manage custom domain allow/deny lists
 
 ## Configuration
 
@@ -15,17 +22,17 @@ tags: "allowlist, denylist, whitelist, blacklist, domain blocking, domain allowi
 const lists = {
   // Denylist (block these domains)
   denylist: [
-    { id: "badwebsite.com", active: true },
-    { id: "pornhub.com", active: false },      // In list but not active
-    { id: "ads.example.com", active: true }
+    { id: 'badwebsite.com', active: true },
+    { id: 'pornhub.com', active: false }, // In list but not active
+    { id: 'ads.example.com', active: true },
   ],
-  
+
   // Allowlist (always allow these domains)
   allowlist: [
-    { id: "goodwebsite.com", active: true },
-    { id: "nytimes.com", active: false },      // In list but not active
-    { id: "work-app.company.com", active: true }
-  ]
+    { id: 'goodwebsite.com', active: true },
+    { id: 'nytimes.com', active: false }, // In list but not active
+    { id: 'work-app.company.com', active: true },
+  ],
 };
 ```
 
@@ -37,12 +44,12 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
   method: 'POST',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ 
-    id: "malicious-site.com",
-    active: true 
-  })
+  body: JSON.stringify({
+    id: 'malicious-site.com',
+    active: true,
+  }),
 });
 ```
 
@@ -54,12 +61,12 @@ await fetch('https://api.nextdns.io/profiles/abc123/allowlist', {
   method: 'POST',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ 
-    id: "trusted-site.com",
-    active: true 
-  })
+  body: JSON.stringify({
+    id: 'trusted-site.com',
+    active: true,
+  }),
 });
 ```
 
@@ -71,9 +78,9 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/badwebsite.com', {
   method: 'PATCH',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ active: false })
+  body: JSON.stringify({ active: false }),
 });
 
 // Re-enable it later
@@ -81,9 +88,9 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/badwebsite.com', {
   method: 'PATCH',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ active: true })
+  body: JSON.stringify({ active: true }),
 });
 ```
 
@@ -93,13 +100,13 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/badwebsite.com', {
 // Remove from denylist
 await fetch('https://api.nextdns.io/profiles/abc123/denylist/badwebsite.com', {
   method: 'DELETE',
-  headers: { 'X-API-Key': 'YOUR_API_KEY' }
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 
 // Remove from allowlist
 await fetch('https://api.nextdns.io/profiles/abc123/allowlist/goodwebsite.com', {
   method: 'DELETE',
-  headers: { 'X-API-Key': 'YOUR_API_KEY' }
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -108,13 +115,13 @@ await fetch('https://api.nextdns.io/profiles/abc123/allowlist/goodwebsite.com', 
 ```javascript
 // Get denylist
 const denylist = await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' }
-}).then(r => r.json());
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+}).then((r) => r.json());
 
 // Get allowlist
 const allowlist = await fetch('https://api.nextdns.io/profiles/abc123/allowlist', {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' }
-}).then(r => r.json());
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+}).then((r) => r.json());
 ```
 
 ## Domain Format
@@ -164,13 +171,13 @@ try {
     method: 'POST',
     headers: {
       'X-API-Key': 'YOUR_API_KEY',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ id: "invalid domain!", active: true })
+    body: JSON.stringify({ id: 'invalid domain!', active: true }),
   });
-  
+
   const result = await response.json();
-  
+
   if (result.errors) {
     // Handle validation errors
     console.error('Invalid domain:', result.errors);
@@ -208,4 +215,4 @@ try {
 
 ## Reference
 
-- [NextDNS Allowlist/Denylist](https://help.nextdns.io/t/g9hmv0k/what-is-the-allowlist-and-denylist)
+- [NextDNS API - Profile Settings](https://nextdns.github.io/api/#profile)

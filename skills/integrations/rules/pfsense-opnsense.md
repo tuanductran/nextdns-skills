@@ -1,15 +1,31 @@
 ---
-title: "pfSense and OPNsense Integration"
+title: 'pfSense and OPNsense Integration'
 impact: HIGH
-impactDescription: "Proper configuration of NextDNS on pfSense and OPNsense firewalls enables network-wide DNS protection with encrypted DNS transport. Without this guidance, users may face CNAME chasing issues on pfSense or fail to leverage OPNsense's native DoT capabilities."
+impactDescription:
+  "Proper configuration of NextDNS on pfSense and OPNsense firewalls enables network-wide DNS
+  protection with encrypted DNS transport. Without this guidance, users may face CNAME chasing
+  issues on pfSense or fail to leverage OPNsense's native DoT capabilities."
 type: capability
-tags: "pfsense, opnsense, firewall, router, unbound, dns-over-tls, dot, freebsd, dns resolver"
+tags:
+  - pfsense
+  - opnsense
+  - firewall
+  - router
+  - unbound
+  - dns-over-tls
+  - dot
+  - freebsd
+  - dns resolver
 ---
+
 # pfSense and OPNsense Integration
 
-**Impact: HIGH** - Critical for deploying NextDNS on enterprise-grade firewalls with proper encrypted DNS configuration and awareness of platform-specific limitations
+Critical for deploying NextDNS on enterprise-grade firewalls with proper encrypted DNS configuration
+and awareness of platform-specific limitations
 
-pfSense and OPNsense are FreeBSD-based firewall/router platforms widely used in enterprise and home environments. This rule provides platform-specific guidance for integrating NextDNS with their native DNS resolvers.
+pfSense and OPNsense are FreeBSD-based firewall/router platforms widely used in enterprise and home
+environments. This rule provides platform-specific guidance for integrating NextDNS with their
+native DNS resolvers.
 
 ## pfSense Configuration
 
@@ -41,14 +57,17 @@ server:
 
 #### ⚠️ Critical Warning: CNAME Chasing Behavior
 
-**pfSense uses Unbound as a recursive resolver. Unbound chases CNAMEs by design, which can result in unexpected behavior when used in conjunction with a blocking DNS resolver like NextDNS.**
+**pfSense uses Unbound as a recursive resolver. Unbound chases CNAMEs by design, which can result in
+unexpected behavior when used in conjunction with a blocking DNS resolver like NextDNS.**
 
 **What this means:**
+
 - If NextDNS blocks a domain that uses a CNAME record, Unbound may still resolve the CNAME target
 - This can bypass some of your blocking rules
 - This is a known limitation of Unbound (see Unbound issue #132)
 
 **Mitigation:**
+
 - Be aware of this behavior when troubleshooting unexpected access to blocked domains
 - Consider using Method 2 (CLI) if this limitation affects your use case
 - Test your blocking rules after configuration to verify expected behavior
@@ -68,13 +87,15 @@ sh -c "$(curl -sL https://nextdns.io/install)"
 ```
 
 **Advantages:**
+
 - Avoids CNAME chasing issues
 - Provides device-level analytics
 - Better integration with NextDNS features
 
 ## OPNsense Configuration
 
-OPNsense provides a dedicated user interface for DNS-over-TLS configuration, making it more straightforward than pfSense.
+OPNsense provides a dedicated user interface for DNS-over-TLS configuration, making it more
+straightforward than pfSense.
 
 ### Method 1: Native Unbound with DoT UI (Recommended)
 
@@ -86,16 +107,17 @@ OPNsense has a built-in UI for configuring DNS-over-TLS, which is the preferred 
 2. Click **Add** button
 3. Configure the following settings:
 
-| Setting | Value |
-|---------|-------|
-| **Server IP** | `45.90.28.0` or `45.90.30.0` |
-| **Server Port** | `853` |
-| **Verify CN** | `<your_config_id>.dns.nextdns.io` |
+| Setting         | Value                             |
+| --------------- | --------------------------------- |
+| **Server IP**   | `45.90.28.0` or `45.90.30.0`      |
+| **Server Port** | `853`                             |
+| **Verify CN**   | `<your_config_id>.dns.nextdns.io` |
 
 1. Replace `<your_config_id>` with your actual NextDNS Configuration ID
 2. Click **Save** and **Apply**
 
 **Why Verify CN matters:**
+
 - Ensures the connection is encrypted and authenticated
 - Links the traffic to your specific NextDNS profile
 - Prevents man-in-the-middle attacks
@@ -104,11 +126,11 @@ OPNsense has a built-in UI for configuring DNS-over-TLS, which is the preferred 
 
 Repeat the steps above with the secondary server for redundancy:
 
-| Setting | Value |
-|---------|-------|
-| **Server IP** | `45.90.30.0` (if you used `45.90.28.0` above) |
-| **Server Port** | `853` |
-| **Verify CN** | `<your_config_id>.dns.nextdns.io` |
+| Setting         | Value                                         |
+| --------------- | --------------------------------------------- |
+| **Server IP**   | `45.90.30.0` (if you used `45.90.28.0` above) |
+| **Server Port** | `853`                                         |
+| **Verify CN**   | `<your_config_id>.dns.nextdns.io`             |
 
 ### Method 2: NextDNS CLI Installation
 
@@ -126,51 +148,50 @@ sh -c "$(curl -sL https://nextdns.io/install)"
 
 ## Comparison: pfSense vs OPNsense
 
-| Feature | pfSense | OPNsense |
-|---------|---------|----------|
-| **DoT UI** | ❌ Manual configuration required | ✅ Dedicated UI available |
-| **Configuration Method** | Custom Options (YAML) | Web UI form |
-| **CNAME Chasing** | ⚠️ Yes (known issue) | ⚠️ Yes (Unbound behavior) |
-| **CLI Support** | ✅ Yes (FreeBSD) | ✅ Yes (FreeBSD) |
-| **Ease of Setup** | Moderate | Easy |
+| Feature                  | pfSense                          | OPNsense                  |
+| ------------------------ | -------------------------------- | ------------------------- |
+| **DoT UI**               | ❌ Manual configuration required | ✅ Dedicated UI available |
+| **Configuration Method** | Custom Options (YAML)            | Web UI form               |
+| **CNAME Chasing**        | ⚠️ Yes (known issue)             | ⚠️ Yes (Unbound behavior) |
+| **CLI Support**          | ✅ Yes (FreeBSD)                 | ✅ Yes (FreeBSD)          |
+| **Ease of Setup**        | Moderate                         | Easy                      |
 
 ## Verification Steps
 
 After configuration, verify that NextDNS is working correctly:
 
-1. Check DNS resolution:
-    ```bash
-    nslookup example.com 127.0.0.1
-```text
-
+1. Check DNS resolution: `nslookup example.com 127.0.0.1`
 2. Verify NextDNS is being used:
-    - Visit [https://test.nextdns.io](https://test.nextdns.io)
-    - You should see your Configuration ID and "✓ This device is using NextDNS"
-
+   - Visit [https://test.nextdns.io](https://test.nextdns.io)
+   - You should see your Configuration ID and "✓ This device is using NextDNS"
 3. Check the NextDNS logs:
-    - Navigate to your NextDNS dashboard
-    - Verify queries from your firewall are appearing in the logs
+   - Navigate to your NextDNS dashboard
+   - Verify queries from your firewall are appearing in the logs
 
 ## Troubleshooting
 
 ### DNS Resolution Not Working
 
-```
+```bash
 # Check Unbound status
 pfctl -s state | grep 53
 # or on OPNsense
 service unbound status
-```bash
+```
 
 ### Verify DoT Connection
 
-```
+```bash
 # Test TLS connection to NextDNS
 openssl s_client -connect 45.90.28.0:853 -servername <config_id>.dns1.nextdns.io
-```bash
+```
 
 ### Debug Mode Installation (CLI Method)
 
-```
+```bash
 DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"
-```text
+```
+
+## Reference
+
+- [NextDNS CLI - pfSense](https://github.com/nextdns/nextdns/wiki/pfSense)

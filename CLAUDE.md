@@ -1,522 +1,153 @@
-# CLAUDE.md - Ultimate Governance Constitution
+# CLAUDE.md
 
-This file serves as the **Ultimate Governance Constitution** for the NextDNS Skills repository. All AI agents working with this codebase MUST strictly adhere to the 10-Point Protocol System defined herein.
+This file provides critical guidance to AI coding assistants (like Claude) when working with the `nextdns-skills` repository. It serves as the primary source of truth for implementation standards, API specifications, and the project's rigorous quality protocols.
 
----
+## Repository Purpose
 
-## Repository Overview
+NextDNS Skills is a high-fidelity collection of structured knowledge (skills) for AI agents. It enables agents to perform complex operations across the NextDNS ecosystem by injecting domain-specific context:
 
-NextDNS agent skills repository providing specialized knowledge for AI agents to handle NextDNS API integration, CLI operations, and Web UI configuration.
-
-- **Purpose**: Empowering AI agents with expert DNS management capabilities.
-- **Content**: Markdown-based skills and rules with standardized metadata.
-- **Package Manager**: pnpm (NOT npm or yarn).
-- **Tools**: markdownlint-cli, case-police.
-- **Governance**: 10-Point Protocol System for maximum quality and consistency.
-
-## Development Commands
-
-### Linting and Formatting
-
-```bash
-pnpm lint           # Runs markdownlint and case-police check
-pnpm lint:fix       # Fixes linting and casing issues automatically
-```
-
-**MANDATORY**: All content MUST pass `pnpm lint` before any commit or pull request.
+- **NextDNS API**: Programmatic configuration, analytics retrieval, and log management.
+- **NextDNS CLI**: Deployment, system configuration, and monitoring.
+- **NextDNS Web UI**: Strategic configuration and dashboard-based management.
+- **Integrations**: Third-party platform connections (OpenWrt, pfSense, Tailscale, Home Assistant, etc.).
 
 ---
 
-## The 10 Governance Protocols
+## 🚀 Development Quick Start
 
-### Protocol 1: Strict Conventional Commits
-
-**Status**: `MANDATORY`
-
-All commit messages MUST follow the Conventional Commits specification:
-
-**Format**: `type(scope): description`
-
-**Allowed Types**:
-
-- `feat` - New feature or capability
-- `fix` - Bug fix
-- `docs` - Documentation changes only
-- `style` - Code style/formatting changes (whitespace, indentation)
-- `refactor` - Code restructuring without behavior change
-- `chore` - Maintenance tasks (dependencies, configs, tooling)
-
-**Scope Constraints**:
-
-- MUST match directory names: `api`, `cli`, `ui`, `integrations`
-- OR use `root` for repository-level changes
-- Examples:
-    - `feat(api): add profile streaming endpoint rule`
-    - `fix(cli): correct daemon restart command syntax`
-    - `docs(ui): update security settings best practices`
-    - `chore(root): update markdownlint configuration`
-
-**Enforcement**: Commits not following this format will be rejected in code review.
+| Task | Command |
+| :--- | :--- |
+| **Setup** | `pnpm install` |
+| **Format** | `pnpm run format` |
+| **Lint (All)** | `pnpm lint` |
+| **Fix (All)** | `pnpm lint:fix` |
+| **Validate Rules** | `pnpm lint:rules` |
+| **Check Syntax** | `pnpm lint:syntax` |
+| **Check Links** | `pnpm lint:links` |
+| **Update Counts** | `python3 scripts/update_counts.py` |
+| **Requirements** | `Node >=20`, `Python >=3.10`, `pnpm` |
 
 ---
 
-### Protocol 2: The "Atomic Update" Workflow (Integrity)
+## 🛠️ Repository Architecture
 
-**Status**: `CRITICAL - ZERO TOLERANCE`
-
-**Rule**: Creation of any file in `skills/` MUST include a simultaneous update to the parent `SKILL.md` (or root `README.md` for new skills) in the **same response/commit**.
-
-**Why**: Orphan files break navigation, discoverability, and skill triggering.
-
-**Mandatory Steps When Creating a New Rule**:
-
-1. Create the rule file in `skills/<category>/rules/<name>.md`
-2. **IMMEDIATELY** update `skills/<category>/SKILL.md` to add the rule to the appropriate table
-3. **VERIFY** the entry includes correct metadata (title, type, tags)
-4. Commit both files together with message: `feat(<category>): add <rule-name> rule`
-
-**Example**:
+### Core Structure
 
 ```text
-✅ CORRECT: Create `skills/api/rules/rate-limiting.md` + Update `skills/api/SKILL.md`
-❌ WRONG: Create `skills/api/rules/rate-limiting.md` (orphan file - PROHIBITED)
+nextdns-skills/
+├── skills/                     # Domain-specific knowledge (Skill Manifests + Rules)
+│   ├── nextdns-api/            # 17 rules (API protocols & endpoints)
+│   ├── nextdns-cli/            # 14 rules (Deployment & SysConfig)
+│   ├── nextdns-ui/             # 10 rules (Web Dashboard Strategy)
+│   └── integrations/           # 10 rules (Platform Connectivity)
+├── scripts/                    # Maintenance & validation scripts
+│   ├── validate_rules.py       # Referential integrity & frontmatter validator
+│   └── update_counts.py        # Automated rule counter for README/CLAUDE
+├── templates/                  # Standardized blueprints
+│   ├── rule-template.md        # For individual rule files in rules/
+│   └── skill-template.md       # For SKILL.md manifests
+└── .github/workflows/          # CI/CD Validation & Automation
+    ├── validate-rules.yml      # CI rule validation
+    ├── update-counts.yml       # Automated count updates
+    └── autofix.yml             # Automated lint fixing
 ```
 
-**Enforcement**: Any pull request with orphan files will be immediately rejected.
+---
+
+## 📡 NextDNS API Specification Summary
+
+AI assistants MUST adhere to these technical specifications when implementing API-related logic:
+
+### 1. Base Logic
+
+- **Endpoint**: `https://api.nextdns.io`
+- **Authentication**: Header `X-Api-Key` (REQUIRED for every call).
+- **Format**:
+  - Success (200): `{ "data": { ... }, "meta": { ... } }`
+  - Error (4xx/5xx): `{ "errors": [ { "code": "...", "detail": "..." } ] }`
+
+### 2. Core Entities
+
+- **Profiles**: Managed at `/profiles`. Contains `security`, `privacy`, `parentalControl`, `denylist`, `allowlist`, and `settings`.
+- **Nested Access**: Supports direct PATCH. Example: `PATCH /profiles/:id/settings/performance`.
+- **Arrays**: Managed via `GET`, `PUT`, `POST`. Individual items via `PATCH`, `DELETE` by ID.
+
+### 3. Advanced Features
+
+- **Pagination**: Uses `cursor` strings in `meta`. Max limit: 1000 (logs), 500 (analytics).
+- **Date/Time**: ISO 8601, Unix timestamps, or relative (`-6h`, `now`). Use IANA Time Zone names.
+- **Analytics**: Append `;series` to endpoints (e.g., `/status;series`) for time-series data.
+- **Logs**: Standard `/logs` or streaming `/logs/stream` (SSE). Use `raw=1` for full DNS data.
 
 ---
 
-### Protocol 3: Automated Quality Assurance (Linting)
+## 🛡️ The 10-Point Protocol System
 
-**Status**: `MANDATORY`
+All contributions MUST strictly follow these protocols to maintain repository integrity:
 
-**Command**: All content MUST pass `pnpm lint` (markdownlint + case-police) before commit.
+### 1. Strict Conventional Commits
 
-**Standards Enforced**:
+- **Format**: `type(scope): description` (e.g., `feat(api): add log retention rule`).
+- **Scopes**: `api`, `cli`, `ui`, `integrations`, `lint`, `docs`, `chore`.
+- **Constraint**: Messages must be lowercase and descriptive.
 
-- ✅ No trailing whitespace
-- ✅ Correct indentation (4 spaces for lists)
-- ✅ Proper heading hierarchy (H1 → H2 → H3)
-- ✅ Fenced code blocks with language tags
-- ✅ Case-police compliance (see Protocol 4)
-- ✅ No duplicate headings at the same level (except siblings)
+### 2. Atomic Rule Workflow (MANDATORY)
 
-**Workflow**:
+- **Rule**: Adding/modifying a rule file MUST be accompanied by an update to the corresponding `SKILL.md` index in the SAME commit.
+- **Validation**: `validate_rules.py` enforces referential integrity between rules and indices.
 
-1. Make changes to markdown files
-2. Run `pnpm lint:fix` to auto-fix issues
-3. Run `pnpm lint` to verify compliance
-4. Only commit if lint check passes
+### 3. Automated Quality Assurance
 
-**Configuration Files**:
+- **Full Suite**: `pnpm lint` runs Prettier, markdownlint, ESLint (syntax), case-police, and `validate_rules.py`.
+- **Pre-check**: Always run `pnpm lint:fix` before pushing.
+- **CI Enforcement**: GitHub Actions blocks PRs that fail any validation step.
 
-- `.markdownlint.yml` - Markdown linting rules
-- `package.json` - Lint scripts and case-police patterns
+### 4. Terminology Precision
 
-**Enforcement**: CI/CD will fail if linting errors are detected.
+- **Brands**: NextDNS, GitHub, JavaScript, Python, Docker, OpenWrt, Tailscale.
+- **Standards**: `profile` (not configuration), `blocklist` (not blacklist), `allowlist` (not whitelist), `X-API-Key`.
 
----
+### 5. Template & Frontmatter Adherence
 
-### Protocol 4: Terminology Precision (Case Police)
+- Use [rule-template.md](templates/rule-template.md) for all new rules.
+- **Required Fields**: `title`, `impact` (HIGH/MEDIUM/LOW), `impactDescription`, `type` (capability/efficiency), `tags` (YAML array).
+- Titles in frontmatter MUST match the H1 heading exactly.
 
-**Status**: `MANDATORY`
+### 6. Zero-PII & Privacy Security
 
-**Rule**: Strictly enforce correct casing for all technical terms as defined by case-police.
+- **Strict Prohibition**: Never commit real API keys, Profile IDs, or personal data.
+- **Placeholders**: Use `abc123` for Profile IDs, `YOUR_API_KEY` for keys, and `example.com` for domains.
 
-**Technical Terms (Correct Casing)**:
+### 7. Strategic Documentation
 
-| Correct | Incorrect |
-|---------|-----------|
-| NextDNS | nextdns, NextDns, NEXTDNS |
-| GitHub | GitHub, github, GITHUB |
-| pnpm | PNPM, npm, npm |
-| iOS | ios, IOS |
-| macOS | macos, macOS, Mac OS |
-| OpenWrt | OpenWrt, openwrt, OpenWrt |
-| JavaScript | JavaScript, javascript |
-| TypeScript | TypeScript, typescript |
-| PayPal | PayPal, paypal |
-| AdGuard | Adguard, adguard |
-| DNSMasq | dnsmasq, Dnsmasq |
+- `README.md`: Project overview and usage.
+- `SKILL.md`: Entry points for discovery (Keyword-driven indexing).
+- `rules/*.md`: Deep technical implementation and code examples.
 
-**Validation**: Run `case-police 'skills/**/*.md'` to check compliance.
+### 8. Code Block Standardization
 
-**Fix Command**: `case-police 'skills/**/*.md' --fix`
+- **Mandatory Language Tags**: Bash, javascript, python, json, yaml, http, text.
+- **Semantic Markers**: Use ✅ for recommended/correct usage and ❌ for anti-patterns/errors.
 
-**Enforcement**: Pull requests with incorrect technical term casing will be rejected.
+### 9. Structural Integrity
 
----
+- Rules MUST reside in `skills/<category>/rules/*.md`.
+- Maintenance scripts reside in `scripts/`.
+- Never create ad-hoc root directories or files without consensus.
 
-### Protocol 5: Template Adherence (Metadata)
+### 10. Link & Reference Integrity
 
-**Status**: `MANDATORY`
-
-**Rule**: All rule files MUST utilize `templates/rule-template.md` as the foundation.
-
-**Required YAML Frontmatter**:
-
-```yaml
----
-title: "Human-Readable Title"
-impact: "HIGH | MEDIUM | LOW"
-impactDescription: "Clear explanation of what happens if rule is not followed"
-type: "capability | efficiency"
-tags: "keyword1, keyword2, keyword3"
----
-```
-
-**Field Definitions**:
-
-- `title` - Descriptive name (3-8 words)
-- `impact` - Severity level:
-    - `HIGH` - Critical, causes failures or security issues
-    - `MEDIUM` - Important, affects quality or performance
-    - `LOW` - Helpful, improves consistency or clarity
-- `impactDescription` - One sentence explaining consequences
-- `type`:
-    - `capability` - AI cannot solve without this knowledge
-    - `efficiency` - AI can solve but poorly without this guidance
-- `tags` - Comma-separated keywords for skill triggering (3-7 tags)
-
-**Required Impact Line**:
-
-Immediately after H1 heading:
-
-```markdown
-# Rule Title
-
-**Impact: HIGH** - Brief description of impact
-```
-
-**Enforcement**: Rules without proper frontmatter will not be indexed and will be rejected.
+- Every rule MUST have a `## Reference` section with verified official sources.
+- Descriptive labels: `[NextDNS API](https://nextdns.github.io/api/)` instead of `[Link](url)`.
 
 ---
 
-### Protocol 6: Security & Privacy (Zero-PII)
+## 🔍 AI Skill Triggering Logic
 
-**Status**: `CRITICAL - ZERO TOLERANCE`
+Skills are discovered by agents through a three-tier metadata system:
 
-**Rule**: NEVER output real configuration IDs, API keys, IP addresses, or personally identifiable information.
+1. **Skill Level**: `description` in `SKILL.md` (Domain identification).
+2. **Rule Level**: `tags` in rule frontmatter (Capability identification).
+3. **Keyword Level**: `Keywords` column in `SKILL.md` tables (Specific task matching).
 
-**Mandatory Placeholders**:
-
-| Element | Placeholder |
-|---------|-------------|
-| Profile ID | `<your_profile_id>` or `abc123` |
-| API Key | `YOUR_API_KEY` or `<your_api_key>` |
-| IP Address | `192.168.1.1` or `<your_ip>` |
-| Domain | `example.com` or `<your_domain>` |
-| Email | `user@example.com` or `<your_email>` |
-
-**Code Examples**:
-
-```javascript
-// ✅ CORRECT
-fetch('https://api.nextdns.io/profiles/abc123', {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' }
-});
-
-// ❌ WRONG - Real API key exposed
-fetch('https://api.nextdns.io/profiles/a1b2c3', {
-  headers: { 'X-API-Key': 'sk_live_abc123xyz...' }
-});
-```
-
-**Redaction Requirements**:
-
-- Scrub all real credentials from examples
-- Use generic placeholders in documentation
-- Warn users to replace placeholders with their actual values
-
-**Enforcement**: Any real PII found in documentation will trigger immediate removal and security review.
-
----
-
-### Protocol 7: Navigation & Indexing (Simple README)
-
-**Status**: `MANDATORY`
-
-**Rule**: Root `README.md` is strictly a **Navigation Hub**. Keep it concise and scannable.
-
-**Format**:
-
-- ✅ Bullet points with links
-- ✅ One-line descriptions (max 15 words)
-- ✅ Clear section headings
-- ✅ Quick examples (max 10 lines per example)
-- ❌ NO long paragraphs
-- ❌ NO detailed explanations (those go in skill files)
-- ❌ NO inline documentation (link to it instead)
-
-**Structure**:
-
-```markdown
-## Section Title
-
-- **[Skill Name](path/to/skill.md)** - Brief one-line description
-- **[Another Skill](path/to/skill2.md)** - Another brief description
-```
-
-**Enforcement**: README.md will be reviewed for excessive verbosity. Keep it under 500 lines.
-
----
-
-### Protocol 8: Code Block Standardization
-
-**Status**: `MANDATORY`
-
-**Rule**: All code blocks MUST specify a language for syntax highlighting and be copy-paste ready.
-
-**Language Tags** (Always Required):
-
-- ````bash```` - Shell commands
-- ````javascript```` - JavaScript code
-- ````yaml```` - YAML/frontmatter
-- ````json```` - JSON data
-- ````conf```` - Configuration files
-- ````text```` - Plain text output
-
-**Copy-Paste Ready Requirements**:
-
-1. **Full Paths**: Use absolute paths in commands
-2. **Executable**: Code must run without modification
-3. **No Placeholders in Commands**: Unless explicitly noted
-4. **Comments**: Use `#` for bash, `//` for JS
-
-**Examples**:
-
-````markdown
-✅ CORRECT:
-```bash
-sudo nextdns config set -profile=abc123
-sudo nextdns restart
-```
-
-❌ WRONG (no language tag):
-```
-nextdns restart
-```
-````
-
-**Enforcement**: CI/CD will detect code blocks without language tags and fail the build.
-
----
-
-### Protocol 9: Directory Structure Enforcement
-
-**Status**: `MANDATORY`
-
-**Rule**: Files must be placed strictly in their designated directories. No exceptions.
-
-**Allowed Locations**:
-
-```text
-/
-├── skills/
-│   ├── nextdns-api/
-│   │   ├── SKILL.md
-│   │   └── rules/*.md
-│   ├── nextdns-cli/
-│   │   ├── SKILL.md
-│   │   └── rules/*.md
-│   ├── nextdns-ui/
-│   │   ├── SKILL.md
-│   │   └── rules/*.md
-│   └── integrations/
-│       ├── SKILL.md
-│       └── rules/*.md
-├── templates/
-│   └── rule-template.md
-├── data/
-│   └── schemas/*.json
-├── README.md
-├── CLAUDE.md
-└── LICENSE
-```
-
-**Prohibited Actions**:
-
-- ❌ Creating rule files in repository root
-- ❌ Creating subdirectories inside `rules/`
-- ❌ Creating arbitrary files outside designated folders
-- ❌ Mixing rule types in wrong skill categories
-
-**File Naming**:
-
-- Use `kebab-case.md` for all rule files
-- Example: `security-settings.md`, `api-authentication.md`
-
-**Enforcement**: Files in incorrect locations will be rejected during code review.
-
----
-
-### Protocol 10: Link Integrity & Validation
-
-**Status**: `MANDATORY`
-
-**Rule**: No broken links. All internal links must be verified before commit.
-
-**Link Requirements**:
-
-1. **Internal Links**: Use relative paths from project root
-2. **External Links**: Use full URLs with HTTPS
-3. **Verification**: Test all links before committing
-
-**Path Accuracy**:
-
-```markdown
-✅ CORRECT:
-[API Authentication](skills/nextdns-api/rules/authentication.md)
-[NextDNS API Docs](https://nextdns.github.io/api/)
-
-❌ WRONG:
-[API Authentication](authentication.md)  <!-- Relative path incorrect -->
-[NextDNS Docs](http://example.com)       <!-- Broken link -->
-```
-
-**Pre-Commit Checklist**:
-
-- [ ] All links use correct relative paths
-- [ ] Linked files exist in repository
-- [ ] External URLs are accessible
-- [ ] No `404` errors in documentation
-
-**Validation Command**:
-
-```bash
-# Check for broken internal links
-grep -r '\[.*\](.*\.md)' skills/ | while read line; do
-  # Extract and verify file paths exist
-  echo "Validating: $line"
-done
-```
-
-**Enforcement**: Pull requests with broken links will be rejected.
-
----
-
-## Project Architecture
-
-### Skills Structure
-
-The repository is organized by skill directories inside the `skills/` folder:
-
-- `skills/nextdns-api` - Rules for API integration (Auth, Analytics, Logs, Profiles)
-- `skills/nextdns-cli` - Rules for CLI installation, daemon control, and advanced routing
-- `skills/nextdns-ui` - Rules for Web Dashboard settings based on best practices and threat modeling
-- `skills/integrations` - Rules for third-party platform integrations (Tailscale, Home Assistant, Ubiquiti, etc.)
-
-Each skill directory follows this internal structure:
-
-- `SKILL.md` - Entry point containing skill metadata and a table mapping rules to keywords
-- `rules/` - Individual markdown files defining specific capabilities or efficiencies
-
-### Rule System
-
-Every file in the `rules/` directory is a standalone piece of knowledge.
-
-**YAML Frontmatter** (Protocol 5):
-Every rule MUST contain standardized metadata for agent triggering.
-
-**Impact Line** (Protocol 5):
-Immediately following the H1 heading, a bolded summary must exist.
-
----
-
-## Key Files
-
-- `skills/nextdns-api/SKILL.md` - Schema and mapping for API-related tasks
-- `skills/nextdns-cli/SKILL.md` - Schema and mapping for CLI/Terminal tasks
-- `skills/nextdns-ui/SKILL.md` - Schema and mapping for Web UI/Configuration tasks
-- `skills/integrations/SKILL.md` - Schema and mapping for third-party integration tasks
-- `templates/rule-template.md` - Standardized template for creating new rules
-- `data/schemas/profile.json` - Mock NextDNS Profile API response for testing
-- `package.json` - Defines linting scripts and project metadata
-- `.markdownlint.yml` - Global markdown styling rules
-- `.github/workflows/validate-rules.yml` - CI/CD workflow for automated validation
-
----
-
-## Workflow: Adding a New Rule
-
-Follow this **exact sequence** to comply with all protocols:
-
-### Step 1: Use Template (Protocol 5)
-
-```bash
-cp templates/rule-template.md skills/<category>/rules/<rule-name>.md
-```
-
-### Step 2: Fill Metadata (Protocol 5)
-
-Edit the YAML frontmatter with correct values.
-
-### Step 3: Write Content (Protocols 3, 4, 8)
-
-- Use 4-space indentation
-- Apply correct technical term casing
-- Add language tags to all code blocks
-
-### Step 4: Update Index (Protocol 2 - CRITICAL)
-
-**IMMEDIATELY** add the rule to `skills/<category>/SKILL.md`:
-
-```markdown
-| [Rule Name](rules/<rule-name>.md) | Brief description | `tag1, tag2` |
-```
-
-### Step 5: Validate (Protocol 3)
-
-```bash
-pnpm lint:fix
-```
-
-### Step 6: Commit (Protocol 1)
-
-```bash
-git add skills/<category>/rules/<rule-name>.md
-git add skills/<category>/SKILL.md
-git commit -m "feat(<category>): add <rule-name> rule"
-```
-
-**⚠️ CRITICAL**: Steps 2, 4, and 6 are non-negotiable. Skipping Protocol 2 will result in rejection.
-
----
-
-## Technical Knowledge Sources
-
-All rules must align with official documentation:
-
-- **API Rules**: [Official NextDNS API Spec](https://nextdns.github.io/api/)
-- **CLI Rules**: [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)
-- **UI Rules**: [NextDNS-Config](https://github.com/yokoffing/NextDNS-Config) community guidelines
-
----
-
-## Enforcement Summary
-
-| Protocol | Status | Enforcement Method |
-|----------|--------|-------------------|
-| 1. Conventional Commits | MANDATORY | Code review |
-| 2. Atomic Updates | CRITICAL | Automated PR check |
-| 3. Linting | MANDATORY | CI/CD pipeline |
-| 4. Case Police | MANDATORY | Automated check |
-| 5. Template Adherence | MANDATORY | Schema validation |
-| 6. Zero-PII | CRITICAL | Security audit |
-| 7. Simple README | MANDATORY | Manual review |
-| 8. Code Blocks | MANDATORY | CI/CD pipeline |
-| 9. Directory Structure | MANDATORY | Automated check |
-| 10. Link Integrity | MANDATORY | Manual review |
-
-**Violation Consequences**:
-
-- ⚠️ **MANDATORY** violations → Pull request rejected, must fix
-- 🚨 **CRITICAL** violations → Immediate rejection + security review
-
----
-
-## Conclusion
-
-These 10 Governance Protocols ensure the NextDNS Skills repository maintains the highest standards of quality, security, and consistency. All contributors and AI agents MUST strictly adhere to these protocols without exception.
-
-**Remember**: Quality is not negotiable. Excellence is the standard.
+AI assistance quality depends directly on the density and precision of these metadata fields.

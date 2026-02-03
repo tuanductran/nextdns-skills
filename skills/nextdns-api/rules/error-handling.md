@@ -1,13 +1,19 @@
 ---
-title: "Error Handling"
+title: 'Error Handling'
 impact: HIGH
-impactDescription: "Handle API errors and validation responses correctly"
+impactDescription: 'Handle API errors and validation responses correctly'
 type: capability
-tags: "error handling, validation, 400 error, error format, error response"
+tags:
+  - error handling
+  - validation
+  - 400 error
+  - error format
+  - error response
 ---
+
 # Error Handling
 
-**Impact: HIGH** - Properly handle API errors and validation failures
+Properly handle API errors and validation failures
 
 ## Error Response Formats
 
@@ -55,25 +61,25 @@ Business logic errors return `200` status with errors array:
 
 ```typescript
 interface Error {
-  code: string;           // Error code (e.g., "invalid", "duplicate")
-  detail: string;         // Human-readable error message
+  code: string; // Error code (e.g., "invalid", "duplicate")
+  detail: string; // Human-readable error message
   source: {
-    parameter?: string;   // Query parameter name (for 400 errors)
-    pointer?: string;     // JSON pointer (for 200 errors)
+    parameter?: string; // Query parameter name (for 400 errors)
+    pointer?: string; // JSON pointer (for 200 errors)
   };
 }
 ```
 
 ## Common Error Codes
 
-| Code | Description | Example |
-|------|-------------|---------|
-| `invalid` | Invalid parameter value | Wrong type, out of range |
-| `required` | Missing required parameter | Missing API key, missing field |
-| `invalid_domain` | Invalid domain format | Malformed domain name |
-| `duplicate` | Duplicate entry | Domain already in list |
-| `not_found` | Resource not found | Profile doesn't exist |
-| `rate_limit` | Rate limit exceeded | Too many requests |
+| Code             | Description                | Example                        |
+| ---------------- | -------------------------- | ------------------------------ |
+| `invalid`        | Invalid parameter value    | Wrong type, out of range       |
+| `required`       | Missing required parameter | Missing API key, missing field |
+| `invalid_domain` | Invalid domain format      | Malformed domain name          |
+| `duplicate`      | Duplicate entry            | Domain already in list         |
+| `not_found`      | Resource not found         | Profile doesn't exist          |
+| `rate_limit`     | Rate limit exceeded        | Too many requests              |
 
 ## Handling Errors
 
@@ -85,8 +91,8 @@ async function makeApiRequest(url, options = {}) {
       headers: {
         'X-API-Key': process.env.NEXTDNS_API_KEY,
         'Content-Type': 'application/json',
-        ...options.headers
-      }
+        ...options.headers,
+      },
     });
 
     const data = await response.json();
@@ -106,7 +112,7 @@ async function makeApiRequest(url, options = {}) {
     if (error instanceof ApiError) {
       // Handle API validation errors
       console.error('API Errors:', error.errors);
-      error.errors.forEach(err => {
+      error.errors.forEach((err) => {
         console.error(`- ${err.code}: ${err.detail}`);
         if (err.source.parameter) {
           console.error(`  Parameter: ${err.source.parameter}`);
@@ -226,21 +232,21 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
 ```javascript
 async function nextdnsApi(endpoint, options = {}) {
   const url = `https://api.nextdns.io${endpoint}`;
-  
+
   const response = await fetch(url, {
     ...options,
     headers: {
       'X-API-Key': process.env.NEXTDNS_API_KEY,
       'Content-Type': 'application/json',
-      ...options.headers
-    }
+      ...options.headers,
+    },
   });
 
   const data = await response.json();
 
   // Handle errors
   if (data.errors) {
-    const errorMessages = data.errors.map(err => {
+    const errorMessages = data.errors.map((err) => {
       let msg = `[${err.code}] ${err.detail}`;
       if (err.source.parameter) {
         msg += ` (parameter: ${err.source.parameter})`;
@@ -265,7 +271,7 @@ async function nextdnsApi(endpoint, options = {}) {
 try {
   const data = await nextdnsApi('/profiles/abc123/denylist', {
     method: 'POST',
-    body: JSON.stringify({ id: 'bad.com', active: true })
+    body: JSON.stringify({ id: 'bad.com', active: true }),
   });
   console.log('Success:', data);
 } catch (error) {
@@ -278,27 +284,27 @@ try {
 ```javascript
 async function nextdnsApiWithRetry(endpoint, options = {}, maxRetries = 3) {
   let lastError;
-  
+
   for (let attempt = 0; attempt < maxRetries; attempt++) {
     try {
       return await nextdnsApi(endpoint, options);
     } catch (error) {
       lastError = error;
-      
+
       // Don't retry on validation errors (400, or 200 with errors)
       if (error.message.includes('API Error')) {
         throw error;
       }
-      
+
       // Retry on network errors or 5xx errors
       if (attempt < maxRetries - 1) {
         const delay = Math.pow(2, attempt) * 1000; // Exponential backoff
         console.log(`Retry attempt ${attempt + 1} after ${delay}ms`);
-        await new Promise(resolve => setTimeout(resolve, delay));
+        await new Promise((resolve) => setTimeout(resolve, delay));
       }
     }
   }
-  
+
   throw lastError;
 }
 ```
@@ -314,7 +320,7 @@ if (!response.ok) {
 
 // ❌ Not checking for errors in response body
 const data = await response.json();
-return data;  // Might contain errors!
+return data; // Might contain errors!
 
 // ✅ Correct
 const data = await response.json();

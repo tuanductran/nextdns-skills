@@ -1,15 +1,21 @@
 ---
-title: "System Configuration"
+title: 'System Configuration'
 impact: HIGH
-impactDescription: "Configuring local system DNS settings to use NextDNS"
+impactDescription: 'Configuring local system DNS settings to use NextDNS'
 type: capability
-tags: "activate, deactivate, DNS resolver, system dns"
+tags:
+  - activate
+  - deactivate
+  - DNS resolver
+  - system dns
 ---
+
 # System Configuration
 
-**Impact: HIGH** - Modifying system-wide DNS resolver settings
+Modifying system-wide DNS resolver settings
 
-The `nextdns` command can automatically manage the local machine's DNS settings to point to the local proxy.
+The `nextdns` command can automatically manage the local machine's DNS settings to point to the
+local proxy.
 
 ## Activating NextDNS
 
@@ -20,6 +26,7 @@ sudo nextdns activate
 ```
 
 This command will:
+
 - Modify `/etc/resolv.conf` on Linux/macOS.
 - Update DNS settings for active network interfaces on Windows.
 - Ensure all system DNS traffic is routed through the local NextDNS proxy.
@@ -41,3 +48,7 @@ You can configure the daemon to automatically activate/deactivate at startup and
 ```bash
 sudo nextdns config set -auto-activate=true
 ```
+
+## Reference
+
+- [NextDNS CLI - Configuration](https://github.com/nextdns/nextdns/wiki#configuration)

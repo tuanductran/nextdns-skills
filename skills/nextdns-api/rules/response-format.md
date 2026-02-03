@@ -1,13 +1,19 @@
 ---
-title: "Response Format"
+title: 'Response Format'
 impact: MEDIUM
-impactDescription: "Parse API response structure correctly"
+impactDescription: 'Parse API response structure correctly'
 type: efficiency
-tags: "response format, data, meta, errors, response structure"
+tags:
+  - response format
+  - data
+  - meta
+  - errors
+  - response structure
 ---
+
 # Response Format
 
-**Impact: MEDIUM** - Understand and parse API response structure
+Understand and parse API response structure
 
 ## Standard Response Format
 
@@ -140,8 +146,8 @@ async function makeRequest(url, options = {}) {
     ...options,
     headers: {
       'X-API-Key': process.env.NEXTDNS_API_KEY,
-      ...options.headers
-    }
+      ...options.headers,
+    },
   });
 
   const result = await response.json();
@@ -154,7 +160,7 @@ async function makeRequest(url, options = {}) {
   // Return data and meta
   return {
     data: result.data,
-    meta: result.meta
+    meta: result.meta,
   };
 }
 
@@ -201,10 +207,9 @@ type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
 
 // Usage
 async function fetchDomains(profileId: string): Promise<Domain[]> {
-  const response = await fetch(
-    `https://api.nextdns.io/profiles/${profileId}/analytics/domains`,
-    { headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY! } }
-  );
+  const response = await fetch(`https://api.nextdns.io/profiles/${profileId}/analytics/domains`, {
+    headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY! },
+  });
 
   const result: ApiResponse<Domain[]> = await response.json();
 
@@ -266,10 +271,9 @@ class NextDNSResponse {
 }
 
 // Usage
-const response = await fetch(
-  'https://api.nextdns.io/profiles/abc123/analytics/domains?from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
-).then(r => r.json());
+const response = await fetch('https://api.nextdns.io/profiles/abc123/analytics/domains?from=-7d', {
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+}).then((r) => r.json());
 
 const wrapped = new NextDNSResponse(response);
 
@@ -288,20 +292,20 @@ if (wrapped.hasErrors()) {
 ### Extract Data
 
 ```javascript
-const { data } = await fetch(url, { headers }).then(r => r.json());
+const { data } = await fetch(url, { headers }).then((r) => r.json());
 ```
 
 ### Extract Data and Cursor
 
 ```javascript
-const { data, meta } = await fetch(url, { headers }).then(r => r.json());
+const { data, meta } = await fetch(url, { headers }).then((r) => r.json());
 const cursor = meta?.pagination?.cursor;
 ```
 
 ### Check for Errors
 
 ```javascript
-const result = await fetch(url, { headers }).then(r => r.json());
+const result = await fetch(url, { headers }).then((r) => r.json());
 if (result.errors) {
   throw new Error('API Error');
 }

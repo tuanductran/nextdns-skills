@@ -1,13 +1,19 @@
 ---
-title: "Date Formats"
+title: 'Date Formats'
 impact: HIGH
-impactDescription: "Use correct date formats in query parameters"
+impactDescription: 'Use correct date formats in query parameters'
 type: capability
-tags: "date format, ISO 8601, UNIX timestamp, relative dates, date parsing"
+tags:
+  - date format
+  - ISO 8601
+  - UNIX timestamp
+  - relative dates
+  - date parsing
 ---
+
 # Date Formats
 
-**Impact: HIGH** - Use correct date formats for time-based queries
+Use correct date formats for time-based queries
 
 ## Supported Date Formats
 
@@ -18,23 +24,23 @@ The NextDNS API accepts multiple date formats:
 Standard ISO 8601 format with timezone:
 
 ```javascript
-from: '2024-01-15T16:34:05.203Z'
-from: '2024-01-15T16:34:05Z'
-from: '2024-01-15T00:00:00Z'
+from: '2024-01-15T16:34:05.203Z';
+from: '2024-01-15T16:34:05Z';
+from: '2024-01-15T00:00:00Z';
 ```
 
 ### 2. UNIX Timestamp (Seconds)
 
 ```javascript
-from: 1615826071
-from: '1615826071'
+from: 1615826071;
+from: '1615826071';
 ```
 
 ### 3. UNIX Timestamp (Milliseconds)
 
 ```javascript
-from: 1615826071284
-from: '1615826071284'
+from: 1615826071284;
+from: '1615826071284';
 ```
 
 ### 4. Relative Dates
@@ -43,32 +49,32 @@ Most convenient for recent data:
 
 ```javascript
 // Hours
-from: '-1h'   // 1 hour ago
-from: '-6h'   // 6 hours ago
-from: '-24h'  // 24 hours ago
+from: '-1h'; // 1 hour ago
+from: '-6h'; // 6 hours ago
+from: '-24h'; // 24 hours ago
 
 // Days
-from: '-1d'   // 1 day ago
-from: '-7d'   // 7 days ago
-from: '-30d'  // 30 days ago
+from: '-1d'; // 1 day ago
+from: '-7d'; // 7 days ago
+from: '-30d'; // 30 days ago
 
 // Months
-from: '-1M'   // 1 month ago
-from: '-3M'   // 3 months ago
-from: '-6M'   // 6 months ago
+from: '-1M'; // 1 month ago
+from: '-3M'; // 3 months ago
+from: '-6M'; // 6 months ago
 
 // Years
-from: '-1y'   // 1 year ago
+from: '-1y'; // 1 year ago
 
 // Now
-from: 'now'   // Current time
+from: 'now'; // Current time
 ```
 
 ### 5. Common Date Formats
 
 ```javascript
-from: '2024-01-15'
-from: '2024-01-15 16:34:05'
+from: '2024-01-15';
+from: '2024-01-15 16:34:05';
 ```
 
 ## Usage Examples
@@ -94,10 +100,9 @@ const response = await fetch(
 ### Last 24 Hours
 
 ```javascript
-const response = await fetch(
-  'https://api.nextdns.io/profiles/abc123/logs?from=-24h',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
-);
+const response = await fetch('https://api.nextdns.io/profiles/abc123/logs?from=-24h', {
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+});
 ```
 
 ### Custom Time Range
@@ -231,7 +236,7 @@ class DateRangeBuilder {
   build() {
     return {
       from: this.fromDate,
-      to: this.toDate
+      to: this.toDate,
     };
   }
 
@@ -244,9 +249,7 @@ class DateRangeBuilder {
 }
 
 // Usage
-const range = new DateRangeBuilder()
-  .lastDays(7)
-  .build();
+const range = new DateRangeBuilder().lastDays(7).build();
 // { from: '-7d', to: 'now' }
 
 const customRange = new DateRangeBuilder()
@@ -255,9 +258,7 @@ const customRange = new DateRangeBuilder()
   .build();
 // { from: '2024-01-01T00:00:00.000Z', to: '2024-01-31T00:00:00.000Z' }
 
-const queryString = new DateRangeBuilder()
-  .lastHours(24)
-  .toQueryString();
+const queryString = new DateRangeBuilder().lastHours(24).toQueryString();
 // "from=-24h&to=now"
 ```
 
@@ -302,25 +303,25 @@ const queryString = new DateRangeBuilder()
 
 ```javascript
 // ❌ Invalid formats
-from: '01/15/2024'           // US date format
-from: '15/01/2024'           // EU date format
-from: 'January 15, 2024'     // Text format
-from: '2024-1-15'            // Missing leading zeros
+from: '01/15/2024'; // US date format
+from: '15/01/2024'; // EU date format
+from: 'January 15, 2024'; // Text format
+from: '2024-1-15'; // Missing leading zeros
 
 // ❌ Invalid relative formats
-from: '-7 days'              // No spaces
-from: '-1week'               // Use 'd' not 'week'
-from: 'last week'            // Use '-7d'
+from: '-7 days'; // No spaces
+from: '-1week'; // Use 'd' not 'week'
+from: 'last week'; // Use '-7d'
 
 // ❌ Missing timezone
-from: '2024-01-15T16:34:05'  // Should have Z or timezone
+from: '2024-01-15T16:34:05'; // Should have Z or timezone
 
 // ✅ Correct formats
-from: '2024-01-15'
-from: '2024-01-15T16:34:05Z'
-from: '-7d'
-from: 1615826071
-from: 'now'
+from: '2024-01-15';
+from: '2024-01-15T16:34:05Z';
+from: '-7d';
+from: 1615826071;
+from: 'now';
 ```
 
 ## Timezone Considerations
@@ -341,6 +342,4 @@ from: 'now'
 
 ## Reference
 
-- [NextDNS API - Date Format](https://nextdns.github.io/api/#date-format-in-query-parameters)
-- [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)
-- [UNIX Time](https://en.wikipedia.org/wiki/Unix_time)
+- [NextDNS API - Date Formats](https://nextdns.github.io/api/#date-format-in-query-parameters)

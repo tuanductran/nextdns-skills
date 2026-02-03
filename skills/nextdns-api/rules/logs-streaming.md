@@ -1,13 +1,14 @@
 ---
-title: "Logs Streaming"
+title: 'Logs Streaming'
 impact: HIGH
-impactDescription: "Stream DNS logs in real-time using Server-Sent Events"
+impactDescription: 'Stream DNS logs in real-time using Server-Sent Events'
 type: capability
-tags: "SSE, real-time, streaming, Server-sent events, live logs, EventSource"
+tags: 'SSE, real-time, streaming, Server-sent events, live logs, EventSource'
 ---
+
 # Logs Streaming
 
-**Impact: HIGH** - Stream DNS logs in real-time using Server-Sent Events (SSE)
+Stream DNS logs in real-time using Server-Sent Events (SSE)
 
 ## Endpoint
 
@@ -18,14 +19,11 @@ GET /profiles/:profile/logs/stream
 ## Basic Usage
 
 ```javascript
-const eventSource = new EventSource(
-  'https://api.nextdns.io/profiles/abc123/logs/stream',
-  {
-    headers: {
-      'X-API-Key': 'YOUR_API_KEY'
-    }
-  }
-);
+const eventSource = new EventSource('https://api.nextdns.io/profiles/abc123/logs/stream', {
+  headers: {
+    'X-API-Key': 'YOUR_API_KEY',
+  },
+});
 
 eventSource.onmessage = (event) => {
   const log = JSON.parse(event.data);
@@ -59,8 +57,8 @@ const eventSource = new EventSource(
   `https://api.nextdns.io/profiles/abc123/logs/stream?id=${lastEventId}`,
   {
     headers: {
-      'X-API-Key': 'YOUR_API_KEY'
-    }
+      'X-API-Key': 'YOUR_API_KEY',
+    },
   }
 );
 ```
@@ -71,10 +69,9 @@ Get the stream ID from the regular logs endpoint:
 
 ```javascript
 // 1. Get recent logs
-const recentLogs = await fetch(
-  'https://api.nextdns.io/profiles/abc123/logs?limit=100',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
-).then(r => r.json());
+const recentLogs = await fetch('https://api.nextdns.io/profiles/abc123/logs?limit=100', {
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+}).then((r) => r.json());
 
 // 2. Get stream ID from metadata
 const streamId = recentLogs.meta.stream.id;
@@ -84,8 +81,8 @@ const eventSource = new EventSource(
   `https://api.nextdns.io/profiles/abc123/logs/stream?id=${streamId}`,
   {
     headers: {
-      'X-API-Key': 'YOUR_API_KEY'
-    }
+      'X-API-Key': 'YOUR_API_KEY',
+    },
   }
 );
 
@@ -119,7 +116,7 @@ url.searchParams.set('search', 'facebook');
 url.searchParams.set('raw', '1');
 
 const eventSource = new EventSource(url.toString(), {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' }
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -134,11 +131,11 @@ function LogsStream({ profileId, apiKey }) {
 
   useEffect(() => {
     const url = new URL(`https://api.nextdns.io/profiles/${profileId}/logs/stream`);
-    
+
     const eventSource = new EventSource(url.toString(), {
       headers: {
-        'X-API-Key': apiKey
-      }
+        'X-API-Key': apiKey,
+      },
     });
 
     eventSource.onopen = () => {
@@ -148,7 +145,7 @@ function LogsStream({ profileId, apiKey }) {
 
     eventSource.onmessage = (event) => {
       const log = JSON.parse(event.data);
-      setLogs(prev => [log, ...prev].slice(0, 100)); // Keep last 100
+      setLogs((prev) => [log, ...prev].slice(0, 100)); // Keep last 100
     };
 
     eventSource.onerror = (error) => {
@@ -184,17 +181,17 @@ import EventSource from 'eventsource';
 
 function streamLogs(profileId, apiKey, options = {}) {
   const url = new URL(`https://api.nextdns.io/profiles/${profileId}/logs/stream`);
-  
+
   // Add filters
   if (options.device) url.searchParams.set('device', options.device);
   if (options.status) url.searchParams.set('status', options.status);
   if (options.search) url.searchParams.set('search', options.search);
   if (options.id) url.searchParams.set('id', options.id);
-  
+
   const eventSource = new EventSource(url.toString(), {
     headers: {
-      'X-API-Key': apiKey
-    }
+      'X-API-Key': apiKey,
+    },
   });
 
   eventSource.onopen = () => {
@@ -203,12 +200,12 @@ function streamLogs(profileId, apiKey, options = {}) {
 
   eventSource.onmessage = (event) => {
     const log = JSON.parse(event.data);
-    
+
     // Process log
     if (log.status === 'blocked') {
       console.log(`Blocked: ${log.domain}`);
     }
-    
+
     // Store last event ID for resuming
     if (event.lastEventId) {
       // Save to database or file
@@ -218,7 +215,7 @@ function streamLogs(profileId, apiKey, options = {}) {
 
   eventSource.onerror = (error) => {
     console.error('Stream error:', error);
-    
+
     // Reconnect with last known ID
     const lastId = getLastEventId();
     if (lastId) {
@@ -233,7 +230,7 @@ function streamLogs(profileId, apiKey, options = {}) {
 
 // Usage
 const stream = streamLogs('abc123', process.env.NEXTDNS_API_KEY, {
-  status: 'blocked'
+  status: 'blocked',
 });
 
 // Stop streaming
@@ -250,9 +247,9 @@ const eventSource = new EventSource(
 
 eventSource.onmessage = (event) => {
   const log = JSON.parse(event.data);
-  
+
   console.log(`Blocked: ${log.domain}`);
-  console.log(`Reasons: ${log.reasons.map(r => r.name).join(', ')}`);
+  console.log(`Reasons: ${log.reasons.map((r) => r.name).join(', ')}`);
 };
 ```
 
@@ -282,9 +279,9 @@ function createReconnectingStream(profileId, apiKey, options = {}) {
   function connect() {
     const url = new URL(`https://api.nextdns.io/profiles/${profileId}/logs/stream`);
     if (lastEventId) url.searchParams.set('id', lastEventId);
-    
+
     eventSource = new EventSource(url.toString(), {
-      headers: { 'X-API-Key': apiKey }
+      headers: { 'X-API-Key': apiKey },
     });
 
     eventSource.onopen = () => {
@@ -295,7 +292,7 @@ function createReconnectingStream(profileId, apiKey, options = {}) {
     eventSource.onmessage = (event) => {
       lastEventId = event.lastEventId;
       const log = JSON.parse(event.data);
-      
+
       // Your log processing here
       console.log(log);
     };
@@ -303,7 +300,7 @@ function createReconnectingStream(profileId, apiKey, options = {}) {
     eventSource.onerror = (error) => {
       console.error('Stream error:', error);
       eventSource.close();
-      
+
       if (reconnectAttempts < maxReconnectAttempts) {
         reconnectAttempts++;
         const delay = Math.min(1000 * Math.pow(2, reconnectAttempts), 30000);
@@ -316,7 +313,7 @@ function createReconnectingStream(profileId, apiKey, options = {}) {
   connect();
 
   return {
-    close: () => eventSource?.close()
+    close: () => eventSource?.close(),
   };
 }
 ```
@@ -325,10 +322,10 @@ function createReconnectingStream(profileId, apiKey, options = {}) {
 
 ```javascript
 // ❌ Using fetch instead of EventSource
-fetch('https://api.nextdns.io/profiles/abc123/logs/stream')
+fetch('https://api.nextdns.io/profiles/abc123/logs/stream');
 
 // ❌ Not handling reconnection
-eventSource.onerror = () => {}  // Stream will die
+eventSource.onerror = () => {}; // Stream will die
 
 // ❌ Not saving last event ID
 // You'll miss events during reconnection
@@ -354,6 +351,4 @@ import EventSource from 'eventsource';
 
 ## Reference
 
-- [NextDNS API - Streaming](https://nextdns.github.io/api/#streaming)
-- [Server-Sent Events (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
-- [EventSource API](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
+- [NextDNS API - Logs Streaming](https://nextdns.github.io/api/#streaming)

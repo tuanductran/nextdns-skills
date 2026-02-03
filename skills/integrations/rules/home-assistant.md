@@ -1,15 +1,30 @@
 ---
-title: "Home Assistant Integration"
+title: 'Home Assistant Integration'
 impact: MEDIUM
-impactDescription: "Without this integration guidance, users cannot leverage Home Assistant for automated DNS control and monitoring. This prevents the creation of time-based parental controls, smart blocking rules, and real-time analytics tracking for home automation systems."
+impactDescription:
+  'Without this integration guidance, users cannot leverage Home Assistant for automated DNS control
+  and monitoring. This prevents the creation of time-based parental controls, smart blocking rules,
+  and real-time analytics tracking for home automation systems.'
 type: capability
-tags: "home assistant, hass, integration, automation, parental control, api, sensors, switches, blocklist"
+tags:
+  - home assistant
+  - hass
+  - integration
+  - automation
+  - parental control
+  - api
+  - sensors
+  - switches
+  - blocklist
 ---
+
 # Home Assistant Integration
 
-**Impact: MEDIUM** - Enables automated DNS control and monitoring through Home Assistant smart home platform
+Enables automated DNS control and monitoring through Home Assistant smart home platform
 
-Home Assistant is a popular open-source home automation platform that can integrate with NextDNS to provide smart DNS control and monitoring. This integration allows you to automate DNS settings based on time, location, or other triggers, and provides real-time visibility into network activity.
+Home Assistant is a popular open-source home automation platform that can integrate with NextDNS to
+provide smart DNS control and monitoring. This integration allows you to automate DNS settings based
+on time, location, or other triggers, and provides real-time visibility into network activity.
 
 ## Prerequisites
 
@@ -51,12 +66,12 @@ Control various NextDNS features through boolean switches:
 - **AI Threat Detection**: Toggle real-time threat intelligence
 - **Parental Controls**: Enable/disable content filtering categories
 - **Blocklist Controls**: Individual switches for specific services:
-    - Block TikTok
-    - Block Facebook
-    - Block Tinder
-    - Block Social Networks (aggregate)
-    - Block Gaming platforms
-    - Block Dating apps
+  - Block TikTok
+  - Block Facebook
+  - Block Tinder
+  - Block Social Networks (aggregate)
+  - Block Gaming platforms
+  - Block Dating apps
 
 ## Automation Examples
 
@@ -69,7 +84,7 @@ automation:
   - alias: Block social media for kids in the evening
     triggers:
       - trigger: time
-        at: "20:00:00"
+        at: '20:00:00'
     actions:
       - action: switch.turn_off
         target:
@@ -85,7 +100,7 @@ automation:
   - alias: Unblock social media for kids in the morning
     triggers:
       - trigger: time
-        at: "07:00:00"
+        at: '07:00:00'
     actions:
       - action: switch.turn_on
         target:
@@ -108,3 +123,7 @@ automation:
         target:
           entity_id: button.nextdns_clear_logs
 ```
+
+## Reference
+
+- [NextDNS API Documentation](https://nextdns.github.io/api/)

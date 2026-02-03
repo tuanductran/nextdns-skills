@@ -1,26 +1,52 @@
 # Default state for all rules
 default: true
-# Disable max line length
+
+# MD013/line-length: Disable max line length (handled by Prettier proseWrap)
 MD013: false
-# Allow duplicated heading for different sections
+
+# MD024/no-duplicate-heading: Allow duplicated headings if they are in different sections
 MD024:
   siblings_only: true
-# Allow multiple top-level headings
+  allow_different_nesting: true
+
+# MD025/single-title/single-h1: Disable to allow H1 in Rule Files which already have H1-like title in frontmatter
 MD025: false
-# Allow inline HTML
+
+# MD033/no-inline-html: Allow inline HTML for specific formatting needs (e.g. <br>, <details>)
 MD033: false
-# Allow non blank lines around list
+
+# MD032/blanks-around-lists: Disable because Prettier sometimes conflicts with this
 MD032: false
+
+# MD046/code-block-style: Require fenced code blocks only
 MD046:
   style: fenced
-MD034: false
-MD031: false
+
+# MD007/ul-indent: Disable to allow Prettier's default indentation (2 spaces)
 MD007: false
-# Allow setext-style headings (for MDC YAML frontmatter with --- delimiters)
-MD003: false
-# Allow headings without surrounding blank lines (for MDC component props)
-MD022: false
-# Allow headings not at the start of the line (for indented MDC components)
-MD023: false
-# Do not require aligned columns in tables
+
+# MD041/first-line-h1: Disable because files start with YAML frontmatter
+MD041: false
+
+# MD003/heading-style: Require ATX-style headings (# Heading)
+MD003:
+  style: atx
+
+# MD012/no-multiple-blanks: Allow multiple consecutive blank lines if needed
+MD012: false
+
+# MD026/no-trailing-punctuation: Disable to allow punctuation in headings (questions etc.)
+MD026: false
+
+# MD031/blanks-around-fences: Disable because Prettier handles this
+MD031: false
+
+# MD004/ul-style: Consistent dash style for lists
+MD004:
+  style: dash
+
+# MD060/table-column-style: Allow unaligned column pipes (handled by Prettier)
 MD060: false
+
+# MD034/no-bare-urls: Allow bare URLs/Emails (common in technical docs)
+MD034: false

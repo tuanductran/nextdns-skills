@@ -1,0 +1,40 @@
+name: Update Skill Counts
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'skills/**/rules/*.md'
+  workflow_dispatch:
+
+jobs:
+  update-counts:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Update counts in README.md
+        run: python3 scripts/update_counts.py
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add README.md CLAUDE.md
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "docs: update skill counts in README.md [skip ci]"
+            git push
+          fi

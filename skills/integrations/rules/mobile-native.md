@@ -1,15 +1,34 @@
 ---
-title: "Mobile Native Encrypted DNS Configuration"
+title: 'Mobile Native Encrypted DNS Configuration'
 impact: HIGH
-impactDescription: "Native encrypted DNS support on mobile devices provides lightweight protection without battery-draining background apps. Without this guidance, users may unnecessarily install third-party apps when the OS provides built-in encrypted DNS capabilities."
+impactDescription:
+  'Native encrypted DNS support on mobile devices provides lightweight protection without
+  battery-draining background apps. Without this guidance, users may unnecessarily install
+  third-party apps when the OS provides built-in encrypted DNS capabilities.'
 type: capability
-tags: "mobile, android, ios, iphone, ipad, private-dns, dot, dns-over-tls, configuration-profile, mobileconfig, native, lightweight"
+tags:
+  - mobile
+  - android
+  - ios
+  - iphone
+  - ipad
+  - private-dns
+  - dot
+  - dns-over-tls
+  - configuration-profile
+  - mobileconfig
+  - native
+  - lightweight
 ---
+
 # Mobile Native Encrypted DNS Configuration
 
-**Impact: HIGH** - Enables NextDNS protection on mobile devices using built-in OS features without battery-draining background apps
+Enables NextDNS protection on mobile devices using built-in OS features without battery-draining
+background apps
 
-Modern mobile operating systems include native support for encrypted DNS protocols, eliminating the need for third-party apps. This provides a lightweight, battery-efficient method for NextDNS protection on smartphones and tablets.
+Modern mobile operating systems include native support for encrypted DNS protocols, eliminating the
+need for third-party apps. This provides a lightweight, battery-efficient method for NextDNS
+protection on smartphones and tablets.
 
 ## Why Use Native Configuration Over Apps
 
@@ -25,10 +44,10 @@ Modern mobile operating systems include native support for encrypted DNS protoco
 ### When to Use the NextDNS App Instead
 
 - You need advanced features like:
-    - Custom DNS server selection per network
-    - Analytics and diagnostics on the device
-    - Detailed connection logs
-    - Manual profile switching
+  - Custom DNS server selection per network
+  - Analytics and diagnostics on the device
+  - Detailed connection logs
+  - Manual profile switching
 
 ## Android Configuration (Version 9+)
 
@@ -39,17 +58,14 @@ Android 9 (Pie) and later include **Private DNS** support using DNS-over-TLS (Do
 1. Open **Settings** on your Android device
 
 2. Navigate to:
-    - **Network & internet** (or **Connections** on Samsung devices)
+   - **Network & internet** (or **Connections** on Samsung devices)
 
 3. Select **Private DNS** (or **Advanced** → **Private DNS**)
 
 4. Choose **Private DNS provider hostname**
 
-5. Enter your NextDNS hostname:
-    ```text
-    <config_id>.dns.nextdns.io
-    ```
-    Replace `<config_id>` with your actual NextDNS Configuration ID
+5. Enter your NextDNS hostname: `<config_id>.dns.nextdns.io` Replace `<config_id>` with your actual
+   NextDNS Configuration ID
 
 6. Tap **Save**
 
@@ -62,6 +78,7 @@ Android 9 (Pie) and later include **Private DNS** support using DNS-over-TLS (Do
 ### Visual Path Reference
 
 **Stock Android:**
+
 ```text
 Settings
   └─ Network & internet
@@ -72,6 +89,7 @@ Settings
 ```
 
 **Samsung (One UI):**
+
 ```text
 Settings
   └─ Connections
@@ -85,9 +103,9 @@ Settings
 
 1. Visit [https://test.nextdns.io](https://test.nextdns.io) in your browser
 2. You should see:
-    - ✓ **Protocol**: TLS (DoT)
-    - ✓ **Status**: Connected
-    - ✓ **Configuration ID**: Your config ID
+   - ✓ **Protocol**: TLS (DoT)
+   - ✓ **Status**: Connected
+   - ✓ **Configuration ID**: Your config ID
 
 ### Troubleshooting Android
 
@@ -98,28 +116,26 @@ Settings
 **Solutions:**
 
 1. **Check hostname format:**
-    - Correct: `abc123.dns.nextdns.io`
-    - Incorrect: `https://abc123.dns.nextdns.io` (no protocol)
-    - Incorrect: `abc123.dns1.nextdns.io` (wrong subdomain)
+   - Correct: `abc123.dns.nextdns.io`
+   - Incorrect: `https://abc123.dns.nextdns.io` (no protocol)
+   - Incorrect: `abc123.dns1.nextdns.io` (wrong subdomain)
 
 2. **Test with automatic setting:**
-    - Temporarily select **Automatic**
-    - If internet works, the issue is with the hostname
-    - If it doesn't work, the issue is network-related
+   - Temporarily select **Automatic**
+   - If internet works, the issue is with the hostname
+   - If it doesn't work, the issue is network-related
 
 3. **Network restrictions:**
-    - Some networks (corporate, public Wi-Fi) may block DNS-over-TLS (port 853)
-    - Try switching between Wi-Fi and mobile data
-    - Contact network administrator if on corporate network
+   - Some networks (corporate, public Wi-Fi) may block DNS-over-TLS (port 853)
+   - Try switching between Wi-Fi and mobile data
+   - Contact network administrator if on corporate network
 
-4. **Clear DNS cache:**
-    ```text
-    Settings → Apps → Show system apps → DNS Client → Storage → Clear cache
-    ```
+4. **Clear DNS cache:** `Settings → Apps → Show system apps → DNS Client → Storage → Clear cache`
 
 ## iOS Configuration (Version 14+)
 
-iOS 14 and later support **Encrypted DNS Profiles** using DNS-over-HTTPS (DoH) or DNS-over-TLS (DoT) via signed configuration profiles.
+iOS 14 and later support **Encrypted DNS Profiles** using DNS-over-HTTPS (DoH) or DNS-over-TLS (DoT)
+via signed configuration profiles.
 
 ### Configuration Steps
 
@@ -140,9 +156,9 @@ iOS 14 and later support **Encrypted DNS Profiles** using DNS-over-HTTPS (DoH) o
 7. Tap **Profile Downloaded** near the top of settings
 
 8. Review the profile details:
-    - **Name**: NextDNS (your config name)
-    - **Type**: DNS Settings
-    - **Signed by**: NextDNS, Inc.
+   - **Name**: NextDNS (your config name)
+   - **Type**: DNS Settings
+   - **Signed by**: NextDNS, Inc.
 
 9. Tap **Install** in the top right
 
@@ -176,3 +192,7 @@ Settings
                       └─ Install (confirm)
                            └─ Done
 ```
+
+## Reference
+
+- [NextDNS Help Center](https://help.nextdns.io)

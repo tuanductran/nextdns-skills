@@ -1,15 +1,21 @@
 ---
-title: "Profile Configuration"
+title: 'Profile Configuration'
 impact: HIGH
-impactDescription: "Managing NextDNS profile IDs and general configuration settings"
+impactDescription: 'Managing NextDNS profile IDs and general configuration settings'
 type: capability
-tags: "config, profile ID, configuration set, edit config"
+tags:
+  - config
+  - profile ID
+  - configuration set
+  - edit config
 ---
+
 # Profile Configuration
 
-**Impact: HIGH** - Managing core NextDNS profile and service settings
+Managing core NextDNS profile and service settings
 
-The CLI uses specific flags to connect to your NextDNS cloud dashboard and control local proxy behavior.
+The CLI uses specific flags to connect to your NextDNS cloud dashboard and control local proxy
+behavior.
 
 ## Setting the Profile ID
 
@@ -22,18 +28,20 @@ sudo nextdns config set -profile=abc123
 
 ## Configuration Management
 
-| Command | Description |
-|---------|-------------|
-| `nextdns config set [flags]` | Sets specific configuration values. |
-| `nextdns config edit` | Opens the configuration file in a text editor for manual editing. |
-| `nextdns config list` | Lists all current configuration values. |
+| Command                      | Description                                                       |
+| ---------------------------- | ----------------------------------------------------------------- |
+| `nextdns config set [flags]` | Sets specific configuration values.                               |
+| `nextdns config edit`        | Opens the configuration file in a text editor for manual editing. |
+| `nextdns config list`        | Lists all current configuration values.                           |
 
 ## Common Configuration Flags
 
 - **`-profile`**: Your NextDNS configuration ID (e.g., `abc123`).
-- **`-report-client-info`**: Enable this to see device names in your NextDNS dashboard (`true`/`false`).
+- **`-report-client-info`**: Enable this to see device names in your NextDNS dashboard
+  (`true`/`false`).
 - **`-auto-activate`**: Automatically set system DNS to 127.0.0.1 on start.
-- **`-setup-router`**: Automatically configure for router setups (integrates with many router firmwares).
+- **`-setup-router`**: Automatically configure for router setups (integrates with many router
+  firmwares).
 - **`-use-hosts`**: Lookup `/etc/hosts` before sending queries upstream (default: `true`).
 - **`-mdns`**: Enable mDNS to discover client information (default: `"all"`).
 
@@ -47,4 +55,9 @@ report-client-info true
 auto-activate true
 ```
 
-**Note**: After editing the configuration file manually or using `config set`, you typically need to `nextdns restart` for the changes to take effect.
+**Note**: After editing the configuration file manually or using `config set`, you typically need to
+`nextdns restart` for the changes to take effect.
+
+## Reference
+
+- [NextDNS CLI - Configuration](https://github.com/nextdns/nextdns/wiki#configuration)

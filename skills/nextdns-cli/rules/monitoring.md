@@ -1,13 +1,19 @@
 ---
-title: "Monitoring"
+title: 'Monitoring'
 impact: MEDIUM
-impactDescription: "Monitoring DNS queries, logs, and client activity"
+impactDescription: 'Monitoring DNS queries, logs, and client activity'
 type: capability
-tags: "log, cache-stats, discovered clients, monitoring, debug"
+tags:
+  - log
+  - cache-stats
+  - discovered clients
+  - monitoring
+  - debug
 ---
+
 # Monitoring
 
-**Impact: MEDIUM** - Real-time observation and metrics of DNS traffic
+Real-time observation and metrics of DNS traffic
 
 Use these commands to monitor the health and activity of the NextDNS proxy.
 
@@ -36,7 +42,8 @@ nextdns cache-stats
 
 ## Client Discovery
 
-See which clients are currently being discovered on the local network (useful for router installations):
+See which clients are currently being discovered on the local network (useful for router
+installations):
 
 ```bash
 # List discovered clients and their names
@@ -53,4 +60,9 @@ sudo nextdns restart
 nextdns log
 ```
 
-**Note**: Query logging can produce a lot of data and is not recommended for long-term use in high-traffic environments.
+**Note**: Query logging can produce a lot of data and is not recommended for long-term use in
+high-traffic environments.
+
+## Reference
+
+- [NextDNS CLI - Commands](https://github.com/nextdns/nextdns#commands)

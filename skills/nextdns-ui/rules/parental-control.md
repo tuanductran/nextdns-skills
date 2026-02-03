@@ -1,13 +1,22 @@
 ---
-title: "Parental Control"
+title: 'Parental Control'
 impact: HIGH
-impactDescription: "Management of content filtering, app restrictions, and schedules"
+impactDescription: 'Management of content filtering, app restrictions, and schedules'
 type: capability
-tags: "apps, games, categories, recreation time, safesearch, restricted mode, bypass methods"
+tags:
+  - websites
+  - apps
+  - games
+  - categories
+  - recreation time
+  - safesearch
+  - restricted mode
+  - bypass methods
 ---
+
 # Parental Control
 
-**Impact: HIGH** - Content filtering and usage monitoring for family members
+Content filtering and usage monitoring for family members
 
 Configure restrictions to manage and protect children's internet access.
 
@@ -25,10 +34,20 @@ Configure restrictions to manage and protect children's internet access.
   - **Dating**: Dating apps and websites.
   - **Piracy**: P2P sites and copyright-infringing content.
   - **Social Networks**: All social media platforms.
-- **Recreation Time**: Set specific time windows for each day of the week (Monday to Sunday) when certain apps or categories are **allowed**. For example, allowing Facebook only from 6 PM to 8 PM on Tuesdays.
+- **Recreation Time**: Set specific time windows for each day of the week (Monday to Sunday) when
+  certain apps or categories are **allowed**. For example, allowing Facebook only from 6 PM to 8 PM
+  on Tuesdays.
 - **SafeSearch**: Enforce SafeSearch on major search engines to filter explicit images and videos.
 - **YouTube Restricted Mode**: Filter mature videos on YouTube and hide all comments.
-- **Block Bypass Methods**: Essential feature to block VPNs, proxies, and Tor used to bypass filtering.
+- **Block Bypass Methods**: Essential feature to block VPNs, proxies, and Tor used to bypass
+  filtering.
 
 ## Expert Insight
-The **Recreation Time** feature is one of the most effective tools for balancing screen time and study time for children. Always enable **Block Bypass Methods** to ensure the rules cannot be easily circumvented by savvy users.
+
+The **Recreation Time** feature is one of the most effective tools for balancing screen time and
+study time for children. Always enable **Block Bypass Methods** to ensure the rules cannot be easily
+circumvented by savvy users.
+
+## Reference
+
+- [NextDNS API - Profile Settings](https://nextdns.github.io/api/#profile)

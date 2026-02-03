@@ -1,21 +1,27 @@
 ---
-title: "Analytics Endpoints"
+title: 'Analytics Endpoints'
 impact: HIGH
-impactDescription: "Access various analytics endpoints for DNS query insights"
+impactDescription: 'Access various analytics endpoints for DNS query insights'
 type: capability
-tags: "analytics, status, domains, reasons, devices, protocols, query types, destinations"
+tags:
+  - analytics
+  - status
+  - domains
+  - reasons
+  - devices
+  - protocols
+  - query types
+  - destinations
 ---
+
 # Analytics Endpoints
 
-**Impact: HIGH** - Access comprehensive DNS analytics data
+Access comprehensive DNS analytics data
 
 ## Available Endpoints
 
 All analytics endpoints follow the pattern:
-
-```text
-https://api.nextdns.io/profiles/:profile/analytics/{endpoint}
-```
+`https://api.nextdns.io/profiles/:profile/analytics/{endpoint}`
 
 ## Status Analytics
 
@@ -335,24 +341,24 @@ const gafam = await fetch(
 ```javascript
 async function getAnalytics(profileId, endpoint, params = {}) {
   const url = new URL(`https://api.nextdns.io/profiles/${profileId}/analytics/${endpoint}`);
-  
+
   Object.entries(params).forEach(([key, value]) => {
     url.searchParams.set(key, value);
   });
-  
+
   const response = await fetch(url, {
-    headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY }
+    headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY },
   });
-  
+
   return response.json();
 }
 
 // Usage
 const status = await getAnalytics('abc123', 'status', { from: '-7d' });
-const blockedDomains = await getAnalytics('abc123', 'domains', { 
-  status: 'blocked', 
+const blockedDomains = await getAnalytics('abc123', 'domains', {
+  status: 'blocked',
   from: '-30d',
-  limit: 100
+  limit: 100,
 });
 ```
 

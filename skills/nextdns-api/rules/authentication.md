@@ -1,13 +1,19 @@
 ---
-title: "Authentication"
+title: 'Authentication'
 impact: HIGH
-impactDescription: "Authenticate all NextDNS API requests with API key"
+impactDescription: 'Authenticate all NextDNS API requests with API key'
 type: capability
-tags: "authentication, API key, X-API-Key, authorization, security"
+tags:
+  - authentication
+  - API key
+  - X-API-Key
+  - authorization
+  - security
 ---
+
 # Authentication
 
-**Impact: HIGH** - All NextDNS API requests require authentication via API key
+All NextDNS API requests require authentication via API key
 
 ## Correct Usage
 
@@ -21,12 +27,12 @@ curl -H "X-API-Key: a8f4e42e896ff37f181e3e8a42a9737e1423d8e7" \
 ```javascript
 const headers = {
   'X-API-Key': 'a8f4e42e896ff37f181e3e8a42a9737e1423d8e7',
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
 };
 
 fetch('https://api.nextdns.io/profiles', { headers })
-  .then(response => response.json())
-  .then(data => console.log(data));
+  .then((response) => response.json())
+  .then((data) => console.log(data));
 ```
 
 ```python
@@ -67,5 +73,4 @@ curl https://api.nextdns.io/profiles?api_key=a8f4e42e896ff37f181e3e8a42a9737e142
 
 ## Reference
 
-- [NextDNS API Documentation - Authentication](https://nextdns.github.io/api/#authentication)
-- [NextDNS Account Page](https://my.nextdns.io/account)
+- [NextDNS API - Authentication](https://nextdns.github.io/api/#authentication)

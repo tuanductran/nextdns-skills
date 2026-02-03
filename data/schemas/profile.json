@@ -15,11 +15,7 @@
     "ddns": false,
     "parking": true,
     "csam": true,
-    "tlds": [
-      "zip",
-      "mov",
-      "country"
-    ]
+    "tlds": ["zip", "mov", "country"]
   },
   "privacy": {
     "blocklists": [
@@ -36,32 +32,13 @@
         "name": "hostsVN"
       }
     ],
-    "natives": [
-      "apple",
-      "samsung",
-      "xiaomi",
-      "windows",
-      "alexa",
-      "roku",
-      "sonos",
-      "huawei"
-    ],
+    "natives": ["apple", "samsung", "xiaomi", "windows", "alexa", "roku", "sonos", "huawei"],
     "disguisedTrackers": true,
     "allowAffiliate": true
   },
   "parentalControl": {
-    "services": [
-      "tiktok",
-      "facebook",
-      "instagram",
-      "twitter",
-      "youtube"
-    ],
-    "categories": [
-      "gambling",
-      "dating",
-      "piracy"
-    ],
+    "services": ["tiktok", "facebook", "instagram", "twitter", "youtube"],
+    "categories": ["gambling", "dating", "piracy"],
     "safeSearch": true,
     "youtubeRestrictedMode": true,
     "blockBypass": true,
@@ -97,16 +74,8 @@
       }
     }
   },
-  "denylist": [
-    "ads.example.com",
-    "tracker.example.net",
-    "malicious.example.org"
-  ],
-  "allowlist": [
-    "important-service.com",
-    "business-app.example.com",
-    "email-tracking.service.net"
-  ],
+  "denylist": ["ads.example.com", "tracker.example.net", "malicious.example.org"],
+  "allowlist": ["important-service.com", "business-app.example.com", "email-tracking.service.net"],
   "settings": {
     "logs": {
       "enabled": true,

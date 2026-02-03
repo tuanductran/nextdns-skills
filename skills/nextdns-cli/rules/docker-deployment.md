@@ -1,19 +1,31 @@
 ---
-title: "Docker Deployment"
+title: 'Docker Deployment'
 impact: HIGH
-impactDescription: "Proper Docker deployment ensures NextDNS CLI runs efficiently with correct network configuration for host detection and client IP visibility"
+impactDescription:
+  'Proper Docker deployment ensures NextDNS CLI runs efficiently with correct network configuration
+  for host detection and client IP visibility'
 type: capability
-tags: "docker, container, DockerHub, host network, port mapping, deployment"
+tags:
+  - docker
+  - container
+  - DockerHub
+  - host network
+  - port mapping
+  - deployment
 ---
+
 # Docker Deployment
 
-**Impact: HIGH** - Essential container deployment patterns for optimal DNS resolution and client tracking
+Essential container deployment patterns for optimal DNS resolution and client tracking
 
-NextDNS CLI is available as pre-built Docker images on DockerHub (`nextdns/nextdns`), enabling containerized deployments across various platforms. The networking mode significantly affects functionality, particularly for host detection and client IP visibility.
+NextDNS CLI is available as pre-built Docker images on DockerHub (`nextdns/nextdns`), enabling
+containerized deployments across various platforms. The networking mode significantly affects
+functionality, particularly for host detection and client IP visibility.
 
 ## Host Network Mode (Recommended)
 
-Using host network mode allows the NextDNS CLI container to see actual LAN IP addresses and enables host detection features:
+Using host network mode allows the NextDNS CLI container to see actual LAN IP addresses and enables
+host detection features:
 
 ```bash
 docker run -d --network host --restart unless-stopped nextdns/nextdns run -listen=:53 -profile=abc123
@@ -21,8 +33,10 @@ docker run -d --network host --restart unless-stopped nextdns/nextdns run -liste
 
 ### Why Host Network Mode?
 
-- **Real IP Visibility**: The CLI sees actual client IP addresses from your LAN instead of Docker's internal NAT IPs.
-- **Host Detection**: Automatic device identification works properly since the CLI can observe network traffic patterns.
+- **Real IP Visibility**: The CLI sees actual client IP addresses from your LAN instead of Docker's
+  internal NAT IPs.
+- **Host Detection**: Automatic device identification works properly since the CLI can observe
+  network traffic patterns.
 - **Performance**: Eliminates NAT overhead for DNS queries.
 - **Simplicity**: No port mapping required, direct access to port 53.
 
@@ -42,9 +56,11 @@ docker run -d -p 53:53/tcp -p 53:53/udp --restart unless-stopped nextdns/nextdns
 
 ### Limitations
 
-- **NAT IP Addresses**: All clients appear as internal Docker NATed IP addresses (typically from the Docker bridge network).
+- **NAT IP Addresses**: All clients appear as internal Docker NATed IP addresses (typically from the
+  Docker bridge network).
 - **No Host Detection**: Device identification features will not work properly.
-- **Query Attribution**: All queries appear to come from the Docker container's IP rather than individual clients.
+- **Query Attribution**: All queries appear to come from the Docker container's IP rather than
+  individual clients.
 
 ### When to Use
 
@@ -54,7 +70,8 @@ docker run -d -p 53:53/tcp -p 53:53/udp --restart unless-stopped nextdns/nextdns
 
 ## Persistence Configuration
 
-The `--restart unless-stopped` flag ensures the container automatically restarts on system boot and after Docker daemon restarts:
+The `--restart unless-stopped` flag ensures the container automatically restarts on system boot and
+after Docker daemon restarts:
 
 ```bash
 docker run -d \
@@ -66,7 +83,8 @@ docker run -d \
 
 ### Restart Policy Options
 
-- `unless-stopped`: Container restarts automatically unless explicitly stopped (recommended for production).
+- `unless-stopped`: Container restarts automatically unless explicitly stopped (recommended for
+  production).
 - `always`: Container always restarts, even after manual stops (not recommended).
 - `on-failure`: Only restarts on non-zero exit codes.
 - `no`: No automatic restart (default, not recommended for DNS services).
@@ -88,10 +106,14 @@ This allows the CLI to store and read configuration from `/etc/nextdns` on the h
 
 ## Best Practices
 
-- **Always Use Restart Policy**: DNS services must be highly available. Use `--restart unless-stopped` for production deployments.
-- **Prefer Host Network Mode**: On Linux systems, host network mode provides the best functionality and performance.
-- **Profile ID Management**: Store profile IDs securely, consider using Docker secrets or environment variables for sensitive configurations.
-- **Resource Limits**: In production, consider setting memory and CPU limits to prevent resource exhaustion.
+- **Always Use Restart Policy**: DNS services must be highly available. Use
+  `--restart unless-stopped` for production deployments.
+- **Prefer Host Network Mode**: On Linux systems, host network mode provides the best functionality
+  and performance.
+- **Profile ID Management**: Store profile IDs securely, consider using Docker secrets or
+  environment variables for sensitive configurations.
+- **Resource Limits**: In production, consider setting memory and CPU limits to prevent resource
+  exhaustion.
 - **Logging**: Use Docker logging drivers to capture and rotate NextDNS CLI logs appropriately.
 
 ## Container Management
@@ -138,3 +160,7 @@ Check logs for errors:
 ```bash
 docker logs nextdns
 ```
+
+## Reference
+
+- [NextDNS CLI - Docker](https://github.com/nextdns/nextdns/wiki/Docker)

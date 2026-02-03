@@ -1,13 +1,21 @@
 ---
-title: "Advanced Features"
+title: 'Advanced Features'
 impact: HIGH
-impactDescription: "Advanced routing, conditional forwarders, and caching configurations"
+impactDescription: 'Advanced routing, conditional forwarders, and caching configurations'
 type: capability
-tags: "conditional forwarder, MAC address, subnet, routing, client detection, split-horizon, cache"
+tags:
+  - conditional forwarder
+  - MAC address
+  - subnet
+  - routing
+  - client detection
+  - split-horizon
+  - cache
 ---
+
 # Advanced Features
 
-**Impact: HIGH** - Complex routing and performance optimizations
+Complex routing and performance optimizations
 
 NextDNS CLI provides advanced features for complex network environments and performance tuning.
 
@@ -24,7 +32,8 @@ sudo nextdns restart
 
 ## Conditional Profile Selection
 
-Apply different NextDNS profiles based on the client's subnet or MAC address. This is powerful for router-level installations.
+Apply different NextDNS profiles based on the client's subnet or MAC address. This is powerful for
+router-level installations.
 
 ```bash
 sudo nextdns config set \
@@ -36,7 +45,8 @@ sudo nextdns restart
 
 ## Cache Configuration
 
-Enable local memory caching to improve performance and provide resilience if upstream is temporarily unavailable.
+Enable local memory caching to improve performance and provide resilience if upstream is temporarily
+unavailable.
 
 ```bash
 # Enable 10MB cache (sufficient for most users)
@@ -55,7 +65,8 @@ sudo nextdns restart
 ## Other Advanced Flags
 
 - **`-bogus-priv`**: Block reverse lookups for private IP ranges (default: `true`).
-- **`-detect-captive-portals`**: Automatic detection and fallback on system DNS for captive portal login.
+- **`-detect-captive-portals`**: Automatic detection and fallback on system DNS for captive portal
+  login.
 - **`-timeout`**: Maximum duration allowed for a request (default: `5s`).
 - **`-max-inflight-requests`**: Maximum simultaneous requests (default: `256`).
 
@@ -67,3 +78,7 @@ NextDNS CLI can act as a proxy for any DoH provider:
 sudo nextdns config set -profile=https://dns.google/dns-query
 sudo nextdns restart
 ```
+
+## Reference
+
+- [NextDNS CLI - Advanced Usage](https://github.com/nextdns/nextdns#advanced-usage)

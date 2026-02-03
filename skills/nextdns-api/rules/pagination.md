@@ -1,13 +1,19 @@
 ---
-title: "Pagination"
+title: 'Pagination'
 impact: HIGH
-impactDescription: "Correctly paginate through API responses"
+impactDescription: 'Correctly paginate through API responses'
 type: capability
-tags: "pagination, cursor, limit, next page, page size"
+tags:
+  - pagination
+  - cursor
+  - limit
+  - next page
+  - page size
 ---
+
 # Pagination
 
-**Impact: HIGH** - Properly paginate through large result sets
+Properly paginate through large result sets
 
 ## How Pagination Works
 
@@ -28,10 +34,9 @@ Most endpoints that return arrays use cursor-based pagination:
 
 ```javascript
 // First page
-const response = await fetch(
-  'https://api.nextdns.io/profiles/abc123/analytics/domains?limit=50',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
-);
+const response = await fetch('https://api.nextdns.io/profiles/abc123/analytics/domains?limit=50', {
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+});
 
 const data = await response.json();
 
@@ -50,16 +55,16 @@ Control results per page:
 
 ```javascript
 // Default limit (varies by endpoint)
-limit: 10  // Most analytics endpoints
+limit: 10; // Most analytics endpoints
 
-limit: 100  // Logs endpoint
+limit: 100; // Logs endpoint
 
 // Minimum and maximum
-limit: 1    // Minimum for analytics
-limit: 500  // Maximum for analytics
+limit: 1; // Minimum for analytics
+limit: 500; // Maximum for analytics
 
-limit: 10   // Minimum for logs
-limit: 1000 // Maximum for logs
+limit: 10; // Minimum for logs
+limit: 1000; // Maximum for logs
 ```
 
 ## Fetch All Pages
@@ -68,28 +73,27 @@ limit: 1000 // Maximum for logs
 async function fetchAllPages(url, apiKey) {
   let allData = [];
   let cursor = null;
-  
+
   do {
     const requestUrl = new URL(url);
     if (cursor) {
       requestUrl.searchParams.set('cursor', cursor);
     }
-    
+
     const response = await fetch(requestUrl, {
-      headers: { 'X-API-Key': apiKey }
+      headers: { 'X-API-Key': apiKey },
     });
-    
+
     const data = await response.json();
-    
+
     if (data.errors) {
       throw new Error(`API Error: ${JSON.stringify(data.errors)}`);
     }
-    
+
     allData = allData.concat(data.data);
     cursor = data.meta?.pagination?.cursor;
-    
   } while (cursor);
-  
+
   return allData;
 }
 
@@ -107,39 +111,38 @@ async function fetchAllPagesWithProgress(url, apiKey, onProgress) {
   let allData = [];
   let cursor = null;
   let page = 0;
-  
+
   do {
     page++;
     const requestUrl = new URL(url);
     if (cursor) {
       requestUrl.searchParams.set('cursor', cursor);
     }
-    
+
     const response = await fetch(requestUrl, {
-      headers: { 'X-API-Key': apiKey }
+      headers: { 'X-API-Key': apiKey },
     });
-    
+
     const data = await response.json();
-    
+
     if (data.errors) {
       throw new Error(`API Error: ${JSON.stringify(data.errors)}`);
     }
-    
+
     allData = allData.concat(data.data);
     cursor = data.meta?.pagination?.cursor;
-    
+
     // Report progress
     if (onProgress) {
       onProgress({
         page,
         itemsInPage: data.data.length,
         totalItems: allData.length,
-        hasMore: !!cursor
+        hasMore: !!cursor,
       });
     }
-    
   } while (cursor);
-  
+
   return allData;
 }
 
@@ -161,34 +164,33 @@ Stop after a certain number of items:
 async function fetchUpToLimit(url, apiKey, maxItems) {
   let allData = [];
   let cursor = null;
-  
+
   do {
     const requestUrl = new URL(url);
     if (cursor) {
       requestUrl.searchParams.set('cursor', cursor);
     }
-    
+
     const response = await fetch(requestUrl, {
-      headers: { 'X-API-Key': apiKey }
+      headers: { 'X-API-Key': apiKey },
     });
-    
+
     const data = await response.json();
-    
+
     if (data.errors) {
       throw new Error(`API Error: ${JSON.stringify(data.errors)}`);
     }
-    
+
     allData = allData.concat(data.data);
     cursor = data.meta?.pagination?.cursor;
-    
+
     // Stop if we've reached the limit
     if (allData.length >= maxItems) {
       allData = allData.slice(0, maxItems);
       break;
     }
-    
   } while (cursor);
-  
+
   return allData;
 }
 
@@ -205,27 +207,26 @@ const top1000 = await fetchUpToLimit(
 ```javascript
 async function* paginateEndpoint(url, apiKey) {
   let cursor = null;
-  
+
   do {
     const requestUrl = new URL(url);
     if (cursor) {
       requestUrl.searchParams.set('cursor', cursor);
     }
-    
+
     const response = await fetch(requestUrl, {
-      headers: { 'X-API-Key': apiKey }
+      headers: { 'X-API-Key': apiKey },
     });
-    
+
     const data = await response.json();
-    
+
     if (data.errors) {
       throw new Error(`API Error: ${JSON.stringify(data.errors)}`);
     }
-    
+
     yield data.data;
-    
+
     cursor = data.meta?.pagination?.cursor;
-    
   } while (cursor);
 }
 
@@ -236,7 +237,7 @@ for await (const page of paginateEndpoint(
 )) {
   console.log(`Processing ${page.length} items...`);
   // Process each page
-  page.forEach(domain => {
+  page.forEach((domain) => {
     console.log(domain.domain, domain.queries);
   });
 }
@@ -265,19 +266,19 @@ These endpoints support pagination:
 
 ```javascript
 // ❌ Using page numbers
-url.searchParams.set('page', '2');  // Not supported
+url.searchParams.set('page', '2'); // Not supported
 
 // ❌ Using offset
-url.searchParams.set('offset', '100');  // Not supported
+url.searchParams.set('offset', '100'); // Not supported
 
 // ❌ Hardcoding cursor values
-cursor: 'page2'  // Must use cursor from API response
+cursor: 'page2'; // Must use cursor from API response
 
 // ❌ Reusing old cursors
-const oldCursor = 'abc123';  // Cursors expire
+const oldCursor = 'abc123'; // Cursors expire
 
 // ✅ Correct - use cursor from response
-cursor: data.meta.pagination.cursor
+cursor: data.meta.pagination.cursor;
 ```
 
 ## Cursor Behavior
@@ -304,33 +305,36 @@ Be mindful of rate limits when paginating:
 async function fetchAllPagesWithRateLimit(url, apiKey, delayMs = 100) {
   let allData = [];
   let cursor = null;
-  
+
   do {
     const requestUrl = new URL(url);
     if (cursor) {
       requestUrl.searchParams.set('cursor', cursor);
     }
-    
+
     const response = await fetch(requestUrl, {
-      headers: { 'X-API-Key': apiKey }
+      headers: { 'X-API-Key': apiKey },
     });
-    
+
     const data = await response.json();
-    
+
     if (data.errors) {
       throw new Error(`API Error: ${JSON.stringify(data.errors)}`);
     }
-    
+
     allData = allData.concat(data.data);
     cursor = data.meta?.pagination?.cursor;
-    
+
     // Delay between requests
     if (cursor) {
-      await new Promise(resolve => setTimeout(resolve, delayMs));
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
     }
-    
   } while (cursor);
-  
+
   return allData;
 }
 ```
+
+## Reference
+
+- [NextDNS API - Pagination](https://nextdns.github.io/api/#pagination)

@@ -1,13 +1,20 @@
 ---
-title: "Time Series Data"
+title: 'Time Series Data'
 impact: HIGH
-impactDescription: "Retrieve time series data for charts and visualizations"
+impactDescription: 'Retrieve time series data for charts and visualizations'
 type: capability
-tags: "time series, charts, interval, alignment, timezone, tumbling windows"
+tags:
+  - time series
+  - charts
+  - interval
+  - alignment
+  - timezone
+  - tumbling windows
 ---
+
 # Time Series Data
 
-**Impact: HIGH** - Get time series data for creating charts and trend analysis
+Get time series data for creating charts and trend analysis
 
 ## Time Series Endpoints
 
@@ -78,13 +85,13 @@ Control the size of each time window:
 
 ```javascript
 // By seconds
-interval: 3600    // 1 hour
-interval: 86400   // 1 day
+interval: 3600; // 1 hour
+interval: 86400; // 1 day
 
 // By duration string
-interval: '1h'    // 1 hour
-interval: '1d'    // 1 day
-interval: '1w'    // 1 week
+interval: '1h'; // 1 hour
+interval: '1d'; // 1 day
+interval: '1w'; // 1 week
 ```
 
 If not specified, API chooses appropriate interval based on date range.
@@ -92,36 +99,38 @@ If not specified, API chooses appropriate interval based on date range.
 ### alignment
 
 Values: `start` | `end` | `clock`
+
 Default: `end`
 
 Control how windows are aligned:
 
 ```javascript
 // Align to end of period (default)
-alignment: 'end'
+alignment: 'end';
 
 // Align to start of period
-alignment: 'start'
+alignment: 'start';
 
 // Align to clock (useful with timezone)
-alignment: 'clock'
+alignment: 'clock';
 ```
 
 ### timezone
 
 Type: TimeZone (IANA timezone name)
+
 Default: `GMT`
 
 Use with `alignment=clock` to align windows to local time:
 
 ```javascript
 // Align to midnight in Paris
-timezone: 'Europe/Paris'
-alignment: 'clock'
+timezone: 'Europe/Paris';
+alignment: 'clock';
 
 // Align to midnight in New York
-timezone: 'America/New_York'
-alignment: 'clock'
+timezone: 'America/New_York';
+alignment: 'clock';
 
 // Get timezone in JavaScript
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -131,50 +140,49 @@ const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 ### partials
 
 Values: `none` | `start` | `end` | `all`
+
 Default: `none`
 
 Include partial windows at start/end:
 
 ```javascript
 // No partial windows (default)
-partials: 'none'
+partials: 'none';
 
 // Include partial window at start
-partials: 'start'
+partials: 'start';
 
 // Include partial window at end
-partials: 'end'
+partials: 'end';
 
 // Include both
-partials: 'all'
+partials: 'all';
 ```
 
 ## Complete Example
 
 ```javascript
 async function getTimeSeries(profileId, endpoint, options = {}) {
-  const url = new URL(
-    `https://api.nextdns.io/profiles/${profileId}/analytics/${endpoint};series`
-  );
-  
+  const url = new URL(`https://api.nextdns.io/profiles/${profileId}/analytics/${endpoint};series`);
+
   // Date range
   url.searchParams.set('from', options.from || '-7d');
   url.searchParams.set('to', options.to || 'now');
-  
+
   // Time series parameters
   if (options.interval) url.searchParams.set('interval', options.interval);
   if (options.alignment) url.searchParams.set('alignment', options.alignment);
   if (options.timezone) url.searchParams.set('timezone', options.timezone);
   if (options.partials) url.searchParams.set('partials', options.partials);
-  
+
   // Other parameters
   if (options.limit) url.searchParams.set('limit', options.limit.toString());
   if (options.device) url.searchParams.set('device', options.device);
-  
+
   const response = await fetch(url, {
-    headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY }
+    headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY },
   });
-  
+
   return response.json();
 }
 
@@ -183,13 +191,13 @@ const data = await getTimeSeries('abc123', 'status', {
   from: '-7d',
   interval: '1d',
   alignment: 'clock',
-  timezone: 'Europe/Paris'
+  timezone: 'Europe/Paris',
 });
 
 // Usage: Last 24 hours, 1 hour intervals
 const hourly = await getTimeSeries('abc123', 'protocols', {
   from: '-24h',
-  interval: '1h'
+  interval: '1h',
 });
 ```
 
@@ -200,19 +208,19 @@ async function createChart(profileId) {
   const data = await getTimeSeries('abc123', 'status', {
     from: '-7d',
     interval: '1d',
-    limit: 10
+    limit: 10,
   });
-  
+
   const times = data.meta.series.times;
-  const datasets = data.data.map(item => ({
+  const datasets = data.data.map((item) => ({
     label: item.status,
-    data: item.queries
+    data: item.queries,
   }));
-  
+
   // Use with Chart.js, Recharts, etc.
   return {
-    labels: times.map(t => new Date(t).toLocaleDateString()),
-    datasets
+    labels: times.map((t) => new Date(t).toLocaleDateString()),
+    datasets,
   };
 }
 ```
@@ -240,15 +248,15 @@ async function createChart(profileId) {
 
 ```javascript
 // Common timezones
-'America/New_York'
-'America/Los_Angeles'
-'Europe/London'
-'Europe/Paris'
-'Asia/Tokyo'
-'Asia/Shanghai'
-'Australia/Sydney'
-'UTC'
-'GMT'
+'America/New_York';
+'America/Los_Angeles';
+'Europe/London';
+'Europe/Paris';
+'Asia/Tokyo';
+'Asia/Shanghai';
+'Australia/Sydney';
+'UTC';
+'GMT';
 
 // Get user's timezone in browser
 const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -258,23 +266,23 @@ const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 ```javascript
 // ❌ Forgetting ;series suffix
-'/profiles/abc123/analytics/status?interval=1d'
+'/profiles/abc123/analytics/status?interval=1d';
 
 // ✅ Correct
-'/profiles/abc123/analytics/status;series?interval=1d'
+'/profiles/abc123/analytics/status;series?interval=1d';
 
 // ❌ Invalid timezone format
-timezone: 'PST'  // Use IANA names
+timezone: 'PST'; // Use IANA names
 
 // ✅ Correct
-timezone: 'America/Los_Angeles'
+timezone: 'America/Los_Angeles';
 
 // ❌ Invalid interval
-interval: '1 day'  // No spaces
+interval: '1 day'; // No spaces
 
 // ✅ Correct
-interval: '1d'
-interval: 86400
+interval: '1d';
+interval: 86400;
 ```
 
 ## Best Practices
@@ -289,4 +297,3 @@ interval: 86400
 ## Reference
 
 - [NextDNS API - Time Series](https://nextdns.github.io/api/#time-series)
-- [IANA Time Zone Database](https://www.iana.org/time-zones)

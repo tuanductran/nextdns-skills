@@ -1,15 +1,28 @@
 ---
-title: "macOS Installation"
+title: 'macOS Installation'
 impact: HIGH
-impactDescription: "Proper installation and configuration of NextDNS CLI on macOS systems ensures optimal DNS protection and performance. Without following these guidelines, users may encounter installation failures, configuration issues, or suboptimal setup for their specific use case."
+impactDescription:
+  'Proper installation and configuration of NextDNS CLI on macOS systems ensures optimal DNS
+  protection and performance. Without following these guidelines, users may encounter installation
+  failures, configuration issues, or suboptimal setup for their specific use case.'
 type: capability
-tags: "macOS, Homebrew, App Store, installer, Mac, installation, setup"
+tags:
+  - macOS
+  - Homebrew
+  - App Store
+  - installer
+  - Mac
+  - installation
+  - setup
 ---
+
 # macOS Installation
 
-**Impact: HIGH** - Essential setup methods and configuration options for macOS systems
+Essential setup methods and configuration options for macOS systems
 
-This rule provides comprehensive guidance for installing and configuring NextDNS CLI on macOS, covering the universal installer, Homebrew installation, Mac App Store alternative, and platform-specific configuration options.
+This rule provides comprehensive guidance for installing and configuring NextDNS CLI on macOS,
+covering the universal installer, Homebrew installation, Mac App Store alternative, and
+platform-specific configuration options.
 
 ## Primary Installation
 
@@ -27,7 +40,8 @@ This command will:
 4. Configure the system DNS settings automatically
 5. Install and activate the NextDNS daemon
 
-Follow the on-screen instructions to complete the installation. The installer will handle all necessary permissions and system configurations.
+Follow the on-screen instructions to complete the installation. The installer will handle all
+necessary permissions and system configurations.
 
 ## Upgrade Path
 
@@ -37,7 +51,8 @@ To upgrade NextDNS CLI to the latest version, simply re-run the installer comman
 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ```
 
-The installer will detect the existing installation and automatically upgrade to the new version if available. No additional steps are required for upgrades.
+The installer will detect the existing installation and automatically upgrade to the new version if
+available. No additional steps are required for upgrades.
 
 ## Manual Installation (Homebrew)
 
@@ -79,7 +94,8 @@ Replace `<id>` with your NextDNS configuration ID. This command will:
 
 ## Official App Alternative
 
-NextDNS is also available as a native Mac application through the Mac App Store. This provides a user-friendly GUI alternative to the CLI:
+NextDNS is also available as a native Mac application through the Mac App Store. This provides a
+user-friendly GUI alternative to the CLI:
 
 1. Download NextDNS from the Mac App Store
 2. Launch the application
@@ -87,17 +103,20 @@ NextDNS is also available as a native Mac application through the Mac App Store.
 4. Navigate to the "Custom config" section
 5. Enter your NextDNS configuration ID
 
-The Mac App Store version provides the same functionality as the CLI but with a graphical interface for easier management. It's ideal for users who prefer not to use the command line.
+The Mac App Store version provides the same functionality as the CLI but with a graphical interface
+for easier management. It's ideal for users who prefer not to use the command line.
 
 ## Troubleshooting
 
-If you encounter issues during installation or configuration, you can enable debug mode for detailed logging:
+If you encounter issues during installation or configuration, you can enable debug mode for detailed
+logging:
 
 ```bash
 DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ```
 
-This will provide verbose output to help diagnose installation problems. Common issues and their solutions:
+This will provide verbose output to help diagnose installation problems. Common issues and their
+solutions:
 
 - **Permission denied**: Ensure you're running commands with `sudo` when required
 - **Port conflicts**: Check if other DNS services are running on port 53
@@ -120,7 +139,4 @@ If issues persist after troubleshooting, contact the NextDNS support team:
 
 ## Reference
 
-- [NextDNS CLI GitHub](https://github.com/nextdns/nextdns)
-- [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)
-- [NextDNS Documentation](https://help.nextdns.io)
-- [Mac App Store - NextDNS](https://apps.apple.com/app/nextdns/id1464122853)
+- [NextDNS CLI - macOS](https://github.com/nextdns/nextdns/wiki/macOS)

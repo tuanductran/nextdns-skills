@@ -2,23 +2,19 @@
   "name": "nextdns-skills",
   "version": "1.0.0",
   "description": "Comprehensive AI agent skills for NextDNS management, covering API integration, CLI operations, and Web UI configuration best practices.",
-  "author": "Tuan Duc Tran <tuanductran.dev@gmail.com>",
-  "license": "MIT",
-  "homepage": "https://github.com/tuanductran/nextdns-skills#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tuanductran/nextdns-skills.git"
   },
+  "homepage": "https://github.com/tuanductran/nextdns-skills#readme",
   "bugs": {
     "url": "https://github.com/tuanductran/nextdns-skills/issues"
   },
+  "author": "Tuan Duc Tran <tuanductran.dev@gmail.com>",
+  "license": "MIT",
   "packageManager": "pnpm@10.28.2",
   "engines": {
     "node": ">=20.0.0"
-  },
-  "scripts": {
-    "lint": "markdownlint --ignore-path=.gitignore . && case-police 'skills/**/*.md'",
-    "lint:fix": "markdownlint --ignore-path=.gitignore . --fix && case-police 'skills/**/*.md' --fix"
   },
   "keywords": [
     "nextdns",
@@ -41,8 +37,27 @@
     "agent-skills",
     "ai-agent"
   ],
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "pnpm run format:check && pnpm run \"/^lint:(md|case|rules|syntax)$/\"",
+    "lint:all": "pnpm run lint && pnpm run lint:links",
+    "lint:case": "case-police 'skills/**/*.md'",
+    "lint:case:fix": "case-police 'skills/**/*.md' --fix",
+    "lint:fix": "pnpm run format && pnpm run \"/^lint:(md|case|rules):fix$/\" && pnpm run lint:rules && pnpm run lint:syntax",
+    "lint:links": "find . -name \"*.md\" -not -path \"*/node_modules/*\" | xargs markdown-link-check -c config.json",
+    "lint:md": "markdownlint --ignore-path=.gitignore .",
+    "lint:md:fix": "markdownlint --ignore-path=.gitignore . --fix",
+    "lint:rules": "python3 scripts/validate_rules.py",
+    "lint:syntax": "eslint \"**/*.md\""
+  },
   "devDependencies": {
+    "@eslint/markdown": "^7.5.1",
     "case-police": "^2.1.1",
-    "markdownlint-cli": "^0.47.0"
+    "eslint": "^9.39.2",
+    "markdown-link-check": "^3.14.2",
+    "markdownlint-cli": "^0.47.0",
+    "prettier": "^3.8.1",
+    "prettier-plugin-pkg": "^0.21.2"
   }
 }

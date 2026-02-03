@@ -1,13 +1,18 @@
 ---
-title: "Logs Download"
+title: 'Logs Download'
 impact: MEDIUM
-impactDescription: "Download logs as a file"
+impactDescription: 'Download logs as a file'
 type: efficiency
-tags: "download logs, export logs, redirect, file download"
+tags:
+  - download logs
+  - export logs
+  - redirect
+  - file download
 ---
+
 # Logs Download
 
-**Impact: MEDIUM** - Download DNS logs as a file
+Download DNS logs as a file
 
 ## Endpoint
 
@@ -24,10 +29,9 @@ By default, this endpoint redirects to the public URL of the log file:
 window.location.href = 'https://api.nextdns.io/profiles/abc123/logs/download';
 
 // Fetch - follows redirect
-const response = await fetch(
-  'https://api.nextdns.io/profiles/abc123/logs/download',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
-);
+const response = await fetch('https://api.nextdns.io/profiles/abc123/logs/download', {
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+});
 
 // Response is the file content
 const blob = await response.blob();
@@ -43,10 +47,9 @@ a.click();
 Use `redirect=0` to get the URL as JSON instead of redirecting:
 
 ```javascript
-const response = await fetch(
-  'https://api.nextdns.io/profiles/abc123/logs/download?redirect=0',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
-);
+const response = await fetch('https://api.nextdns.io/profiles/abc123/logs/download?redirect=0', {
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+});
 
 const result = await response.json();
 // { "data": { "url": "https://..." } }
@@ -157,11 +160,7 @@ async function downloadLogs(profileId, apiKey, outputPath) {
 }
 
 // Usage
-await downloadLogs(
-  'abc123',
-  process.env.NEXTDNS_API_KEY,
-  './nextdns-logs.csv'
-);
+await downloadLogs('abc123', process.env.NEXTDNS_API_KEY, './nextdns-logs.csv');
 ```
 
 ## File Format
@@ -192,7 +191,7 @@ url.searchParams.set('from', '-7d');
 url.searchParams.set('redirect', '0');
 
 const response = await fetch(url, {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' }
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -211,7 +210,7 @@ const response = await fetch(url, {
 ```javascript
 async function downloadFilteredLogs(profileId, apiKey, filters = {}) {
   const url = new URL(`https://api.nextdns.io/profiles/${profileId}/logs/download`);
-  
+
   // Add filters
   if (filters.from) url.searchParams.set('from', filters.from);
   if (filters.to) url.searchParams.set('to', filters.to);
@@ -219,27 +218,27 @@ async function downloadFilteredLogs(profileId, apiKey, filters = {}) {
   if (filters.status) url.searchParams.set('status', filters.status);
   if (filters.search) url.searchParams.set('search', filters.search);
   if (filters.raw !== undefined) url.searchParams.set('raw', filters.raw ? '1' : '0');
-  
+
   // Get URL without redirect
   url.searchParams.set('redirect', '0');
-  
+
   const response = await fetch(url, {
-    headers: { 'X-API-Key': apiKey }
+    headers: { 'X-API-Key': apiKey },
   });
-  
+
   const result = await response.json();
-  
+
   if (result.errors) {
     throw new Error('Failed to generate log file');
   }
-  
+
   return result.data.url;
 }
 
 // Usage: Download blocked logs from last 7 days
 const downloadUrl = await downloadFilteredLogs('abc123', process.env.NEXTDNS_API_KEY, {
   status: 'blocked',
-  from: '-7d'
+  from: '-7d',
 });
 
 window.location.href = downloadUrl;
@@ -249,17 +248,21 @@ window.location.href = downloadUrl;
 
 ```javascript
 // ❌ Not handling redirect parameter
-const response = await fetch(url).then(r => r.json());
+const response = await fetch(url).then((r) => r.json());
 // This will fail because default is redirect, not JSON
 
 // ❌ Not checking for errors
-const { data } = await fetch(url + '?redirect=0').then(r => r.json());
-window.location.href = data.url;  // Might not exist if there are errors
+const { data } = await fetch(url + '?redirect=0').then((r) => r.json());
+window.location.href = data.url; // Might not exist if there are errors
 
 // ✅ Correct
-const response = await fetch(url + '?redirect=0', { headers }).then(r => r.json());
+const response = await fetch(url + '?redirect=0', { headers }).then((r) => r.json());
 if (response.errors) {
   throw new Error('Failed to generate log file');
 }
 window.location.href = response.data.url;
 ```
+
+## Reference
+
+- [NextDNS API - Logs Download](https://nextdns.github.io/api/#download)

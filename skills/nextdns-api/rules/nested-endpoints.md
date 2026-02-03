@@ -1,13 +1,20 @@
 ---
-title: "Nested Endpoints"
+title: 'Nested Endpoints'
 impact: HIGH
-impactDescription: "Work with nested objects and arrays in profile configuration"
+impactDescription: 'Work with nested objects and arrays in profile configuration'
 type: capability
-tags: "nested objects, child endpoints, PATCH, DELETE, PUT, POST"
+tags:
+  - nested objects
+  - child endpoints
+  - PATCH
+  - DELETE
+  - PUT
+  - POST
 ---
+
 # Nested Endpoints
 
-**Impact: HIGH** - Understand how to work with nested profile configuration
+Understand how to work with nested profile configuration
 
 ## Nested Structure
 
@@ -55,22 +62,21 @@ Nested objects support `GET` and `PATCH`:
 
 ```javascript
 // GET nested object
-const security = await fetch(
-  'https://api.nextdns.io/profiles/abc123/security',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
-).then(r => r.json());
+const security = await fetch('https://api.nextdns.io/profiles/abc123/security', {
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+}).then((r) => r.json());
 
 // PATCH nested object
 await fetch('https://api.nextdns.io/profiles/abc123/security', {
   method: 'PATCH',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
   body: JSON.stringify({
     cryptojacking: true,
-    typosquatting: true
-  })
+    typosquatting: true,
+  }),
 });
 ```
 
@@ -80,19 +86,18 @@ Nested arrays support `GET`, `POST`, and `PUT`:
 
 ```javascript
 // GET array
-const blocklists = await fetch(
-  'https://api.nextdns.io/profiles/abc123/privacy/blocklists',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
-).then(r => r.json());
+const blocklists = await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists', {
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+}).then((r) => r.json());
 
 // POST to add item
 await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists', {
   method: 'POST',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ id: 'stevenblack' })
+  body: JSON.stringify({ id: 'stevenblack' }),
 });
 
 // PUT to replace entire array
@@ -100,12 +105,9 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists', {
   method: 'PUT',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  body: JSON.stringify([
-    { id: 'nextdns-recommended' },
-    { id: 'oisd' }
-  ])
+  body: JSON.stringify([{ id: 'nextdns-recommended' }, { id: 'oisd' }]),
 });
 ```
 
@@ -119,15 +121,15 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/badsite.com', {
   method: 'PATCH',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ active: false })
+  body: JSON.stringify({ active: false }),
 });
 
 // DELETE array item (remove)
 await fetch('https://api.nextdns.io/profiles/abc123/denylist/badsite.com', {
   method: 'DELETE',
-  headers: { 'X-API-Key': 'YOUR_API_KEY' }
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -165,13 +167,13 @@ await fetch('https://api.nextdns.io/profiles/abc123/security', {
   method: 'PATCH',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
   body: JSON.stringify({
     cryptojacking: true,
     dnsRebinding: true,
-    typosquatting: true
-  })
+    typosquatting: true,
+  }),
 });
 ```
 
@@ -183,15 +185,15 @@ await fetch('https://api.nextdns.io/profiles/abc123/security/tlds', {
   method: 'POST',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ id: 'xyz' })
+  body: JSON.stringify({ id: 'xyz' }),
 });
 
 // Remove TLD
 await fetch('https://api.nextdns.io/profiles/abc123/security/tlds/xyz', {
   method: 'DELETE',
-  headers: { 'X-API-Key': 'YOUR_API_KEY' }
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 
 // Replace all TLDs
@@ -199,13 +201,9 @@ await fetch('https://api.nextdns.io/profiles/abc123/security/tlds', {
   method: 'PUT',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  body: JSON.stringify([
-    { id: 'ru' },
-    { id: 'cn' },
-    { id: 'tk' }
-  ])
+  body: JSON.stringify([{ id: 'ru' }, { id: 'cn' }, { id: 'tk' }]),
 });
 ```
 
@@ -217,13 +215,13 @@ await fetch('https://api.nextdns.io/profiles/abc123/settings/performance', {
   method: 'PATCH',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
   body: JSON.stringify({
     ecs: true,
     cacheBoost: true,
-    cnameFlattening: true
-  })
+    cnameFlattening: true,
+  }),
 });
 ```
 
@@ -235,9 +233,9 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services', {
   method: 'POST',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ id: 'tiktok', active: true })
+  body: JSON.stringify({ id: 'tiktok', active: true }),
 });
 
 // Toggle service
@@ -245,57 +243,57 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tik
   method: 'PATCH',
   headers: {
     'X-API-Key': 'YOUR_API_KEY',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
-  body: JSON.stringify({ active: false })
+  body: JSON.stringify({ active: false }),
 });
 
 // Remove service
 await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tiktok', {
   method: 'DELETE',
-  headers: { 'X-API-Key': 'YOUR_API_KEY' }
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 ```
 
 ## Endpoint Patterns
 
 | Endpoint Type | GET | POST | PUT | PATCH | DELETE |
-|---------------|-----|------|-----|-------|--------|
-| Profile | ✅ | ✅ | ❌ | ✅ | ✅ |
-| Nested Object | ✅ | ❌ | ❌ | ✅ | ❌ |
-| Nested Array | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Array Item | ❌ | ❌ | ❌ | ✅ | ✅ |
+| ------------- | --- | ---- | --- | ----- | ------ |
+| Profile       | ✅  | ✅   | ❌  | ✅    | ✅     |
+| Nested Object | ✅  | ❌   | ❌  | ✅    | ❌     |
+| Nested Array  | ✅  | ✅   | ✅  | ❌    | ❌     |
+| Array Item    | ❌  | ❌   | ❌  | ✅    | ✅     |
 
 ## Do NOT Use
 
 ```javascript
 // ❌ Using PUT on object endpoints
 await fetch('https://api.nextdns.io/profiles/abc123/security', {
-  method: 'PUT',  // Not supported, use PATCH
-  body: JSON.stringify({ cryptojacking: true })
+  method: 'PUT', // Not supported, use PATCH
+  body: JSON.stringify({ cryptojacking: true }),
 });
 
 // ❌ Using PATCH on array endpoints
 await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists', {
-  method: 'PATCH',  // Not supported, use POST or PUT
-  body: JSON.stringify({ id: 'oisd' })
+  method: 'PATCH', // Not supported, use POST or PUT
+  body: JSON.stringify({ id: 'oisd' }),
 });
 
 // ❌ Using POST on array items
 await fetch('https://api.nextdns.io/profiles/abc123/denylist/bad.com', {
-  method: 'POST',  // Not supported, use PATCH
-  body: JSON.stringify({ active: false })
+  method: 'POST', // Not supported, use PATCH
+  body: JSON.stringify({ active: false }),
 });
 
 // ❌ Wrong ID format in URL
 await fetch('https://api.nextdns.io/profiles/abc123/denylist/0', {
   // Use domain name, not array index
-  method: 'DELETE'
+  method: 'DELETE',
 });
 
 // ✅ Correct
 await fetch('https://api.nextdns.io/profiles/abc123/denylist/bad.com', {
-  method: 'DELETE'
+  method: 'DELETE',
 });
 ```
 
@@ -311,7 +309,7 @@ class NextDNSProfile {
 
   async get(path = '') {
     const response = await fetch(`${this.baseUrl}${path}`, {
-      headers: { 'X-API-Key': this.apiKey }
+      headers: { 'X-API-Key': this.apiKey },
     });
     return response.json();
   }
@@ -321,9 +319,9 @@ class NextDNSProfile {
       method: 'PATCH',
       headers: {
         'X-API-Key': this.apiKey,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
     return response.json();
   }
@@ -333,9 +331,9 @@ class NextDNSProfile {
       method: 'POST',
       headers: {
         'X-API-Key': this.apiKey,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
     return response.json();
   }
@@ -345,9 +343,9 @@ class NextDNSProfile {
       method: 'PUT',
       headers: {
         'X-API-Key': this.apiKey,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
     return response.json();
   }
@@ -355,7 +353,7 @@ class NextDNSProfile {
   async delete(path) {
     const response = await fetch(`${this.baseUrl}${path}`, {
       method: 'DELETE',
-      headers: { 'X-API-Key': this.apiKey }
+      headers: { 'X-API-Key': this.apiKey },
     });
     return response.json();
   }
@@ -379,4 +377,4 @@ await profile.delete('/denylist/bad.com');
 
 ## Reference
 
-- [NextDNS API - Nested Objects and Arrays](https://nextdns.github.io/api/#nested-objects-and-arrays)
+- [NextDNS API - Nested Objects](https://nextdns.github.io/api/#nested-objects-and-arrays)

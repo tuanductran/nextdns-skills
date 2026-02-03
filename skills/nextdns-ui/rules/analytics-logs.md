@@ -1,13 +1,20 @@
 ---
-title: "Analytics and Logs"
+title: 'Analytics and Logs'
 impact: MEDIUM
-impactDescription: "Monitoring network activity and identifying blocked queries"
+impactDescription: 'Monitoring network activity and identifying blocked queries'
 type: capability
-tags: "monitoring, logs, blocked queries, query count, analytics, traffic analysis"
+tags:
+  - monitoring
+  - logs
+  - blocked queries
+  - query count
+  - analytics
+  - traffic analysis
 ---
+
 # Analytics and Logs
 
-**Impact: MEDIUM** - Visibility and troubleshooting tools
+Visibility and troubleshooting tools
 
 Monitor your network activity and troubleshoot issues through real-time logs and detailed analytics.
 
@@ -17,9 +24,13 @@ Monitor your network activity and troubleshoot issues through real-time logs and
 - **Search and Filter**:
   - **Blocked Queries Only**: Quickly identify what is being blocked.
   - **Raw DNS Logs**: View absolute DNS record details.
-- **Identification**: To find out **why** a domain is blocked, hover over the information icon (**ⓘ**) next to the query. It will tell you the specific blocklist or security feature responsible.
-- **Direct Action**: You can allow or block domains directly from the log entry using the checkmark or cross icons.
-- **Reloading**: Use the reload icon to check for the most recent queries after making configuration changes.
+- **Identification**: To find out **why** a domain is blocked, hover over the information icon
+  (**ⓘ**) next to the query. It will tell you the specific blocklist or security feature
+  responsible.
+- **Direct Action**: You can allow or block domains directly from the log entry using the checkmark
+  or cross icons.
+- **Reloading**: Use the reload icon to check for the most recent queries after making configuration
+  changes.
 
 ## Analytics Tab
 
@@ -32,5 +43,11 @@ Monitor your network activity and troubleshoot issues through real-time logs and
 
 ## Best Practices
 
-- Periodically check the **Blocked Queries Only** filter to ensure no essential services are being blocked.
-- Use the **Analytics** to understand the traffic patterns on your network and identify potential issues (like a device making excessive requests).
+- Periodically check the **Blocked Queries Only** filter to ensure no essential services are being
+  blocked.
+- Use the **Analytics** to understand the traffic patterns on your network and identify potential
+  issues (like a device making excessive requests).
+
+## Reference
+
+- [NextDNS Help Center](https://help.nextdns.io)

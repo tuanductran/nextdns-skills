@@ -1,0 +1,50 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^http://localhost"
+    },
+    {
+      "pattern": "^https://example.com"
+    },
+    {
+      "pattern": "^https://test.nextdns.io"
+    },
+    {
+      "pattern": "YOUR_API_KEY"
+    },
+    {
+      "pattern": "abc123"
+    },
+    {
+      "pattern": "rules/rule-name.md"
+    },
+    {
+      "pattern": "rules/another-rule.md"
+    },
+    {
+      "pattern": "rules/optimization-rule.md"
+    },
+    {
+      "pattern": "rules/best-practice.md"
+    }
+  ],
+  "replacementPatterns": [
+    {
+      "pattern": "^/",
+      "replacement": "{{BASEURL}}/"
+    }
+  ],
+  "httpHeaders": [
+    {
+      "urls": ["https://github.com/", "https://help.nextdns.io/"],
+      "headers": {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
+      }
+    }
+  ],
+  "timeout": "20s",
+  "retryOn429": true,
+  "retryCount": 2,
+  "fallbackToGet": true,
+  "aliveStatusCodes": [200, 206]
+}
