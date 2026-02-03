@@ -69,7 +69,7 @@ const profileData = {
 const response = await fetch('https://api.nextdns.io/profiles', {
   method: 'POST',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify(profileData),
@@ -85,7 +85,7 @@ GET a specific profile:
 
 ```javascript
 const response = await fetch('https://api.nextdns.io/profiles/abc123', {
-  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 
 const profile = await response.json();
@@ -106,7 +106,7 @@ const updates = {
 await fetch('https://api.nextdns.io/profiles/abc123', {
   method: 'PATCH',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify(updates),
@@ -120,7 +120,7 @@ DELETE a profile:
 ```javascript
 await fetch('https://api.nextdns.io/profiles/abc123', {
   method: 'DELETE',
-  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -134,7 +134,7 @@ const profileId = data.id; // "abc123"
 
 // Use in analytics
 const analytics = await fetch(`https://api.nextdns.io/profiles/${profileId}/analytics/status`, {
-  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 ```
 

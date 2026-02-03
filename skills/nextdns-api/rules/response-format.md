@@ -145,7 +145,7 @@ async function makeRequest(url, options = {}) {
   const response = await fetch(url, {
     ...options,
     headers: {
-      'X-Api-Key': process.env.NEXTDNS_API_KEY,
+      'X-API-Key': process.env.NEXTDNS_API_KEY,
       ...options.headers,
     },
   });
@@ -208,7 +208,7 @@ type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
 // Usage
 async function fetchDomains(profileId: string): Promise<Domain[]> {
   const response = await fetch(`https://api.nextdns.io/profiles/${profileId}/analytics/domains`, {
-    headers: { 'X-Api-Key': process.env.NEXTDNS_API_KEY! },
+    headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY! },
   });
 
   const result: ApiResponse<Domain[]> = await response.json();
@@ -272,7 +272,7 @@ class NextDNSResponse {
 
 // Usage
 const response = await fetch('https://api.nextdns.io/profiles/abc123/analytics/domains?from=-7d', {
-  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 }).then((r) => r.json());
 
 const wrapped = new NextDNSResponse(response);

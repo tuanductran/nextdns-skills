@@ -29,7 +29,7 @@ url.searchParams.set('from', '-7d');
 url.searchParams.set('to', 'now');
 
 const response = await fetch(url, {
-  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -94,7 +94,7 @@ async function getAnalytics(profileId, options = {}) {
   if (options.cursor) url.searchParams.set('cursor', options.cursor);
 
   const response = await fetch(url, {
-    headers: { 'X-Api-Key': process.env.NEXTDNS_API_KEY },
+    headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY },
   });
 
   return response.json();

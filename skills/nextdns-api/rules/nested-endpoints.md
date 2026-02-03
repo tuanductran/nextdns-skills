@@ -63,14 +63,14 @@ Nested objects support `GET` and `PATCH`:
 ```javascript
 // GET nested object
 const security = await fetch('https://api.nextdns.io/profiles/abc123/security', {
-  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 }).then((r) => r.json());
 
 // PATCH nested object
 await fetch('https://api.nextdns.io/profiles/abc123/security', {
   method: 'PATCH',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
@@ -87,14 +87,14 @@ Nested arrays support `GET`, `POST`, and `PUT`:
 ```javascript
 // GET array
 const blocklists = await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists', {
-  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 }).then((r) => r.json());
 
 // POST to add item
 await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists', {
   method: 'POST',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ id: 'stevenblack' }),
@@ -104,7 +104,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists', {
 await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists', {
   method: 'PUT',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify([{ id: 'nextdns-recommended' }, { id: 'oisd' }]),
@@ -120,7 +120,7 @@ Individual array items support `PATCH` and `DELETE`:
 await fetch('https://api.nextdns.io/profiles/abc123/denylist/badsite.com', {
   method: 'PATCH',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ active: false }),
@@ -129,7 +129,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/badsite.com', {
 // DELETE array item (remove)
 await fetch('https://api.nextdns.io/profiles/abc123/denylist/badsite.com', {
   method: 'DELETE',
-  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -166,7 +166,7 @@ For array items, use the first key as the ID in the URL:
 await fetch('https://api.nextdns.io/profiles/abc123/security', {
   method: 'PATCH',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
@@ -184,7 +184,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security', {
 await fetch('https://api.nextdns.io/profiles/abc123/security/tlds', {
   method: 'POST',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ id: 'xyz' }),
@@ -193,14 +193,14 @@ await fetch('https://api.nextdns.io/profiles/abc123/security/tlds', {
 // Remove TLD
 await fetch('https://api.nextdns.io/profiles/abc123/security/tlds/xyz', {
   method: 'DELETE',
-  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 
 // Replace all TLDs
 await fetch('https://api.nextdns.io/profiles/abc123/security/tlds', {
   method: 'PUT',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify([{ id: 'ru' }, { id: 'cn' }, { id: 'tk' }]),
@@ -214,7 +214,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security/tlds', {
 await fetch('https://api.nextdns.io/profiles/abc123/settings/performance', {
   method: 'PATCH',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
@@ -232,7 +232,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/settings/performance', {
 await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services', {
   method: 'POST',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ id: 'tiktok', active: true }),
@@ -242,7 +242,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services', {
 await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tiktok', {
   method: 'PATCH',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ active: false }),
@@ -251,7 +251,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tik
 // Remove service
 await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tiktok', {
   method: 'DELETE',
-  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
+  headers: { 'X-API-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -309,7 +309,7 @@ class NextDNSProfile {
 
   async get(path = '') {
     const response = await fetch(`${this.baseUrl}${path}`, {
-      headers: { 'X-Api-Key': this.apiKey },
+      headers: { 'X-API-Key': this.apiKey },
     });
     return response.json();
   }
@@ -318,7 +318,7 @@ class NextDNSProfile {
     const response = await fetch(`${this.baseUrl}${path}`, {
       method: 'PATCH',
       headers: {
-        'X-Api-Key': this.apiKey,
+        'X-API-Key': this.apiKey,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
@@ -330,7 +330,7 @@ class NextDNSProfile {
     const response = await fetch(`${this.baseUrl}${path}`, {
       method: 'POST',
       headers: {
-        'X-Api-Key': this.apiKey,
+        'X-API-Key': this.apiKey,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
@@ -342,7 +342,7 @@ class NextDNSProfile {
     const response = await fetch(`${this.baseUrl}${path}`, {
       method: 'PUT',
       headers: {
-        'X-Api-Key': this.apiKey,
+        'X-API-Key': this.apiKey,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
@@ -353,7 +353,7 @@ class NextDNSProfile {
   async delete(path) {
     const response = await fetch(`${this.baseUrl}${path}`, {
       method: 'DELETE',
-      headers: { 'X-Api-Key': this.apiKey },
+      headers: { 'X-API-Key': this.apiKey },
     });
     return response.json();
   }

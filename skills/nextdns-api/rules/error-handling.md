@@ -89,7 +89,7 @@ async function makeApiRequest(url, options = {}) {
     const response = await fetch(url, {
       ...options,
       headers: {
-        'X-Api-Key': process.env.NEXTDNS_API_KEY,
+        'X-API-Key': process.env.NEXTDNS_API_KEY,
         'Content-Type': 'application/json',
         ...options.headers,
       },
@@ -156,7 +156,7 @@ class HttpError extends Error {
 // Request
 const response = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/status?limit=invalid',
-  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
 );
 
 // Response: 400 Bad Request
@@ -180,7 +180,7 @@ const response = await fetch(
 await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
   method: 'POST',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({ id: 'invalid domain!', active: true })
@@ -207,7 +207,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
 await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
   method: 'POST',
   headers: {
-    'X-Api-Key': 'YOUR_API_KEY',
+    'X-API-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({ id: 'existing.com', active: true })
@@ -236,7 +236,7 @@ async function nextdnsApi(endpoint, options = {}) {
   const response = await fetch(url, {
     ...options,
     headers: {
-      'X-Api-Key': process.env.NEXTDNS_API_KEY,
+      'X-API-Key': process.env.NEXTDNS_API_KEY,
       'Content-Type': 'application/json',
       ...options.headers,
     },
