@@ -107,7 +107,7 @@ All contributions MUST strictly follow these protocols to maintain repository in
 
 ### 3. Automated Quality Assurance
 
-- **Full Suite**: `pnpm lint` runs Prettier, markdownlint, ESLint (syntax), case-police, and
+- **Full Suite**: `pnpm lint` runs Prettier, markdownlint, ESLint (with syntax and case-police), and
   `validate_rules.py`.
 - **Pre-check**: Always run `pnpm lint:fix` before pushing.
 - **CI Enforcement**: GitHub Actions blocks PRs that fail any validation step.
