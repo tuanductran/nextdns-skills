@@ -1,8 +1,8 @@
 ---
 title: "Linked IP and DDNS"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Configuring NextDNS for networks and devices that do not support modern DNS protocols"
-type: "capability"
+type: capability
 tags: "linked ip, ddns, noip, dynamic dns, router setup, legacy dns"
 ---
 # Linked IP and DDNS

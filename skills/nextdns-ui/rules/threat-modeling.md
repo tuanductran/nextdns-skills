@@ -1,8 +1,8 @@
 ---
 title: "Threat Modeling & Strategy"
-impact: "LOW"
+impact: LOW
 impactDescription: "Strategic approach to DNS configuration based on balancing security and usability"
-type: "efficiency"
+type: efficiency
 tags: "threat model, grandma test, diminishing returns, strategy, optimization"
 ---
 # Threat Modeling & Strategy

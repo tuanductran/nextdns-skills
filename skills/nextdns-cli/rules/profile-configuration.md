@@ -1,8 +1,8 @@
 ---
 title: "Profile Configuration"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Managing NextDNS profile IDs and general configuration settings"
-type: "capability"
+type: capability
 tags: "config, profile ID, configuration set, edit config"
 ---
 # Profile Configuration

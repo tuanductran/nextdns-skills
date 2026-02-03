@@ -1,8 +1,8 @@
 ---
 title: "OpenWrt Integration"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Proper installation and configuration of NextDNS on OpenWrt routers ensures network-wide DNS protection. Without this guidance, users may struggle with installation methods, upgrades, or troubleshooting issues specific to OpenWrt environments."
-type: "capability"
+type: capability
 tags: "openwrt, router, installation, upgrade, troubleshooting, ssh, luci"
 ---
 # OpenWrt Integration

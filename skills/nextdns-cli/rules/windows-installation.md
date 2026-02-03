@@ -1,8 +1,8 @@
 ---
 title: "Windows Installation"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Proper Windows-specific installation procedures ensure NextDNS CLI is correctly deployed with appropriate privileges and system integration"
-type: "capability"
+type: capability
 tags: "Windows, GUI, CLI, installation, setup, EXE, Systray"
 ---
 # Windows Installation

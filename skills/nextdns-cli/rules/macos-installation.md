@@ -1,8 +1,8 @@
 ---
 title: "macOS Installation"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Proper installation and configuration of NextDNS CLI on macOS systems ensures optimal DNS protection and performance. Without following these guidelines, users may encounter installation failures, configuration issues, or suboptimal setup for their specific use case."
-type: "capability"
+type: capability
 tags: "macOS, Homebrew, App Store, installer, Mac, installation, setup"
 ---
 # macOS Installation

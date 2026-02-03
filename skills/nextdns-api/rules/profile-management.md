@@ -1,8 +1,8 @@
 ---
 title: "Profile Management"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Create, read, update, and delete NextDNS profiles"
-type: "capability"
+type: capability
 tags: "profiles, CRUD, create profile, update profile, delete profile, settings"
 ---
 # Profile Management

@@ -1,8 +1,8 @@
 ---
 title: "Privacy Settings"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Configure privacy blocklists and native tracking protection"
-type: "capability"
+type: capability
 tags: "privacy, blocklists, native tracking, disguised trackers, affiliate links"
 ---
 # Privacy Settings

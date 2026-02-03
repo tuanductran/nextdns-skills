@@ -1,8 +1,8 @@
 ---
 title: "Troubleshooting via Web UI"
-impact: "MEDIUM"
+impact: MEDIUM
 impactDescription: "Debugging false positives and connectivity issues using dashboard tools"
-type: "efficiency"
+type: efficiency
 tags: "debugging, logs, identification, false positives, troubleshooting"
 ---
 # Troubleshooting via Web UI

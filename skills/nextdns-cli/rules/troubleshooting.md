@@ -1,8 +1,8 @@
 ---
 title: "Troubleshooting"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Diagnosing and fixing DNS resolution and connectivity issues"
-type: "capability"
+type: capability
 tags: "diagnostic, connection test, DNS leak, debug"
 ---
 # Troubleshooting

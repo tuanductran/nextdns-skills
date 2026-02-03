@@ -1,8 +1,8 @@
 ---
 title: "Nested Endpoints"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Work with nested objects and arrays in profile configuration"
-type: "capability"
+type: capability
 tags: "nested objects, child endpoints, PATCH, DELETE, PUT, POST"
 ---
 # Nested Endpoints

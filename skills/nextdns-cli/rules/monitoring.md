@@ -1,8 +1,8 @@
 ---
 title: "Monitoring"
-impact: "MEDIUM"
+impact: MEDIUM
 impactDescription: "Monitoring DNS queries, logs, and client activity"
-type: "capability"
+type: capability
 tags: "log, cache-stats, discovered clients, monitoring, debug"
 ---
 # Monitoring

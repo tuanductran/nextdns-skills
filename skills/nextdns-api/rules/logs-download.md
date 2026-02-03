@@ -1,8 +1,8 @@
 ---
 title: "Logs Download"
-impact: "MEDIUM"
+impact: MEDIUM
 impactDescription: "Download logs as a file"
-type: "efficiency"
+type: efficiency
 tags: "download logs, export logs, redirect, file download"
 ---
 # Logs Download

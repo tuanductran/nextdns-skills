@@ -1,8 +1,8 @@
 ---
 title: "System Configuration"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Configuring local system DNS settings to use NextDNS"
-type: "capability"
+type: capability
 tags: "activate, deactivate, DNS resolver, system dns"
 ---
 # System Configuration

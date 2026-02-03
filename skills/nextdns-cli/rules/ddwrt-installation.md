@@ -1,8 +1,8 @@
 ---
 title: "DD-WRT Installation"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Without proper JFFS setup and installation procedures, NextDNS CLI will fail to persist on DD-WRT routers, causing DNS configuration loss after reboots and potential certificate errors due to time sync issues."
-type: "capability"
+type: capability
 tags: "DD-WRT, JFFS, router, NTP, time sync, dnsmasq, SSH, router installation"
 ---
 # DD-WRT Installation
