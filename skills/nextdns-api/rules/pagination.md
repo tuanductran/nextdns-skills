@@ -11,6 +11,8 @@ tags:
   - page size
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Pagination
 
 Properly paginate through large result sets
@@ -35,7 +37,7 @@ Most endpoints that return arrays use cursor-based pagination:
 ```javascript
 // First page
 const response = await fetch('https://api.nextdns.io/profiles/abc123/analytics/domains?limit=50', {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 
 const data = await response.json();
@@ -44,7 +46,7 @@ const data = await response.json();
 if (data.meta.pagination.cursor) {
   const nextPage = await fetch(
     `https://api.nextdns.io/profiles/abc123/analytics/domains?limit=50&cursor=${data.meta.pagination.cursor}`,
-    { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+    { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
   );
 }
 ```
@@ -81,7 +83,7 @@ async function fetchAllPages(url, apiKey) {
     }
 
     const response = await fetch(requestUrl, {
-      headers: { 'X-API-Key': apiKey },
+      headers: { 'X-Api-Key': apiKey },
     });
 
     const data = await response.json();
@@ -120,7 +122,7 @@ async function fetchAllPagesWithProgress(url, apiKey, onProgress) {
     }
 
     const response = await fetch(requestUrl, {
-      headers: { 'X-API-Key': apiKey },
+      headers: { 'X-Api-Key': apiKey },
     });
 
     const data = await response.json();
@@ -172,7 +174,7 @@ async function fetchUpToLimit(url, apiKey, maxItems) {
     }
 
     const response = await fetch(requestUrl, {
-      headers: { 'X-API-Key': apiKey },
+      headers: { 'X-Api-Key': apiKey },
     });
 
     const data = await response.json();
@@ -215,7 +217,7 @@ async function* paginateEndpoint(url, apiKey) {
     }
 
     const response = await fetch(requestUrl, {
-      headers: { 'X-API-Key': apiKey },
+      headers: { 'X-Api-Key': apiKey },
     });
 
     const data = await response.json();
@@ -313,7 +315,7 @@ async function fetchAllPagesWithRateLimit(url, apiKey, delayMs = 100) {
     }
 
     const response = await fetch(requestUrl, {
-      headers: { 'X-API-Key': apiKey },
+      headers: { 'X-Api-Key': apiKey },
     });
 
     const data = await response.json();

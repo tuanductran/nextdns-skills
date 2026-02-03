@@ -11,6 +11,8 @@ tags:
   - services blocking
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Parental Control
 
 Configure parental controls and content filtering
@@ -59,7 +61,7 @@ const parentalControlSettings = {
 await fetch('https://api.nextdns.io/profiles/abc123/parentalControl', {
   method: 'PATCH',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
@@ -77,7 +79,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl', {
 await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services', {
   method: 'POST',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ id: 'tiktok', active: true }),
@@ -87,7 +89,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services', {
 await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tiktok', {
   method: 'PATCH',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ active: false }),
@@ -96,7 +98,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tik
 // Remove service from list
 await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tiktok', {
   method: 'DELETE',
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -107,7 +109,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tik
 await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/categories', {
   method: 'POST',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ id: 'gambling', active: true }),
@@ -117,7 +119,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/categories',
 await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/categories/gambling', {
   method: 'PATCH',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ active: false }),

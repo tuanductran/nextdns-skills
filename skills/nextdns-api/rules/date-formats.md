@@ -11,6 +11,8 @@ tags:
   - date parsing
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Date Formats
 
 Use correct date formats for time-based queries
@@ -84,7 +86,7 @@ from: '2024-01-15 16:34:05';
 ```javascript
 const response = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/status?from=-7d&to=now',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 );
 ```
 
@@ -93,7 +95,7 @@ const response = await fetch(
 ```javascript
 const response = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/domains?from=2024-01-01&to=2024-01-31',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 );
 ```
 
@@ -101,7 +103,7 @@ const response = await fetch(
 
 ```javascript
 const response = await fetch('https://api.nextdns.io/profiles/abc123/logs?from=-24h', {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -110,7 +112,7 @@ const response = await fetch('https://api.nextdns.io/profiles/abc123/logs?from=-
 ```javascript
 const response = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/devices?from=2024-01-15T00:00:00Z&to=2024-01-15T23:59:59Z',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 );
 ```
 

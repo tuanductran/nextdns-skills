@@ -11,13 +11,15 @@ metadata:
   version: '1.0.0'
 ---
 
+<!-- @case-police-ignore Api -->
+
 # NextDNS API Skills
 
 ## Capability Rules
 
 | Rule                                                | Keywords                                                         | Description                   |
 | --------------------------------------------------- | ---------------------------------------------------------------- | ----------------------------- |
-| [authentication](rules/authentication.md)           | API key, X-API-Key, authorization, authentication                | Authenticate with NextDNS API |
+| [authentication](rules/authentication.md)           | API key, X-Api-Key, authorization, authentication                | Authenticate with NextDNS API |
 | [profile-management](rules/profile-management.md)   | create profile, update profile, delete profile, profile settings | Manage NextDNS profiles       |
 | [security-settings](rules/security-settings.md)     | threat intelligence, cryptojacking, DNS rebinding, typosquatting | Configure security features   |
 | [privacy-settings](rules/privacy-settings.md)       | blocklists, native tracking, disguised trackers, affiliate       | Configure privacy features    |

@@ -14,6 +14,8 @@ tags:
   - CSAM
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Security Settings
 
 Configure comprehensive security features for DNS filtering
@@ -58,7 +60,7 @@ PATCH to update security settings:
 await fetch('https://api.nextdns.io/profiles/abc123/security', {
   method: 'PATCH',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
@@ -78,7 +80,7 @@ Manage blocked TLDs via nested endpoint:
 await fetch('https://api.nextdns.io/profiles/abc123/security/tlds', {
   method: 'POST',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ id: 'xyz' }),
@@ -87,7 +89,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security/tlds', {
 // Remove a TLD
 await fetch('https://api.nextdns.io/profiles/abc123/security/tlds/xyz', {
   method: 'DELETE',
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 ```
 

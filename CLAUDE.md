@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+<!-- @case-police-ignore Api -->
+
 This file provides critical guidance to AI coding assistants (like Claude) when working with the
 `nextdns-skills` repository. It serves as the primary source of truth for implementation standards,
 API specifications, and the project's rigorous quality protocols.
@@ -105,7 +107,7 @@ All contributions MUST strictly follow these protocols to maintain repository in
 
 ### 3. Automated Quality Assurance
 
-- **Full Suite**: `pnpm lint` runs Prettier, markdownlint, ESLint (syntax), case-police, and
+- **Full Suite**: `pnpm lint` runs Prettier, markdownlint, ESLint (with syntax and case-police), and
   `validate_rules.py`.
 - **Pre-check**: Always run `pnpm lint:fix` before pushing.
 - **CI Enforcement**: GitHub Actions blocks PRs that fail any validation step.
@@ -114,7 +116,71 @@ All contributions MUST strictly follow these protocols to maintain repository in
 
 - **Brands**: NextDNS, GitHub, JavaScript, Python, Docker, OpenWrt, Tailscale.
 - **Standards**: `profile` (not configuration), `blocklist` (not blacklist), `allowlist` (not
-  whitelist), `X-API-Key`.
+  whitelist), `X-Api-Key`.
+
+#### X-Api-Key Standard (MANDATORY)
+
+**Critical Rule**: The NextDNS API authentication header MUST always be written as `X-Api-Key` with
+a lowercase 'i' in 'Api'. This is the official NextDNS API standard and must be strictly enforced
+across all documentation, code examples, and templates.
+
+**Linting Requirement**: When using `X-Api-Key` in Markdown files within the `skills/` directory,
+you MUST include the following comment immediately after the frontmatter (or at the top of files
+without frontmatter) to prevent case-police linting conflicts:
+
+```markdown
+<!-- @case-police-ignore Api -->
+```
+
+**Why This Matters**:
+
+- The case-police linter enforces standard technology name capitalization (e.g., `API` not `Api`)
+- However, `X-Api-Key` is the official NextDNS header name and cannot be changed
+- The ignore comment tells case-police to skip checking the word "Api" in that file
+- Without this comment, CI builds will fail due to case-police attempting to enforce `X-API-Key`
+
+**Examples**:
+
+✅ **Correct Usage**:
+
+````markdown
+---
+title: 'Authentication'
+tags:
+  - X-Api-Key
+---
+
+<!-- @case-police-ignore Api -->
+
+# Authentication
+
+```javascript
+const headers = {
+  'X-Api-Key': 'YOUR_API_KEY',
+};
+```
+````
+
+❌ **Incorrect Usage**:
+
+```markdown
+# Do NOT use these variations:
+
+- X-API-Key (uppercase API)
+- X-api-key (lowercase api)
+- X_Api_Key (underscore separator)
+- Api-Key (missing X- prefix)
+```
+
+**Important Notes**:
+
+- This rule applies to ALL files in `skills/nextdns-api/` and any other location where the NextDNS
+  API is documented
+- When creating new files or refactoring existing ones that reference `X-Api-Key`, always add the
+  ignore comment
+- The template file `templates/rule-template.md` already includes this comment for reference
+- If case-police reports an error about "Api → API", add the ignore comment rather than changing the
+  casing
 
 ### 5. Template & Frontmatter Adherence
 

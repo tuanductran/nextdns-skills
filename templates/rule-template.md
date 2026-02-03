@@ -10,6 +10,8 @@ tags:
   - keyword4
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Your Rule Title
 
 Brief one-line description of what this rule addresses
@@ -39,7 +41,7 @@ nextdns config set -profile=abc123
 // ✅ Example in JavaScript (if applicable)
 const response = await fetch('https://api.nextdns.io/profiles/abc123', {
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
 });
@@ -52,7 +54,7 @@ const data = await response.json();
 import requests
 
 headers = {
-    'X-API-Key': 'YOUR_API_KEY'
+    'X-Api-Key': 'YOUR_API_KEY'
 }
 
 response = requests.get('https://api.nextdns.io/profiles/abc123', headers=headers)
@@ -176,7 +178,7 @@ TEMPLATE USAGE NOTES:
    - "profile" not "configuration"
    - "blocklist" not "blacklist"
    - "allowlist" not "whitelist"
-   - "X-API-Key" not "API-Key"
+   - "X-Api-Key" not "API-Key"
 
 6. Security:
    - Never use real API keys or profile IDs

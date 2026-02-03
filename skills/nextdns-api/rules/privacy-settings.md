@@ -11,6 +11,8 @@ tags:
   - affiliate links
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Privacy Settings
 
 Configure privacy protection and ad/tracker blocking
@@ -53,7 +55,7 @@ const privacySettings = {
 await fetch('https://api.nextdns.io/profiles/abc123/privacy', {
   method: 'PATCH',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
@@ -72,7 +74,7 @@ Add or remove blocklists:
 await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists', {
   method: 'POST',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ id: 'stevenblack' }),
@@ -81,7 +83,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists', {
 // Remove a blocklist
 await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists/stevenblack', {
   method: 'DELETE',
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -92,7 +94,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists/stevenbla
 await fetch('https://api.nextdns.io/profiles/abc123/privacy/natives', {
   method: 'POST',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ id: 'apple' }),
@@ -101,7 +103,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/natives', {
 // Remove native tracking protection
 await fetch('https://api.nextdns.io/profiles/abc123/privacy/natives/apple', {
   method: 'DELETE',
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 ```
 

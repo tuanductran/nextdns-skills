@@ -12,6 +12,8 @@ tags:
   - query logs
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Logs Management
 
 Query and filter DNS logs for debugging and analysis
@@ -20,7 +22,7 @@ Query and filter DNS logs for debugging and analysis
 
 ```javascript
 const response = await fetch('https://api.nextdns.io/profiles/abc123/logs?from=-1h&limit=100', {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 
 const logs = await response.json();
@@ -186,7 +188,7 @@ async function getLogs(profileId, options = {}) {
   if (options.cursor) url.searchParams.set('cursor', options.cursor);
 
   const response = await fetch(url, {
-    headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY },
+    headers: { 'X-Api-Key': process.env.NEXTDNS_API_KEY },
   });
 
   return response.json();
