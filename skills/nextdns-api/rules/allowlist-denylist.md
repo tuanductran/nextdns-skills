@@ -43,7 +43,7 @@ const lists = {
 await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
   method: 'POST',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
@@ -60,7 +60,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
 await fetch('https://api.nextdns.io/profiles/abc123/allowlist', {
   method: 'POST',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
@@ -77,7 +77,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/allowlist', {
 await fetch('https://api.nextdns.io/profiles/abc123/denylist/badwebsite.com', {
   method: 'PATCH',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ active: false }),
@@ -87,7 +87,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/badwebsite.com', {
 await fetch('https://api.nextdns.io/profiles/abc123/denylist/badwebsite.com', {
   method: 'PATCH',
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({ active: true }),
@@ -100,13 +100,13 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/badwebsite.com', {
 // Remove from denylist
 await fetch('https://api.nextdns.io/profiles/abc123/denylist/badwebsite.com', {
   method: 'DELETE',
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 
 // Remove from allowlist
 await fetch('https://api.nextdns.io/profiles/abc123/allowlist/goodwebsite.com', {
   method: 'DELETE',
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -115,12 +115,12 @@ await fetch('https://api.nextdns.io/profiles/abc123/allowlist/goodwebsite.com', 
 ```javascript
 // Get denylist
 const denylist = await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 }).then((r) => r.json());
 
 // Get allowlist
 const allowlist = await fetch('https://api.nextdns.io/profiles/abc123/allowlist', {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 }).then((r) => r.json());
 ```
 
@@ -170,7 +170,7 @@ try {
   const response = await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
     method: 'POST',
     headers: {
-      'X-API-Key': 'YOUR_API_KEY',
+      'X-Api-Key': 'YOUR_API_KEY',
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ id: 'invalid domain!', active: true }),

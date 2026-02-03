@@ -31,7 +31,7 @@ Append `;series` to any analytics endpoint to get time series data:
 ```javascript
 const response = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/queryTypes;series?from=-7d&interval=1d&limit=2',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 );
 
 const data = await response.json();
@@ -180,7 +180,7 @@ async function getTimeSeries(profileId, endpoint, options = {}) {
   if (options.device) url.searchParams.set('device', options.device);
 
   const response = await fetch(url, {
-    headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY },
+    headers: { 'X-Api-Key': process.env.NEXTDNS_API_KEY },
   });
 
   return response.json();

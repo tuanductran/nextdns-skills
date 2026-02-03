@@ -114,7 +114,7 @@ All contributions MUST strictly follow these protocols to maintain repository in
 
 - **Brands**: NextDNS, GitHub, JavaScript, Python, Docker, OpenWrt, Tailscale.
 - **Standards**: `profile` (not configuration), `blocklist` (not blacklist), `allowlist` (not
-  whitelist), `X-API-Key`.
+  whitelist), `X-Api-Key`.
 
 ### 5. Template & Frontmatter Adherence
 

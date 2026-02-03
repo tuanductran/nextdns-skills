@@ -30,7 +30,7 @@ Query distribution by status (blocked, allowed, default):
 ```javascript
 const response = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/status?from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 );
 
 // Response
@@ -51,19 +51,19 @@ Top queried domains:
 // All domains
 const domains = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/domains?from=-7d&limit=50',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Blocked domains only
 const blocked = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/domains?status=blocked&from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Root domains only
 const roots = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/domains?root=true&from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Response
@@ -89,7 +89,7 @@ Why domains were blocked:
 ```javascript
 const reasons = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/reasons?from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Response
@@ -121,7 +121,7 @@ Query distribution by IP address:
 ```javascript
 const ips = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/ips?from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Response
@@ -155,7 +155,7 @@ Query distribution by device:
 ```javascript
 const devices = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/devices?from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Response
@@ -189,7 +189,7 @@ Query distribution by DNS protocol:
 ```javascript
 const protocols = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/protocols?from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Response
@@ -209,7 +209,7 @@ Distribution by DNS record type:
 ```javascript
 const queryTypes = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/queryTypes?from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Response
@@ -229,7 +229,7 @@ IPv4 vs IPv6 distribution:
 ```javascript
 const ipVersions = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/ipVersions?from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Response
@@ -248,7 +248,7 @@ DNSSEC validation statistics:
 ```javascript
 const dnssec = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/dnssec?from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Response
@@ -267,7 +267,7 @@ Encrypted vs unencrypted queries:
 ```javascript
 const encryption = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/encryption?from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Response
@@ -286,7 +286,7 @@ Query destinations by country:
 ```javascript
 const countries = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/destinations?type=countries&from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Response
@@ -320,7 +320,7 @@ Queries to big tech companies:
 ```javascript
 const gafam = await fetch(
   'https://api.nextdns.io/profiles/abc123/analytics/destinations?type=gafam&from=-7d',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 ).then(r => r.json());
 
 // Response
@@ -347,7 +347,7 @@ async function getAnalytics(profileId, endpoint, params = {}) {
   });
 
   const response = await fetch(url, {
-    headers: { 'X-API-Key': process.env.NEXTDNS_API_KEY },
+    headers: { 'X-Api-Key': process.env.NEXTDNS_API_KEY },
   });
 
   return response.json();

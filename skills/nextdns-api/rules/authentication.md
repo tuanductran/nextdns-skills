@@ -6,7 +6,7 @@ type: capability
 tags:
   - authentication
   - API key
-  - X-API-Key
+  - X-Api-Key
   - authorization
   - security
 ---
@@ -17,16 +17,16 @@ All NextDNS API requests require authentication via API key
 
 ## Correct Usage
 
-Pass your API key via the `X-API-Key` header for every API call:
+Pass your API key via the `X-Api-Key` header for every API call:
 
 ```bash
-curl -H "X-API-Key: a8f4e42e896ff37f181e3e8a42a9737e1423d8e7" \
+curl -H "X-Api-Key: a8f4e42e896ff37f181e3e8a42a9737e1423d8e7" \
   https://api.nextdns.io/profiles
 ```
 
 ```javascript
 const headers = {
-  'X-API-Key': 'a8f4e42e896ff37f181e3e8a42a9737e1423d8e7',
+  'X-Api-Key': 'a8f4e42e896ff37f181e3e8a42a9737e1423d8e7',
   'Content-Type': 'application/json',
 };
 
@@ -39,7 +39,7 @@ fetch('https://api.nextdns.io/profiles', { headers })
 import requests
 
 headers = {
-    'X-API-Key': 'a8f4e42e896ff37f181e3e8a42a9737e1423d8e7'
+    'X-Api-Key': 'a8f4e42e896ff37f181e3e8a42a9737e1423d8e7'
 }
 
 response = requests.get('https://api.nextdns.io/profiles', headers=headers)
@@ -56,7 +56,7 @@ data = response.json()
 # ❌ Missing authentication header
 curl https://api.nextdns.io/profiles
 
-# ❌ Using Authorization header instead of X-API-Key
+# ❌ Using Authorization header instead of X-Api-Key
 curl -H "Authorization: Bearer a8f4e42e896ff37f181e3e8a42a9737e1423d8e7" \
   https://api.nextdns.io/profiles
 

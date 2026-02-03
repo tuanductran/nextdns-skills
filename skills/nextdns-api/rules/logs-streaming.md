@@ -21,7 +21,7 @@ GET /profiles/:profile/logs/stream
 ```javascript
 const eventSource = new EventSource('https://api.nextdns.io/profiles/abc123/logs/stream', {
   headers: {
-    'X-API-Key': 'YOUR_API_KEY',
+    'X-Api-Key': 'YOUR_API_KEY',
   },
 });
 
@@ -57,7 +57,7 @@ const eventSource = new EventSource(
   `https://api.nextdns.io/profiles/abc123/logs/stream?id=${lastEventId}`,
   {
     headers: {
-      'X-API-Key': 'YOUR_API_KEY',
+      'X-Api-Key': 'YOUR_API_KEY',
     },
   }
 );
@@ -70,7 +70,7 @@ Get the stream ID from the regular logs endpoint:
 ```javascript
 // 1. Get recent logs
 const recentLogs = await fetch('https://api.nextdns.io/profiles/abc123/logs?limit=100', {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 }).then((r) => r.json());
 
 // 2. Get stream ID from metadata
@@ -81,7 +81,7 @@ const eventSource = new EventSource(
   `https://api.nextdns.io/profiles/abc123/logs/stream?id=${streamId}`,
   {
     headers: {
-      'X-API-Key': 'YOUR_API_KEY',
+      'X-Api-Key': 'YOUR_API_KEY',
     },
   }
 );
@@ -116,7 +116,7 @@ url.searchParams.set('search', 'facebook');
 url.searchParams.set('raw', '1');
 
 const eventSource = new EventSource(url.toString(), {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -134,7 +134,7 @@ function LogsStream({ profileId, apiKey }) {
 
     const eventSource = new EventSource(url.toString(), {
       headers: {
-        'X-API-Key': apiKey,
+        'X-Api-Key': apiKey,
       },
     });
 
@@ -190,7 +190,7 @@ function streamLogs(profileId, apiKey, options = {}) {
 
   const eventSource = new EventSource(url.toString(), {
     headers: {
-      'X-API-Key': apiKey,
+      'X-Api-Key': apiKey,
     },
   });
 
@@ -242,7 +242,7 @@ const stream = streamLogs('abc123', process.env.NEXTDNS_API_KEY, {
 ```javascript
 const eventSource = new EventSource(
   'https://api.nextdns.io/profiles/abc123/logs/stream?status=blocked',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 );
 
 eventSource.onmessage = (event) => {
@@ -258,7 +258,7 @@ eventSource.onmessage = (event) => {
 ```javascript
 const eventSource = new EventSource(
   'https://api.nextdns.io/profiles/abc123/logs/stream?device=8TD1G',
-  { headers: { 'X-API-Key': 'YOUR_API_KEY' } }
+  { headers: { 'X-Api-Key': 'YOUR_API_KEY' } }
 );
 
 eventSource.onmessage = (event) => {
@@ -281,7 +281,7 @@ function createReconnectingStream(profileId, apiKey, options = {}) {
     if (lastEventId) url.searchParams.set('id', lastEventId);
 
     eventSource = new EventSource(url.toString(), {
-      headers: { 'X-API-Key': apiKey },
+      headers: { 'X-Api-Key': apiKey },
     });
 
     eventSource.onopen = () => {
