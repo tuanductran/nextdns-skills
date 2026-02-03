@@ -1,8 +1,8 @@
 ---
 title: "Your Rule Title"
-impact: "HIGH"
+impact: HIGH
 impactDescription: "Clear explanation of what happens if rule is not followed"
-type: "capability"
+type: capability
 tags: "keyword1, keyword2, keyword3"
 ---
 
@@ -16,12 +16,12 @@ MUST comply with CLAUDE.md Protocol 5: Template Adherence (Metadata)
 
 YAML Frontmatter Requirements (MANDATORY):
 - title: Descriptive name (3-8 words) - Use quotes for consistency
-- impact: Severity level - Choose one: "HIGH", "MEDIUM", or "LOW"
+- impact: Severity level - Choose one: HIGH, MEDIUM, or LOW (unquoted)
   * HIGH - Critical, causes failures or security issues
   * MEDIUM - Important, affects quality or performance
   * LOW - Helpful, improves consistency or clarity
 - impactDescription: One sentence explaining consequences - Use quotes
-- type: Choose one: "capability" or "efficiency"
+- type: Choose one: capability or efficiency (unquoted)
   * capability - AI cannot solve without this knowledge
   * efficiency - AI can solve but poorly without this guidance
 - tags: Comma-separated keywords for skill triggering (3-7 tags) - Use quotes
