@@ -30,7 +30,7 @@ window.location.href = 'https://api.nextdns.io/profiles/abc123/logs/download';
 
 // Fetch - follows redirect
 const response = await fetch('https://api.nextdns.io/profiles/abc123/logs/download', {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 
 // Response is the file content
@@ -48,7 +48,7 @@ Use `redirect=0` to get the URL as JSON instead of redirecting:
 
 ```javascript
 const response = await fetch('https://api.nextdns.io/profiles/abc123/logs/download?redirect=0', {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 
 const result = await response.json();
@@ -70,7 +70,7 @@ async function downloadLogs(profileId, apiKey) {
     // Get the download URL
     const response = await fetch(
       `https://api.nextdns.io/profiles/${profileId}/logs/download?redirect=0`,
-      { headers: { 'X-API-Key': apiKey } }
+      { headers: { 'X-Api-Key': apiKey } }
     );
 
     const result = await response.json();
@@ -104,7 +104,7 @@ function LogsDownloadButton({ profileId, apiKey }) {
     try {
       const response = await fetch(
         `https://api.nextdns.io/profiles/${profileId}/logs/download?redirect=0`,
-        { headers: { 'X-API-Key': apiKey } }
+        { headers: { 'X-Api-Key': apiKey } }
       );
 
       const result = await response.json();
@@ -141,7 +141,7 @@ async function downloadLogs(profileId, apiKey, outputPath) {
   // Get download URL
   const response = await fetch(
     `https://api.nextdns.io/profiles/${profileId}/logs/download?redirect=0`,
-    { headers: { 'X-API-Key': apiKey } }
+    { headers: { 'X-Api-Key': apiKey } }
   );
 
   const result = await response.json();
@@ -191,7 +191,7 @@ url.searchParams.set('from', '-7d');
 url.searchParams.set('redirect', '0');
 
 const response = await fetch(url, {
-  headers: { 'X-API-Key': 'YOUR_API_KEY' },
+  headers: { 'X-Api-Key': 'YOUR_API_KEY' },
 });
 ```
 
@@ -223,7 +223,7 @@ async function downloadFilteredLogs(profileId, apiKey, filters = {}) {
   url.searchParams.set('redirect', '0');
 
   const response = await fetch(url, {
-    headers: { 'X-API-Key': apiKey },
+    headers: { 'X-Api-Key': apiKey },
   });
 
   const result = await response.json();
