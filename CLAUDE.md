@@ -1,31 +1,36 @@
 # CLAUDE.md
 
-This file provides critical guidance to AI coding assistants (like Claude) when working with the `nextdns-skills` repository. It serves as the primary source of truth for implementation standards, API specifications, and the project's rigorous quality protocols.
+This file provides critical guidance to AI coding assistants (like Claude) when working with the
+`nextdns-skills` repository. It serves as the primary source of truth for implementation standards,
+API specifications, and the project's rigorous quality protocols.
 
 ## Repository Purpose
 
-NextDNS Skills is a high-fidelity collection of structured knowledge (skills) for AI agents. It enables agents to perform complex operations across the NextDNS ecosystem by injecting domain-specific context:
+NextDNS Skills is a high-fidelity collection of structured knowledge (skills) for AI agents. It
+enables agents to perform complex operations across the NextDNS ecosystem by injecting
+domain-specific context:
 
 - **NextDNS API**: Programmatic configuration, analytics retrieval, and log management.
 - **NextDNS CLI**: Deployment, system configuration, and monitoring.
 - **NextDNS Web UI**: Strategic configuration and dashboard-based management.
-- **Integrations**: Third-party platform connections (OpenWrt, pfSense, Tailscale, Home Assistant, etc.).
+- **Integrations**: Third-party platform connections (OpenWrt, pfSense, Tailscale, Home Assistant,
+  etc.).
 
 ---
 
 ## 🚀 Development Quick Start
 
-| Task | Command |
-| :--- | :--- |
-| **Setup** | `pnpm install` |
-| **Format** | `pnpm run format` |
-| **Lint (All)** | `pnpm lint` |
-| **Fix (All)** | `pnpm lint:fix` |
-| **Validate Rules** | `pnpm lint:rules` |
-| **Check Syntax** | `pnpm lint:syntax` |
-| **Check Links** | `pnpm lint:links` |
-| **Update Counts** | `python3 scripts/update_counts.py` |
-| **Requirements** | `Node >=20`, `Python >=3.10`, `pnpm` |
+| Task               | Command                              |
+| :----------------- | :----------------------------------- |
+| **Setup**          | `pnpm install`                       |
+| **Format**         | `pnpm run format`                    |
+| **Lint (All)**     | `pnpm lint`                          |
+| **Fix (All)**      | `pnpm lint:fix`                      |
+| **Validate Rules** | `pnpm lint:rules`                    |
+| **Check Syntax**   | `pnpm lint:syntax`                   |
+| **Check Links**    | `pnpm lint:links`                    |
+| **Update Counts**  | `python3 scripts/update_counts.py`   |
+| **Requirements**   | `Node >=20`, `Python >=3.10`, `pnpm` |
 
 ---
 
@@ -68,7 +73,8 @@ AI assistants MUST adhere to these technical specifications when implementing AP
 
 ### 2. Core Entities
 
-- **Profiles**: Managed at `/profiles`. Contains `security`, `privacy`, `parentalControl`, `denylist`, `allowlist`, and `settings`.
+- **Profiles**: Managed at `/profiles`. Contains `security`, `privacy`, `parentalControl`,
+  `denylist`, `allowlist`, and `settings`.
 - **Nested Access**: Supports direct PATCH. Example: `PATCH /profiles/:id/settings/performance`.
 - **Arrays**: Managed via `GET`, `PUT`, `POST`. Individual items via `PATCH`, `DELETE` by ID.
 
@@ -93,30 +99,35 @@ All contributions MUST strictly follow these protocols to maintain repository in
 
 ### 2. Atomic Rule Workflow (MANDATORY)
 
-- **Rule**: Adding/modifying a rule file MUST be accompanied by an update to the corresponding `SKILL.md` index in the SAME commit.
+- **Rule**: Adding/modifying a rule file MUST be accompanied by an update to the corresponding
+  `SKILL.md` index in the SAME commit.
 - **Validation**: `validate_rules.py` enforces referential integrity between rules and indices.
 
 ### 3. Automated Quality Assurance
 
-- **Full Suite**: `pnpm lint` runs Prettier, markdownlint, ESLint (syntax), case-police, and `validate_rules.py`.
+- **Full Suite**: `pnpm lint` runs Prettier, markdownlint, ESLint (syntax), case-police, and
+  `validate_rules.py`.
 - **Pre-check**: Always run `pnpm lint:fix` before pushing.
 - **CI Enforcement**: GitHub Actions blocks PRs that fail any validation step.
 
 ### 4. Terminology Precision
 
 - **Brands**: NextDNS, GitHub, JavaScript, Python, Docker, OpenWrt, Tailscale.
-- **Standards**: `profile` (not configuration), `blocklist` (not blacklist), `allowlist` (not whitelist), `X-API-Key`.
+- **Standards**: `profile` (not configuration), `blocklist` (not blacklist), `allowlist` (not
+  whitelist), `X-API-Key`.
 
 ### 5. Template & Frontmatter Adherence
 
 - Use [rule-template.md](templates/rule-template.md) for all new rules.
-- **Required Fields**: `title`, `impact` (HIGH/MEDIUM/LOW), `impactDescription`, `type` (capability/efficiency), `tags` (YAML array).
+- **Required Fields**: `title`, `impact` (HIGH/MEDIUM/LOW), `impactDescription`, `type`
+  (capability/efficiency), `tags` (YAML array).
 - Titles in frontmatter MUST match the H1 heading exactly.
 
 ### 6. Zero-PII & Privacy Security
 
 - **Strict Prohibition**: Never commit real API keys, Profile IDs, or personal data.
-- **Placeholders**: Use `abc123` for Profile IDs, `YOUR_API_KEY` for keys, and `example.com` for domains.
+- **Placeholders**: Use `abc123` for Profile IDs, `YOUR_API_KEY` for keys, and `example.com` for
+  domains.
 
 ### 7. Strategic Documentation
 
