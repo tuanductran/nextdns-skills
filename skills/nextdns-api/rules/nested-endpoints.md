@@ -12,6 +12,8 @@ tags:
   - POST
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Nested Endpoints
 
 Understand how to work with nested profile configuration

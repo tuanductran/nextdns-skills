@@ -12,6 +12,8 @@ tags:
   - tumbling windows
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Time Series Data
 
 Get time series data for creating charts and trend analysis

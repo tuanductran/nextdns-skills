@@ -11,6 +11,8 @@ tags:
   - date parsing
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Date Formats
 
 Use correct date formats for time-based queries

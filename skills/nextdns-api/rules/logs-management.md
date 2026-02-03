@@ -12,6 +12,8 @@ tags:
   - query logs
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Logs Management
 
 Query and filter DNS logs for debugging and analysis

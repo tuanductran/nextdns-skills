@@ -11,6 +11,8 @@ tags:
   - response structure
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Response Format
 
 Understand and parse API response structure

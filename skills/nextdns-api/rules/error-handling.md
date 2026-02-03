@@ -11,6 +11,8 @@ tags:
   - error response
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Error Handling
 
 Properly handle API errors and validation failures

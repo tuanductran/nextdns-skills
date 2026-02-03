@@ -6,6 +6,8 @@ type: capability
 tags: 'SSE, real-time, streaming, Server-sent events, live logs, EventSource'
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Logs Streaming
 
 Stream DNS logs in real-time using Server-Sent Events (SSE)

@@ -11,6 +11,8 @@ metadata:
   version: '1.0.0'
 ---
 
+<!-- @case-police-ignore Api -->
+
 # NextDNS API Skills
 
 ## Capability Rules

@@ -12,6 +12,8 @@ tags:
   - domain allowing
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Allowlist and Denylist
 
 Manage custom domain allow/deny lists

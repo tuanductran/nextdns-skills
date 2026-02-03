@@ -11,6 +11,8 @@ tags:
   - page size
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Pagination
 
 Properly paginate through large result sets
