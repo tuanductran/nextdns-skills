@@ -10,6 +10,8 @@ tags:
   - file download
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Logs Download
 
 Download DNS logs as a file

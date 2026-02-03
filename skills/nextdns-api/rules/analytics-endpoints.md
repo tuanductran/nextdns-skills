@@ -14,6 +14,8 @@ tags:
   - destinations
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Analytics Endpoints
 
 Access comprehensive DNS analytics data

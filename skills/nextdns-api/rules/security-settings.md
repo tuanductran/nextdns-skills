@@ -14,6 +14,8 @@ tags:
   - CSAM
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Security Settings
 
 Configure comprehensive security features for DNS filtering

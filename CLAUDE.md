@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+<!-- @case-police-ignore Api -->
+
 This file provides critical guidance to AI coding assistants (like Claude) when working with the
 `nextdns-skills` repository. It serves as the primary source of truth for implementation standards,
 API specifications, and the project's rigorous quality protocols.

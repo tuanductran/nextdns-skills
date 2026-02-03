@@ -11,6 +11,8 @@ tags:
   - security
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Authentication
 
 All NextDNS API requests require authentication via API key

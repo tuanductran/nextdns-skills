@@ -11,6 +11,8 @@ tags:
   - affiliate links
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Privacy Settings
 
 Configure privacy protection and ad/tracker blocking

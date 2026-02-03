@@ -12,6 +12,8 @@ tags:
   - settings
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Profile Management
 
 Manage NextDNS profiles via API endpoints

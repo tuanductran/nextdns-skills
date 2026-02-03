@@ -11,6 +11,8 @@ tags:
   - services blocking
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Parental Control
 
 Configure parental controls and content filtering

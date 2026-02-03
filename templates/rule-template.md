@@ -10,6 +10,8 @@ tags:
   - keyword4
 ---
 
+<!-- @case-police-ignore Api -->
+
 # Your Rule Title
 
 Brief one-line description of what this rule addresses
