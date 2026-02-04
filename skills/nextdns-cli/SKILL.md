@@ -30,6 +30,9 @@ metadata:
 | [ddwrt-installation](rules/ddwrt-installation.md)       | DD-WRT, JFFS, NTP, router, time sync, dnsmasq            | DD-WRT router installation and setup       |
 | [docker-deployment](rules/docker-deployment.md)         | docker, container, DockerHub, host network, port mapping | Deploy NextDNS CLI via Docker containers   |
 | [troubleshooting](rules/troubleshooting.md)             | diagnostic, connection test, DNS leak                    | Troubleshoot DNS issues                    |
+| [cache-configuration](rules/cache-configuration.md)     | cache-size, max-age, ttl, performance, optimization      | Optimize DNS performance with CLI caching  |
+| [config-file-format](rules/config-file-format.md)       | nextdns.conf, automation, paths, structure               | Manage the nextdns.conf file format        |
+| [split-horizon](rules/split-horizon.md)                 | internal dns, lan, forwarder, local resolution           | Resolve internal domains with NextDNS      |
 
 ## Efficiency Rules
 

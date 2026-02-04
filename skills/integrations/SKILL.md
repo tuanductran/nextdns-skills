@@ -27,12 +27,14 @@ metadata:
 | [pfSense and OPNsense Integration](rules/pfsense-opnsense.md)              | pfsense, opnsense, firewall, router, unbound, dns-over-tls, dot, freebsd, dns resolver                                       | Deploy NextDNS on pfSense and OPNsense firewalls with proper encrypted DNS configuration and platform-specific guidance          |
 | [Public DNS and AdGuard Home Integration](rules/public-dns-and-adguard.md) | public dns, adguard, anycast, doh, dot, browser setup, windows, android, ios, upstream dns, bootstrap dns                    | Configure NextDNS public DNS servers on browsers and operating systems, and integrate with AdGuard Home as upstream DNS provider |
 | [Synology Integration (DSM and SRM)](rules/synology.md)                    | synology, dsm, srm, nas, router, ssh, cli, dhcp, network                                                                     | Install NextDNS on Synology NAS (DSM) and routers (SRM) with proper SSH access and network configuration                         |
+| [AsusWRT-Merlin](rules/asuswrt-merlin.md)                                  | asus, merlin, router, ssh, installation, setup                                                                               | Deploy NextDNS on Asus routers with Merlin firmware                                                                              |
+| [EdgeRouter and Firewalla](rules/edgerouter-firewalla.md)                  | edgerouter, edgeos, firewalla, gateway, ssh, professional                                                                    | Deploy NextDNS on EdgeRouter and Firewalla hardware                                                                              |
 
 ## Efficiency Rules
 
-| Rule                      | Keywords | Description               |
-| ------------------------- | -------- | ------------------------- |
-| _No efficiency rules yet_ |          | Add efficiency rules here |
+| Rule                                            | Keywords                                      | Description                            |
+| ----------------------------------------------- | --------------------------------------------- | -------------------------------------- |
+| [Backup and Failover](rules/backup-failover.md) | backup dns, failover, redundancy, reliability | Ensure connectivity during DNS outages |
 
 ## Adding New Integration Rules
 

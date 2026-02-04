@@ -31,8 +31,8 @@ use nextdns skill, <your request here>
 | :----------------------------------------------- | :----: | :--------------------------------------------------------------------- |
 | [**NextDNS API**](skills/nextdns-api/SKILL.md)   | **17** | Authentication, Profile management, Analytics, and Logs.               |
 | [**NextDNS CLI**](skills/nextdns-cli/SKILL.md)   | **14** | Installation, system-wide configuration, and client monitoring.        |
-| [**NextDNS Web UI**](skills/nextdns-ui/SKILL.md) | **10** | Strategic configuration, content filtering, and security modeling.     |
-| [**Integrations**](skills/integrations/SKILL.md) | **10** | Third-party platform connectivity (OpenWrt, pfSense, Tailscale, etc.). |
+| [**NextDNS Web UI**](skills/nextdns-ui/SKILL.md) | **12** | Strategic configuration, content filtering, and security modeling.     |
+| [**Integrations**](skills/integrations/SKILL.md) | **13** | Third-party platform connectivity (OpenWrt, pfSense, Tailscale, etc.). |
 
 ---
 

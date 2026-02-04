@@ -12,20 +12,28 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - name: Setup Python
-        uses: actions/setup-python@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
         with:
-          python-version: '3.14'
+          node-version: 'lts/*'
 
-      - name: Update counts in README.md
-        run: python3 scripts/update_counts.py
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.2
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Update counts
+        run: pnpm run update-counts
 
       - name: Commit and push changes
         run: |
@@ -35,6 +43,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "docs: update skill counts in README.md [skip ci]"
+            git commit -m "docs: update skill counts [skip ci]"
             git push
           fi

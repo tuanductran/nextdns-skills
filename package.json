@@ -46,8 +46,9 @@
     "lint:links": "find . -name \"*.md\" -not -path \"*/node_modules/*\" | xargs markdown-link-check -c config.json",
     "lint:md": "markdownlint --ignore-path=.gitignore .",
     "lint:md:fix": "markdownlint --ignore-path=.gitignore . --fix",
-    "lint:rules": "python3 scripts/validate_rules.py",
-    "lint:syntax": "eslint \"**/*.md\""
+    "lint:rules": "node scripts/validate_rules.mjs",
+    "lint:syntax": "eslint \"**/*.md\"",
+    "update-counts": "node scripts/update_counts.mjs"
   },
   "devDependencies": {
     "@eslint/markdown": "^7.5.1",

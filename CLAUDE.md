@@ -22,17 +22,16 @@ domain-specific context:
 
 ## 🚀 Development Quick Start
 
-| Task               | Command                              |
-| :----------------- | :----------------------------------- |
-| **Setup**          | `pnpm install`                       |
-| **Format**         | `pnpm run format`                    |
-| **Lint (All)**     | `pnpm lint`                          |
-| **Fix (All)**      | `pnpm lint:fix`                      |
-| **Validate Rules** | `pnpm lint:rules`                    |
-| **Check Syntax**   | `pnpm lint:syntax`                   |
-| **Check Links**    | `pnpm lint:links`                    |
-| **Update Counts**  | `python3 scripts/update_counts.py`   |
-| **Requirements**   | `Node >=20`, `Python >=3.10`, `pnpm` |
+| Task               | Command              |
+| :----------------- | :------------------- |
+| **Setup**          | `pnpm install`       |
+| **Format**         | `pnpm run format`    |
+| **Lint (All)**     | `pnpm lint`          |
+| **Fix (All)**      | `pnpm lint:fix`      |
+| **Validate Rules** | `pnpm lint:rules`    |
+| **Check Links**    | `pnpm lint:links`    |
+| **Update Counts**  | `pnpm update-counts` |
+| **Requirements**   | `Node lts/*`, `pnpm` |
 
 ---
 
@@ -44,12 +43,12 @@ domain-specific context:
 nextdns-skills/
 ├── skills/                     # Domain-specific knowledge (Skill Manifests + Rules)
 │   ├── nextdns-api/            # 17 rules (API protocols & endpoints)
-│   ├── nextdns-cli/            # 14 rules (Deployment & SysConfig)
-│   ├── nextdns-ui/             # 10 rules (Web Dashboard Strategy)
-│   └── integrations/           # 10 rules (Platform Connectivity)
+│   ├── nextdns-cli/            # 17 rules (Deployment & SysConfig)
+│   ├── nextdns-ui/             # 12 rules (Web Dashboard Strategy)
+│   └── integrations/           # 13 rules (Platform Connectivity)
 ├── scripts/                    # Maintenance & validation scripts
-│   ├── validate_rules.py       # Referential integrity & frontmatter validator
-│   └── update_counts.py        # Automated rule counter for README/CLAUDE
+│   ├── validate_rules.mjs      # Referential integrity & frontmatter validator
+│   └── update_counts.mjs       # Automated rule counter for README/CLAUDE
 ├── templates/                  # Standardized blueprints
 │   ├── rule-template.md        # For individual rule files in rules/
 │   └── skill-template.md       # For SKILL.md manifests
@@ -89,7 +88,7 @@ AI assistants MUST adhere to these technical specifications when implementing AP
 
 ---
 
-## 🛡️ The 10-Point Protocol System
+## 🛡️ The 11-Point Protocol System
 
 All contributions MUST strictly follow these protocols to maintain repository integrity:
 
@@ -103,12 +102,12 @@ All contributions MUST strictly follow these protocols to maintain repository in
 
 - **Rule**: Adding/modifying a rule file MUST be accompanied by an update to the corresponding
   `SKILL.md` index in the SAME commit.
-- **Validation**: `validate_rules.py` enforces referential integrity between rules and indices.
+- **Validation**: `validate_rules.mjs` enforces referential integrity between rules and indices.
 
 ### 3. Automated Quality Assurance
 
-- **Full Suite**: `pnpm lint` runs Prettier, markdownlint, ESLint (with syntax and case-police), and
-  `validate_rules.py`.
+- **Full Suite**: `pnpm lint` runs Prettier, markdownlint, ESLint (including case-police), and
+  `validate_rules.mjs`.
 - **Pre-check**: Always run `pnpm lint:fix` before pushing.
 - **CI Enforcement**: GitHub Actions blocks PRs that fail any validation step.
 
@@ -216,6 +215,14 @@ const headers = {
 
 - Every rule MUST have a `## Reference` section with verified official sources.
 - Descriptive labels: `[NextDNS API](https://nextdns.github.io/api/)` instead of `[Link](url)`.
+
+### 11. Atomic Schema Sync (MANDATORY)
+
+- **Rule**: Any modifications to NextDNS API structures, profile entities, or configuration
+  parameters in `rules/` MUST be accompanied by a corresponding update to the JSON schemas in
+  `data/schemas/`.
+- **Consistency**: Ensure `data/schemas/profile.json` always reflects the latest entity definitions
+  documented in the skills.
 
 ---
 

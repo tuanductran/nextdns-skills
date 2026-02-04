@@ -23,11 +23,13 @@ metadata:
 | [denylist-allowlist](rules/denylist-allowlist.md)             | block domain, allow domain, whitelist, fixing breakage     | Manually manage domain accessibility      |
 | [analytics-logs](rules/analytics-logs.md)                     | monitoring, logs, blocked queries, identifier              | Monitor network activity and troubleshoot |
 | [configuration-management](rules/configuration-management.md) | profile name, log location, performance, cache boost       | Manage profile global settings            |
+| [web3-settings](rules/web3-settings.md)                       | web3, blockchain, ens, unstoppable domains                 | Enable resolution for blockchain domains  |
 
 ## Efficiency Rules
 
-| Rule                                              | Keywords                                             | Description                                |
-| ------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------ |
-| [threat-modeling](rules/threat-modeling.md)       | grandma test, overblocking, strategy, infrastructure | Strategic approach to DNS configuration    |
-| [setup-optimization](rules/setup-optimization.md) | cache boost, cname flattening, performance           | Optimize DNS performance                   |
-| [troubleshooting-ui](rules/troubleshooting-ui.md) | log inspection, reload logs, identification          | Troubleshoot false positives via dashboard |
+| Rule                                                  | Keywords                                             | Description                                |
+| ----------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------ |
+| [threat-modeling](rules/threat-modeling.md)           | grandma test, overblocking, strategy, infrastructure | Strategic approach to DNS configuration    |
+| [recommended-settings](rules/recommended-settings.md) | guidelines, best practices, optimization, basics     | Optimal settings based on NextDNS-Config   |
+| [setup-optimization](rules/setup-optimization.md)     | cache boost, cname flattening, performance           | Optimize DNS performance                   |
+| [troubleshooting-ui](rules/troubleshooting-ui.md)     | log inspection, reload logs, identification          | Troubleshoot false positives via dashboard |
