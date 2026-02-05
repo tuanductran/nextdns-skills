@@ -35,7 +35,7 @@ jobs:
           echo "Checking frontmatter in new .md files under skills/"
           # Fetch the base branch to ensure it's available for comparison
           git fetch origin ${{ github.base_ref }}
-          NEW_FILES=$(git diff --name-only --diff-filter=A origin/${{ github.base_ref }}..HEAD | grep '^skills/.*\.md$' || true)
+          NEW_FILES=$(git diff --name-only --diff-filter=A origin/${{ github.base_ref }}...HEAD | grep '^skills/.*\.md$' || true)
           
           if [ -z "$NEW_FILES" ]; then
             echo "No new .md files in skills/ directory"
@@ -62,8 +62,8 @@ jobs:
               FILE_VALID=0
             fi
             
-            # Check if file has closing delimiter
-            DELIMITER_COUNT=$(grep -c '^---$' "$file" 2>/dev/null || echo "0")
+            # Check if file has closing delimiter in first 100 lines (frontmatter should be at top)
+            DELIMITER_COUNT=$(head -n 100 "$file" 2>/dev/null | grep -c '^---$' || echo "0")
             if [ "$DELIMITER_COUNT" -lt 2 ]; then
               echo "❌ ERROR: Missing frontmatter closing delimiter in $file"
               MISSING_FRONTMATTER=1
