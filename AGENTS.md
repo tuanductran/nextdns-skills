@@ -87,8 +87,8 @@ AI agents MUST strictly adhere to these protocols:
 1. **Atomic Rule Workflow**: Adding/modifying a rule file MUST be accompanied by an update to the
    corresponding `SKILL.md` index in the SAME commit.
 2. **X-Api-Key Standard**: Use `X-Api-Key` ONLY (lowercase 'i'). Add
-   `<!-- @case-police-ignore Api -->` to the top of all Markdown files referencing it. **Remove
-   this line from the template if your rule does not reference the API key.**
+   `<!-- @case-police-ignore Api -->` to the top of all Markdown files referencing it. **Remove this
+   line from the template if your rule does not reference the API key.**
 3. **Terminology Precision**: Use "profile" (not configuration), "blocklist" (not blacklist),
    "allowlist" (not whitelist).
 4. **Zero-PII Policy**: Never commit real API keys or Profile IDs. Use placeholders: `YOUR_API_KEY`,
