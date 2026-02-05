@@ -60,7 +60,6 @@ jobs:
               echo "❌ ERROR: Missing frontmatter opening delimiter in $file"
               MISSING_FRONTMATTER=1
               FILE_VALID=0
-              continue
             fi
             
             # Check if file has closing delimiter
@@ -69,7 +68,6 @@ jobs:
               echo "❌ ERROR: Missing frontmatter closing delimiter in $file"
               MISSING_FRONTMATTER=1
               FILE_VALID=0
-              continue
             fi
             
             # Extract frontmatter (content between first two ---)
@@ -79,7 +77,6 @@ jobs:
               echo "❌ ERROR: Empty frontmatter in $file"
               MISSING_FRONTMATTER=1
               FILE_VALID=0
-              continue
             fi
             
             # Check required fields as defined in AGENTS.md section 3 (Technical Rule Specifications)
