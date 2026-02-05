@@ -28,18 +28,23 @@ function updateDocument(filePath, categories, patternGenerator, name) {
   }
 
   let updatedContent = content;
+  const logs = [];
   for (const cat of categories) {
     const count = getRuleCount(cat);
     if (count === null) continue;
 
     const pattern = patternGenerator(cat);
     if (pattern.test(updatedContent)) {
-      updatedContent = updatedContent.replace(pattern, `$1${count}$2`);
-      console.log(`[${name}] Updated ${cat} count to ${count}`);
+      const newContent = updatedContent.replace(pattern, `$1${count}$2`);
+      if (newContent !== updatedContent) {
+        updatedContent = newContent;
+        logs.push(`[${name}] Updated ${cat} count to ${count}`);
+      }
     }
   }
 
   if (updatedContent !== content) {
+    logs.forEach((log) => console.log(log));
     writeFile(filePath, updatedContent);
     console.log(`${filePath} updated successfully.`);
   } else {
