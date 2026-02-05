@@ -61,7 +61,10 @@ function updateCounts() {
     'README.md',
     categories,
     (cat) =>
-      new RegExp(`(\\| \\[.*?\\]\\(skills/${cat}/SKILL\\.md\\) \\| \\*\\*)\\d+(\\*\\* \\|)`, 'g'),
+      new RegExp(
+        `(\\|\\s+\\[.*?\\]\\(skills/${cat}/SKILL\\.md\\)\\s+\\|\\s+\\*\\*)\\d+(\\*\\*\\s+\\|)`,
+        'g'
+      ),
     'README'
   );
 
