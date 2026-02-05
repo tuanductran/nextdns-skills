@@ -62,16 +62,16 @@ jobs:
               FILE_VALID=0
             fi
             
-            # Check if file has closing delimiter in first 100 lines (frontmatter should be at top)
-            DELIMITER_COUNT=$(head -n 100 "$file" 2>/dev/null | grep -c '^---$' || echo "0")
+            # Count only first two --- delimiters in first 100 lines
+            DELIMITER_COUNT=$(head -n 100 "$file" 2>/dev/null | awk '/^---$/ { count++; if (count == 2) exit } END { print count }')
             if [ "$DELIMITER_COUNT" -lt 2 ]; then
               echo "❌ ERROR: Missing frontmatter closing delimiter in $file"
               MISSING_FRONTMATTER=1
               FILE_VALID=0
             fi
             
-            # Extract frontmatter (content between first two ---)
-            FRONTMATTER=$(sed -n '/^---$/,/^---$/p' "$file" | sed '1d;$d')
+            # Extract frontmatter (content between first two --- only)
+            FRONTMATTER=$(awk '/^---$/ { if (++count == 2) exit; if (count == 1) next } count == 1' "$file")
             
             if [ -z "$FRONTMATTER" ]; then
               echo "❌ ERROR: Empty frontmatter in $file"
