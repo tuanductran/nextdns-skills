@@ -22,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 'lts/*'
+          node-version-file: '.node-version'
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v4
@@ -39,7 +39,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add README.md CLAUDE.md
+          git add README.md AGENTS.md
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else

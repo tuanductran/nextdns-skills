@@ -13,11 +13,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 'lts/*'
+          node-version-file: '.node-version'
 
       - name: Setup PNPM
         uses: pnpm/action-setup@v4
@@ -26,6 +28,85 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Check frontmatter in new skill files
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "Checking frontmatter in new .md files under skills/"
+          # Fetch the base branch to ensure it's available for comparison
+          git fetch origin ${{ github.base_ref }}
+          NEW_FILES=$(git diff --name-only --diff-filter=A origin/${{ github.base_ref }}..HEAD | grep '^skills/.*\.md$' || true)
+          
+          if [ -z "$NEW_FILES" ]; then
+            echo "No new .md files in skills/ directory"
+            exit 0
+          fi
+          
+          echo "New files to validate:"
+          echo "$NEW_FILES"
+          
+          MISSING_FRONTMATTER=0
+          while IFS= read -r file; do
+            if [ -z "$file" ] || [ ! -f "$file" ]; then
+              [ -n "$file" ] && echo "Skipping $file (file not found)"
+              continue
+            fi
+            
+            echo "Checking $file..."
+            FILE_VALID=1
+            
+            # Check if file starts with ---
+            if ! head -n 1 "$file" | grep -q '^---$'; then
+              echo "❌ ERROR: Missing frontmatter opening delimiter in $file"
+              MISSING_FRONTMATTER=1
+              FILE_VALID=0
+            fi
+            
+            # Count only first two --- delimiters (stop after second, no arbitrary line limit)
+            DELIMITER_COUNT=$(awk 'BEGIN {count=0} /^---$/ { if (++count == 2) exit } END { print count }' "$file")
+            if [ "$DELIMITER_COUNT" -lt 2 ]; then
+              echo "❌ ERROR: Missing frontmatter closing delimiter in $file"
+              MISSING_FRONTMATTER=1
+              FILE_VALID=0
+            fi
+            
+            # Extract frontmatter (content between first two --- only)
+            FRONTMATTER=$(awk '/^---$/ { if (++count == 2) exit; if (count == 1) next } count == 1' "$file")
+            
+            if [ -z "$FRONTMATTER" ]; then
+              echo "❌ ERROR: Empty frontmatter in $file"
+              MISSING_FRONTMATTER=1
+              FILE_VALID=0
+            fi
+            
+            # Check required fields as defined in AGENTS.md section 3 (Technical Rule Specifications)
+            # Required: title, impact, impactDescription, type, tags
+            REQUIRED_FIELDS=("title" "impact" "impactDescription" "type" "tags")
+            for field in "${REQUIRED_FIELDS[@]}"; do
+              # Intentionally allow optional leading whitespace in this pre-check (POSIX regex),
+              # even though YAML frontmatter top-level keys should not be indented per spec.
+              if ! echo "$FRONTMATTER" | grep -qE "^[[:space:]]*${field}:"; then
+                echo "❌ ERROR: Missing required field '${field}' in $file"
+                MISSING_FRONTMATTER=1
+                FILE_VALID=0
+              fi
+            done
+            
+            if [ $FILE_VALID -eq 1 ]; then
+              echo "✓ $file has valid frontmatter"
+            fi
+          done <<< "$NEW_FILES"
+          
+          if [ $MISSING_FRONTMATTER -eq 1 ]; then
+            echo ""
+            echo "❌ Frontmatter validation failed. Please ensure all new .md files in skills/ have:"
+            echo "  - Properly delimited YAML frontmatter (opening and closing ---)"
+            echo "  - Required fields: title, impact, impactDescription, type, and tags"
+            echo "  - See AGENTS.md section 3 (Technical Rule Specifications) for details"
+            exit 1
+          fi
+          
+          echo "✅ All new files have valid frontmatter"
 
       - name: Run Full Validation
         run: pnpm run lint:all
