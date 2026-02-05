@@ -60,12 +60,12 @@ function updateCounts() {
     'README'
   );
 
-  // Update CLAUDE.md
+  // Update AGENTS.md
   updateDocument(
-    'CLAUDE.md',
+    'AGENTS.md',
     categories,
     (cat) => new RegExp(`(${cat}/.*?# )\\d+( rules)`, 'g'),
-    'CLAUDE'
+    'AGENTS'
   );
 }
 

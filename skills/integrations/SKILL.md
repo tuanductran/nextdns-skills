@@ -29,6 +29,7 @@ metadata:
 | [Synology Integration (DSM and SRM)](rules/synology.md)                    | synology, dsm, srm, nas, router, ssh, cli, dhcp, network                                                                     | Install NextDNS on Synology NAS (DSM) and routers (SRM) with proper SSH access and network configuration                         |
 | [AsusWRT-Merlin](rules/asuswrt-merlin.md)                                  | asus, merlin, router, ssh, installation, setup                                                                               | Deploy NextDNS on Asus routers with Merlin firmware                                                                              |
 | [EdgeRouter and Firewalla](rules/edgerouter-firewalla.md)                  | edgerouter, edgeos, firewalla, gateway, ssh, professional                                                                    | Deploy NextDNS on EdgeRouter and Firewalla hardware                                                                              |
+| [MikroTik DoH Setup](rules/mikrotik-setup.md)                              | mikrotik, routeros, doh, dns-over-https, networking                                                                          | Configure NextDNS via DNS-over-HTTPS on MikroTik RouterOS devices                                                                |
 
 ## Efficiency Rules
 

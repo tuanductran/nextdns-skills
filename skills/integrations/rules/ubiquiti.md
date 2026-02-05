@@ -157,7 +157,9 @@ repositories may be archived:
 **Fix**:
 
 ```bash
-sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list
+sed -i -e 's/deb.debian.org/archive.debian.org/g' \
+       -e 's|security.debian.org|archive.debian.org/|g' \
+       -e '/stretch-updates/d' /etc/apt/sources.list
 apt update
 ```
 

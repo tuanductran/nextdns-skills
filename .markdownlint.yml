@@ -15,8 +15,8 @@ MD025: false
 # MD033/no-inline-html: Allow inline HTML for specific formatting needs (e.g. <br>, <details>)
 MD033: false
 
-# MD032/blanks-around-lists: Disable because Prettier sometimes conflicts with this
-MD032: false
+# MD032/blanks-around-lists: Require blank lines around lists for better readability
+MD032: true
 
 # MD046/code-block-style: Require fenced code blocks only
 MD046:

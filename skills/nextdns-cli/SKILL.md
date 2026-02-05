@@ -33,6 +33,8 @@ metadata:
 | [cache-configuration](rules/cache-configuration.md)     | cache-size, max-age, ttl, performance, optimization      | Optimize DNS performance with CLI caching  |
 | [config-file-format](rules/config-file-format.md)       | nextdns.conf, automation, paths, structure               | Manage the nextdns.conf file format        |
 | [split-horizon](rules/split-horizon.md)                 | internal dns, lan, forwarder, local resolution           | Resolve internal domains with NextDNS      |
+| [Conditional Profiles](rules/conditional-profiles.md)   | cli, profile, conditional, subnet, mac-address           | Apply different profiles based on clients  |
+| [Advanced Linux Support](rules/linux-advanced.md)       | linux, arch, alpine, aur, apk                            | Advanced Linux installation methods        |
 
 ## Efficiency Rules
 

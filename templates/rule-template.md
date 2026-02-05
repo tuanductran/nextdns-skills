@@ -141,53 +141,6 @@ Link to official documentation and relevant resources. Always use HTTPS URLs.
 
 <!--
 TEMPLATE USAGE NOTES:
-
-1. YAML Frontmatter (MANDATORY):
-   - title: Descriptive name (3-8 words) - Use quotes for consistency
-   - impact: Choose one: HIGH, MEDIUM, or LOW (unquoted)
-     * HIGH - Critical, causes failures or security issues
-     * MEDIUM - Important, affects quality or performance
-     * LOW - Helpful, improves consistency or clarity
-   - impactDescription: One sentence explaining consequences - Use quotes
-   - type: Choose one: capability or efficiency (unquoted)
-     * capability - AI cannot solve without this knowledge
-     * efficiency - AI can solve but poorly without this guidance
-   - tags: Array of 3-7 keywords for skill triggering (use YAML array format)
-
-2. H1 Heading:
-   - Must match the title in frontmatter
-   - Immediately followed by a brief one-line description
-
-3. Code Blocks:
-   - MUST specify language tag (bash, javascript, python, json, yaml, http, conf, text)
-   - Use ✅ for correct examples
-   - Use ❌ for incorrect examples
-   - Include explanatory comments
-
-4. Sections:
-   - Overview: Context and when to apply
-   - Correct Usage: Working examples with ✅
-   - Do NOT Use: Anti-patterns with ❌
-   - Best Practices: Additional tips (optional but recommended)
-   - Common Pitfalls: Mistakes to avoid (optional but recommended)
-   - Troubleshooting: Debug guidance (optional but recommended)
-   - Reference: Official documentation links (mandatory)
-
-5. Terminology:
-   - Use exact NextDNS terminology (see Protocol 4 in CLAUDE.md)
-   - "profile" not "configuration"
-   - "blocklist" not "blacklist"
-   - "allowlist" not "whitelist"
-   - "X-Api-Key" not "API-Key"
-
-6. Security:
-   - Never use real API keys or profile IDs
-   - Use placeholders: YOUR_API_KEY, abc123, example.com
-   - Follow zero-PII policy
-
-7. After Creating Rule:
-   - IMMEDIATELY update skills/<category>/SKILL.md
-   - Add entry to appropriate table (Capability or Efficiency)
-   - Run: pnpm lint:fix
-   - Commit both files together with conventional commit message
+Refer to AGENTS.md for detailed instructions on rule creation protocols,
+frontmatter requirements, and quality standards.
 -->
