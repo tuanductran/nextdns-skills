@@ -1,4 +1,4 @@
-# nextdns-skills
+# NextDNS Skills
 
 ![NextDNS Skills](thumbnail.jpeg)
 

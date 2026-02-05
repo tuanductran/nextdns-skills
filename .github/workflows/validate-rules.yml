@@ -63,7 +63,7 @@ jobs:
             fi
             
             # Count only first two --- delimiters (stop after second, no arbitrary line limit)
-            DELIMITER_COUNT=$(awk '/^---$/ { if (++count == 2) exit } END { print count }' "$file")
+            DELIMITER_COUNT=$(awk 'BEGIN {count=0} /^---$/ { if (++count == 2) exit } END { print count }' "$file")
             if [ "$DELIMITER_COUNT" -lt 2 ]; then
               echo "❌ ERROR: Missing frontmatter closing delimiter in $file"
               MISSING_FRONTMATTER=1
@@ -83,7 +83,8 @@ jobs:
             # Required: title, impact, impactDescription, type, tags
             REQUIRED_FIELDS=("title" "impact" "impactDescription" "type" "tags")
             for field in "${REQUIRED_FIELDS[@]}"; do
-              # Allow optional leading whitespace in YAML fields (POSIX regex)
+              # Intentionally allow optional leading whitespace in this pre-check (POSIX regex),
+              # even though YAML frontmatter top-level keys should not be indented per spec.
               if ! echo "$FRONTMATTER" | grep -qE "^[[:space:]]*${field}:"; then
                 echo "❌ ERROR: Missing required field '${field}' in $file"
                 MISSING_FRONTMATTER=1
