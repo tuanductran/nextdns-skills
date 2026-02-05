@@ -43,6 +43,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "docs: update skill counts [skip ci]"
+            git commit -m "docs: sync README and AGENTS counts [skip ci]"
             git push
           fi
