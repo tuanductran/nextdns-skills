@@ -35,7 +35,7 @@ jobs:
           echo "Checking frontmatter in new .md files under skills/"
           # Fetch the base branch to ensure it's available for comparison
           git fetch origin ${{ github.base_ref }}
-          NEW_FILES=$(git diff --name-only --diff-filter=A refs/remotes/origin/${{ github.base_ref }}...HEAD | grep '^skills/.*\.md$' || true)
+          NEW_FILES=$(git diff --name-only --diff-filter=A refs/remotes/origin/${{ github.base_ref }}..HEAD | grep '^skills/.*\.md$' || true)
           
           if [ -z "$NEW_FILES" ]; then
             echo "No new .md files in skills/ directory"
@@ -57,7 +57,16 @@ jobs:
             
             # Check if file starts with ---
             if ! head -n 1 "$file" | grep -q '^---$'; then
-              echo "❌ ERROR: Missing frontmatter in $file"
+              echo "❌ ERROR: Missing frontmatter opening delimiter in $file"
+              MISSING_FRONTMATTER=1
+              FILE_VALID=0
+              continue
+            fi
+            
+            # Check if file has closing delimiter
+            DELIMITER_COUNT=$(grep -c '^---$' "$file" || echo "0")
+            if [ "$DELIMITER_COUNT" -lt 2 ]; then
+              echo "❌ ERROR: Missing frontmatter closing delimiter in $file"
               MISSING_FRONTMATTER=1
               FILE_VALID=0
               continue
@@ -66,11 +75,19 @@ jobs:
             # Extract frontmatter (content between first two ---)
             FRONTMATTER=$(sed -n '/^---$/,/^---$/p' "$file" | sed '1d;$d')
             
+            if [ -z "$FRONTMATTER" ]; then
+              echo "❌ ERROR: Empty frontmatter in $file"
+              MISSING_FRONTMATTER=1
+              FILE_VALID=0
+              continue
+            fi
+            
             # Check required fields as defined in AGENTS.md section 3 (Technical Rule Specifications)
             # Required: title, impact, impactDescription, type, tags
             REQUIRED_FIELDS=("title" "impact" "impactDescription" "type" "tags")
             for field in "${REQUIRED_FIELDS[@]}"; do
-              if ! echo "$FRONTMATTER" | grep -q "^${field}:"; then
+              # Allow optional leading whitespace in YAML fields
+              if ! echo "$FRONTMATTER" | grep -qE "^\s*${field}:"; then
                 echo "❌ ERROR: Missing required field '${field}' in $file"
                 MISSING_FRONTMATTER=1
                 FILE_VALID=0
@@ -85,7 +102,8 @@ jobs:
           if [ $MISSING_FRONTMATTER -eq 1 ]; then
             echo ""
             echo "❌ Frontmatter validation failed. Please ensure all new .md files in skills/ have:"
-            echo "  - title, impact, impactDescription, type, and tags fields"
+            echo "  - Properly delimited YAML frontmatter (opening and closing ---)"
+            echo "  - Required fields: title, impact, impactDescription, type, and tags"
             echo "  - See AGENTS.md section 3 (Technical Rule Specifications) for details"
             exit 1
           fi
