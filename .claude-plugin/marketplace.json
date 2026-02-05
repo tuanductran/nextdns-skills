@@ -1,0 +1,30 @@
+{
+  "name": "nextdns-skills",
+  "description": "Expert AI assistants for NextDNS configuration, API integration, CLI management, and network-wide deployments.",
+  "plugins": [
+    {
+      "name": "NextDNS API Expert",
+      "source": "./",
+      "description": "Expert in NextDNS API integration covering authentication, profile management, analytics, logs, and real-time streaming for DNS filtering solutions.",
+      "skills": ["./skills/nextdns-api"]
+    },
+    {
+      "name": "NextDNS CLI Specialist",
+      "source": "./",
+      "description": "Specialist in NextDNS CLI client installation, configuration, and management for DNS-over-HTTPS proxy on routers, servers, and client devices.",
+      "skills": ["./skills/nextdns-cli"]
+    },
+    {
+      "name": "NextDNS Web UI Architect",
+      "source": "./",
+      "description": "Architect specializing in NextDNS Web UI configuration via my.nextdns.io, including security features, privacy lists, parental controls, and monitoring logs.",
+      "skills": ["./skills/nextdns-ui"]
+    },
+    {
+      "name": "NextDNS Integrations Architect",
+      "source": "./",
+      "description": "Architect for NextDNS integration with third-party platforms including Tailscale, Home Assistant, Ubiquiti, pfSense, OpenWrt, and other network management systems.",
+      "skills": ["./skills/integrations"]
+    }
+  ]
+}
