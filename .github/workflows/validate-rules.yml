@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -49,11 +51,13 @@ jobs:
             fi
             
             echo "Checking $file..."
+            FILE_VALID=1
             
             # Check if file starts with ---
             if ! head -n 1 "$file" | grep -q '^---$'; then
               echo "❌ ERROR: Missing frontmatter in $file"
               MISSING_FRONTMATTER=1
+              FILE_VALID=0
               continue
             fi
             
@@ -66,10 +70,11 @@ jobs:
               if ! echo "$FRONTMATTER" | grep -q "^${field}:"; then
                 echo "❌ ERROR: Missing required field '${field}' in $file"
                 MISSING_FRONTMATTER=1
+                FILE_VALID=0
               fi
             done
             
-            if [ $MISSING_FRONTMATTER -eq 0 ]; then
+            if [ $FILE_VALID -eq 1 ]; then
               echo "✓ $file has valid frontmatter"
             fi
           done
