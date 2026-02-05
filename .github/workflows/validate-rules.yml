@@ -33,7 +33,9 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           echo "Checking frontmatter in new .md files under skills/"
-          NEW_FILES=$(git diff --name-only --diff-filter=A origin/${{ github.base_ref }}...HEAD | grep '^skills/.*\.md$' || true)
+          # Fetch the base branch to ensure it's available for comparison
+          git fetch origin ${{ github.base_ref }}
+          NEW_FILES=$(git diff --name-only --diff-filter=A refs/remotes/origin/${{ github.base_ref }}...HEAD | grep '^skills/.*\.md$' || true)
           
           if [ -z "$NEW_FILES" ]; then
             echo "No new .md files in skills/ directory"
@@ -64,7 +66,8 @@ jobs:
             # Extract frontmatter (content between first two ---)
             FRONTMATTER=$(sed -n '/^---$/,/^---$/p' "$file" | sed '1d;$d')
             
-            # Check required fields
+            # Check required fields as defined in AGENTS.md section 3 (Technical Rule Specifications)
+            # Required: title, impact, impactDescription, type, tags
             REQUIRED_FIELDS=("title" "impact" "impactDescription" "type" "tags")
             for field in "${REQUIRED_FIELDS[@]}"; do
               if ! echo "$FRONTMATTER" | grep -q "^${field}:"; then
@@ -83,6 +86,7 @@ jobs:
             echo ""
             echo "❌ Frontmatter validation failed. Please ensure all new .md files in skills/ have:"
             echo "  - title, impact, impactDescription, type, and tags fields"
+            echo "  - See AGENTS.md section 3 (Technical Rule Specifications) for details"
             exit 1
           fi
           
