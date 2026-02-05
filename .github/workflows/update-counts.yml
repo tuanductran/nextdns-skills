@@ -2,9 +2,7 @@ name: Update Skill Counts
 
 on:
   push:
-    branches: [main, develop]
-    paths:
-      - 'skills/**/rules/*.md'
+  pull_request:
   workflow_dispatch:
 
 jobs:
