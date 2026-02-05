@@ -86,8 +86,8 @@ jobs:
             # Required: title, impact, impactDescription, type, tags
             REQUIRED_FIELDS=("title" "impact" "impactDescription" "type" "tags")
             for field in "${REQUIRED_FIELDS[@]}"; do
-              # Allow optional leading whitespace in YAML fields
-              if ! echo "$FRONTMATTER" | grep -qE "^\s*${field}:"; then
+              # Allow optional leading whitespace in YAML fields (POSIX regex)
+              if ! echo "$FRONTMATTER" | grep -qE "^[[:space:]]*${field}:"; then
                 echo "❌ ERROR: Missing required field '${field}' in $file"
                 MISSING_FRONTMATTER=1
                 FILE_VALID=0
