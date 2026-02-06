@@ -71,7 +71,7 @@ All rules MUST be created using `templates/rule-template.md`.
   - `impactDescription`: One-sentence consequence of non-compliance.
   - `type`: `capability` (AI needs this to solve the task) or `efficiency` (AI can solve, but this
     optimizes it).
-  - `tags`: 3-7 keywords for task-specific triggering.
+  - `tags`: 3-7 keywords for task-specific triggering (must be YAML array format, not string).
 - **Standard Sections**:
   - `H1 Heading`: Immediately followed by a one-line description.
   - `Overview`: Context and scenario.

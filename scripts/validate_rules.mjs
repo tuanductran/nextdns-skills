@@ -99,6 +99,15 @@ function validateFieldValues(file, frontmatter) {
     errorsFound = true;
   }
 
+  // Validate tags format - must be array, not string
+  const tagsMatch = frontmatter.match(/^tags:\s*'(.*)'/m);
+  if (tagsMatch) {
+    printError(
+      `Invalid tags format in ${file}: tags must be an array (use '- item' format), not a string`
+    );
+    errorsFound = true;
+  }
+
   return errorsFound;
 }
 
