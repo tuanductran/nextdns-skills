@@ -50,7 +50,8 @@ Always block Apple's Private Relay if you want NextDNS to see individual device 
 
 - ✅ **Cache Boost**: **Enabled**. High TTL values for cache-friendly responses.
 - ✅ **ECS**: **Enabled** (Anonymized). Improves performance with Anycast networks/CDNs.
-- ❌ **CNAME Flattening**: **Disabled** by default. Can break compatibility with Yahoo Mail and certain complex records.
+- ❌ **CNAME Flattening**: **Disabled** by default. Can break compatibility with Yahoo Mail and
+  certain complex records.
 
 ## Summary Checklist
 
