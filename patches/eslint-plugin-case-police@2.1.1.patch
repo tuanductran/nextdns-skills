@@ -1,0 +1,13 @@
+diff --git a/dist/index.cjs b/dist/index.cjs
+index e2fd6fcc92634706ef0d1c316eb6194cdca27464..528a5c58490e921c6a60d45e46e7fadacc1ae8bc 100644
+--- a/dist/index.cjs
++++ b/dist/index.cjs
+@@ -115,7 +115,7 @@ const stringCheck = createEslintRule({
+     };
+     const dict = loadDict(options);
+     const code = context.sourceCode.text;
+-    const extension = node_path.extname(context.getFilename());
++    const extension = node_path.extname(context.filename);
+     const isMarkdown = extension === ".md" || extension === ".mdx";
+     const checkText = (node) => {
+       const start = node.range[0];
