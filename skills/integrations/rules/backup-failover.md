@@ -28,8 +28,8 @@ or your connection to it fails, all internet access on your network will appear 
 Most advanced routers (OpenWrt, pfSense, EdgeRouter) allow multiple DNS upstreams. Configure NextDNS
 as the primary and a privacy-respecting public DNS as a secondary.
 
-✅ **Primary**: `45.90.28.abc (NextDNS Anycast/Linked IP)` ✅ **Secondary**: `9.9.9.9 (Quad9)` or
-`1.1.1.1 (Cloudflare)`
+- ✅ **Primary**: `45.90.28.abc (NextDNS Anycast/Linked IP)`
+- ✅ **Secondary**: `9.9.9.9 (Quad9)` or `1.1.1.1 (Cloudflare)`
 
 ### 2. NextDNS CLI Multi-Server
 

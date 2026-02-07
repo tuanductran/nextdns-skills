@@ -34,9 +34,9 @@ When enabled, NextDNS can resolve:
 
 ## Use Cases
 
-✅ **Native Resolution**: Access decentralized websites directly in any browser without needing
-special extensions (Metamask, etc.) for DNS resolution. ✅ **Developer Workflow**: Simplifies
-testing for decentralized applications (dApps).
+- ✅ **Native Resolution**: Access decentralized websites directly in any browser without needing
+  special extensions (Metamask, etc.) for DNS resolution.
+- ✅ **Developer Workflow**: Simplifies testing for decentralized applications (dApps).
 
 ## Security Note
 
