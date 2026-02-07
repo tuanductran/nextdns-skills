@@ -61,5 +61,10 @@
     "markdownlint-cli": "^0.47.0",
     "prettier": "^3.8.1",
     "prettier-plugin-pkg": "^0.21.2"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "eslint-plugin-case-police@2.1.1": "patches/eslint-plugin-case-police@2.1.1.patch"
+    }
   }
 }
