@@ -12,7 +12,7 @@
   },
   "author": "Tuan Duc Tran <tuanductran.dev@gmail.com>",
   "license": "MIT",
-  "packageManager": "pnpm@10.29.2",
+  "packageManager": "pnpm@10.29.3",
   "engines": {
     "node": ">=20.0.0"
   },
