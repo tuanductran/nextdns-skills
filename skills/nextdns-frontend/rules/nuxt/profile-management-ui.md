@@ -78,7 +78,7 @@ await fetchProfiles();
     <ul>
       <li v-for="profile in profiles" :key="profile.id">
         {{ profile.name }} ({{ profile.id }})
-        <UButton color="red" @click="deleteProfile(profile.id)">Delete</UButton>
+        <UButton color="error" @click="deleteProfile(profile.id)">Delete</UButton>
         <NuxtLink :to="`/profiles/${profile.id}`">View</NuxtLink>
       </li>
     </ul>

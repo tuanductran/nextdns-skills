@@ -79,11 +79,11 @@ export function useProfiles() {
   async function createProfile(name: string) {
     try {
       await $fetch('/api/profiles', { method: 'POST', body: { name } });
-      toast.add({ title: 'Profile created', color: 'green' });
+      toast.add({ title: 'Profile created', color: 'success' });
     } catch (err: unknown) {
       const message =
         (err as { data?: { message?: string } })?.data?.message ?? 'Failed to create profile';
-      toast.add({ title: 'Error', description: message, color: 'red' });
+      toast.add({ title: 'Error', description: message, color: 'error' });
     }
   }
 
@@ -101,7 +101,7 @@ const { data, error } = await useFetch('/api/profiles');
 
 <template>
   <div v-if="error">
-    <UAlert color="red" :title="error.message ?? 'Failed to load profiles'" />
+    <UAlert color="error" :title="error.message ?? 'Failed to load profiles'" />
   </div>
   <ul v-else>
     <li v-for="profile in data?.data" :key="profile.id">{{ profile.name }}</li>
@@ -162,13 +162,14 @@ if (response.status !== 200) handleError() // ❌ Misses 200-with-errors case
 ### Issue: `useToast` is undefined in a composable
 
 **Solution**: `useToast` requires `@nuxt/ui`. Ensure the module is installed and added to
-`nuxt.config.ts`. Also add `<UNotifications />` to `app.vue`:
+`nuxt.config.ts`. Also wrap your `app.vue` with `<UApp>` which provides the toast provider:
 
 ```vue
 <!-- app.vue -->
 <template>
-  <NuxtPage />
-  <UNotifications />
+  <UApp>
+    <NuxtPage />
+  </UApp>
 </template>
 ```
 
@@ -185,5 +186,5 @@ throw createError({ statusCode: 422, message: 'Validation failed', data: json.er
 ## Reference
 
 - [Nuxt 4 — Error Handling](https://nuxt.com/docs/4.x/getting-started/error-handling)
-- [Nuxt UI — Notifications](https://ui.nuxt.com/components/notifications)
+- [Nuxt UI — Toast](https://ui.nuxt.com/components/toast)
 - [NextDNS API — Handling Errors](https://nextdns.github.io/api/#handling-errors)
