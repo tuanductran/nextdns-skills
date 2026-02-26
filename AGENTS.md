@@ -99,6 +99,86 @@ AI agents MUST strictly adhere to these protocols:
 6. **Code Block Standards**: Specify language tags (bash, python, etc.). Use markers ✅/❌.
 7. **Conventional Commits**: `type(scope): description` (e.g., `feat(api): add rewrite rule`).
 8. **Schema Consistency**: Sync any structural changes with `data/schemas/profile.json`.
+9. **TypeScript Type Safety**: All TypeScript code examples in frontend rules MUST use explicit,
+   precise types. The following are strictly forbidden:
+   - `any` — use `unknown` (and narrow with type guards), or a concrete interface/type alias.
+   - `object` — use a specific interface or `Record<string, unknown>`.
+   - `Function` — use a typed signature (e.g., `() => void`).
+   - Non-null assertions (`!`) without a preceding type guard — document the guard instead.
+   - Type casting (`as SomeType`) without a prior type-narrowing check.
+
+   Use framework-generated types where available (e.g., `Route.LoaderArgs`, `PageServerLoad`,
+   `RequestEvent`) rather than manually re-typing them.
+
+## 🌐 Frontend Skill Standards
+
+These standards apply exclusively to `skills/nextdns-frontend/` and all subdirectories.
+
+### TypeScript Configuration
+
+All code examples in frontend rules MUST assume the following `tsconfig.json` baseline:
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
+  }
+}
+```
+
+Every rule's code example MUST compile cleanly under these settings. If a workaround is necessary,
+document WHY explicitly in a code comment.
+
+### Error Handling in Frontend Examples
+
+- Always handle both network failures and API-level errors (non-2xx HTTP status codes) separately.
+- In `try/catch`, the caught value is `unknown` — narrow it with `instanceof Error` before accessing
+  `.message`.
+- Surface errors to the user via the framework's error mechanism (`error()`, `ErrorBoundary`,
+  `useFormState`) rather than `console.error` alone.
+- Never swallow errors silently.
+
+### Accessibility (a11y)
+
+All UI component examples in frontend rules MUST follow these a11y requirements:
+
+- Use semantic HTML (`<button>`, `<nav>`, `<main>`, `<section>`, `<h1>`–`<h6>`).
+- Add `aria-label` or `aria-labelledby` to interactive elements that lack visible text.
+- Loading states must include an `aria-live="polite"` region or a `role="status"` element.
+- Color alone must not convey state — pair with text or an icon.
+
+### Testing Guidelines
+
+When a rule demonstrates a data-fetching or mutation pattern, include a brief **Testing** subsection
+after the main example showing:
+
+- How to mock the NextDNS API call (e.g., `vi.mock`, `jest.mock`, MSW handler).
+- One happy-path assertion and one error-path assertion.
+- Use `@testing-library/svelte`, `@testing-library/react`, or the framework's own test utilities.
+
+## 🤝 Contributing & Code Review
+
+### Contribution Workflow
+
+1. **Branch**: create a feature branch — `feat/add-{framework}-{rule}`.
+2. **Implement**: follow the Skill Development Lifecycle above.
+3. **Validate**: run the full validation suite before opening a PR.
+4. **PR title**: use Conventional Commits format — `feat(frontend): add SvelteKit logs rule`.
+5. **Review checklist**: Rule registered in `SKILL.md` (same commit) · No forbidden TypeScript
+   patterns (Protocol #9) · Example compiles under strict TS · a11y requirements met · Placeholder
+   values only · `pnpm run lint` passes locally.
+
+### Code Review Standards
+
+Reviewers MUST reject PRs that:
+
+- Introduce `any`, `object`, or `Function` types in TypeScript examples.
+- Commit real API keys, profile IDs, or domain names.
+- Add a rule file without updating `SKILL.md`.
+- Leave unlabeled code fences (triggers `MD040`).
+- Use deprecated framework APIs that conflict with official documentation.
 
 ## 🚀 Efficiency & Validation
 
