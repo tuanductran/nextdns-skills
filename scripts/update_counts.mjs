@@ -16,7 +16,23 @@ function getRuleCount(cat) {
   if (!fs.existsSync(rulesPath) || !fs.statSync(rulesPath).isDirectory()) {
     return null;
   }
-  return fs.readdirSync(rulesPath).filter((file) => file.endsWith('.md')).length;
+  return walkDir(rulesPath, (file) => file.endsWith('.md')).length;
+}
+
+function walkDir(dir, matcher) {
+  let results = [];
+  if (!fs.existsSync(dir)) return results;
+
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results = results.concat(walkDir(fullPath, matcher));
+    } else if (matcher(entry.name)) {
+      results.push(fullPath);
+    }
+  }
+  return results;
 }
 
 /* ========= Update Helpers ========= */
@@ -54,7 +70,13 @@ function updateDocument(filePath, categories, patternGenerator, name) {
 
 /* ========= Main Logic ========= */
 function updateCounts() {
-  const categories = ['nextdns-api', 'nextdns-cli', 'nextdns-ui', 'integrations'];
+  const categories = [
+    'nextdns-api',
+    'nextdns-cli',
+    'nextdns-ui',
+    'integrations',
+    'nextdns-frontend',
+  ];
 
   // Update README.md
   updateDocument(

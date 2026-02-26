@@ -24,7 +24,8 @@ nextdns-skills/
 │   ├── nextdns-api/            # 20 rules (API protocols & endpoints)
 │   ├── nextdns-cli/            # 21 rules (Deployment & SysConfig)
 │   ├── nextdns-ui/             # 13 rules (Web Dashboard Strategy)
-│   └── integrations/           # 15 rules (Platform Connectivity)
+│   ├── integrations/           # 15 rules (Platform Connectivity)
+│   └── nextdns-frontend/       # 30 rules (Nuxt + Next.js + Astro Dashboard)
 ├── scripts/                    # Maintenance & validation scripts
 ├── templates/                  # Standardized blueprints
 └── data/schemas/               # JSON schemas for NextDNS entities

@@ -27,12 +27,13 @@ use nextdns skill, <your request here>
 
 ## 🧠 Available Skills
 
-| Category                                         | Rules  | Focus                                                                  |
-| :----------------------------------------------- | :----: | :--------------------------------------------------------------------- |
-| [**NextDNS API**](skills/nextdns-api/SKILL.md)   | **20** | Authentication, Profile management, Analytics, and Logs.               |
-| [**NextDNS CLI**](skills/nextdns-cli/SKILL.md)   | **21** | Installation, system-wide configuration, and client monitoring.        |
-| [**NextDNS Web UI**](skills/nextdns-ui/SKILL.md) | **13** | Strategic configuration, content filtering, and security modeling.     |
-| [**Integrations**](skills/integrations/SKILL.md) | **15** | Third-party platform connectivity (OpenWrt, pfSense, Tailscale, etc.). |
+| Category                                                 | Rules  | Focus                                                                            |
+| :------------------------------------------------------- | :----: | :------------------------------------------------------------------------------- |
+| [**NextDNS API**](skills/nextdns-api/SKILL.md)           | **20** | Authentication, Profile management, Analytics, and Logs.                         |
+| [**NextDNS CLI**](skills/nextdns-cli/SKILL.md)           | **21** | Installation, system-wide configuration, and client monitoring.                  |
+| [**NextDNS Web UI**](skills/nextdns-ui/SKILL.md)         | **13** | Strategic configuration, content filtering, and security modeling.               |
+| [**Integrations**](skills/integrations/SKILL.md)         | **15** | Third-party platform connectivity (OpenWrt, pfSense, Tailscale, etc.).           |
+| [**NextDNS Frontend**](skills/nextdns-frontend/SKILL.md) | **30** | Nuxt, Next.js, and Astro dashboards: BFF proxy, profile UI, SSE logs, analytics. |
 
 ---
 

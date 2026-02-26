@@ -39,14 +39,15 @@ function checkUnregisteredRules(skillFile, rulesDir, skillContent) {
   if (!fs.existsSync(rulesDir) || !fs.statSync(rulesDir).isDirectory()) return false;
 
   let errorsFound = false;
-  const ruleFiles = fs.readdirSync(rulesDir).filter((f) => f.endsWith('.md'));
+  const ruleFilePaths = walkDir(rulesDir, (n) => n.endsWith('.md'));
 
-  for (const ruleFile of ruleFiles) {
-    if (!skillContent.includes(`(rules/${ruleFile})`)) {
-      printError(`Rule '${ruleFile}' exists but is not registered in ${skillFile}`);
+  for (const fullPath of ruleFilePaths) {
+    const relPath = path.relative(rulesDir, fullPath).split(path.sep).join('/');
+    if (!skillContent.includes(`(rules/${relPath})`)) {
+      printError(`Rule '${relPath}' exists but is not registered in ${skillFile}`);
       errorsFound = true;
     } else {
-      printSuccess(path.basename(ruleFile, '.md'));
+      printSuccess(path.basename(fullPath, '.md'));
     }
   }
   return errorsFound;
