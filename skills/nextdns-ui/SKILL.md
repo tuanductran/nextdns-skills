@@ -24,6 +24,7 @@ metadata:
 | [analytics-logs](rules/analytics-logs.md)                     | monitoring, logs, blocked queries, identifier              | Monitor network activity and troubleshoot |
 | [configuration-management](rules/configuration-management.md) | profile name, log location, performance, cache boost       | Manage profile global settings            |
 | [web3-settings](rules/web3-settings.md)                       | web3, blockchain, ens, unstoppable domains                 | Enable resolution for blockchain domains  |
+| [rewrites](rules/rewrites.md)                                 | rewrites, custom dns, hostname override, local dns, cname  | Override DNS resolution for hostnames     |
 
 ## Efficiency Rules
 

@@ -21,10 +21,10 @@ domain-specific context:
 ```text
 nextdns-skills/
 ├── skills/                     # Domain-specific knowledge categories
-│   ├── nextdns-api/            # 17 rules (API protocols & endpoints)
-│   ├── nextdns-cli/            # 19 rules (Deployment & SysConfig)
-│   ├── nextdns-ui/             # 12 rules (Web Dashboard Strategy)
-│   └── integrations/           # 14 rules (Platform Connectivity)
+│   ├── nextdns-api/            # 20 rules (API protocols & endpoints)
+│   ├── nextdns-cli/            # 21 rules (Deployment & SysConfig)
+│   ├── nextdns-ui/             # 13 rules (Web Dashboard Strategy)
+│   └── integrations/           # 15 rules (Platform Connectivity)
 ├── scripts/                    # Maintenance & validation scripts
 ├── templates/                  # Standardized blueprints
 └── data/schemas/               # JSON schemas for NextDNS entities
