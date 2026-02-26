@@ -25,6 +25,12 @@
       "source": "./",
       "description": "Architect for NextDNS integration with third-party platforms including Tailscale, Home Assistant, Ubiquiti, pfSense, OpenWrt, and other network management systems.",
       "skills": ["./skills/integrations"]
+    },
+    {
+      "name": "NextDNS Frontend Engineer",
+      "source": "./",
+      "description": "Expert in building custom NextDNS dashboards with Nuxt 4, Next.js 15, Astro, SvelteKit, and React Router v7. Covers BFF API proxy patterns, profile management UI, real-time SSE log streaming, analytics charts, and error handling.",
+      "skills": ["./skills/nextdns-frontend"]
     }
   ]
 }
