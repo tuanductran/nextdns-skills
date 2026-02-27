@@ -67,5 +67,10 @@
     "nextdns-skills-build": "workspace:*",
     "nextdns-skills-scripts": "workspace:*",
     "turbo": "^2.8.12"
+  },
+  "pnpm": {
+    "overrides": {
+      "minimatch": ">=10.2.3"
+    }
   }
 }
