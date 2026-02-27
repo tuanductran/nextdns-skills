@@ -12,13 +12,13 @@ tags:
   - traffic analysis
 ---
 
-# Analytics and Logs
+# Analytics and logs
 
 Visibility and troubleshooting tools
 
 Monitor your network activity and troubleshoot issues through real-time logs and detailed analytics.
 
-## Logs Tab
+## Logs tab
 
 - **Real-time Monitoring**: See every DNS query hitting the NextDNS resolver.
 - **Search and Filter**:
@@ -32,7 +32,7 @@ Monitor your network activity and troubleshoot issues through real-time logs and
 - **Reloading**: Use the reload icon to check for the most recent queries after making configuration
   changes.
 
-## Analytics Tab
+## Analytics tab
 
 - **Global Overview**: Track total queries and the percentage of blocked requests.
 - **Insights**:
@@ -41,7 +41,7 @@ Monitor your network activity and troubleshoot issues through real-time logs and
   - **Top Clients**: Identify which devices are the most active on your network.
 - **Retention**: Data in the Analytics tab respects your chosen retention period in Settings.
 
-## Best Practices
+## Best practices
 
 - Periodically check the **Blocked Queries Only** filter to ensure no essential services are being
   blocked.

@@ -14,7 +14,7 @@ tags:
   - deployment
 ---
 
-# Docker Deployment
+# Docker deployment
 
 Essential container deployment patterns for optimal DNS resolution and client tracking
 
@@ -22,7 +22,7 @@ NextDNS CLI is available as pre-built Docker images on DockerHub (`nextdns/nextd
 containerized deployments across various platforms. The networking mode significantly affects
 functionality, particularly for host detection and client IP visibility.
 
-## Host Network Mode (Recommended)
+## Host network mode (recommended)
 
 Using host network mode allows the NextDNS CLI container to see actual LAN IP addresses and enables
 host detection features:
@@ -31,7 +31,7 @@ host detection features:
 docker run -d --network host --restart unless-stopped nextdns/nextdns run -listen=:53 -profile=abc123
 ```
 
-### Why Host Network Mode?
+### Why host network mode?
 
 - **Real IP Visibility**: The CLI sees actual client IP addresses from your LAN instead of Docker's
   internal NAT IPs.
@@ -40,13 +40,13 @@ docker run -d --network host --restart unless-stopped nextdns/nextdns run -liste
 - **Performance**: Eliminates NAT overhead for DNS queries.
 - **Simplicity**: No port mapping required, direct access to port 53.
 
-### Important Considerations
+### Important considerations
 
 - Host network mode only works on Linux hosts.
 - The container shares the host's network stack directly.
 - Ensure no other service is listening on port 53 on the host.
 
-## Port Translation Mode
+## Port translation mode
 
 When host network mode is not available or desired, use port mapping:
 
@@ -62,13 +62,13 @@ docker run -d -p 53:53/tcp -p 53:53/udp --restart unless-stopped nextdns/nextdns
 - **Query Attribution**: All queries appear to come from the Docker container's IP rather than
   individual clients.
 
-### When to Use
+### When to use
 
 - On macOS or Windows Docker Desktop where host networking is not supported.
 - In environments where network isolation is required.
 - For testing or development purposes.
 
-## Persistence Configuration
+## Persistence configuration
 
 The `--restart unless-stopped` flag ensures the container automatically restarts on system boot and
 after Docker daemon restarts:
@@ -81,7 +81,7 @@ docker run -d \
     nextdns/nextdns run -listen=:53 -profile=abc123
 ```
 
-### Restart Policy Options
+### Restart policy options
 
 - `unless-stopped`: Container restarts automatically unless explicitly stopped (recommended for
   production).
@@ -89,7 +89,7 @@ docker run -d \
 - `on-failure`: Only restarts on non-zero exit codes.
 - `no`: No automatic restart (default, not recommended for DNS services).
 
-## Configuration File Persistence
+## Configuration file persistence
 
 To persist configuration across container restarts, mount the configuration directory:
 
@@ -104,7 +104,7 @@ docker run -d \
 
 This allows the CLI to store and read configuration from `/etc/nextdns` on the host system.
 
-## Best Practices
+## Best practices
 
 - **Always Use Restart Policy**: DNS services must be highly available. Use
   `--restart unless-stopped` for production deployments.
@@ -116,7 +116,7 @@ This allows the CLI to store and read configuration from `/etc/nextdns` on the h
   exhaustion.
 - **Logging**: Use Docker logging drivers to capture and rotate NextDNS CLI logs appropriately.
 
-## Container Management
+## Container management
 
 ```bash
 # View container status
@@ -137,7 +137,7 @@ docker pull nextdns/nextdns:latest
 
 ## Troubleshooting
 
-### Port Already in Use
+### Port already in use
 
 If port 53 is already in use:
 
@@ -153,7 +153,7 @@ sudo systemctl disable systemd-resolved
 sudo systemctl stop systemd-resolved
 ```
 
-### Container Not Starting
+### Container NOT starting
 
 Check logs for errors:
 

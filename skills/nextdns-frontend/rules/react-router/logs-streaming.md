@@ -17,7 +17,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Log Streaming via SSE (React Router v7)
+# Log streaming via sse React router v7)
 
 Proxy the NextDNS real-time log stream through a React Router v7 resource route and consume it in a
 React component
@@ -29,9 +29,9 @@ added on the server side. A React Router v7 resource route (a route module witho
 component export) proxies the upstream SSE stream as a `ReadableStream` response. The React
 component connects to the local resource route URL and parses incoming `data:` events.
 
-## Correct Usage
+## Correct usage
 
-### SSE proxy resource route
+### Sse proxy resource route
 
 ```typescript
 // ✅ app/routes/api.profiles.$id.logs.stream.ts
@@ -81,7 +81,7 @@ export default [
 ] satisfies RouteConfig;
 ```
 
-### React component consuming SSE
+### React component consuming sse
 
 ```typescript
 // ✅ app/routes/profiles.$id.logs.tsx
@@ -147,7 +147,7 @@ useEffect(() => {
 }, []);
 ```
 
-## Best Practices
+## Best practices
 
 - **Resource route for SSE proxy**: A route module without a default component export acts as an API
   endpoint — `loader` handles GET (SSE stream) cleanly.
@@ -158,7 +158,7 @@ useEffect(() => {
 
 ## Troubleshooting
 
-### Issue: Stream closes immediately after opening
+### Issue: stream closes immediately after opening
 
 **Symptoms**: `onerror` fires within seconds; no log events received.
 
@@ -166,7 +166,7 @@ useEffect(() => {
 deployment platform does not buffer streaming responses (Vercel: use Edge Functions; Cloudflare: set
 `Transfer-Encoding: chunked`).
 
-### Issue: `EventSource` causes hydration mismatch
+### Issue: `eventsource` causes hydration mismatch
 
 **Solution**: `EventSource` is browser-only. Place the `new EventSource(...)` call inside
 `useEffect` (client-only lifecycle) — never call it at module level or during SSR.

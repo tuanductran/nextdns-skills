@@ -18,7 +18,7 @@ Essential setup and platform-specific installation
 On most platforms, the NextDNS CLI can be installed with a single command. Use this skill when the
 user needs to set up NextDNS on a new device or router.
 
-## Universal Installer
+## Universal installer
 
 The following command works for most Linux distributions (Debian, Ubuntu, CentOS, Arch, Alpine),
 macOS, and many routers:
@@ -27,17 +27,17 @@ macOS, and many routers:
 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ```
 
-### Installation Workflow
+### Installation workflow
 
 1. **Run the script**: Execute the command above.
 2. **Follow the menu**: The interactive installer will guide you through the setup.
-3. **Enter Profile ID**: You will be prompted for your NextDNS configuration ID (e.g., `abc123`).
+3. **Enter Profile ID**: You will be prompted for your NextDNS configuration ID (for example, `abc123`).
 4. **Confirm Setup**: The installer will typically ask if you want to:
    - Set up a router configuration (if applicable).
    - Automatically configure system DNS.
    - Initialize the daemon at startup.
 
-## Platform-Specific Installation
+## Platform-specific installation
 
 While the universal installer is recommended, some platforms have specific considerations:
 
@@ -49,7 +49,7 @@ While the universal installer is recommended, some platforms have specific consi
 | **pfSense** | Installed via the "Shell" using the universal installer script.                   |
 | **Docker**  | Use the official `nextdns/nextdns` image.                                         |
 
-## Important Considerations
+## Important considerations
 
 - **Profile ID**: Always ensure you have a valid NextDNS profile ID from
   [my.nextdns.io](https://my.nextdns.io) before starting.

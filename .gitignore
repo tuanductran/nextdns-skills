@@ -1,47 +1,38 @@
-# 📦 Dependencies & Package Managers
+# 📦 Dependencies
 node_modules/
 .pnpm-debug.log*
 
-# 🐍 Python
-__pycache__/
-*.py[cod]
-*$py.class
-.pytest_cache/
-.python-version
-.venv
-venv/
-env/
-
-# 🛠️ Linters & Tools
-.eslintcache
-.markdownlintcache
-.prettiercache
-.ruff_cache/
-.mypy_cache/
-
-# 📂 Build & IDE
+# 🔨 Build outputs
 dist/
 build/
-.cache/
+packages/*/dist/
+
+# 🛠️ Linter & tool caches
+.markdownlintcache
+.biome/
+.turbo/
+
+# 💻 Editor & IDE
 .vscode/
 !.vscode/extensions.json
 !.vscode/settings.json
 .idea/
 *.swp
 *.swo
+
+# 🖥️ OS
 .DS_Store
 Thumbs.db
 
-# 🔐 Security & Environment
+# 🔐 Environment
 .env*
 !.env.example
-*.pem
-*.key
-credentials.json
 
-# 📝 Project Specific
+# 🤖 AI agent workspaces
 .agent/
 .gemini/
 .gemini-agent/
-manual_backups/
-temp_*/
+
+# 📝 Generated outputs
+skills/*/AGENTS.md
+test-cases.json

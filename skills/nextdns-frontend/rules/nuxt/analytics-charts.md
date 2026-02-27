@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Analytics Charts
+# Analytics charts
 
 Fetch NextDNS time-series analytics and render them as charts in a Nuxt dashboard
 
@@ -24,13 +24,13 @@ Fetch NextDNS time-series analytics and render them as charts in a Nuxt dashboar
 
 The NextDNS analytics API provides two shapes of data:
 
-- **Aggregated** — e.g., `/analytics/status` returns a total count per status.
-- **Time series** — append `;series` to any endpoint (e.g., `/analytics/status;series`) to get an
+- **Aggregated** — for example, `/analytics/status` returns a total count per status.
+- **Time series** — append `;series` to any endpoint (for example, `/analytics/status;series`) to get an
   array of counts over time, suitable for line or bar charts.
 
 Both shapes are fetched through a Nuxt server route to keep the API key server-side.
 
-## Correct Usage
+## Correct usage
 
 ### Server routes
 
@@ -148,7 +148,7 @@ await useFetch('https://api.nextdns.io/profiles/abc123/analytics/status', {
 });
 ```
 
-## Best Practices
+## Best practices
 
 - **Always pass `from`**: Omitting the date range returns all-time data, which is slow and can
   overwhelm a chart.
@@ -160,14 +160,14 @@ await useFetch('https://api.nextdns.io/profiles/abc123/analytics/status', {
 
 ## Troubleshooting
 
-### Issue: Time-series chart has misaligned x-axis
+### Issue: time-series chart has misaligned x-axis
 
 **Symptoms**: The number of data points in `queries` does not match `meta.series.times`.
 
 **Solution**: Both arrays have the same length by design. Ensure you are reading from
 `data.meta.series.times` (not constructing timestamps manually).
 
-### Issue: Analytics endpoint returns empty `data` array
+### Issue: analytics endpoint returns empty `data` array
 
 **Symptoms**: No queries are shown even though the profile is active.
 

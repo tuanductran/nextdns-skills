@@ -12,9 +12,9 @@ metadata:
   version: '1.0.0'
 ---
 
-# NextDNS CLI Skills
+# NextDNS CLI skills
 
-## Capability Rules
+## Capability rules
 
 | Rule                                                    | Keywords                                                     | Description                                |
 | ------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------ |
@@ -38,7 +38,7 @@ metadata:
 | [nix](rules/nix.md)                                     | nix, nixos, declarative, configuration.nix, services.nextdns | Install NextDNS on NixOS declaratively     |
 | [freebsd](rules/freebsd.md)                             | freebsd, bsd, pkg, ports, rc.conf                            | Install NextDNS on FreeBSD via pkg/ports   |
 
-## Efficiency Rules
+## Efficiency rules
 
 | Rule                                            | Keywords                            | Description                   |
 | ----------------------------------------------- | ----------------------------------- | ----------------------------- |

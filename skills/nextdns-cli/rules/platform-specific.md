@@ -12,14 +12,14 @@ tags:
   - UnifiOS
 ---
 
-# Platform Specific
+# Platform specific
 
 Tailored setup for routers and specialized operating systems
 
 NextDNS CLI integrates differently depending on the host system, especially on routers where it may
 need to hook into the local DHCP and DNS service (like dnsmasq).
 
-## Routers (General)
+## Routers (general)
 
 Most routers support the universal installer. Always use the `-setup-router=true` flag to ensure
 NextDNS integrates correctly with the router's DNS server and DHCP client discovery.
@@ -39,20 +39,20 @@ For modern versions of OpenWrt:
 2. Run the universal installer.
 3. Recommended: Select "Install NextDNS as a service" during the setup.
 
-### Ubiquiti (EdgeOS / UnifiOS)
+### Ubiquiti (edgeos / unifios)
 
-- **EdgeOS (ER-X, ERL, etc.)**: Use the universal installer via SSH.
+- **EdgeOS (ER-X, ERL, and more)**: Use the universal installer via SSH.
 - **UnifiOS (UDM/UXG)**: Use the universal installer via SSH. NextDNS CLI can automatically detect
   and configure itself for these platforms.
 
-### Synology (DSM / SRM)
+### Synology (dsm / srm)
 
 - **DSM**: Use the universal installer via SSH as root (`sudo -i`).
 - **SRM**: Similar to OpenWrt, use the universal installer via SSH.
 
-## Operating Systems
+## Operating systems
 
-### Linux (Systemd)
+### Linux systemd
 
 NextDNS CLI integrates with `systemd-resolved`. If `nextdns activate` doesn't work, you may need to
 manually configure `systemd-resolved` to point to `127.0.0.1` or disable it if it conflicts with

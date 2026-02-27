@@ -14,22 +14,22 @@ tags:
   - bypass methods
 ---
 
-# Parental Control
+# Parental control
 
 Content filtering and usage monitoring for family members
 
 Configure restrictions to manage and protect children's internet access.
 
-## Control Features
+## Control features
 
-- **Websites, Apps & Games**: Restrict access to specific popular services. Supported apps include:
+- **Websites, Apps and Games**: Restrict access to specific popular services. Supported apps include:
   - **Social Media**: Facebook, TikTok, Instagram, Snapchat, Reddit, Twitter, Tumblr, Pinterest.
   - **Gaming**: Roblox, Minecraft, Fortnite, League of Legends, Steam, Blizzard.
   - **Messaging**: Messenger, WhatsApp, Discord, Telegram, Skype.
   - **Streaming**: YouTube, Netflix, Disney+, Hulu, Spotify, Twitch, Vimeo, Prime Video.
   - **Others**: Tinder, eBay, Amazon, Zoom, 9GAG.
 - **Categories**: Block entire categories of content:
-  - **Porn**: Adult and pornographic content (e.g., Pornhub).
+  - **Porn**: Adult and pornographic content (for example, Pornhub).
   - **Gambling**: Gambling and betting sites.
   - **Dating**: Dating apps and websites.
   - **Piracy**: P2P sites and copyright-infringing content.
@@ -42,7 +42,7 @@ Configure restrictions to manage and protect children's internet access.
 - **Block Bypass Methods**: Essential feature to block VPNs, proxies, and Tor used to bypass
   filtering.
 
-## Expert Insight
+## Expert insight
 
 The **Recreation Time** feature is one of the most effective tools for balancing screen time and
 study time for children. Always enable **Block Bypass Methods** to ensure the rules cannot be easily

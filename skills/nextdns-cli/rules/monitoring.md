@@ -17,7 +17,7 @@ Real-time observation and metrics of DNS traffic
 
 Use these commands to monitor the health and activity of the NextDNS proxy.
 
-## Checking Logs
+## Checking logs
 
 To view the real-time activity and startup logs of the daemon:
 
@@ -31,7 +31,7 @@ sudo nextdns restart
 nextdns log
 ```
 
-## Cache Statistics
+## Cache statistics
 
 If you have caching enabled, you can monitor its performance:
 
@@ -40,7 +40,7 @@ If you have caching enabled, you can monitor its performance:
 nextdns cache-stats
 ```
 
-## Client Discovery
+## Client discovery
 
 See which clients are currently being discovered on the local network (useful for router
 installations):
@@ -50,7 +50,7 @@ installations):
 nextdns discovered
 ```
 
-## Query Logging
+## Query logging
 
 Enable direct logging of DNS queries to the console (useful for debugging specific blocked domains):
 

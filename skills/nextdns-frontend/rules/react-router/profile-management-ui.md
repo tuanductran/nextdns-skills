@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Profile Management UI (React Router v7)
+# Profile management UI React router v7)
 
 Build NextDNS profile list, create, update, and delete flows using React Router v7 `loader` and
 `action` functions
@@ -28,7 +28,7 @@ route modules. All NextDNS API calls must go through `loader`/`action` because t
 server and have access to `process.env.NEXTDNS_API_KEY`. The component receives `loaderData` as a
 prop automatically typed by the framework.
 
-## Correct Usage
+## Correct usage
 
 ### Profile list route with loader
 
@@ -140,7 +140,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 }
 ```
 
-## Best Practices
+## Best practices
 
 - **`loader` for GET, `action` for mutations**: This is the React Router v7 convention. `loader`
   runs on GET requests; `action` handles POST, PATCH, DELETE, PUT form submissions.
@@ -153,7 +153,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 
 ## Troubleshooting
 
-### Issue: `loaderData` is `undefined` after form submission
+### Issue: `loaderdata` is `undefined` after form submission
 
 **Symptoms**: Component re-renders but `loaderData` is empty after the `action` runs.
 

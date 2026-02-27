@@ -17,7 +17,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Project Setup
+# Project setup
 
 Bootstrap an Astro project with React integration configured to integrate with the NextDNS API
 
@@ -30,7 +30,7 @@ A NextDNS Astro + React frontend requires:
 3. Server-only environment variables (no `PUBLIC_` prefix) for the API key
 4. A `src/lib/nextdns.ts` shared fetcher used in Astro frontmatter and API endpoints
 
-## Correct Usage
+## Correct usage
 
 ### Create the project
 
@@ -56,7 +56,7 @@ npm install swr
 npm install @tanstack/react-query
 ```
 
-### astro.config.mjs
+### Astro.config.mjs
 
 ```javascript
 // ✅ Complete configuration for a NextDNS Astro frontend
@@ -75,7 +75,7 @@ export default defineConfig({
 });
 ```
 
-### tsconfig.json
+### TSConfig.json
 
 ```json
 {
@@ -199,7 +199,7 @@ export default defineConfig({ output: 'static' }); // ❌ API endpoints become b
 Without a `client:*` directive, React components render as static HTML only (no JavaScript sent to
 the browser).
 
-### Issue: TypeScript JSX errors in `.tsx` files
+### Issue: TypeScript jsx errors in `.tsx` files
 
 **Solution**: Ensure `tsconfig.json` has `"jsx": "react-jsx"` and `"jsxImportSource": "react"`.
 These are required when using React alongside Astro's own JSX syntax.

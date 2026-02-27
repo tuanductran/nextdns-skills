@@ -13,9 +13,9 @@ metadata:
 
 <!-- @case-police-ignore Api -->
 
-# NextDNS API Skills
+# NextDNS API skills
 
-## Capability Rules
+## Capability rules
 
 | Rule                                                | Keywords                                                                   | Description                   |
 | --------------------------------------------------- | -------------------------------------------------------------------------- | ----------------------------- |
@@ -38,7 +38,7 @@ metadata:
 | [rewrites](rules/rewrites.md)                       | rewrites, dns records, custom dns, hostname override, cname                | Manage DNS rewrite records    |
 | [settings](rules/settings.md)                       | settings, logs, log retention, log location, cache boost, cname flattening | Manage profile settings       |
 
-## Efficiency Rules
+## Efficiency rules
 
 | Rule                                        | Keywords                               | Description         |
 | ------------------------------------------- | -------------------------------------- | ------------------- |

@@ -12,7 +12,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Logs Download
+# Logs download
 
 Download DNS logs as a file
 
@@ -22,7 +22,7 @@ Download DNS logs as a file
 GET /profiles/:profile/logs/download
 ```
 
-## Basic Usage
+## Basic usage
 
 By default, this endpoint redirects to the public URL of the log file:
 
@@ -44,7 +44,7 @@ a.download = 'nextdns-logs.csv';
 a.click();
 ```
 
-## Get URL Without Redirect
+## Get URL without redirect
 
 Use `redirect=0` to get the URL as JSON instead of redirecting:
 
@@ -59,7 +59,7 @@ const result = await response.json();
 const downloadUrl = result.data.url;
 ```
 
-## With Loading Indicator
+## With loading indicator
 
 Useful when showing a loader while the file is being generated:
 
@@ -92,7 +92,7 @@ async function downloadLogs(profileId, apiKey) {
 }
 ```
 
-## React Example
+## React example
 
 ```javascript
 import { useState } from 'react';
@@ -133,7 +133,7 @@ function LogsDownloadButton({ profileId, apiKey }) {
 }
 ```
 
-## Node.js Example
+## Node.js example
 
 ```javascript
 import fs from 'fs';
@@ -165,23 +165,23 @@ async function downloadLogs(profileId, apiKey, outputPath) {
 await downloadLogs('abc123', process.env.NEXTDNS_API_KEY, './nextdns-logs.csv');
 ```
 
-## File Format
+## File format
 
 The downloaded file is in CSV format with the following columns:
 
 - Timestamp
 - Domain
 - Root Domain
-- Type (A, AAAA, etc.)
+- Type (A, AAAA, and more)
 - Status (default, blocked, allowed)
 - Reasons (if blocked)
 - Client IP
 - Device Name
 - Device Model
-- Protocol (DoH, DoT, UDP, etc.)
+- Protocol (DoH, DoT, UDP, and more)
 - Encrypted (yes/no)
 
-## Query Parameters
+## Query parameters
 
 The download endpoint supports the same filtering parameters as the logs endpoint:
 
@@ -197,7 +197,7 @@ const response = await fetch(url, {
 });
 ```
 
-### Supported Parameters
+### Supported parameters
 
 - `from` - Start date
 - `to` - End date
@@ -207,7 +207,7 @@ const response = await fetch(url, {
 - `raw` - Include all queries (true/false)
 - `redirect` - Return URL instead of redirecting (0/1)
 
-## Complete Example with Filters
+## Complete example with filters
 
 ```javascript
 async function downloadFilteredLogs(profileId, apiKey, filters = {}) {

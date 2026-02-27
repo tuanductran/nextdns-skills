@@ -12,14 +12,14 @@ tags:
   - optimization
 ---
 
-# Threat Modeling & Strategy
+# Threat modeling and strategy
 
 Efficient approach to long-term DNS management
 
 DNS configuration is a spectrum between absolute security/privacy and complete usability. Use these
 guidelines to find your balance.
 
-## The Grandma Test
+## The grandma test
 
 A DNS configuration is considered "stable" if it passes the **Grandma Test**:
 
@@ -27,7 +27,7 @@ A DNS configuration is considered "stable" if it passes the **Grandma Test**:
 - Major apps (Bank, Teams, Netflix) should work without manual adjustment.
 - Websites should load correctly without HTTPS warnings.
 
-## Law of Diminishing Returns
+## Law of diminishing returns
 
 Avoid "overblocking." Adding more and more blocklists doesn't necessarily make you more secure but
 significantly increases the risk of "breakage" (legitimate sites not working).
@@ -37,7 +37,7 @@ significantly increases the risk of "breakage" (legitimate sites not working).
 - Use an "AGGRESSIVE" profile only on individual devices where you can easily toggle it off or fix
   it.
 
-## Profile Organization Strategy
+## Profile organization strategy
 
 Instead of one massive profile, divide your configurations
 
@@ -45,7 +45,7 @@ Instead of one massive profile, divide your configurations
 - **Profile B (Personal)**: Moderate blocking. Used on personal laptops/phones.
 - **Profile C (Kids)**: High parental control and category blocking.
 
-## Maintenance Checklist
+## Maintenance checklist
 
 1. Periodically check your **Analytics** to see if specific rules are over-blocking.
 2. Review the **Allowlist** and remove entries that were only meant to be temporary.

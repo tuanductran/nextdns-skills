@@ -61,7 +61,7 @@ response = requests.get('https://api.nextdns.io/profiles/abc123', headers=header
 data = response.json()
 ```
 
-### Additional Examples (if needed)
+### Additional examples (if needed)
 
 Provide more examples for different use cases or scenarios.
 
@@ -82,7 +82,7 @@ const response = await fetch('https://api.nextdns.io/profiles/abc123');
 // Missing authentication header
 ```
 
-## Best Practices
+## Best practices
 
 List actionable recommendations and tips for optimal implementation.
 
@@ -91,17 +91,17 @@ List actionable recommendations and tips for optimal implementation.
 - **Practice 3**: Additional guidance for edge cases
 - **Practice 4**: Performance or security consideration
 
-## Common Pitfalls
+## Common pitfalls
 
 Describe frequent mistakes users make and how to avoid them.
 
-### Pitfall 1: Descriptive Name
+### Pitfall 1: Descriptive name
 
 Explain the mistake and its consequences.
 
 **Solution**: Provide clear steps to avoid or fix this issue.
 
-### Pitfall 2: Another Common Issue
+### Pitfall 2: Another common issue
 
 Describe the problem scenario.
 
@@ -111,7 +111,7 @@ Describe the problem scenario.
 
 Provide debugging guidance for issues related to this rule.
 
-### Issue: Common Error or Problem
+### Issue: Common error or problem
 
 **Symptoms**: What the user will observe when this issue occurs.
 
@@ -122,7 +122,7 @@ Provide debugging guidance for issues related to this rule.
 nextdns status
 ```
 
-### Issue: Another Potential Problem
+### Issue: Another potential problem
 
 **Symptoms**: Observable behavior indicating this issue.
 
@@ -141,6 +141,7 @@ Link to official documentation and relevant resources. Always use HTTPS URLs.
 
 <!--
 TEMPLATE USAGE NOTES:
-Refer to AGENTS.md for detailed instructions on rule creation protocols,
-frontmatter requirements, and quality standards.
+Refer to AGENTS.md (root) for detailed instructions on rule creation protocols,
+frontmatter requirements, and quality standards. Note: skills/*/AGENTS.md files
+are auto-generated outputs — edit the source rules in skills/*/rules/ instead.
 -->

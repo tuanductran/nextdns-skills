@@ -10,15 +10,15 @@ metadata:
   version: '1.0.0'
 ---
 
-# NextDNS Web UI Skills
+# NextDNS web UI skills
 
-## Capability Rules
+## Capability rules
 
 | Rule                                                          | Keywords                                                   | Description                               |
 | ------------------------------------------------------------- | ---------------------------------------------------------- | ----------------------------------------- |
 | [security-settings](rules/security-settings.md)               | threat intelligence, google safe browsing, TLDs, security  | Configure advanced threat protection      |
 | [privacy-settings](rules/privacy-settings.md)                 | blocklists, Hagezi, OISD, native tracking, privacy         | Manage privacy and ad-blocking lists      |
-| [parental-control](rules/parental-control.md)                 | apps & games, categories, recreation time, restricted mode | Set up restrictions for family members    |
+| [parental-control](rules/parental-control.md)                 | apps and games, categories, recreation time, restricted mode | Set up restrictions for family members    |
 | [ddns-settings](rules/ddns-settings.md)                       | linked ip, ddns, noip, dynamic dns, router                 | Manage network IP linking and dynamic DNS |
 | [denylist-allowlist](rules/denylist-allowlist.md)             | block domain, allow domain, whitelist, fixing breakage     | Manually manage domain accessibility      |
 | [analytics-logs](rules/analytics-logs.md)                     | monitoring, logs, blocked queries, identifier              | Monitor network activity and troubleshoot |
@@ -26,7 +26,7 @@ metadata:
 | [web3-settings](rules/web3-settings.md)                       | web3, blockchain, ens, unstoppable domains                 | Enable resolution for blockchain domains  |
 | [rewrites](rules/rewrites.md)                                 | rewrites, custom dns, hostname override, local dns, cname  | Override DNS resolution for hostnames     |
 
-## Efficiency Rules
+## Efficiency rules
 
 | Rule                                                  | Keywords                                             | Description                                |
 | ----------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------ |

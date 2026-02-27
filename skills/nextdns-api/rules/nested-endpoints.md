@@ -14,11 +14,11 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Nested Endpoints
+# Nested endpoints
 
 Understand how to work with nested profile configuration
 
-## Nested Structure
+## Nested structure
 
 Profile configuration has nested objects and arrays:
 
@@ -41,7 +41,7 @@ Profile configuration has nested objects and arrays:
 }
 ```
 
-## Child Endpoints
+## Child endpoints
 
 All nested objects and arrays have their own API endpoints:
 
@@ -56,9 +56,9 @@ All nested objects and arrays have their own API endpoints:
 /profiles/:profile/denylist                  # Top-level array
 ```
 
-## HTTP Methods by Endpoint Type
+## HTTP methods by endpoint type
 
-### Object Endpoints
+### Object endpoints
 
 Nested objects support `GET` and `PATCH`:
 
@@ -82,7 +82,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security', {
 });
 ```
 
-### Array Endpoints
+### Array endpoints
 
 Nested arrays support `GET`, `POST`, and `PUT`:
 
@@ -113,7 +113,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists', {
 });
 ```
 
-### Array Item Endpoints
+### Array item endpoints
 
 Individual array items support `PATCH` and `DELETE`:
 
@@ -135,7 +135,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/badsite.com', {
 });
 ```
 
-## Using First Key as ID
+## Using first key as id
 
 For array items, use the first key as the ID in the URL:
 
@@ -159,9 +159,9 @@ For array items, use the first key as the ID in the URL:
 /profiles/abc123/parentalControl/services/tiktok
 ```
 
-## Complete Examples
+## Complete examples
 
-### Update Security Settings
+### Update security settings
 
 ```javascript
 // Update specific security settings
@@ -209,7 +209,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security/tlds', {
 });
 ```
 
-### Update Performance Settings
+### Update performance settings
 
 ```javascript
 // Update deeply nested settings
@@ -227,7 +227,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/settings/performance', {
 });
 ```
 
-### Manage Parental Control Services
+### Manage parental control services
 
 ```javascript
 // Add service
@@ -257,7 +257,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tik
 });
 ```
 
-## Endpoint Patterns
+## Endpoint patterns
 
 | Endpoint Type | GET | POST | PUT | PATCH | DELETE |
 | ------------- | --- | ---- | --- | ----- | ------ |
@@ -299,7 +299,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/bad.com', {
 });
 ```
 
-## Helper Class
+## Helper class
 
 ```javascript
 class NextDNSProfile {

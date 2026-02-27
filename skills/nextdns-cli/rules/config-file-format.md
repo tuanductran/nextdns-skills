@@ -10,17 +10,17 @@ tags:
   - configuration-file
 ---
 
-# CLI Configuration File Format
+# CLI configuration file format
 
 The NextDNS CLI stores its settings in a simple key-value format. Understanding this file is
 essential for infrastructure-as-code and advanced automation.
 
-## File Location
+## File location
 
-- **Linux/Unix**: `/etc/nextdns.conf`
+- **Linux/UNIX**: `/etc/nextdns.conf`
 - **macOS**: `/Library/Application Support/NextDNS/nextdns.conf`
 
-## Format Structure
+## Format structure
 
 The file consists of flags without the leading dash, followed by the value.
 
@@ -36,7 +36,7 @@ cache-size 10MB
 cache-max-age 5m
 ```
 
-## Conditional Profiles
+## Conditional profiles
 
 You can specify multiple profiles based on conditions directly in the file:
 

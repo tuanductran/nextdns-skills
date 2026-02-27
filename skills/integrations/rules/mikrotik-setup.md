@@ -11,7 +11,7 @@ tags:
   - networking
 ---
 
-# MikroTik DoH Setup
+# MikroTik DoH setup
 
 Comprehensive guide for configuring NextDNS with DNS-over-HTTPS on MikroTik RouterOS devices.
 
@@ -20,9 +20,9 @@ Comprehensive guide for configuring NextDNS with DNS-over-HTTPS on MikroTik Rout
 MikroTik RouterOS (v6.47+) supports DNS-over-HTTPS (DoH). Configuring NextDNS via DoH provides
 encrypted DNS for the entire network without relying on the command-line installer.
 
-## Correct Usage
+## Correct usage
 
-### 1. Import Security Certificate
+### 1. Import security certificate
 
 MikroTik requires a root CA certificate to verify the HTTPS connection to NextDNS.
 
@@ -32,7 +32,7 @@ MikroTik requires a root CA certificate to verify the HTTPS connection to NextDN
 /certificate import file-name=DigiCertGlobalRootCA.crt.pem name=DigiCertGlobalRootCA
 ```
 
-### 2. Configure Static DNS
+### 2. Configure static DNS
 
 Map the NextDNS hostname to its IP addresses to initiate the DoH connection.
 
@@ -55,7 +55,7 @@ Set the DoH server URL and enable certificate verification.
 
 ## Do NOT Use
 
-❌ **Plain DNS with DoH**: Do not leave standard DNS servers (e.g., 8.8.8.8) in the `servers` list,
+❌ **Plain DNS with DoH**: Do not leave standard DNS servers (for example, 8.8.8.8) in the `servers` list,
 as MikroTik might fallback to them.
 
 ```bash
@@ -65,14 +65,14 @@ as MikroTik might fallback to them.
 
 ## Troubleshooting
 
-### No Connection / certificate error
+### No connection / certificate error
 
 1. **System Time**: MikroTik MUST have the correct system time for HTTPS verification. Check
    `/system clock print`.
 2. **Certificate Name**: Ensure the certificate was imported correctly and is visible in
    `/certificate print`.
 
-### Slow Resolution
+### Slow resolution
 
 - Ensure `max-udp-packet-size` is set to `4096` in `/ip dns set`.
 - Use RouterOS v7.x for significantly better DoH performance and stability compared to v6.x.

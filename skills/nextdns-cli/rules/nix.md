@@ -13,7 +13,7 @@ tags:
   - services.nextdns
 ---
 
-# NixOS Installation
+# NixOS installation
 
 Install and configure NextDNS CLI on NixOS using declarative system configuration
 
@@ -24,9 +24,9 @@ NixOS manages system state declaratively through `/etc/nixos/configuration.nix`.
 `nixos-rebuild switch` because NixOS regenerates system files from configuration. Always use the
 native `services.nextdns` NixOS module instead.
 
-## Correct Usage
+## Correct usage
 
-### Minimal Host Mode
+### Minimal host mode
 
 Edit `/etc/nixos/configuration.nix`:
 
@@ -51,7 +51,7 @@ Apply the configuration:
 sudo nixos-rebuild switch
 ```
 
-### Router Mode (LAN DNS)
+### Router mode LAN DNS
 
 ```nix
 # ✅ Router mode — listen on all interfaces for LAN clients
@@ -73,7 +73,7 @@ sudo nixos-rebuild switch
 }
 ```
 
-### Conditional Profiles (Subnet-Based)
+### Conditional profiles (subnet-based)
 
 ```nix
 # ✅ Assign different profiles per subnet
@@ -91,7 +91,7 @@ sudo nixos-rebuild switch
 }
 ```
 
-### With Cache Boost
+### With cache boost
 
 ```nix
 # ✅ Enable local DNS cache
@@ -120,7 +120,7 @@ sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 # NixOS manages these files declaratively
 ```
 
-## Managing the Service
+## Managing the service
 
 After `nixos-rebuild switch`, manage the service with standard systemd commands:
 
@@ -147,7 +147,7 @@ sudo nixos-rebuild switch
 
 ## Troubleshooting
 
-### Issue: Service not starting after rebuild
+### Issue: service NOT starting after rebuild
 
 **Symptoms**: `systemctl status nextdns` shows failed state.
 
@@ -162,7 +162,7 @@ arguments = [ "-profile abc123" ];
 arguments = [ "-profile" "abc123" ];
 ```
 
-### Issue: DNS not resolving after activation
+### Issue: DNS NOT resolving after activation
 
 **Symptoms**: `/etc/resolv.conf` still points to old nameservers.
 

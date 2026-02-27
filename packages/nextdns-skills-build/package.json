@@ -1,0 +1,40 @@
+{
+  "name": "nextdns-skills-build",
+  "version": "1.0.0",
+  "description": "Build tooling for NextDNS Skills (API, CLI, UI, Integrations, Frontend)",
+  "type": "module",
+  "bin": {
+    "nextdns-skills-build": "./bin/cli.js"
+  },
+  "exports": {
+    ".": "./bin/cli.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "build-agents": "node bin/cli.js build",
+    "build-all": "node bin/cli.js build --all",
+    "build-api": "node bin/cli.js build --skill=nextdns-api",
+    "build-cli": "node bin/cli.js build --skill=nextdns-cli",
+    "build-ui": "node bin/cli.js build --skill=nextdns-ui",
+    "build-integrations": "node bin/cli.js build --skill=integrations",
+    "build-frontend": "node bin/cli.js build --skill=nextdns-frontend",
+    "validate": "node bin/cli.js validate",
+    "extract-tests": "node bin/cli.js extract-tests",
+    "migrate": "node bin/cli.js migrate",
+    "dev": "tsup --watch"
+  },
+  "keywords": [
+    "nextdns",
+    "dns",
+    "skills",
+    "guidelines",
+    "llm",
+    "agents"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

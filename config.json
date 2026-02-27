@@ -14,24 +14,6 @@
     },
     {
       "pattern": "abc123"
-    },
-    {
-      "pattern": "rules/rule-name.md"
-    },
-    {
-      "pattern": "rules/another-rule.md"
-    },
-    {
-      "pattern": "rules/optimization-rule.md"
-    },
-    {
-      "pattern": "rules/best-practice.md"
-    }
-  ],
-  "replacementPatterns": [
-    {
-      "pattern": "^/",
-      "replacement": "{{BASEURL}}/"
     }
   ],
   "httpHeaders": [

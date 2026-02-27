@@ -16,16 +16,16 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Analytics Endpoints
+# Analytics endpoints
 
 Access comprehensive DNS analytics data
 
-## Available Endpoints
+## Available endpoints
 
 All analytics endpoints follow the pattern:
 `https://api.nextdns.io/profiles/:profile/analytics/{endpoint}`
 
-## Status Analytics
+## Status analytics
 
 Query distribution by status (blocked, allowed, default):
 
@@ -45,7 +45,7 @@ const response = await fetch(
 }
 ```
 
-## Domains Analytics
+## Domains analytics
 
 Top queried domains:
 
@@ -84,7 +84,7 @@ const roots = await fetch(
 }
 ```
 
-## Blocking Reasons
+## Blocking reasons
 
 Why domains were blocked:
 
@@ -116,7 +116,7 @@ const reasons = await fetch(
 }
 ```
 
-## Client IPs
+## Client ips
 
 Query distribution by IP address:
 
@@ -204,7 +204,7 @@ const protocols = await fetch(
 }
 ```
 
-## Query Types
+## Query types
 
 Distribution by DNS record type:
 
@@ -224,7 +224,7 @@ const queryTypes = await fetch(
 }
 ```
 
-## IP Versions
+## Ip versions
 
 IPv4 vs IPv6 distribution:
 
@@ -281,7 +281,7 @@ const encryption = await fetch(
 }
 ```
 
-## Destinations - Countries
+## Destinations - countries
 
 Query destinations by country:
 
@@ -315,7 +315,7 @@ const countries = await fetch(
 }
 ```
 
-## Destinations - GAFAM
+## Destinations - gafam
 
 Queries to big tech companies:
 
@@ -338,7 +338,7 @@ const gafam = await fetch(
 }
 ```
 
-## Helper Function
+## Helper function
 
 ```javascript
 async function getAnalytics(profileId, endpoint, params = {}) {

@@ -8,7 +8,7 @@ on:
       - develop
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   autofix:
@@ -28,7 +28,10 @@ jobs:
           version: 10.30.3
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
 
       - name: Run autofix
         run: pnpm lint:fix

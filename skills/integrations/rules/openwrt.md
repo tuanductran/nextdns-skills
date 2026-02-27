@@ -16,7 +16,7 @@ tags:
   - luci
 ---
 
-# OpenWrt Integration
+# OpenWrt integration
 
 Essential for deploying NextDNS on OpenWrt routers with proper installation methods and
 troubleshooting guidance
@@ -25,11 +25,11 @@ OpenWrt is a popular open-source firmware for routers that provides extensive cu
 control. This rule provides comprehensive guidance for installing, upgrading, and troubleshooting
 NextDNS on OpenWrt devices.
 
-## Installation Methods
+## Installation methods
 
 OpenWrt supports two installation methods depending on your version and preferences.
 
-### Method A: Universal Installer (Recommended)
+### Method a: universal installer (recommended)
 
 This method works on all OpenWrt versions and provides the most reliable installation experience.
 
@@ -41,7 +41,7 @@ This method works on all OpenWrt versions and provides the most reliable install
 | 4    | Run the NextDNS installer: `sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'` |
 | 5    | Follow the on-screen instructions to complete setup                                 |
 
-### Method B: LuCI App (Version 19.07.01-rc2+)
+### Method b: luci app (version 19.07.01-rc2+)
 
 This method is only available for OpenWrt version 19.07.01-rc2 and later. It provides a graphical
 interface for configuration.
@@ -66,7 +66,7 @@ To upgrade an existing NextDNS installation on OpenWrt:
 
 ## Troubleshooting
 
-### Debug Mode Installation
+### Debug mode installation
 
 If the installation fails or encounters errors, run the installer in debug mode to generate detailed
 logs:
@@ -77,16 +77,16 @@ DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 
 This will output verbose information that can help identify the root cause of installation issues.
 
-### Common Issues
+### Common issues
 
 - **curl not found**: Ensure curl is installed with `opkg update && opkg install curl`
 - **Permission denied**: Make sure you're running commands as root or with sufficient privileges
 - **Port 53 conflict**: Check if another DNS service (like dnsmasq) is already using port 53
 - **Package not available**: For Method B, verify your OpenWrt version is 19.07.01-rc2 or later
 
-## Usage Examples
+## Usage examples
 
-### Complete Installation via SSH
+### Complete installation via SSH
 
 ```bash
 # Connect to router via SSH
@@ -101,14 +101,14 @@ sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 # Follow the prompts to complete installation
 ```
 
-### Debug Mode Installation
+### Debug mode installation
 
 ```bash
 # Run installer with debug output
 DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ```
 
-### Upgrade Existing Installation
+### Upgrade existing installation
 
 ```bash
 # Re-run the installer to upgrade

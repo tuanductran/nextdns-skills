@@ -18,7 +18,7 @@ tags:
   - split dns
 ---
 
-# Tailscale Integration
+# Tailscale integration
 
 Critical for protecting mesh VPN traffic with NextDNS filtering and enforcing DNS policies across
 distributed networks
@@ -27,24 +27,24 @@ Tailscale is a zero-config mesh VPN built on WireGuard that makes it easy to con
 securely. By integrating NextDNS with Tailscale, you can ensure that all traffic flowing through
 your Tailscale network benefits from NextDNS filtering and protection.
 
-## Integration Mechanism
+## Integration mechanism
 
 Tailscale integrates with NextDNS using **DNS-over-HTTPS (DoH)** as the transport protocol. This
 ensures encrypted DNS queries across your entire mesh network, even when devices are on untrusted
 networks.
 
-## Basic Setup: Global Nameserver
+## Basic setup: global nameserver
 
 This configuration applies NextDNS to all devices in your Tailscale network (tailnet).
 
-### Step 1: Obtain NextDNS IPv6 Endpoint
+### Step 1: obtain NextDNS IPv6 endpoint
 
 1. Log in to your NextDNS dashboard
 2. Navigate to the **Setup** tab
 3. Find the **Endpoints** section
 4. Copy the **IPv6 address** (format: `2a07:a8c0::xx:xxxx`)
 
-### Step 2: Configure Tailscale Admin Console
+### Step 2: configure Tailscale admin console
 
 1. Open the [Tailscale Admin Console](https://login.tailscale.com/admin/dns)
 2. Navigate to **DNS** settings
@@ -58,7 +58,7 @@ Nameserver: 2a07:a8c0::ab:cd12
 ☑ Override local DNS
 ```
 
-### Step 3: Enable Override DNS Servers (Critical)
+### Step 3: enable override DNS servers (critical)
 
 This setting must be enabled to ensure NextDNS is actually used:
 
@@ -66,12 +66,12 @@ This setting must be enabled to ensure NextDNS is actually used:
 - Enabling it forces all DNS queries through Tailscale's resolver
 - This is the most common cause of integration failures
 
-## Advanced Configuration: Per-Device Profiles
+## Advanced configuration: per-device profiles
 
 Tailscale's Access Control List (ACL) system allows you to assign different NextDNS profiles to
 specific devices or user groups using node attributes.
 
-### Assigning Profiles with nodeAttrs
+### Assigning profiles with nodeattrs
 
 You can specify which NextDNS profile each device should use through ACL policies:
 
@@ -98,9 +98,9 @@ You can specify which NextDNS profile each device should use through ACL policie
 
 - `target`: Specifies which devices/users this rule applies to (uses Tailscale tags or autogroups)
 - `attr`: The NextDNS profile ID to apply (format: `nextdns:YOUR_PROFILE_ID`)
-- Replace `abc123`, `xyz789`, etc. with your actual NextDNS profile IDs
+- Replace `abc123`, `xyz789`, and more with your actual NextDNS profile IDs
 
-### Example: Family vs. Work Profiles
+### Example: family vs. work profiles
 
 ```json
 {
@@ -124,7 +124,7 @@ You can specify which NextDNS profile each device should use through ACL policie
 }
 ```
 
-### Disabling Device Metadata Sharing
+### Disabling device metadata sharing
 
 If you prefer not to share device information with NextDNS, use the `no-device-info` attribute:
 
@@ -143,7 +143,7 @@ This prevents Tailscale from sending device names, operating systems, and other 
 
 ## Limitations
 
-### Split DNS Not Supported
+### Split DNS NOT supported
 
 NextDNS cannot be used as a split DNS server alongside other DNS providers in Tailscale. You must
 choose one of the following:
@@ -153,7 +153,7 @@ choose one of the following:
 
 There is no hybrid configuration where some domains use NextDNS and others use different resolvers.
 
-### IPv6 Requirement
+### IPv6 requirement
 
 The DoH integration requires IPv6 connectivity. Devices without IPv6 support may experience issues
 or fallback to local DNS.
@@ -166,7 +166,7 @@ After configuration, verify the integration is working:
 2. Confirm it shows "This device is using NextDNS with `your profile`"
 3. Check the NextDNS logs to see queries from your Tailscale devices
 
-## Best Practices
+## Best practices
 
 - **Test Before Full Deployment**: Configure a single device first to verify functionality
 - **Use Tags Strategically**: Organize devices with Tailscale tags for easier profile management
@@ -175,7 +175,7 @@ After configuration, verify the integration is working:
 - **Regular ACL Review**: Audit your ACL configuration periodically to ensure correct profile
   assignments
 
-## Common Pitfalls
+## Common pitfalls
 
 - **Forgetting to Enable Override**: The most common mistake is not enabling "Override local DNS" in
   Tailscale settings
@@ -188,21 +188,21 @@ After configuration, verify the integration is working:
 
 ## Troubleshooting
 
-### DNS Not Working After Configuration
+### DNS NOT working after configuration
 
 1. Verify "Override local DNS" is enabled in Tailscale Admin Console
 2. Check that the NextDNS IPv6 endpoint is correctly entered
 3. Restart the Tailscale client on affected devices
 4. Test IPv6 connectivity: `ping6 2a07:a8c0::1`
 
-### Wrong Profile Being Used
+### Wrong profile being used
 
 1. Review your ACL nodeAttrs configuration for syntax errors
 2. Verify device tags are correctly assigned in Tailscale Admin Console
 3. Check that profile IDs match your NextDNS dashboard
 4. Use `tailscale status` to confirm device tags
 
-### Queries Not Appearing in NextDNS Logs
+### Queries NOT appearing in NextDNS logs
 
 1. Confirm devices are actually routing through Tailscale (check Tailscale status)
 2. Verify the profile ID in your configuration is correct

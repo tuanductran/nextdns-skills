@@ -14,7 +14,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# DNS Rewrites
+# DNS rewrites
 
 Manage custom DNS rewrite records via the NextDNS API
 
@@ -26,13 +26,13 @@ deleting rewrite records.
 
 Common use cases:
 
-- Point internal hostnames (e.g., `nas.home`) to local IP addresses
+- Point internal hostnames (for example, `nas.home`) to local IP addresses
 - Block a specific hostname by returning `0.0.0.0`
 - Create CNAME aliases for self-hosted services
 
-## Correct Usage
+## Correct usage
 
-### List All Rewrites
+### List all rewrites
 
 ```javascript
 // ✅ Retrieve all rewrite records for a profile
@@ -44,7 +44,7 @@ const { data } = await response.json();
 // data: [{ "id": "abc123", "name": "nas.home", "content": "192.168.1.100" }]
 ```
 
-### Add an A Record (IPv4)
+### Add an a record IPv4
 
 ```javascript
 // ✅ Map a hostname to an IPv4 address
@@ -61,7 +61,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/rewrites', {
 });
 ```
 
-### Add a CNAME Alias
+### Add a CNAME alias
 
 ```javascript
 // ✅ Point a subdomain to another hostname
@@ -78,7 +78,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/rewrites', {
 });
 ```
 
-### Block a Hostname via Rewrite
+### Block a hostname via rewrite
 
 ```javascript
 // ✅ Return zero address to effectively block a hostname
@@ -95,7 +95,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/rewrites', {
 });
 ```
 
-### Delete a Rewrite
+### Delete a rewrite
 
 ```javascript
 // ✅ Remove a rewrite using the id returned from GET or POST
@@ -129,7 +129,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/rewrites/nas.home', {
 });
 ```
 
-## Best Practices
+## Best practices
 
 - **Store rewrite IDs**: Save the `id` from the POST response to enable programmatic deletion
   without a prior GET.
@@ -142,7 +142,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/rewrites/nas.home', {
 
 ## Troubleshooting
 
-### Issue: POST returns 400 Bad Request
+### Issue: post returns 400 bad request
 
 **Symptoms**: `{"errors": {"name": "invalid"}}` or a generic validation error.
 
@@ -153,7 +153,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/rewrites/nas.home', {
 echo '{"name":"nas.home","content":"192.168.1.100"}' | python3 -m json.tool
 ```
 
-### Issue: Rewrite not taking effect
+### Issue: rewrite NOT taking effect
 
 **Symptoms**: DNS still resolves to the original IP after creating the rewrite.
 

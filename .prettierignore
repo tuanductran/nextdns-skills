@@ -1,9 +1,0 @@
-pnpm-lock.yaml
-node_modules/
-.github/
-dist/
-build/
-*.jpeg
-*.jpg
-*.png
-thumbnail.jpeg

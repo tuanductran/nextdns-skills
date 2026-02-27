@@ -11,9 +11,9 @@ metadata:
   version: '1.0.0'
 ---
 
-# NextDNS Integration Skills
+# NextDNS integration skills
 
-## Capability Rules
+## Capability rules
 
 | Rule                                                                       | Keywords                                                                                                                     | Description                                                                                                                      |
 | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
@@ -32,13 +32,13 @@ metadata:
 | [MikroTik DoH Setup](rules/mikrotik-setup.md)                              | mikrotik, routeros, doh, dns-over-https, networking                                                                          | Configure NextDNS via DNS-over-HTTPS on MikroTik RouterOS devices                                                                |
 | [Kubernetes Integration](rules/kubernetes.md)                              | kubernetes, k8s, coredns, daemonset, dns policy, container                                                                   | Deploy NextDNS CLI as a node-level DNS proxy in Kubernetes clusters                                                              |
 
-## Efficiency Rules
+## Efficiency rules
 
 | Rule                                            | Keywords                                      | Description                            |
 | ----------------------------------------------- | --------------------------------------------- | -------------------------------------- |
 | [Backup and Failover](rules/backup-failover.md) | backup dns, failover, redundancy, reliability | Ensure connectivity during DNS outages |
 
-## Adding New Integration Rules
+## Adding new integration rules
 
 When adding a new integration rule:
 
@@ -49,7 +49,7 @@ When adding a new integration rule:
 5. Register the rule in the appropriate table above
 6. Run `pnpm lint:fix` to ensure compliance
 
-### Example Integration Platforms
+### Example integration platforms
 
 Consider creating rules for these popular platforms:
 

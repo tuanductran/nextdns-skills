@@ -7,7 +7,7 @@ management.
 
 ---
 
-## 🚀 Installation & Usage
+## 🚀 Installation and usage
 
 ### ⚙️ Installation
 
@@ -25,19 +25,19 @@ use nextdns skill, <your request here>
 
 ---
 
-## 🧠 Available Skills
+## 🧠 Available skills
 
 | Category                                                 | Rules  | Focus                                                                            |
 | :------------------------------------------------------- | :----: | :------------------------------------------------------------------------------- |
 | [**NextDNS API**](skills/nextdns-api/SKILL.md)           | **20** | Authentication, Profile management, Analytics, and Logs.                         |
 | [**NextDNS CLI**](skills/nextdns-cli/SKILL.md)           | **21** | Installation, system-wide configuration, and client monitoring.                  |
 | [**NextDNS Web UI**](skills/nextdns-ui/SKILL.md)         | **13** | Strategic configuration, content filtering, and security modeling.               |
-| [**Integrations**](skills/integrations/SKILL.md)         | **15** | Third-party platform connectivity (OpenWrt, pfSense, Tailscale, etc.).           |
-| [**NextDNS Frontend**](skills/nextdns-frontend/SKILL.md) | **30** | Nuxt, Next.js, and Astro dashboards: BFF proxy, profile UI, SSE logs, analytics. |
+| [**Integrations**](skills/integrations/SKILL.md)         | **15** | Third-party platform connectivity (OpenWrt, pfSense, Tailscale, and more).       |
+| [**NextDNS Frontend**](skills/nextdns-frontend/SKILL.md) | **30** | Nuxt, Next.js, Astro, SvelteKit, and React Router: BFF proxy, profile UI, SSE logs, analytics. |
 
 ---
 
-## 📜 System Architecture
+## 📜 System architecture
 
 Rules are categorized into two types to guide AI precision:
 
@@ -53,19 +53,21 @@ Rules are categorized into two types to guide AI precision:
 This repository is governed by the **10-Point Protocol System** to ensure high-fidelity skills for
 AI agents.
 
-### Quick Commands
+### Quick commands
 
-| Task                     | Command            |
-| :----------------------- | :----------------- |
-| **Setup**                | `pnpm install`     |
-| **Auto-Format Code**     | `pnpm run format`  |
-| **Full Quality Check**   | `pnpm lint`        |
-| **Fix Formatting/Terms** | `pnpm lint:fix`    |
-| **Check Rule Logic**     | `pnpm lint:rules`  |
-| **Check Syntax**         | `pnpm lint:syntax` |
-| **Check Broken Links**   | `pnpm lint:links`  |
+| Task                     | Command               |
+| :----------------------- | :-------------------- |
+| **Setup**                | `pnpm install`        |
+| **Auto-Format Code**     | `pnpm run format`     |
+| **Full Quality Check**   | `pnpm lint`           |
+| **Fix Formatting/Terms** | `pnpm lint:fix`       |
+| **Check Rule Logic**     | `pnpm lint:rules`     |
+| **Check Syntax**         | `pnpm lint:syntax`    |
+| **Check Broken Links**   | `pnpm lint:links`     |
+| **Build All Skills**     | `pnpm build:skills`   |
+| **Sync Rule Counts**     | `pnpm update-counts`  |
 
-### Adding New Rules
+### Adding new rules
 
 1. Use the [Rule Template](templates/rule-template.md).
 2. Register the rule in the parent `SKILL.md`.

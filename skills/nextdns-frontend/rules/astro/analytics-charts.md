@@ -17,7 +17,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Analytics Charts
+# Analytics charts
 
 Fetch NextDNS time-series analytics and render them as charts in an Astro + React dashboard
 
@@ -25,14 +25,14 @@ Fetch NextDNS time-series analytics and render them as charts in an Astro + Reac
 
 The NextDNS analytics API provides two shapes of data:
 
-- **Aggregated** — e.g., `/analytics/status` returns a total count per status.
-- **Time series** — append `;series` to any endpoint (e.g., `/analytics/status;series`) to get an
+- **Aggregated** — for example, `/analytics/status` returns a total count per status.
+- **Time series** — append `;series` to any endpoint (for example, `/analytics/status;series`) to get an
   array of counts over time, suitable for line or bar charts.
 
 In Astro, static summary data is fetched in `.astro` frontmatter (server-side). Interactive charts
 with date pickers are React islands that call the Astro analytics API endpoint.
 
-## Correct Usage
+## Correct usage
 
 ### Astro API endpoint — analytics proxy
 
@@ -181,7 +181,7 @@ useEffect(() => {
 }, []);
 ```
 
-## Best Practices
+## Best practices
 
 - **Always include `from=`**: Scoped time ranges are faster and return more relevant data.
 - **Use `client:visible` for chart islands**: Charts are often below the fold — `client:visible`
@@ -191,13 +191,13 @@ useEffect(() => {
 
 ## Troubleshooting
 
-### Issue: Analytics endpoint returns 404 for `;series` paths
+### Issue: analytics endpoint returns 404 for `;series` paths
 
 **Solution**: The `;series` suffix is part of the URL path — it must be URL-encoded or passed
 verbatim. Some routing configurations may strip it. Verify the Astro dynamic route file name does
 not interfere with the semicolon character.
 
-### Issue: SWR returns stale data after changing the date range selector
+### Issue: swr returns stale data after changing the date range selector
 
 **Solution**: SWR uses the URL as the cache key. Including `from` in the URL (as shown above)
 ensures a fresh request is made whenever the selector value changes.

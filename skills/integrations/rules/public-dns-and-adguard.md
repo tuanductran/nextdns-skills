@@ -20,7 +20,7 @@ tags:
   - bootstrap dns
 ---
 
-# Public DNS and AdGuard Home Integration
+# Public DNS and AdGuard home integration
 
 Critical for unlinked device setup and AdGuard Home upstream configuration
 
@@ -31,7 +31,7 @@ specific configuration profile, as well as integration with AdGuard Home as an u
 provider. This guide covers browser setup, operating system configuration, and AdGuard Home
 integration patterns.
 
-## Public DNS Servers (Anycast)
+## Public DNS servers (anycast)
 
 NextDNS operates the following public DNS servers for unlinked devices:
 
@@ -53,9 +53,9 @@ NextDNS operates the following public DNS servers for unlinked devices:
 
 - Hostname: `dns.nextdns.io`
 
-## Browser Setup
+## Browser setup
 
-### Chrome and Edge
+### Chrome and edge
 
 Configure secure DNS in Chromium-based browsers:
 
@@ -71,19 +71,19 @@ Configure secure DNS in Chromium-based browsers:
 Configure DNS over HTTPS in Firefox:
 
 1. Navigate to **Settings**
-2. Go to **Privacy & Security**
+2. Go to **Privacy and Security**
 3. Enable **DNS over HTTPS**
 4. Select **Max Protection**
 5. Choose **NextDNS** from the provider list
 
-## Operating System Setup
+## Operating system setup
 
 ### Windows 11
 
 Configure DNS settings with DoH support:
 
 1. Open **Settings**
-2. Navigate to **Network & internet**
+2. Navigate to **Network and internet**
 3. Select your connection (**Wi-Fi** or **Ethernet**)
 4. Click **Hardware properties**
 5. Under **DNS Server Assignment**, click **Edit**
@@ -101,7 +101,7 @@ Configure DNS settings with DoH support:
 Configure Private DNS for system-wide encrypted DNS:
 
 1. Open **Settings**
-2. Navigate to **Network & internet**
+2. Navigate to **Network and internet**
 3. Select **Private DNS**
 4. Choose **Private DNS provider hostname**
 5. Enter: `dns.nextdns.io`
@@ -113,15 +113,15 @@ iOS requires installing a configuration profile:
 1. Visit the [Apple configuration generator](https://apple.nextdns.io)
 2. Generate and download the `.mobileconfig` profile for your configuration
 3. Install the profile on your iOS device
-4. Navigate to **Settings** → **General** → **VPN & Device Management**
+4. Navigate to **Settings** → **General** → **VPN and Device Management**
 5. Select and install the NextDNS profile
 
 **Note:** The profile must be generated from the official NextDNS Apple generator to ensure proper
 signing and compatibility.
 
-## AdGuard Home Integration
+## AdGuard home integration
 
-### Upstream DNS Servers
+### Upstream DNS servers
 
 Configure NextDNS as upstream DNS in AdGuard Home for load balancing:
 
@@ -137,7 +137,7 @@ https://dns2.nextdns.io/
 - **DNS over TLS:** Use `tls://dns1.nextdns.io/` and `tls://dns2.nextdns.io/`
 - **DNS over QUIC:** Use `quic://dns1.nextdns.io/` and `quic://dns2.nextdns.io/`
 
-### Bootstrap DNS Servers
+### Bootstrap DNS servers
 
 **Critical:** Bootstrap DNS servers must be configured to ensure AdGuard Home can resolve NextDNS
 upstream hostnames and maintain EDNS Client Subnet (ECS) functionality for optimal routing.
@@ -153,7 +153,7 @@ upstream hostnames and maintain EDNS Client Subnet (ECS) functionality for optim
 These public resolvers ensure that AdGuard Home can properly resolve the NextDNS upstream hostnames
 and maintain ECS functionality for optimal routing.
 
-## Best Practices
+## Best practices
 
 - Use DNS over HTTPS (DoH) or DNS over TLS (DoT) whenever possible for encrypted DNS queries
 - Configure both IPv4 and IPv6 DNS servers for dual-stack networks
@@ -161,7 +161,7 @@ and maintain ECS functionality for optimal routing.
 - Use load-balanced endpoints (`dns1` and `dns2`) for better reliability in AdGuard Home
 - Test DNS configuration after setup using online DNS leak test tools
 
-## Common Pitfalls
+## Common pitfalls
 
 - **Missing Bootstrap DNS:** AdGuard Home may fail to resolve NextDNS upstream servers without
   proper bootstrap configuration

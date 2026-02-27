@@ -17,7 +17,7 @@ tags:
   - router installation
 ---
 
-# DD-WRT Installation
+# DD-WRT installation
 
 Essential setup for NextDNS CLI on DD-WRT routers with persistent configuration
 
@@ -32,7 +32,7 @@ and protecting custom DNS settings.
 - Requires SSH access to the router
 - Router must have sufficient JFFS storage space
 
-## JFFS Enablement
+## Jffs enablement
 
 JFFS must be enabled and properly wiped before installing NextDNS CLI:
 
@@ -49,7 +49,7 @@ JFFS must be enabled and properly wiped before installing NextDNS CLI:
 **Important**: The "Clean JFFS2" option should only be enabled once during initial setup. Leaving it
 enabled will erase JFFS contents on every reboot.
 
-## Installation and Upgrade
+## Installation and upgrade
 
 Connect to your DD-WRT router via SSH and run the universal installer:
 
@@ -74,7 +74,7 @@ sh -c "$(curl -sL https://nextdns.io/install)"
 
 The installer automatically detects existing installations and performs an upgrade.
 
-## Time Sync Workaround
+## Time sync workaround
 
 DD-WRT may experience x509 certificate errors during boot due to incorrect system time. To prevent
 this, configure an NTP forwarder:
@@ -87,7 +87,7 @@ This ensures that NTP queries for `2.pool.ntp.org` are forwarded to your upstrea
 certificate validation failures during the boot sequence when the system clock hasn't synchronized
 yet.
 
-## dnsmasq Persistence
+## dnsmasq persistence
 
 NextDNS CLI modifies the default dnsmasq configuration. To protect custom dnsmasq settings and
 ensure they persist across NextDNS updates:

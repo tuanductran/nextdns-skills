@@ -14,7 +14,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Error Handling
+# Error handling
 
 Map NextDNS API errors to user-friendly React and Next.js error UI
 
@@ -23,14 +23,14 @@ Map NextDNS API errors to user-friendly React and Next.js error UI
 The NextDNS API returns errors in two formats:
 
 - **HTTP 4xx/5xx** with `{ "errors": [...] }` — validation or auth errors.
-- **HTTP 200 OK** with `{ "errors": [...] }` — user-level errors (e.g., duplicate name).
+- **HTTP 200 OK** with `{ "errors": [...] }` — user-level errors (for example, duplicate name).
 
 Both must be handled explicitly. Next.js Route Handlers should return typed error responses, and
 React components should display them via error boundaries or toast notifications.
 
-## Correct Usage
+## Correct usage
 
-### Route Handler — return typed errors
+### Route handler — return typed errors
 
 ```typescript
 // ✅ lib/nextdns.ts — throw structured errors from the fetcher
@@ -104,7 +104,7 @@ export default function ProfileError({
 }
 ```
 
-### Client Component — toast on mutation failure
+### Client component — toast on mutation failure
 
 ```tsx
 // ✅ components/ProfileActions.tsx
@@ -181,7 +181,7 @@ if (!res.ok) throw new Error('error'); // ❌ Misses 200-with-errors case
 return NextResponse.json(err, { status: 500 }); // ❌ May leak internal details
 ```
 
-## Best Practices
+## Best practices
 
 - **Check `json.errors` first**: NextDNS returns user errors inside 200 responses — HTTP status
   alone is not sufficient.
@@ -194,12 +194,12 @@ return NextResponse.json(err, { status: 500 }); // ❌ May leak internal details
 
 ## Troubleshooting
 
-### Issue: `error.tsx` is not displayed — the page crashes instead
+### Issue: `error.tsx` is NOT displayed — the page crashes instead
 
 **Solution**: `error.tsx` must be a **Client Component** (`'use client'` at the top). Server
 Components cannot be error boundaries in Next.js.
 
-### Issue: Error message from Route Handler not reaching the Client Component
+### Issue: error message from route handler NOT reaching the client component
 
 **Solution**: Ensure the Route Handler returns a JSON body with an `error` field:
 

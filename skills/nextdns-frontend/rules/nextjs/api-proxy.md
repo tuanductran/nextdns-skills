@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# API Key Proxy (BFF Pattern)
+# API key proxy (bff pattern)
 
 Proxy all NextDNS API calls through Next.js Route Handlers to keep X-Api-Key server-side only
 
@@ -30,7 +30,7 @@ place to attach the key before forwarding requests to `api.nextdns.io`.
 Browser → /api/* (Next.js Route Handler) → api.nextdns.io (X-Api-Key added here)
 ```
 
-## Correct Usage
+## Correct usage
 
 ### Environment variable setup
 
@@ -66,7 +66,7 @@ export async function nextdnsFetch<T>(path: string, options?: RequestInit): Prom
 }
 ```
 
-### Profile list Route Handler
+### Profile list route handler
 
 ```typescript
 // ✅ app/api/profiles/route.ts
@@ -79,7 +79,7 @@ export async function GET() {
 }
 ```
 
-### Dynamic profile Route Handler
+### Dynamic profile route handler
 
 ```typescript
 // ✅ app/api/profiles/[id]/route.ts
@@ -117,7 +117,7 @@ const res = await fetch('https://api.nextdns.io/profiles', {
 });
 ```
 
-## Best Practices
+## Best practices
 
 - **One utility, one key location**: Use `lib/nextdns.ts` as the single place where the key is
   attached — never repeat `process.env.NEXTDNS_API_KEY` across Route Handler files.
@@ -127,7 +127,7 @@ const res = await fetch('https://api.nextdns.io/profiles', {
 
 ## Troubleshooting
 
-### Issue: `process.env.NEXTDNS_API_KEY` is `undefined` in a Route Handler
+### Issue: `process.env.nextdns_api_key` is `undefined` in a route handler
 
 **Symptoms**: The utility throws `NEXTDNS_API_KEY is not set`.
 
@@ -140,7 +140,7 @@ production — secrets must be set as OS-level env vars.
 echo $NEXTDNS_API_KEY
 ```
 
-### Issue: `process.env.NEXTDNS_API_KEY` is accessible in a Client Component
+### Issue: `process.env.nextdns_api_key` is accessible in a client component
 
 **Symptoms**: The key appears in browser DevTools → Application → JavaScript.
 

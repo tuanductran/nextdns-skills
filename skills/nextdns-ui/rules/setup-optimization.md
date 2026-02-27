@@ -10,13 +10,13 @@ tags:
   - profile management
 ---
 
-# Setup Optimization
+# Setup optimization
 
 Performance and management efficiency
 
 Tips for getting the best performance and reliability out of your NextDNS configuration.
 
-## Performance Optimization
+## Performance optimization
 
 - **Enable Cache Boost**: This reduces the number of queries your devices need to make by telling
   them to remember DNS answers for longer.
@@ -25,9 +25,9 @@ Tips for getting the best performance and reliability out of your NextDNS config
 - **Select Local Storage**: For the best latency in dashboard interactions, choose a log storage
   location near you, though this is primarily for compliance.
 
-## Profile Management
+## Profile management
 
-- Create separate profiles for different use cases (e.g., "Parental Control" for kids' devices,
+- Create separate profiles for different use cases (for example, "Parental Control" for kids' devices,
   "Minimal" for gaming PCs) to avoid one-size-fits-all frustration.
 - Regularly audit your **Allowlist** to remove entries that are no longer needed.
 

@@ -15,7 +15,7 @@ tags:
   - Systray
 ---
 
-# Windows Installation
+# Windows installation
 
 Critical for proper NextDNS deployment on Windows systems
 
@@ -23,12 +23,12 @@ NextDNS offers two installation methods for Windows: an official GUI application
 for easy management, and a manual CLI installation for advanced users who prefer command-line
 control.
 
-## Official GUI App Installation
+## Official gui app installation
 
 The recommended method for most users is the official GUI application, which provides a
 user-friendly Systray interface.
 
-### Download and Setup
+### Download and setup
 
 1. **Download**: Get the latest stable release from
    [https://nextdns.io/download/windows/stable](https://nextdns.io/download/windows/stable).
@@ -39,7 +39,7 @@ user-friendly Systray interface.
 The GUI app automatically handles service installation, Windows Firewall rules, and network adapter
 configuration.
 
-## Manual CLI Installation
+## Manual CLI installation
 
 For advanced users, server deployments, or automated setups, the CLI method provides more control.
 
@@ -48,7 +48,7 @@ For advanced users, server deployments, or automated setups, the CLI method prov
 Download the latest Windows binary from
 [GitHub Releases](https://github.com/nextdns/nextdns/releases).
 
-### Installation Steps
+### Installation steps
 
 1. **Create Directory**: Create a dedicated folder for the NextDNS binary:
 
@@ -67,9 +67,9 @@ Download the latest Windows binary from
      -auto-activate
    ```
 
-   **Note**: Replace `<your_config_id>` with your actual NextDNS Configuration ID (e.g., `abc123`).
+   **Note**: Replace `<your_config_id>` with your actual NextDNS Configuration ID (for example, `abc123`).
 
-### Command Options
+### Command options
 
 - `-config <your_config_id>`: Specifies your NextDNS profile.
 - `-report-client-info`: Enables device identification in the NextDNS dashboard.

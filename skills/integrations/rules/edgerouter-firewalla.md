@@ -12,11 +12,11 @@ tags:
   - installation
 ---
 
-# EdgeRouter and Firewalla Integration
+# EdgeRouter and Firewalla integration
 
 Strategic deployment of NextDNS on Ubiquiti EdgeRouter (EdgeOS) and Firewalla hardware.
 
-## Ubiquiti EdgeRouter (EdgeOS)
+## Ubiquiti EdgeRouter (edgeos)
 
 ### 1. Enable SSH
 
@@ -30,7 +30,7 @@ Strategic deployment of NextDNS on Ubiquiti EdgeRouter (EdgeOS) and Firewalla ha
 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ```
 
-## Firewalla (Gold/Purple/Blue Plus)
+## Firewalla (gold/purple/blue plus)
 
 Firewalla runs a customized Ubuntu-based OS. You can install the CLI directly on the box.
 
@@ -45,7 +45,7 @@ Firewalla runs a customized Ubuntu-based OS. You can install the CLI directly on
 sh -c "$(curl -sL https://nextdns.io/install)"
 ```
 
-## Critical Configuration
+## Critical configuration
 
 ✅ **Client Reporting**: Always enable `Discovery DNS` and `MDNS` in the NextDNS CLI configuration
 to ensure Firewalla/EdgeRouter can map internal IP addresses to hostnames in your NextDNS dashboard.

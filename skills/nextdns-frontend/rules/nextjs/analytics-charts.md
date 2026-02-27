@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Analytics Charts
+# Analytics charts
 
 Fetch NextDNS time-series analytics and render them as charts in a Next.js dashboard
 
@@ -24,16 +24,16 @@ Fetch NextDNS time-series analytics and render them as charts in a Next.js dashb
 
 The NextDNS analytics API provides two shapes of data:
 
-- **Aggregated** — e.g., `/analytics/status` returns a total count per status.
-- **Time series** — append `;series` to any endpoint (e.g., `/analytics/status;series`) to get an
+- **Aggregated** — for example, `/analytics/status` returns a total count per status.
+- **Time series** — append `;series` to any endpoint (for example, `/analytics/status;series`) to get an
   array of counts over time, suitable for line or bar charts.
 
 Both shapes are fetched through a Next.js Route Handler (or directly in a Server Component) to keep
 the API key server-side.
 
-## Correct Usage
+## Correct usage
 
-### Route Handler — analytics proxy
+### Route handler — analytics proxy
 
 ```typescript
 // ✅ app/api/profiles/[id]/analytics/[endpoint]/route.ts
@@ -55,7 +55,7 @@ export async function GET(req: Request, context: RouteContext<{ id: string; endp
 }
 ```
 
-### Server Component — aggregated analytics
+### Server component — aggregated analytics
 
 ```tsx
 // ✅ app/profiles/[id]/analytics/page.tsx — Server Component
@@ -89,7 +89,7 @@ export default async function AnalyticsPage({ params }: { params: Promise<{ id: 
 }
 ```
 
-### Client Component — time-series chart with SWR
+### Client component — time-series chart with swr
 
 ```tsx
 // ✅ components/StatusChart.tsx — Client Component for interactive charts
@@ -163,7 +163,7 @@ useEffect(() => {
 }, []);
 ```
 
-## Best Practices
+## Best practices
 
 - **Always include `from=`**: Scoped time ranges are faster and return more relevant data.
 - **Cache Server Component fetches**: For dashboard-level data, set `next: { revalidate: 60 }` in
@@ -173,7 +173,7 @@ useEffect(() => {
 
 ## Troubleshooting
 
-### Issue: Analytics endpoint returns 404
+### Issue: analytics endpoint returns 404
 
 **Symptoms**: `nextdnsFetch` throws a `NextDNS error 404`.
 
@@ -181,7 +181,7 @@ useEffect(() => {
 query parameter. Example: `/analytics/status;series` (correct) vs `/analytics/status?series`
 (incorrect).
 
-### Issue: Time-series data has gaps
+### Issue: time-series data has gaps
 
 **Symptoms**: The series array is missing some time points.
 

@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# API Key Proxy (BFF Pattern)
+# API key proxy (bff pattern)
 
 Proxy all NextDNS API calls through React Router v7 resource routes to keep X-Api-Key server-side
 only
@@ -33,7 +33,7 @@ bundles.
 Browser → /api/* (React Router resource route) → api.nextdns.io (X-Api-Key added here)
 ```
 
-## Correct Usage
+## Correct usage
 
 ### Environment variable setup
 
@@ -147,7 +147,7 @@ export default function Dashboard() {
 }
 ```
 
-## Best Practices
+## Best practices
 
 - **`.server.ts` suffix**: Vite (used by React Router v7) strips files ending in `.server.ts` from
   client bundles, preventing accidental imports of server-only code.
@@ -158,12 +158,12 @@ export default function Dashboard() {
 
 ## Troubleshooting
 
-### Issue: `process.env.NEXTDNS_API_KEY` is `undefined`
+### Issue: `process.env.nextdns_api_key` is `undefined`
 
 **Solution**: Add the variable to `.env` (development) or the platform's secret store (production).
 Variables without the `VITE_` prefix are server-only and require restart to pick up.
 
-### Issue: Resource route returns 404
+### Issue: resource route returns 404
 
 **Solution**: Verify the route is registered in `app/routes.ts` and the file has no default
 component export — a default export turns it into a UI route, not a resource route.

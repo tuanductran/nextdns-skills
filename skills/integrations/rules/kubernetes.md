@@ -12,7 +12,7 @@ tags:
   - container
 ---
 
-# Kubernetes Integration
+# Kubernetes integration
 
 Deploy NextDNS CLI in a Kubernetes cluster as a node-level DNS proxy
 
@@ -28,9 +28,9 @@ Two approaches are covered:
 2. **CoreDNS Forwarder** — CoreDNS forwards all or specific queries to the node-local NextDNS
    daemon, requiring no pod-level changes.
 
-## Correct Usage
+## Correct usage
 
-### DaemonSet Manifest
+### Daemonset manifest
 
 Deploy the NextDNS CLI on every node:
 
@@ -85,7 +85,7 @@ Apply:
 kubectl apply -f nextdns-daemonset.yaml
 ```
 
-### Pod-Level DNS Configuration
+### Pod-level DNS configuration
 
 Point individual pods to the node-local NextDNS:
 
@@ -112,7 +112,7 @@ spec:
       image: my-app:latest
 ```
 
-### CoreDNS Forwarder (Cluster-Wide)
+### CoreDNS forwarder (cluster-wide)
 
 Configure CoreDNS to forward all external queries through NextDNS:
 
@@ -171,7 +171,7 @@ securityContext:
   runAsUser: 0 # ❌ Must also add NET_ADMIN capability
 ```
 
-## Best Practices
+## Best practices
 
 - **Use `127.0.0.1:5300`** instead of `:53` to avoid conflicts with existing node DNS services.
 - **Always add `NET_ADMIN` capability**: NextDNS CLI needs it to configure system-level DNS.
@@ -182,7 +182,7 @@ securityContext:
 
 ## Troubleshooting
 
-### Issue: Pods cannot resolve external domains
+### Issue: pods cannot resolve external domains
 
 **Symptoms**: DNS queries time out or return SERVFAIL after applying the CoreDNS forwarder.
 
@@ -199,7 +199,7 @@ kubectl exec -it <nextdns-pod> -n kube-system -- nextdns status
 kubectl run dns-test --image=busybox --rm -it -- nslookup example.com 127.0.0.1
 ```
 
-### Issue: CoreDNS not forwarding after ConfigMap update
+### Issue: coredns NOT forwarding after configmap update
 
 **Symptoms**: Changes to the Corefile are not taking effect.
 

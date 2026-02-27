@@ -13,15 +13,15 @@ tags:
   - cache
 ---
 
-# Advanced Features
+# Advanced features
 
 Complex routing and performance optimizations
 
 NextDNS CLI provides advanced features for complex network environments and performance tuning.
 
-## Split-Horizon (Conditional Forwarding)
+## Split-horizon (conditional forwarding)
 
-Route specific domains to different DNS servers (e.g., internal company domains).
+Route specific domains to different DNS servers (for example, internal company domains).
 
 ```bash
 sudo nextdns config set \
@@ -30,7 +30,7 @@ sudo nextdns config set \
 sudo nextdns restart
 ```
 
-## Conditional Profile Selection
+## Conditional profile selection
 
 Apply different NextDNS profiles based on the client's subnet or MAC address. This is powerful for
 router-level installations.
@@ -43,7 +43,7 @@ sudo nextdns config set \
 sudo nextdns restart
 ```
 
-## Cache Configuration
+## Cache configuration
 
 Enable local memory caching to improve performance and provide resilience if upstream is temporarily
 unavailable.
@@ -62,7 +62,7 @@ sudo nextdns config set -max-ttl=5s
 sudo nextdns restart
 ```
 
-## Other Advanced Flags
+## Other advanced flags
 
 - **`-bogus-priv`**: Block reverse lookups for private IP ranges (default: `true`).
 - **`-detect-captive-portals`**: Automatic detection and fallback on system DNS for captive portal
@@ -70,7 +70,7 @@ sudo nextdns restart
 - **`-timeout`**: Maximum duration allowed for a request (default: `5s`).
 - **`-max-inflight-requests`**: Maximum simultaneous requests (default: `256`).
 
-## Using Another DoH Provider
+## Using another DoH provider
 
 NextDNS CLI can act as a proxy for any DoH provider:
 

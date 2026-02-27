@@ -15,7 +15,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Error Handling
+# Error handling
 
 Map NextDNS API errors to user-friendly Nuxt UI notifications
 
@@ -24,12 +24,12 @@ Map NextDNS API errors to user-friendly Nuxt UI notifications
 The NextDNS API returns errors in two formats:
 
 - **400 Bad Request** with `{ "errors": [...] }` — validation errors (invalid input).
-- **200 OK** with `{ "errors": [...] }` — user-level errors (e.g., duplicate profile name).
+- **200 OK** with `{ "errors": [...] }` — user-level errors (for example, duplicate profile name).
 
 Both must be handled explicitly. Nuxt server routes should translate upstream errors into H3 errors,
 and Vue components should display them via Nuxt UI toasts.
 
-## Correct Usage
+## Correct usage
 
 ### Server route — translate upstream errors
 
@@ -69,7 +69,7 @@ export async function useNextDNSFetch<T>(
 }
 ```
 
-### Vue composable — handle errors from useFetch
+### Vue composable — handle errors from usefetch
 
 ```typescript
 // ✅ app/composables/useProfiles.ts — surface errors via Nuxt UI toast
@@ -91,7 +91,7 @@ export function useProfiles() {
 }
 ```
 
-### Global error handler for useFetch
+### Global error handler for usefetch
 
 ```vue
 <!-- ✅ Handle errors inline with useFetch -->
@@ -109,7 +109,7 @@ const { data, error } = await useFetch('/api/profiles');
 </template>
 ```
 
-### 404 and 401 handling in server routes
+### 404 And 401 handling in server routes
 
 ```typescript
 // ✅ Return meaningful HTTP errors to the client
@@ -146,7 +146,7 @@ const { error } = await useFetch('/api/profiles')
 if (response.status !== 200) handleError() // ❌ Misses 200-with-errors case
 ```
 
-## Best Practices
+## Best practices
 
 - **Always check `json.errors`**: The NextDNS API returns user errors inside a 200 response — HTTP
   status alone is not sufficient.
@@ -159,7 +159,7 @@ if (response.status !== 200) handleError() // ❌ Misses 200-with-errors case
 
 ## Troubleshooting
 
-### Issue: `useToast` is undefined in a composable
+### Issue: `usetoast` is undefined in a composable
 
 **Solution**: `useToast` requires `@nuxt/ui`. Ensure the module is installed and added to
 `nuxt.config.ts`. Also wrap your `app.vue` with `<UApp>` which provides the toast provider:
@@ -173,7 +173,7 @@ if (response.status !== 200) handleError() // ❌ Misses 200-with-errors case
 </template>
 ```
 
-### Issue: Error details not surfaced from server route to browser
+### Issue: error details NOT surfaced from server route to browser
 
 **Solution**: When using `createError`, pass details in the `data` field — Nuxt serialises it to the
 client:

@@ -1,0 +1,28 @@
+{
+  "name": "nextdns-skills-scripts",
+  "version": "1.0.0",
+  "description": "Maintenance scripts for NextDNS Skills: validate rule integrity and sync rule counts",
+  "type": "module",
+  "bin": {
+    "nextdns-skills-scripts": "./bin/cli.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "validate-rules": "node bin/cli.js validate-rules",
+    "update-counts": "node bin/cli.js update-counts",
+    "dev": "tsup --watch"
+  },
+  "keywords": [
+    "nextdns",
+    "skills",
+    "scripts",
+    "validation",
+    "maintenance"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

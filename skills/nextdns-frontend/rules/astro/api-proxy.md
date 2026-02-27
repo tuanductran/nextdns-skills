@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# API Key Proxy (BFF Pattern)
+# API key proxy (bff pattern)
 
 Proxy all NextDNS API calls through Astro API endpoints to keep X-Api-Key server-side only
 
@@ -34,7 +34,7 @@ Browser → /api/* (Astro endpoint) → api.nextdns.io (X-Api-Key added here)
 > **Requires SSR**: API endpoints with runtime data require an SSR adapter and either
 > `output: 'server'` or `output: 'hybrid'` in `astro.config.mjs`.
 
-## Correct Usage
+## Correct usage
 
 ### Environment variable setup
 
@@ -134,7 +134,7 @@ const res = await fetch('https://api.nextdns.io/profiles', {
 });
 ```
 
-## Best Practices
+## Best practices
 
 - **One utility, one key location**: Use `src/lib/nextdns.ts` as the single place where the key is
   attached — never repeat `import.meta.env.NEXTDNS_API_KEY` across endpoint files.
@@ -145,7 +145,7 @@ const res = await fetch('https://api.nextdns.io/profiles', {
 
 ## Troubleshooting
 
-### Issue: `import.meta.env.NEXTDNS_API_KEY` is `undefined` in an API endpoint
+### Issue: `import.meta.env.nextdns_api_key` is `undefined` in an API endpoint
 
 **Solution**: Verify the variable exists in `.env` and does **not** have the `PUBLIC_` prefix.
 Non-`PUBLIC_` variables are only available in server-side code (Astro frontmatter, endpoints,

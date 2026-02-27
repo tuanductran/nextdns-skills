@@ -11,19 +11,19 @@ tags:
   - availability
 ---
 
-# Backup and Failover Configuration
+# Backup and failover configuration
 
 A resilient network configuration ensures that DNS resolution continues even if the primary NextDNS
 connection is interrupted.
 
-## Why Redundancy Matters
+## Why redundancy matters
 
 DNS is a single point of failure. If your router is configured _only_ to use NextDNS and the service
 or your connection to it fails, all internet access on your network will appear "down."
 
-## Implementation Strategies
+## Implementation strategies
 
-### 1. Router-Level Local Failover (Recommended)
+### 1. Router-level local failover (recommended)
 
 Most advanced routers (OpenWrt, pfSense, EdgeRouter) allow multiple DNS upstreams. Configure NextDNS
 as the primary and a privacy-respecting public DNS as a secondary.
@@ -31,7 +31,7 @@ as the primary and a privacy-respecting public DNS as a secondary.
 - ✅ **Primary**: `45.90.28.abc (NextDNS Anycast/Linked IP)`
 - ✅ **Secondary**: `9.9.9.9 (Quad9)` or `1.1.1.1 (Cloudflare)`
 
-### 2. NextDNS CLI Multi-Server
+### 2. NextDNS CLI multi-server
 
 The NextDNS CLI supports multiple server definitions for the same domain or as a global failover.
 
@@ -39,18 +39,18 @@ The NextDNS CLI supports multiple server definitions for the same domain or as a
 nextdns config set -forwarder=https://dns.nextdns.io,https://dns.google/dns-query
 ```
 
-### 3. Client-Level Fallback
+### 3. Client-level fallback
 
 Operating systems (Windows, macOS, iOS, Android) often attempt to query multiple DNS servers if the
 first one times out. Adding a secondary DNS server in your DHCP settings provides this safety net.
 
-## The "DNS Leak" Warning
+## The DNS leak" warning
 
 ⚠️ **Caution**: Adding a non-NextDNS secondary server (like 8.8.8.8) may lead to "DNS leaks" where
 some queries bypass NextDNS filtering even when it is online. This happens because some OS
 algorithms query all available servers and use the fastest response.
 
-## Strategic Recommendation
+## Strategic recommendation
 
 - **For maximum privacy**: Use only NextDNS across multiple bootstrap IPs or DoH endpoints.
 - **For maximum availability**: Use NextDNS as primary and Quad9 (which also blocks malware) as

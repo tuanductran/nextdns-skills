@@ -10,15 +10,15 @@ tags:
   - best practices
 ---
 
-# Best Practices
+# Best practices
 
 Optimizing your NextDNS CLI setup for stability and speed
 
 Follow these recommendations to get the most out of your NextDNS CLI installation.
 
-## Performance Optimization
+## Performance optimization
 
-### 1. Enable Caching
+### 1. Enable caching
 
 Local caching significantly reduces latency by avoiding unnecessary network round-trips for repeated
 queries.
@@ -28,7 +28,7 @@ sudo nextdns config set -cache-size=10MB
 sudo nextdns restart
 ```
 
-### 2. Lower Client TTL
+### 2. Lower client TTL
 
 Use `-max-ttl` to prevent devices on your network from caching DNS records for too long. This
 ensures changes in your NextDNS web dashboard apply quickly.
@@ -39,7 +39,7 @@ sudo nextdns config set -max-ttl=5s
 sudo nextdns restart
 ```
 
-### 3. Use EDNS Client Subnet (ECS)
+### 3. Use EDNS client subnet ECS
 
 EDNS allows NextDNS to see which regional network you are on, helping CDNs (like Netflix or Akamai)
 serve content from the closest server to you.
@@ -49,9 +49,9 @@ serve content from the closest server to you.
 sudo nextdns config set -report-client-info=true
 ```
 
-## Reliability and Resilience
+## Reliability and resilience
 
-### 1. Multiple Forwarders
+### 1. Multiple forwarders
 
 If you use split-horizon DNS, specify multiple local servers for failover.
 
@@ -59,7 +59,7 @@ If you use split-horizon DNS, specify multiple local servers for failover.
 sudo nextdns config set -forwarder local.domain=192.168.1.1,192.168.1.2
 ```
 
-### 2. Auto-Activation
+### 2. Auto-activation
 
 Ensure NextDNS takes over system DNS automatically at boot.
 

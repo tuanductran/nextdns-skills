@@ -12,13 +12,13 @@ tags:
   - service
 ---
 
-# Daemon Control
+# Daemon control
 
 Controlling the background service process
 
 Once installed as a service, use these commands to manage the NextDNS background daemon.
 
-## Common Service Commands
+## Common service commands
 
 | Action        | Command             | Description                                                            |
 | ------------- | ------------------- | ---------------------------------------------------------------------- |
@@ -29,7 +29,7 @@ Once installed as a service, use these commands to manage the NextDNS background
 | **Install**   | `nextdns install`   | Installs the NextDNS daemon as a system service.                       |
 | **Uninstall** | `nextdns uninstall` | Removes the NextDNS daemon from system services.                       |
 
-## Important Notes
+## Important notes
 
 - **Run Subcommand**: Avoid using `nextdns run` unless you are debugging and need to run the service
   in the foreground. Permanent installations should always use the service manager via

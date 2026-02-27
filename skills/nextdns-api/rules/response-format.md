@@ -13,15 +13,15 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Response Format
+# Response format
 
 Understand and parse API response structure
 
-## Standard Response Format
+## Standard response format
 
 All API responses with `200` or `400` status follow one of these formats:
 
-### Success Response
+### Success response
 
 ```javascript
 {
@@ -30,7 +30,7 @@ All API responses with `200` or `400` status follow one of these formats:
 }
 ```
 
-### Error Response
+### Error response
 
 ```javascript
 {
@@ -38,9 +38,9 @@ All API responses with `200` or `400` status follow one of these formats:
 }
 ```
 
-## Data Types
+## Data types
 
-### Object Response
+### Object response
 
 Single object endpoints return an object in `data`:
 
@@ -65,7 +65,7 @@ Single object endpoints return an object in `data`:
 }
 ```
 
-### Array Response
+### Array response
 
 List endpoints return an array in `data`:
 
@@ -90,7 +90,7 @@ List endpoints return an array in `data`:
 }
 ```
 
-## Meta Section
+## Meta section
 
 The `meta` section contains additional information:
 
@@ -107,7 +107,7 @@ The `meta` section contains additional information:
 }
 ```
 
-### Time Series
+### Time series
 
 ```javascript
 {
@@ -127,7 +127,7 @@ The `meta` section contains additional information:
 }
 ```
 
-### Stream ID
+### Stream id
 
 ```javascript
 {
@@ -140,7 +140,7 @@ The `meta` section contains additional information:
 }
 ```
 
-## Parsing Responses
+## Parsing responses
 
 ```javascript
 async function makeRequest(url, options = {}) {
@@ -175,7 +175,7 @@ console.log('Domains:', data);
 console.log('Next cursor:', meta?.pagination?.cursor);
 ```
 
-## TypeScript Types
+## TypeScript types
 
 ```typescript
 interface SuccessResponse<T> {
@@ -229,7 +229,7 @@ interface Domain {
 }
 ```
 
-## Response Wrapper
+## Response wrapper
 
 ```javascript
 class NextDNSResponse {
@@ -289,22 +289,22 @@ if (wrapped.hasErrors()) {
 }
 ```
 
-## Common Patterns
+## Common patterns
 
-### Extract Data
+### Extract data
 
 ```javascript
 const { data } = await fetch(url, { headers }).then((r) => r.json());
 ```
 
-### Extract Data and Cursor
+### Extract data and cursor
 
 ```javascript
 const { data, meta } = await fetch(url, { headers }).then((r) => r.json());
 const cursor = meta?.pagination?.cursor;
 ```
 
-### Check for Errors
+### Check for errors
 
 ```javascript
 const result = await fetch(url, { headers }).then((r) => r.json());

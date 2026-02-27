@@ -14,11 +14,11 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Profile Management
+# Profile management
 
 Manage NextDNS profiles via API endpoints
 
-## Create a New Profile
+## Create a new profile
 
 POST to `https://api.nextdns.io/profiles` with profile configuration:
 
@@ -81,7 +81,7 @@ const result = await response.json();
 // { "data": { "id": "abc123" } }
 ```
 
-## Get Profile
+## Get profile
 
 GET a specific profile:
 
@@ -93,7 +93,7 @@ const response = await fetch('https://api.nextdns.io/profiles/abc123', {
 const profile = await response.json();
 ```
 
-## Update Profile
+## Update profile
 
 PATCH to update specific fields:
 
@@ -115,7 +115,7 @@ await fetch('https://api.nextdns.io/profiles/abc123', {
 });
 ```
 
-## Delete Profile
+## Delete profile
 
 DELETE a profile:
 
@@ -126,7 +126,7 @@ await fetch('https://api.nextdns.io/profiles/abc123', {
 });
 ```
 
-## Profile ID Usage
+## Profile id usage
 
 After creating a profile, use the returned `id` for all subsequent operations:
 

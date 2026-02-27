@@ -12,13 +12,13 @@ tags:
   - cname flattening
 ---
 
-# Configuration Management
+# Configuration management
 
 System-level profile settings and performance
 
 Manage your NextDNS profile settings, log storage, and performance optimizations.
 
-## General Settings
+## General settings
 
 - **Profile Name**: Use descriptive names like "Router - Stable" or "Browser - Aggressive".
 - **Logs Enabled**: Toggle on/off log recording.
@@ -29,17 +29,17 @@ Manage your NextDNS profile settings, log storage, and performance optimizations
   - **Caution**: This setting can break **PayPal 2FA**, **iCloud Private Relay**, **Microsoft
     Teams**, and **Yahoo! Mail**. Only enable if you have installed the NextDNS Root CA.
 
-## Performance & Advanced
+## Performance and advanced
 
 - **Anonymized EDNS Client Subnet**: Often enabled by default to improve CDN routing without
   exposing your full IP.
 - **Cache Boost**: Recommended for performance. It tells clients to keep DNS answers longer.
 - **CNAME Flattening**: Reduces the number of DNS queries.
   - **Warning**: May break compatibility with services like **Yahoo! Mail**.
-- **Rewrites**: Manually redirect any domain or subdomain (e.g., `local.home` to `192.168.1.1`).
+- **Rewrites**: Manually redirect any domain or subdomain (for example, `local.home` to `192.168.1.1`).
 - **Bypass Age Verification**: Allows accessing content that requires age verification via DNS
   identification.
-- **Web3**: Enable resolution of decentralised domains (HNS, ENS, etc.).
+- **Web3**: Enable resolution of decentralised domains (HNS, ENS, and more).
 
 ## Maintenance
 

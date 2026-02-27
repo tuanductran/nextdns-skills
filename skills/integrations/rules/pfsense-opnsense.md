@@ -18,7 +18,7 @@ tags:
   - dns resolver
 ---
 
-# pfSense and OPNsense Integration
+# pfSense and OPNsense integration
 
 Critical for deploying NextDNS on enterprise-grade firewalls with proper encrypted DNS configuration
 and awareness of platform-specific limitations
@@ -27,15 +27,15 @@ pfSense and OPNsense are FreeBSD-based firewall/router platforms widely used in 
 environments. This rule provides platform-specific guidance for integrating NextDNS with their
 native DNS resolvers.
 
-## pfSense Configuration
+## pfSense configuration
 
 pfSense uses Unbound as its DNS resolver. There are two methods to integrate NextDNS.
 
-### Method 1: Native Unbound with DNS-over-TLS (Recommended)
+### Method 1: native unbound with dns-over-tls (recommended)
 
 Configure Unbound to forward all DNS queries to NextDNS over TLS.
 
-#### Configuration Steps
+#### Configuration steps
 
 1. Navigate to **Services → DNS Resolver → General Settings**
 2. Scroll to **Custom Options** section
@@ -55,7 +55,7 @@ server:
 1. Replace `<config_id>` with your actual NextDNS Configuration ID
 2. Click **Save** and **Apply Changes**
 
-#### ⚠️ Critical Warning: CNAME Chasing Behavior
+#### ⚠️ critical warning: CNAME chasing behavior
 
 **pfSense uses Unbound as a recursive resolver. Unbound chases CNAMEs by design, which can result in
 unexpected behavior when used in conjunction with a blocking DNS resolver like NextDNS.**
@@ -72,7 +72,7 @@ unexpected behavior when used in conjunction with a blocking DNS resolver like N
 - Consider using Method 2 (CLI) if this limitation affects your use case
 - Test your blocking rules after configuration to verify expected behavior
 
-### Method 2: NextDNS CLI Installation
+### Method 2: NextDNS CLI installation
 
 Install the NextDNS CLI directly on pfSense (FreeBSD-compatible).
 
@@ -92,16 +92,16 @@ sh -c "$(curl -sL https://nextdns.io/install)"
 - Provides device-level analytics
 - Better integration with NextDNS features
 
-## OPNsense Configuration
+## OPNsense configuration
 
 OPNsense provides a dedicated user interface for DNS-over-TLS configuration, making it more
 straightforward than pfSense.
 
-### Method 1: Native Unbound with DoT UI (Recommended)
+### Method 1: native unbound with DoT UI (recommended)
 
 OPNsense has a built-in UI for configuring DNS-over-TLS, which is the preferred method.
 
-#### Configuration Steps
+#### Configuration steps
 
 1. Navigate to **Services → Unbound DNS → DNS over TLS**
 2. Click **Add** button
@@ -122,7 +122,7 @@ OPNsense has a built-in UI for configuring DNS-over-TLS, which is the preferred 
 - Links the traffic to your specific NextDNS profile
 - Prevents man-in-the-middle attacks
 
-#### Optional: Add Secondary Server
+#### Optional: add secondary server
 
 Repeat the steps above with the secondary server for redundancy:
 
@@ -132,7 +132,7 @@ Repeat the steps above with the secondary server for redundancy:
 | **Server Port** | `853`                                         |
 | **Verify CN**   | `<your_config_id>.dns.nextdns.io`             |
 
-### Method 2: NextDNS CLI Installation
+### Method 2: NextDNS CLI installation
 
 OPNsense also supports the CLI installer:
 
@@ -156,7 +156,7 @@ sh -c "$(curl -sL https://nextdns.io/install)"
 | **CLI Support**          | ✅ Yes (FreeBSD)                 | ✅ Yes (FreeBSD)          |
 | **Ease of Setup**        | Moderate                         | Easy                      |
 
-## Verification Steps
+## Verification steps
 
 After configuration, verify that NextDNS is working correctly:
 
@@ -170,7 +170,7 @@ After configuration, verify that NextDNS is working correctly:
 
 ## Troubleshooting
 
-### DNS Resolution Not Working
+### DNS resolution NOT working
 
 ```bash
 # Check Unbound status
@@ -179,14 +179,14 @@ pfctl -s state | grep 53
 service unbound status
 ```
 
-### Verify DoT Connection
+### Verify DoT connection
 
 ```bash
 # Test TLS connection to NextDNS
 openssl s_client -connect 45.90.28.0:853 -servername <config_id>.dns1.nextdns.io
 ```
 
-### Debug Mode Installation (CLI Method)
+### Debug mode installation CLI method)
 
 ```bash
 DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"

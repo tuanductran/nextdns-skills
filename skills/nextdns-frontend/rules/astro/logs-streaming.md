@@ -17,7 +17,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Real-Time Log Streaming
+# Real-time log streaming
 
 Proxy the NextDNS SSE log stream through an Astro API endpoint and consume it in a React island
 
@@ -32,9 +32,9 @@ endpoint that opens the upstream SSE connection (with the key server-side) and r
 Browser EventSource → /api/logs/stream (Astro) → api.nextdns.io/logs/stream (X-Api-Key)
 ```
 
-## Correct Usage
+## Correct usage
 
-### Astro API endpoint — SSE proxy
+### Astro API endpoint — sse proxy
 
 ```typescript
 // ✅ src/pages/api/logs/stream.ts
@@ -73,7 +73,7 @@ export const GET: APIRoute = async ({ request }) => {
 };
 ```
 
-### React island — consume SSE
+### React island — consume sse
 
 ```tsx
 // ✅ src/components/react/LogStream.tsx
@@ -176,7 +176,7 @@ const source = new EventSource(
 <LogStream profileId={id} /> // ❌ Crashes on server render
 ```
 
-## Best Practices
+## Best practices
 
 - **Use `client:only="react"` for real-time components**: Components that depend on `EventSource`,
   `WebSocket`, or other browser-only APIs should use `client:only` to skip SSR entirely.
@@ -187,14 +187,14 @@ const source = new EventSource(
 
 ## Troubleshooting
 
-### Issue: `EventSource` causes a server-side rendering error
+### Issue: `eventsource` causes a server-side rendering error
 
 **Symptoms**: Build or dev server logs show `EventSource is not defined`.
 
 **Solution**: Use `client:only="react"` instead of `client:load` to ensure the component is never
 rendered on the server.
 
-### Issue: Endpoint returns immediately instead of streaming
+### Issue: endpoint returns immediately instead of streaming
 
 **Solution**: Verify the upstream fetch returns `Content-Type: text/event-stream`. Test the endpoint
 directly:

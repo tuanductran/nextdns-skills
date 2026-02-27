@@ -17,7 +17,7 @@ tags:
 
 All NextDNS API requests require authentication via API key
 
-## Correct Usage
+## Correct usage
 
 Pass your API key via the `X-Api-Key` header for every API call:
 
@@ -48,7 +48,7 @@ response = requests.get('https://api.nextdns.io/profiles', headers=headers)
 data = response.json()
 ```
 
-## Finding Your API Key
+## Finding your API key
 
 💡 Find your API key at the bottom of your account page: <https://my.nextdns.io/account>
 
@@ -66,7 +66,7 @@ curl -H "Authorization: Bearer a8f4e42e896ff37f181e3e8a42a9737e1423d8e7" \
 curl https://api.nextdns.io/profiles?api_key=a8f4e42e896ff37f181e3e8a42a9737e1423d8e7
 ```
 
-## Security Best Practices
+## Security best practices
 
 - Never commit API keys to version control
 - Use environment variables to store API keys

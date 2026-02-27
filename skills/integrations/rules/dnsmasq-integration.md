@@ -16,7 +16,7 @@ tags:
   - setup-router
 ---
 
-# DNSMasq Integration
+# dnsmasq integration
 
 Enables DNSMasq and NextDNS to run together while preserving client reporting and conditional
 configuration capabilities
@@ -30,9 +30,9 @@ including client reporting and conditional configuration features.
 This integration allows DNSMasq to continue handling local DNS resolution and DHCP services while
 forwarding external DNS queries to NextDNS for filtering and protection.
 
-## Configuration Steps
+## Configuration steps
 
-### Step 1: Configure NextDNS to Listen on Alternative Port
+### Step 1: configure NextDNS to listen on alternative port
 
 NextDNS must be configured to listen on a different port to avoid conflicts with DNSMasq, which
 typically uses port 53.
@@ -45,7 +45,7 @@ nextdns install -listen 127.0.0.1:5555
 This configuration ensures NextDNS binds to port 5555 instead of the default port 53, allowing
 DNSMasq to continue operating on port 53.
 
-### Step 2: Configure DNSMasq to Forward to NextDNS
+### Step 2: configure dnsmasq to forward to NextDNS
 
 Add the following parameters to your DNSMasq configuration to forward DNS queries to NextDNS while
 preserving client information:
@@ -68,7 +68,7 @@ These parameters ensure that:
 - `--add-subnet=32,128`: Client subnet information is added for IPv4 (/32) and IPv6 (/128),
   supporting conditional configuration
 
-## Automatic Configuration for Router Firmwares
+## Automatic configuration for router firmwares
 
 On router firmwares that ship with DNSMasq pre-installed, the above configuration can often be
 handled automatically.
@@ -83,9 +83,9 @@ nextdns install -setup-router
 The `-setup-router` flag automatically detects DNSMasq and configures both services to work together
 without manual intervention. This is the recommended approach for router environments.
 
-## Best Practices
+## Best practices
 
-- **Use alternative port**: Always configure NextDNS to use a non-standard port (e.g., 5555) when
+- **Use alternative port**: Always configure NextDNS to use a non-standard port (for example, 5555) when
   running alongside DNSMasq
 - **Preserve client information**: Ensure `--add-mac` and `--add-subnet` parameters are set to
   maintain client reporting features
@@ -98,12 +98,12 @@ without manual intervention. This is the recommended approach for router environ
 
 ## Troubleshooting
 
-### Port Conflicts
+### Port conflicts
 
 If you encounter port binding errors, verify that:
 
 - DNSMasq is running on port 53
-- NextDNS is configured to use an alternative port (e.g., 5555)
+- NextDNS is configured to use an alternative port (for example, 5555)
 - No other services are using the chosen alternative port
 
 ```bash
@@ -114,7 +114,7 @@ netstat -tulpn | grep :53
 netstat -tulpn | grep :5555
 ```
 
-### Client Reporting Not Working
+### Client reporting NOT working
 
 If client devices are not appearing correctly in NextDNS analytics:
 
@@ -122,7 +122,7 @@ If client devices are not appearing correctly in NextDNS analytics:
 - Check that `--add-subnet` parameter is properly configured
 - Ensure DNS queries are being forwarded to NextDNS (check DNSMasq logs)
 
-### Router Firmware Issues
+### Router firmware issues
 
 If `-setup-router` fails or doesn't configure properly:
 

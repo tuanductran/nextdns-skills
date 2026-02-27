@@ -14,7 +14,7 @@ tags:
   - block override
 ---
 
-# DNS Rewrites
+# DNS rewrites
 
 Override DNS resolution for specific hostnames from the NextDNS web dashboard
 
@@ -27,17 +27,17 @@ Navigate to **my.nextdns.io → \[Profile\] → Rewrites** to manage rewrite rec
 
 Common use cases:
 
-- Access local devices by friendly hostname (e.g., `nas.home → 192.168.1.50`)
+- Access local devices by friendly hostname (for example, `nas.home → 192.168.1.50`)
 - Block a specific hostname by returning `0.0.0.0`
 - Create a CNAME alias for a self-hosted service
 
-## Correct Usage
+## Correct usage
 
-### Adding an A Record (IPv4)
+### Adding an a record IPv4
 
 1. Click **Add a Rewrite**
-2. Enter the **Name** (hostname, e.g., `nas.home`)
-3. Enter the **Answer** (IPv4 address, e.g., `192.168.1.50`)
+2. Enter the **Name** (hostname, for example, `nas.home`)
+3. Enter the **Answer** (IPv4 address, for example, `192.168.1.50`)
 4. Click **Add**
 
 ```text
@@ -45,7 +45,7 @@ Common use cases:
    Answer: 192.168.1.50       → Returns the specified IPv4 address
 ```
 
-### Adding an AAAA Record (IPv6)
+### Adding an AAAA record IPv6
 
 ```text
 ✅ Name:   nas.home
@@ -59,7 +59,7 @@ Common use cases:
    Answer: myserver.example.com   → Returns CNAME pointing to the target
 ```
 
-### Blocking a Specific Hostname
+### Blocking a specific hostname
 
 ```text
 ✅ Name:   tracker.specific.com
@@ -81,7 +81,7 @@ Common use cases:
    any rewrite you may have defined for myserver.example.com.
 ```
 
-## Best Practices
+## Best practices
 
 - **Rewrites override everything**: A rewrite takes precedence over blocklists, security rules, and
   allowlists for that exact hostname.
@@ -94,7 +94,7 @@ Common use cases:
 
 ## Troubleshooting
 
-### Issue: Rewrite not resolving correctly
+### Issue: rewrite NOT resolving correctly
 
 **Symptoms**: Device still gets the original IP or NXDOMAIN after adding a rewrite.
 
@@ -115,7 +115,7 @@ sudo resolvectl flush-caches
 ipconfig /flushdns
 ```
 
-### Issue: A legitimate service stopped working after adding a rewrite
+### Issue: a legitimate service stopped working after adding a rewrite
 
 **Symptoms**: A website or app becomes inaccessible after adding a rewrite entry.
 

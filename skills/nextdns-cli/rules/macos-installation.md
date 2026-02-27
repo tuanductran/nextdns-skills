@@ -16,7 +16,7 @@ tags:
   - setup
 ---
 
-# macOS Installation
+# macOS installation
 
 Essential setup methods and configuration options for macOS systems
 
@@ -24,7 +24,7 @@ This rule provides comprehensive guidance for installing and configuring NextDNS
 covering the universal installer, Homebrew installation, Mac App Store alternative, and
 platform-specific configuration options.
 
-## Primary Installation
+## Primary installation
 
 The recommended method for installing NextDNS CLI on macOS is using the universal one-liner command:
 
@@ -43,7 +43,7 @@ This command will:
 Follow the on-screen instructions to complete the installation. The installer will handle all
 necessary permissions and system configurations.
 
-## Upgrade Path
+## Upgrade path
 
 To upgrade NextDNS CLI to the latest version, simply re-run the installer command:
 
@@ -54,17 +54,17 @@ sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 The installer will detect the existing installation and automatically upgrade to the new version if
 available. No additional steps are required for upgrades.
 
-## Manual Installation (Homebrew)
+## Manual installation Homebrew
 
 For users who prefer package management via Homebrew, NextDNS CLI is available through a custom tap:
 
-### Install Binary
+### Install binary
 
 ```bash
 brew install nextdns/tap/nextdns
 ```
 
-### Configuration for Workstation
+### Configuration for workstation
 
 For a personal workstation or laptop, use the following configuration:
 
@@ -78,7 +78,7 @@ Replace `<id>` with your NextDNS configuration ID. This command will:
 - Enable client info reporting for better analytics
 - Automatically activate DNS on system startup
 
-### Configuration for Router/Server
+### Configuration for router/server
 
 For a router or server setup where NextDNS acts as a DNS proxy for other devices:
 
@@ -92,7 +92,7 @@ Replace `<id>` with your NextDNS configuration ID. This command will:
 - Enable client info reporting
 - Configure NextDNS to operate in router mode with proper DHCP integration
 
-## Official App Alternative
+## Official app alternative
 
 NextDNS is also available as a native Mac application through the Mac App Store. This provides a
 user-friendly GUI alternative to the CLI:
@@ -122,14 +122,14 @@ solutions:
 - **Port conflicts**: Check if other DNS services are running on port 53
 - **Configuration not applying**: Verify your NextDNS configuration ID is correct
 
-### Getting Help
+### Getting help
 
 If issues persist after troubleshooting, contact the NextDNS support team:
 
 - Email: team@nextdns.io
 - Include debug output and system information when reporting issues
 
-## Best Practices
+## Best practices
 
 - Always verify your NextDNS configuration ID before installation
 - Use `-report-client-info` to enable per-device analytics in your NextDNS dashboard

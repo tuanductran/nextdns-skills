@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Project Setup
+# Project setup
 
 Bootstrap a Next.js 15 App Router project configured to integrate with the NextDNS API
 
@@ -29,7 +29,7 @@ A NextDNS Next.js frontend requires:
 3. A `lib/nextdns.ts` shared fetcher — used exclusively in Route Handlers and Server Components
 4. Optional: shadcn/ui for components, SWR or React Query for Client Component data fetching
 
-## Correct Usage
+## Correct usage
 
 ### Create the project
 
@@ -156,7 +156,7 @@ export default { output: 'export' }; // ❌ Breaks all Route Handlers
 
 ## Troubleshooting
 
-### Issue: TypeScript errors on missing `RouteContext` type
+### Issue: TypeScript errors on missing `routecontext` type
 
 **Solution**: `RouteContext` is globally available after running `next dev` or `next build` (type
 generation). Run:
@@ -165,7 +165,7 @@ generation). Run:
 npx next typegen
 ```
 
-### Issue: `lib/nextdns.ts` imported in a Client Component causes build error
+### Issue: `lib/nextdns.ts` imported in a client component causes build error
 
 **Solution**: Add `'server-only'` to guard the file from accidental client-side imports:
 

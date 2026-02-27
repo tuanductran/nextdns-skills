@@ -18,7 +18,7 @@ tags:
   - network
 ---
 
-# Synology Integration (DSM and SRM)
+# Synology integration (dsm and srm)
 
 Essential for deploying NextDNS on Synology NAS (DSM) and routers (SRM) with proper SSH access and
 network configuration
@@ -26,24 +26,24 @@ network configuration
 Synology provides two operating systems: **DSM** for NAS devices and **SRM** for routers. This rule
 provides platform-specific guidance for installing the NextDNS CLI on both platforms.
 
-## Platform Overview
+## Platform overview
 
 | Platform | Full Name               | Device Type | Use Case                          |
 | -------- | ----------------------- | ----------- | --------------------------------- |
 | **DSM**  | DiskStation Manager     | NAS         | Network storage, local DNS server |
 | **SRM**  | Synology Router Manager | Router      | Network gateway, DHCP server      |
 
-## DSM (NAS) Installation
+## Dsm (nas) installation
 
-### Step 1: Enable SSH Access
+### Step 1: enable SSH access
 
 1. Log in to DSM Web Interface
 2. Navigate to **Control Panel**
-3. Select **Terminal & SNMP**
+3. Select **Terminal and SNMP**
 4. Check **Enable SSH service**
 5. Click **Apply**
 
-### Step 2: Connect via SSH
+### Step 2: connect via SSH
 
 ```bash
 # Connect to your Synology NAS
@@ -53,7 +53,7 @@ ssh admin@synology-nas-ip
 # Type 'yes' and press Enter
 ```
 
-### Step 3: Install NextDNS CLI
+### Step 3: install NextDNS CLI
 
 ```bash
 # Run the NextDNS installer
@@ -65,11 +65,11 @@ sh -c "$(curl -sL https://nextdns.io/install)"
 # - Configure additional options as needed
 ```
 
-## SRM (Router) Installation
+## Srm (router) installation
 
 SRM requires an additional critical step to enable root access via the admin user.
 
-### Step 1: Enable Admin User (CRITICAL)
+### Step 1: enable admin user (critical)
 
 ⚠️ **This step is mandatory for SRM. Skipping it will prevent SSH access.**
 
@@ -82,14 +82,14 @@ SRM requires an additional critical step to enable root access via the admin use
 7. Set a strong password for the admin user
 8. Click **OK**
 
-### Step 2: Enable SSH Service
+### Step 2: enable SSH service
 
 1. In **Control Panel**, navigate to **Services**
 2. Locate **SSH** section
 3. Check **Enable SSH services**
 4. Click **Apply**
 
-### Step 3: Connect via SSH as Root
+### Step 3: connect via SSH as root
 
 **Important:** Connect using the `root` username (not `admin`) with the admin password you set.
 
@@ -100,7 +100,7 @@ ssh root@synology-router-ip
 # Use the password you set for the admin user
 ```
 
-### Step 4: Install NextDNS CLI
+### Step 4: install NextDNS CLI
 
 ```bash
 # Run the NextDNS installer
@@ -109,35 +109,35 @@ sh -c "$(curl -sL https://nextdns.io/install)"
 # Follow the interactive prompts
 ```
 
-## Post-Installation: Network Configuration
+## Post-installation: network configuration
 
 After installing NextDNS on your Synology device, configure your network to use it as the DNS
 server.
 
-### Configure DHCP (SRM Only)
+### Configure DHCP (srm only)
 
 If you're using SRM as your router, configure DHCP to automatically assign the NextDNS-enabled
 device as the DNS server:
 
 1. Navigate to **Network Center** → **DHCP Server**
 2. Under **DNS Server**, set:
-   - **Primary DNS**: IP address of your Synology router (e.g., `192.168.1.1`)
+   - **Primary DNS**: IP address of your Synology router (for example, `192.168.1.1`)
 3. Click **Apply**
 
-### Configure DHCP (DSM as Local DNS)
+### Configure DHCP (dsm as local DNS
 
 If you're using DSM as a local DNS server for your network:
 
 1. Access your router's DHCP settings (non-Synology router)
-2. Set the **Primary DNS** to your DSM device IP (e.g., `192.168.1.10`)
+2. Set the **Primary DNS** to your DSM device IP (for example, `192.168.1.10`)
 3. Apply the changes
 
 **Recommendation:** Set a static IP address for your Synology device to prevent DNS resolution
 issues if the IP changes.
 
-### Setting a Static IP
+### Setting a static ip
 
-#### On DSM
+#### On dsm
 
 1. Navigate to **Control Panel** → **Network** → **Network Interface**
 2. Select your network interface and click **Edit**
@@ -145,7 +145,7 @@ issues if the IP changes.
 4. Enter your desired static IP, subnet mask, and gateway
 5. Click **OK**
 
-#### On SRM
+#### On srm
 
 1. Navigate to **Network Center** → **Local Network** → **Network Interface**
 2. Select your WAN or LAN interface
@@ -169,7 +169,7 @@ NextDNS is active.
 
 ## Troubleshooting
 
-### Debug Mode Installation
+### Debug mode installation
 
 If the installation fails or you encounter issues, run the installer in debug mode:
 
@@ -179,15 +179,15 @@ DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"
 
 This will output verbose information to help identify the problem.
 
-### Common Issues
+### Common issues
 
-#### Cannot SSH to SRM (Permission Denied)
+#### Cannot SSH to srm (permission denied)
 
 **Cause:** The admin user is disabled (default state on SRM).
 
 **Solution:** Follow Step 1 under "SRM Installation" to enable the admin user.
 
-#### DNS Resolution Not Working
+#### DNS resolution NOT working
 
 **Cause:** DHCP clients are not using the Synology device as their DNS server.
 
@@ -198,7 +198,7 @@ This will output verbose information to help identify the problem.
 3. Renew DHCP leases on client devices (`ipconfig /release && ipconfig /renew` on Windows, or
    reconnect Wi-Fi)
 
-#### NextDNS Service Not Starting
+#### NextDNS service NOT starting
 
 **Cause:** Port 53 may be in use by another service.
 

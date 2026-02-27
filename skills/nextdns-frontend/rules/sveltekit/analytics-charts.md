@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Analytics Charts (SvelteKit)
+# Analytics charts SvelteKit
 
 Fetch NextDNS analytics data in `+page.server.ts` and render interactive charts in Svelte components
 
@@ -24,10 +24,10 @@ Fetch NextDNS analytics data in `+page.server.ts` and render interactive charts 
 
 The NextDNS API provides query statistics and time-series analytics endpoints under
 `/profiles/{id}/analytics`. Data must be fetched server-side (in `+page.server.ts`) because the API
-key is required. Charting libraries (e.g., Chart.js via `svelte-chartjs`) render on the client after
+key is required. Charting libraries (for example, Chart.js via `svelte-chartjs`) render on the client after
 hydration.
 
-## Correct Usage
+## Correct usage
 
 ### Fetch analytics server-side
 
@@ -116,7 +116,7 @@ npm install svelte-chartjs chart.js
 </script>
 ```
 
-## Best Practices
+## Best practices
 
 - **Parallel fetching**: Use `Promise.all` in `load` to fetch multiple analytics endpoints
   simultaneously, reducing total latency.
@@ -129,7 +129,7 @@ npm install svelte-chartjs chart.js
 
 ## Troubleshooting
 
-### Issue: Chart does not render after navigation
+### Issue: chart does NOT render after navigation
 
 **Symptoms**: Chart canvas is blank after client-side route navigation.
 

@@ -11,13 +11,13 @@ tags:
   - troubleshooting
 ---
 
-# Troubleshooting via Web UI
+# Troubleshooting via web UI
 
 Efficient resolution of blocked content and false positives
 
 How to identify and resolve issues when something isn't working as expected.
 
-## Step-by-Step Troubleshooting
+## Step-by-step troubleshooting
 
 1. **Verify the Issue**: If a site is not loading, first check if it's a DNS issue by disabling
    NextDNS temporarily or checking if it works on a different network.
@@ -29,7 +29,7 @@ How to identify and resolve issues when something isn't working as expected.
 6. **Reload the Site**: Flush your local DNS cache or restart your browser to see if the site now
    loads.
 
-## Common Issues
+## Common issues
 
 - **HTTPS Warnings**: Usually caused by the **Block Page** feature. If this is annoying, disable the
   "Block Page" in Settings.

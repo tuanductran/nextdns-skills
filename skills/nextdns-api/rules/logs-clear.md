@@ -14,7 +14,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Logs Clear
+# Logs clear
 
 Permanently delete all stored DNS logs for a profile
 
@@ -26,7 +26,7 @@ sensitive log data on demand.
 
 This operation is **permanent and irreversible**. Logs cannot be recovered after deletion.
 
-## Correct Usage
+## Correct usage
 
 ```javascript
 // ✅ Clear all logs for a profile
@@ -78,7 +78,7 @@ await fetch('https://api.nextdns.io/profiles/wrongId/logs', {
 });
 ```
 
-## Best Practices
+## Best practices
 
 - **Verify the profile ID before calling**: The operation is irreversible. Confirm you are targeting
   the correct profile.
@@ -91,14 +91,14 @@ await fetch('https://api.nextdns.io/profiles/wrongId/logs', {
 
 ## Troubleshooting
 
-### Issue: 401 Unauthorized
+### Issue: 401 unauthorized
 
 **Symptoms**: Response `{"errors": [{"code": "unauthorized"}]}`.
 
 **Solution**: Ensure the `X-Api-Key` header is present and the key belongs to the account that owns
 the profile.
 
-### Issue: 404 Not Found
+### Issue: 404 NOT found
 
 **Symptoms**: The profile ID does not exist or belongs to a different account.
 

@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Real-Time Log Streaming
+# Real-time log streaming
 
 Proxy the NextDNS SSE log stream through a Nuxt server route and consume it in Vue
 
@@ -31,9 +31,9 @@ to the browser.
 Browser EventSource → /api/logs/stream (Nuxt) → api.nextdns.io/logs/stream (X-Api-Key)
 ```
 
-## Correct Usage
+## Correct usage
 
-### Server route — SSE proxy
+### Server route — sse proxy
 
 ```typescript
 // ✅ server/api/logs/stream.get.ts
@@ -63,7 +63,7 @@ export default defineEventHandler(async (event) => {
 });
 ```
 
-### Vue composable — consume SSE
+### Vue composable — consume sse
 
 ```typescript
 // ✅ app/composables/useLogStream.ts
@@ -162,7 +162,7 @@ const source = new EventSource(
 setInterval(() => fetchLogs(), 1000);
 ```
 
-## Best Practices
+## Best practices
 
 - **Cap the in-memory log buffer**: SSE delivers logs continuously; limit the array to prevent
   unbounded memory growth (500 entries is a good default).
@@ -173,7 +173,7 @@ setInterval(() => fetchLogs(), 1000);
 
 ## Troubleshooting
 
-### Issue: Stream connects but no events arrive
+### Issue: stream connects but no events arrive
 
 **Symptoms**: `EventSource` opens successfully but no `onmessage` events fire.
 
@@ -184,7 +184,7 @@ directly:
 curl -N "http://localhost:3000/api/logs/stream?profileId=abc123"
 ```
 
-### Issue: `sendStream` is not defined
+### Issue: `sendstream` is NOT defined
 
 **Solution**: `sendStream` is a Nuxt H3 utility. Ensure you are using Nuxt 4.x and import is
 resolved automatically in server routes.

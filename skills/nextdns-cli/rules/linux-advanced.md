@@ -12,7 +12,7 @@ tags:
   - workstation
 ---
 
-# Advanced Linux Distribution Support
+# Advanced Linux distribution support
 
 Manual and advanced installation methods for Alpine Linux, Arch Linux, and other distributions.
 
@@ -21,9 +21,9 @@ Manual and advanced installation methods for Alpine Linux, Arch Linux, and other
 While the standard installer script works for most, specific distributions like Alpine (musl-based)
 or Arch (AUR-centric) benefit from native package management for better lifecycle control.
 
-## Correct Usage
+## Correct usage
 
-### 1. Arch Linux (via AUR)
+### 1. Arch Linux (via aur)
 
 Using native package managers allows systemic updates.
 
@@ -38,7 +38,7 @@ sudo nextdns install \
   -auto-activate
 ```
 
-### 2. Alpine Linux (Manual APK)
+### 2. Alpine Linux (manual apk)
 
 Useful for lightweight Docker hosts or Alpine-based routers.
 
@@ -55,7 +55,7 @@ sudo apk add nextdns
 sudo nextdns install -profile abc123 -setup-router
 ```
 
-### 3. RPM-Based (Fedora/CentOS/RHEL)
+### 3. Rpm-based (fedora/centos/rhel)
 
 Manual repo setup if the installer script fails.
 
@@ -76,12 +76,12 @@ sudo dnf install nextdns
 
 ## Troubleshooting
 
-### Musl vs Glibc (Alpine)
+### Musl vs glibc (alpine)
 
 If using the binary directly on Alpine, ensure you use the `alpine` specific downloads if not using
 `apk`, as standard binaries might fail due to missing `glibc`.
 
-### Permission Errors
+### Permission errors
 
 Always run `nextdns install` or `nextdns config` commands with `sudo` to ensure the systemd or init
 services can be correctly registered.

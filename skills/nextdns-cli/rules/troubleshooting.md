@@ -16,7 +16,7 @@ Essential steps to resolve DNS outages and misconfigurations
 
 When DNS is not working or not pointing to NextDNS correctly, follow these diagnostic steps.
 
-## Initial Health Check
+## Initial health check
 
 First, verify if NextDNS is actually being used:
 
@@ -28,7 +28,7 @@ curl https://test.nextdns.io
 The output will tell you if you are using NextDNS, which protocol (DoH, DoT), and which profile ID
 is active.
 
-## Common CLI Fixes
+## Common CLI fixes
 
 1. **Restart the service**: Most configuration issues are resolved by a simple restart.
    ```bash
@@ -50,7 +50,7 @@ is active.
    nextdns log
    ```
 
-### Installation Failures
+### Installation failures
 
 If the initial installation script fails, run it in debug mode to see more detailed output:
 
@@ -58,7 +58,7 @@ If the initial installation script fails, run it in debug mode to see more detai
 DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ```
 
-### Port 53 Conflict
+### Port 53 conflict
 
 If NextDNS fails to start, another service might be using port 53 (common on Linux with `dnsmasq` or
 `systemd-resolved`).
@@ -67,14 +67,14 @@ If NextDNS fails to start, another service might be using port 53 (common on Lin
 - Solution: Stop the conflicting service or configure NextDNS to listen on a different IP/interface
   using the `-listen` flag.
 
-### Captive Portals
+### Captive portals
 
 If you are at a hotel or airport and cannot connect:
 
 - Enable captive portal detection: `sudo nextdns config set -detect-captive-portals=true`.
 - This allows the system to temporarily use the local network's DNS to handle the login page.
 
-## Diagnostic Tool
+## Diagnostic tool
 
 NextDNS provides a diagnostic tool to help support staff:
 

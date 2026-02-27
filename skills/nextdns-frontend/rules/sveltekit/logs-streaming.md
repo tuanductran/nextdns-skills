@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Log Streaming via SSE (SvelteKit)
+# Log streaming via sse SvelteKit
 
 Proxy the NextDNS real-time log stream through a SvelteKit `+server.ts` route and consume it in a
 Svelte component
@@ -28,9 +28,9 @@ added on the server side. A SvelteKit `+server.ts` route proxies the upstream SS
 `ReadableStream` response. The Svelte component connects to the SvelteKit route (no key in URL) and
 parses incoming `data:` events.
 
-## Correct Usage
+## Correct usage
 
-### SSE proxy route
+### Sse proxy route
 
 ```typescript
 // ✅ src/routes/api/profiles/[id]/logs/stream/+server.ts
@@ -61,7 +61,7 @@ export const GET: RequestHandler = async ({ params }) => {
 };
 ```
 
-### Svelte component consuming SSE
+### Svelte component consuming sse
 
 ```svelte
 <!-- ✅ src/routes/profiles/[id]/logs/+page.svelte -->
@@ -117,7 +117,7 @@ export const GET: RequestHandler = async ({ params }) => {
 </script>
 ```
 
-## Best Practices
+## Best practices
 
 - **Pipe the upstream body**: Pass `upstream.body` directly to `new Response()` to avoid buffering
   the entire stream in memory.
@@ -125,19 +125,19 @@ export const GET: RequestHandler = async ({ params }) => {
   `setTimeout` fallback in `onerror`.
 - **`onDestroy` cleanup**: Always close the `EventSource` when the Svelte component is destroyed to
   prevent memory leaks.
-- **Limit buffer size**: Cap the `logs` array (e.g., last 200 entries) to avoid unbounded memory
+- **Limit buffer size**: Cap the `logs` array (for example, last 200 entries) to avoid unbounded memory
   growth in long-running sessions.
 
 ## Troubleshooting
 
-### Issue: Stream closes immediately after connection
+### Issue: stream closes immediately after connection
 
 **Symptoms**: `onerror` fires within 1 second, no log entries appear.
 
 **Solution**: Check that the upstream request headers include `Accept: text/event-stream`. Some
-platforms (e.g., Cloudflare Workers) buffer SSE responses — use the streaming adapter.
+platforms (for example, Cloudflare Workers) buffer SSE responses — use the streaming adapter.
 
-### Issue: `EventSource` is not defined (SSR)
+### Issue: `eventsource` is NOT defined (ssr)
 
 **Symptoms**: Build or hydration error referencing `EventSource`.
 

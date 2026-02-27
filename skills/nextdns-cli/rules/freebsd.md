@@ -14,7 +14,7 @@ tags:
   - service
 ---
 
-# FreeBSD Installation
+# FreeBSD installation
 
 Install and configure NextDNS CLI on FreeBSD using pkg or the ports collection
 
@@ -24,9 +24,9 @@ FreeBSD supports NextDNS CLI through the official package repository (`pkg`) and
 collection. Service management on FreeBSD uses `rc.conf` and the `service` command rather than
 systemd. The standard universal installer also works on FreeBSD as an alternative.
 
-## Correct Usage
+## Correct usage
 
-### Method 1: Universal Installer (Recommended)
+### Method 1: universal installer (recommended)
 
 ```bash
 # ✅ Simplest method — handles binary, service registration, and activation
@@ -35,7 +35,7 @@ sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 
 Follow the interactive prompts to set your profile ID and install mode (host or router).
 
-### Method 2: pkg (Binary Package)
+### Method 2: pkg (binary package)
 
 ```bash
 # ✅ Install from the official FreeBSD package repository
@@ -58,7 +58,7 @@ nextdns install \
   -setup-router
 ```
 
-### Method 3: Ports Collection
+### Method 3: ports collection
 
 ```bash
 # ✅ Install from source using the ports collection
@@ -66,7 +66,7 @@ cd /usr/ports/dns/nextdns
 make install clean
 ```
 
-### Service Management
+### Service management
 
 ```bash
 # ✅ Start the service
@@ -82,7 +82,7 @@ service nextdns status
 nextdns log
 ```
 
-### Manual rc.conf Entry
+### Manual rc.conf entry
 
 If the service is not auto-registered, add it manually to `/etc/rc.conf`:
 
@@ -130,7 +130,7 @@ pkg delete nextdns
 
 ## Troubleshooting
 
-### Issue: Installation fails with permission error
+### Issue: installation fails with permission error
 
 **Symptoms**: `Permission denied` when running the installer.
 
@@ -140,7 +140,7 @@ pkg delete nextdns
 sudo sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ```
 
-### Issue: Service not persisting after reboot
+### Issue: service NOT persisting after reboot
 
 **Symptoms**: NextDNS daemon is not running after a system reboot.
 
@@ -151,7 +151,7 @@ grep nextdns /etc/rc.conf
 # Should output: nextdns_enable="YES"
 ```
 
-### Issue: Debug installation failure
+### Issue: debug installation failure
 
 ```bash
 # Run installer in debug mode

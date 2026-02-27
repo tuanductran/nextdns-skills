@@ -18,7 +18,7 @@ tags:
   - blocklist
 ---
 
-# Home Assistant Integration
+# Home assistant integration
 
 Enables automated DNS control and monitoring through Home Assistant smart home platform
 
@@ -35,16 +35,16 @@ Before setting up the integration, you need:
 
 ## Installation
 
-1. Navigate to **Settings → Devices & Services** in Home Assistant
+1. Navigate to **Settings → Devices and Services** in Home Assistant
 2. Click **Add Integration** and search for "NextDNS"
 3. Enter your NextDNS API Key and Profile ID
 4. The integration will automatically discover and configure available entities
 
-## Available Entities
+## Available entities
 
 The integration provides multiple entity types for monitoring and control:
 
-### Binary Sensors
+### Binary sensors
 
 - **Connection Status**: Indicates whether NextDNS is actively connected and responding
 
@@ -73,9 +73,9 @@ Control various NextDNS features through boolean switches:
   - Block Gaming platforms
   - Block Dating apps
 
-## Automation Examples
+## Automation examples
 
-### Time-Based Parental Control
+### Time-based parental control
 
 This automation demonstrates blocking social media for children during evening hours:
 
@@ -91,7 +91,7 @@ automation:
           entity_id: switch.kids_block_social_networks
 ```
 
-### Morning Unblock Automation
+### Morning unblock automation
 
 Complement the evening block with a morning unblock:
 
@@ -107,7 +107,7 @@ automation:
           entity_id: switch.kids_block_social_networks
 ```
 
-### High Threat Response
+### High threat response
 
 Automatically clear logs when a high number of threats are detected:
 

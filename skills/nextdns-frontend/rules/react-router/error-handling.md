@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Error Handling (React Router v7)
+# Error handling React router v7)
 
 Map NextDNS API errors to React Router v7 error boundaries and inline component feedback
 
@@ -33,9 +33,9 @@ React Router v7 provides two error-handling mechanisms:
 Throw errors in `loader` for unrecoverable failures. Return error objects from `action` for
 recoverable validation failures.
 
-## Correct Usage
+## Correct usage
 
-### Route-level error boundary (Framework Mode)
+### Route-level error boundary (framework mode)
 
 ```typescript
 // ✅ app/routes/profiles.$id.tsx
@@ -189,7 +189,7 @@ export function ErrorBoundary() {
 }
 ```
 
-## Best Practices
+## Best practices
 
 - **`throw data()` in `loader`, return in `action`**: Thrown errors trigger `ErrorBoundary`;
   returned objects are available as `actionData` for inline feedback.
@@ -202,14 +202,14 @@ export function ErrorBoundary() {
 
 ## Troubleshooting
 
-### Issue: `ErrorBoundary` not rendered — blank white page
+### Issue: `errorboundary` NOT rendered — blank white page
 
 **Symptoms**: Loader throws but the app shows a blank page instead of the error boundary.
 
 **Solution**: Ensure `ErrorBoundary` is exported from the **same route module** as the `loader`, not
 just from `root.tsx`.
 
-### Issue: `actionData` is `undefined` after form submission
+### Issue: `actiondata` is `undefined` after form submission
 
 **Solution**: Ensure the `action` returns a plain object (not `undefined`) on error. Returning
 `null` is valid for success; returning `{ error: '...' }` gives `actionData` to the component.

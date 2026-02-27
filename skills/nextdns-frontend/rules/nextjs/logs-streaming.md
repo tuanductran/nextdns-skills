@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Real-Time Log Streaming
+# Real-time log streaming
 
 Proxy the NextDNS SSE log stream through a Next.js Route Handler and consume it in React
 
@@ -31,9 +31,9 @@ Handler that opens the upstream SSE connection (with the key server-side) and re
 Browser EventSource → /api/logs/stream (Next.js) → api.nextdns.io/logs/stream (X-Api-Key)
 ```
 
-## Correct Usage
+## Correct usage
 
-### Route Handler — SSE proxy
+### Route handler — sse proxy
 
 ```typescript
 // ✅ app/api/logs/stream/route.ts
@@ -70,7 +70,7 @@ export async function GET(req: Request) {
 }
 ```
 
-### React Client Component — consume SSE
+### React client component — consume sse
 
 ```tsx
 // ✅ components/LogStream.tsx
@@ -165,7 +165,7 @@ const source = new EventSource(
 setInterval(() => fetchLogs(), 1000); // ❌
 ```
 
-## Best Practices
+## Best practices
 
 - **Export `dynamic = 'force-dynamic'`** in the Route Handler: Prevents Next.js from statically
   caching the SSE route at build time.
@@ -176,7 +176,7 @@ setInterval(() => fetchLogs(), 1000); // ❌
 
 ## Troubleshooting
 
-### Issue: Route Handler returns immediately instead of streaming
+### Issue: route handler returns immediately instead of streaming
 
 **Symptoms**: `EventSource` fires `onerror` immediately; no events arrive.
 

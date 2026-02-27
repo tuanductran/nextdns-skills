@@ -14,11 +14,11 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Time Series Data
+# Time series data
 
 Get time series data for creating charts and trend analysis
 
-## Time Series Endpoints
+## Time series endpoints
 
 Append `;series` to any analytics endpoint to get time series data:
 
@@ -28,7 +28,7 @@ Append `;series` to any analytics endpoint to get time series data:
 /profiles/:profile/analytics/protocols;series
 ```
 
-## Basic Usage
+## Basic usage
 
 ```javascript
 const response = await fetch(
@@ -39,7 +39,7 @@ const response = await fetch(
 const data = await response.json();
 ```
 
-## Response Format
+## Response format
 
 Instead of single `queries` value, you get an array:
 
@@ -77,9 +77,9 @@ Instead of single `queries` value, you get an array:
 }
 ```
 
-## Query Parameters
+## Query parameters
 
-### interval
+### Interval
 
 Type: Seconds | Duration
 
@@ -98,7 +98,7 @@ interval: '1w'; // 1 week
 
 If not specified, API chooses appropriate interval based on date range.
 
-### alignment
+### Alignment
 
 Values: `start` | `end` | `clock`
 
@@ -117,7 +117,7 @@ alignment: 'start';
 alignment: 'clock';
 ```
 
-### timezone
+### Timezone
 
 Type: TimeZone (IANA timezone name)
 
@@ -139,7 +139,7 @@ const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 // "Europe/Paris"
 ```
 
-### partials
+### Partials
 
 Values: `none` | `start` | `end` | `all`
 
@@ -161,7 +161,7 @@ partials: 'end';
 partials: 'all';
 ```
 
-## Complete Example
+## Complete example
 
 ```javascript
 async function getTimeSeries(profileId, endpoint, options = {}) {
@@ -203,7 +203,7 @@ const hourly = await getTimeSeries('abc123', 'protocols', {
 });
 ```
 
-## Creating Charts
+## Creating charts
 
 ```javascript
 async function createChart(profileId) {
@@ -227,7 +227,7 @@ async function createChart(profileId) {
 }
 ```
 
-## Common Intervals
+## Common intervals
 
 ```javascript
 // Hourly for last 24 hours
@@ -246,7 +246,7 @@ async function createChart(profileId) {
 { from: '-1y', interval: '30d' }
 ```
 
-## Timezone Examples
+## Timezone examples
 
 ```javascript
 // Common timezones
@@ -287,7 +287,7 @@ interval: '1d';
 interval: 86400;
 ```
 
-## Best Practices
+## Best practices
 
 1. **Choose appropriate intervals**: Don't use 1-hour intervals for 1-year ranges
 2. **Use clock alignment** for daily reports to align with user's day

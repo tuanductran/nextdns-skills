@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Analytics Charts (React Router v7)
+# Analytics charts React router v7)
 
 Fetch NextDNS analytics data in a React Router v7 `loader` and render interactive charts in React
 components
@@ -28,7 +28,7 @@ The NextDNS API provides query statistics and time-series analytics endpoints un
 API key is required. The component receives `loaderData` as a prop. Charting libraries such as
 Recharts or Chart.js render on the client after hydration.
 
-## Correct Usage
+## Correct usage
 
 ### Fetch analytics in a loader
 
@@ -57,7 +57,7 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 }
 ```
 
-### Render with Recharts
+### Render with recharts
 
 ```typescript
 // ✅ app/routes/profiles.$id.analytics.tsx  (continued)
@@ -100,7 +100,7 @@ export default function AnalyticsPage({ loaderData }: Route.ComponentProps) {
 }
 ```
 
-### Install Recharts
+### Install recharts
 
 ```bash
 npm install recharts
@@ -119,7 +119,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 }
 ```
 
-## Best Practices
+## Best practices
 
 - **`Promise.all` in loader**: Fetch multiple analytics endpoints concurrently to minimize page load
   time.
@@ -131,7 +131,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 
 ## Troubleshooting
 
-### Issue: Chart is blank on first render but shows data after interaction
+### Issue: chart is blank on first render but shows data after interaction
 
 **Symptoms**: `ResponsiveContainer` returns 0 width on SSR.
 

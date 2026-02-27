@@ -13,15 +13,15 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Date Formats
+# Date formats
 
 Use correct date formats for time-based queries
 
-## Supported Date Formats
+## Supported date formats
 
 The NextDNS API accepts multiple date formats:
 
-### 1. ISO 8601
+### 1. Iso 8601
 
 Standard ISO 8601 format with timezone:
 
@@ -31,21 +31,21 @@ from: '2024-01-15T16:34:05Z';
 from: '2024-01-15T00:00:00Z';
 ```
 
-### 2. UNIX Timestamp (Seconds)
+### 2. UNIX timestamp (seconds)
 
 ```javascript
 from: 1615826071;
 from: '1615826071';
 ```
 
-### 3. UNIX Timestamp (Milliseconds)
+### 3. UNIX timestamp (milliseconds)
 
 ```javascript
 from: 1615826071284;
 from: '1615826071284';
 ```
 
-### 4. Relative Dates
+### 4. Relative dates
 
 Most convenient for recent data:
 
@@ -72,16 +72,16 @@ from: '-1y'; // 1 year ago
 from: 'now'; // Current time
 ```
 
-### 5. Common Date Formats
+### 5. Common date formats
 
 ```javascript
 from: '2024-01-15';
 from: '2024-01-15 16:34:05';
 ```
 
-## Usage Examples
+## Usage examples
 
-### Last 7 Days
+### Last 7 days
 
 ```javascript
 const response = await fetch(
@@ -90,7 +90,7 @@ const response = await fetch(
 );
 ```
 
-### Specific Date Range
+### Specific date range
 
 ```javascript
 const response = await fetch(
@@ -99,7 +99,7 @@ const response = await fetch(
 );
 ```
 
-### Last 24 Hours
+### Last 24 hours
 
 ```javascript
 const response = await fetch('https://api.nextdns.io/profiles/abc123/logs?from=-24h', {
@@ -107,7 +107,7 @@ const response = await fetch('https://api.nextdns.io/profiles/abc123/logs?from=-
 });
 ```
 
-### Custom Time Range
+### Custom time range
 
 ```javascript
 const response = await fetch(
@@ -116,7 +116,7 @@ const response = await fetch(
 );
 ```
 
-## Helper Functions
+## Helper functions
 
 ### JavaScript
 
@@ -188,7 +188,7 @@ def format_date_for_api(date):
     return date
 ```
 
-## Date Range Builder
+## Date range builder
 
 ```javascript
 class DateRangeBuilder {
@@ -264,7 +264,7 @@ const queryString = new DateRangeBuilder().lastHours(24).toQueryString();
 // "from=-24h&to=now"
 ```
 
-## Common Patterns
+## Common patterns
 
 ```javascript
 // Last hour
@@ -326,14 +326,14 @@ from: 1615826071;
 from: 'now';
 ```
 
-## Timezone Considerations
+## Timezone considerations
 
 - All timestamps are in **UTC**
 - ISO 8601 strings should include timezone (`Z` for UTC)
 - Relative dates are calculated from current UTC time
 - Use time series `timezone` parameter for local time alignment
 
-## Best Practices
+## Best practices
 
 1. **Use relative dates** for recent data (`-7d`, `-24h`)
 2. **Use ISO 8601** for specific dates

@@ -10,14 +10,14 @@ tags:
   - edit config
 ---
 
-# Profile Configuration
+# Profile configuration
 
 Managing core NextDNS profile and service settings
 
 The CLI uses specific flags to connect to your NextDNS cloud dashboard and control local proxy
 behavior.
 
-## Setting the Profile ID
+## Setting the profile id
 
 Setting the primary NextDNS profile is the most important configuration step:
 
@@ -26,7 +26,7 @@ Setting the primary NextDNS profile is the most important configuration step:
 sudo nextdns config set -profile=abc123
 ```
 
-## Configuration Management
+## Configuration management
 
 | Command                      | Description                                                       |
 | ---------------------------- | ----------------------------------------------------------------- |
@@ -34,9 +34,9 @@ sudo nextdns config set -profile=abc123
 | `nextdns config edit`        | Opens the configuration file in a text editor for manual editing. |
 | `nextdns config list`        | Lists all current configuration values.                           |
 
-## Common Configuration Flags
+## Common configuration flags
 
-- **`-profile`**: Your NextDNS configuration ID (e.g., `abc123`).
+- **`-profile`**: Your NextDNS configuration ID (for example, `abc123`).
 - **`-report-client-info`**: Enable this to see device names in your NextDNS dashboard
   (`true`/`false`).
 - **`-auto-activate`**: Automatically set system DNS to 127.0.0.1 on start.
@@ -45,7 +45,7 @@ sudo nextdns config set -profile=abc123
 - **`-use-hosts`**: Lookup `/etc/hosts` before sending queries upstream (default: `true`).
 - **`-mdns`**: Enable mDNS to discover client information (default: `"all"`).
 
-## Manual Editing
+## Manual editing
 
 If you use `nextdns config edit`, the file format is a simple list of flags:
 

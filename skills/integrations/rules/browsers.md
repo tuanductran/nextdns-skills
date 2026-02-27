@@ -19,7 +19,7 @@ tags:
   - proxy
 ---
 
-# Browser Native DoH Configuration
+# Browser native DoH configuration
 
 Enables NextDNS protection in restricted environments without system-wide changes or administrative
 privileges
@@ -28,9 +28,9 @@ Modern browsers include built-in support for DNS-over-HTTPS (DoH), allowing encr
 without installing additional software or requiring system administrator rights. This is
 particularly useful in corporate, educational, or restrictive network environments.
 
-## Use Cases
+## Use cases
 
-### When to Use Browser-Level DoH
+### When to use browser-level DoH
 
 - **Corporate Networks**: When IT policies block software installation or system-wide DNS changes
 - **Shared Computers**: Public libraries, internet cafes, or shared workstations
@@ -45,12 +45,12 @@ particularly useful in corporate, educational, or restrictive network environmen
 - **Per-browser**: Must be configured separately in each browser
 - **Profile-dependent**: Settings may not sync across devices unless using browser sync
 
-## Chrome and Edge Configuration
+## Chrome and edge configuration
 
 Google Chrome and Microsoft Edge share the same Chromium-based architecture and use identical
 configuration steps.
 
-### Configuration Steps
+### Configuration steps
 
 1. Open browser settings:
    - **Chrome**: `chrome://settings/security`
@@ -72,14 +72,14 @@ configuration steps.
 
 8. Click **Save** or close settings (changes apply automatically)
 
-### Finding Your Configuration ID
+### Finding your configuration id
 
 1. Log in to [https://my.nextdns.io](https://my.nextdns.io)
 2. Select your configuration
 3. Your Configuration ID is displayed in the URL: `https://my.nextdns.io/<config_id>/setup`
-4. The ID is a 6-character alphanumeric string (e.g., `abc123`)
+4. The ID is a 6-character alphanumeric string (for example, `abc123`)
 
-### Visual Path Reference
+### Visual path reference
 
 ```text
 Settings
@@ -91,15 +91,15 @@ Settings
                            └─ Enter custom provider
 ```
 
-## Firefox Configuration
+## Firefox configuration
 
 Firefox has its own implementation of DNS-over-HTTPS with slightly different terminology.
 
-### Configuration Steps
+### Configuration steps
 
 1. Open browser settings:
    - Navigate to `about:preferences#privacy`
-   - Or go to **Settings** → **Privacy & Security**
+   - Or go to **Settings** → **Privacy and Security**
 
 2. Scroll to **DNS over HTTPS** section
 
@@ -113,7 +113,7 @@ Firefox has its own implementation of DNS-over-HTTPS with slightly different ter
 
 6. Changes apply automatically
 
-### Visual Path Reference
+### Visual path reference
 
 ```text
 Settings
@@ -125,7 +125,7 @@ Settings
                            └─ Enter custom DNS URL
 ```
 
-### Firefox Protection Modes
+### Firefox protection modes
 
 | Mode                     | Behavior                            | Use Case                                |
 | ------------------------ | ----------------------------------- | --------------------------------------- |
@@ -137,7 +137,7 @@ Settings
 
 After configuration, verify that DoH is working correctly:
 
-### Method 1: NextDNS Test Page
+### Method 1: NextDNS test page
 
 1. Visit [https://test.nextdns.io](https://test.nextdns.io)
 2. You should see:
@@ -145,9 +145,9 @@ After configuration, verify that DoH is working correctly:
    - ✓ **Status**: Connected
    - ✓ **Configuration ID**: Your config ID
 
-### Method 2: Browser Network Tools
+### Method 2: browser network tools
 
-#### Chrome/Edge
+#### Chrome/edge
 
 1. Open DevTools (F12)
 2. Navigate to **Network** tab
@@ -161,7 +161,7 @@ After configuration, verify that DoH is working correctly:
 2. Check the **TRR** (Trusted Recursive Resolver) status
 3. Should show as "TRR only" for Max Protection
 
-### Method 3: Check Query Logs
+### Method 3: check query logs
 
 1. Log in to [https://my.nextdns.io](https://my.nextdns.io)
 2. Navigate to **Logs** tab
@@ -169,7 +169,7 @@ After configuration, verify that DoH is working correctly:
 
 ## Troubleshooting
 
-### DoH Not Working
+### DoH NOT working
 
 **Possible causes:**
 
@@ -178,7 +178,7 @@ After configuration, verify that DoH is working correctly:
 3. **Network Blocking**: Some networks may block DoH traffic (port 443 to dns.nextdns.io)
 4. **Browser Sync Conflict**: Disable browser sync temporarily to rule out conflicts
 
-### Testing Fallback
+### Testing fallback
 
 Temporarily use an invalid configuration ID to verify the browser is actually using DoH:
 `https://dns.nextdns.io/invalid`
@@ -186,7 +186,7 @@ Temporarily use an invalid configuration ID to verify the browser is actually us
 If DNS queries fail after setting this invalid ID, your browser is correctly using DoH. Restore your
 real configuration ID to resume normal operation.
 
-### Chrome/Edge: "Secure DNS Unavailable" Warning
+### Chrome/edge: "secure DNS unavailable" warning
 
 If you see a warning that secure DNS is unavailable:
 
@@ -195,7 +195,7 @@ If you see a warning that secure DNS is unavailable:
 3. Clear browser cache and DNS cache
 4. Restart the browser
 
-### Firefox: Fallback to System DNS
+### Firefox: fallback to system DNS
 
 If Firefox falls back to system DNS (when using "Increased Protection" mode):
 
@@ -203,7 +203,7 @@ If Firefox falls back to system DNS (when using "Increased Protection" mode):
 2. Verify the custom URL is entered correctly
 3. Check browser console (F12) for DNS-related errors
 
-## Best Practices
+## Best practices
 
 - **Use Max Protection** (Firefox) or enable DoH unconditionally (Chrome/Edge) for maximum security
 - **Verify configuration** using test.nextdns.io after setup
@@ -211,19 +211,19 @@ If Firefox falls back to system DNS (when using "Increased Protection" mode):
 - **Document Settings** for easier reconfiguration on new devices
 - **Consider System-Wide Setup** for comprehensive protection beyond just browser traffic
 
-## Limitations and Considerations
+## Limitations and considerations
 
-### Browser-Only Protection
+### Browser-only protection
 
 Browser DoH only protects DNS queries originating from that browser. Other applications on your
-system (email clients, games, system updates, etc.) will use the system's default DNS settings.
+system (email clients, games, system updates, and more) will use the system's default DNS settings.
 
 ### Performance
 
 DoH adds minimal latency (typically 5-15ms) compared to unencrypted DNS. This is generally
 imperceptible for normal browsing.
 
-### Network Policies
+### Network policies
 
 Some corporate or school networks may:
 

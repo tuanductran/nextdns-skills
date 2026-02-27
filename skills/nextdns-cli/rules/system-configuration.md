@@ -10,7 +10,7 @@ tags:
   - system dns
 ---
 
-# System Configuration
+# System configuration
 
 Modifying system-wide DNS resolver settings
 
@@ -41,7 +41,7 @@ sudo nextdns deactivate
 
 This should be used if you want to bypass the local proxy or if you are uninstalling the CLI.
 
-## Auto-Activation
+## Auto-activation
 
 You can configure the daemon to automatically activate/deactivate at startup and exit:
 

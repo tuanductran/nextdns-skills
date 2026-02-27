@@ -13,15 +13,15 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Error Handling
+# Error handling
 
 Properly handle API errors and validation failures
 
-## Error Response Formats
+## Error response formats
 
 The API uses two different error response patterns:
 
-### 1. Client Errors (400 Bad Request)
+### 1. Client errors (400 bad request)
 
 Invalid requests return `400` status with errors array:
 
@@ -40,7 +40,7 @@ Invalid requests return `400` status with errors array:
 }
 ```
 
-### 2. User Errors (200 OK)
+### 2. User errors (200 ok)
 
 Business logic errors return `200` status with errors array:
 
@@ -59,7 +59,7 @@ Business logic errors return `200` status with errors array:
 }
 ```
 
-## Error Object Structure
+## Error object structure
 
 ```typescript
 interface Error {
@@ -72,7 +72,7 @@ interface Error {
 }
 ```
 
-## Common Error Codes
+## Common error codes
 
 | Code             | Description                | Example                        |
 | ---------------- | -------------------------- | ------------------------------ |
@@ -83,7 +83,7 @@ interface Error {
 | `not_found`      | Resource not found         | Profile doesn't exist          |
 | `rate_limit`     | Rate limit exceeded        | Too many requests              |
 
-## Handling Errors
+## Handling errors
 
 ```javascript
 async function makeApiRequest(url, options = {}) {
@@ -150,9 +150,9 @@ class HttpError extends Error {
 }
 ```
 
-## Validation Examples
+## Validation examples
 
-### Invalid Query Parameter
+### Invalid query parameter
 
 ```javascript
 // Request
@@ -175,7 +175,7 @@ const response = await fetch(
 }
 ```
 
-### Invalid Domain
+### Invalid domain
 
 ```javascript
 // Request
@@ -202,7 +202,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
 }
 ```
 
-### Duplicate Entry
+### Duplicate entry
 
 ```javascript
 // Adding domain that already exists
@@ -229,7 +229,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
 }
 ```
 
-## Comprehensive Error Handler
+## Comprehensive error handler
 
 ```javascript
 async function nextdnsApi(endpoint, options = {}) {
@@ -281,7 +281,7 @@ try {
 }
 ```
 
-## Retry Logic
+## Retry logic
 
 ```javascript
 async function nextdnsApiWithRetry(endpoint, options = {}, maxRetries = 3) {
@@ -335,7 +335,7 @@ if (!response.ok) {
 return data;
 ```
 
-## Best Practices
+## Best practices
 
 1. **Always check for `errors` in response** even on 200 OK
 2. **Check HTTP status** for network/server errors

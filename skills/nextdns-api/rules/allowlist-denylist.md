@@ -14,7 +14,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Allowlist and Denylist
+# Allowlist and denylist
 
 Manage custom domain allow/deny lists
 
@@ -38,7 +38,7 @@ const lists = {
 };
 ```
 
-## Add Domain to Denylist
+## Add domain to denylist
 
 ```javascript
 // Block a domain
@@ -55,7 +55,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist', {
 });
 ```
 
-## Add Domain to Allowlist
+## Add domain to allowlist
 
 ```javascript
 // Always allow a domain (bypass all blocking)
@@ -72,7 +72,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/allowlist', {
 });
 ```
 
-## Update Domain Status
+## Update domain status
 
 ```javascript
 // Temporarily disable a denylist entry without removing it
@@ -96,7 +96,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/denylist/badwebsite.com', {
 });
 ```
 
-## Remove Domain
+## Remove domain
 
 ```javascript
 // Remove from denylist
@@ -112,7 +112,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/allowlist/goodwebsite.com', 
 });
 ```
 
-## Get All Entries
+## Get all entries
 
 ```javascript
 // Get denylist
@@ -126,7 +126,7 @@ const allowlist = await fetch('https://api.nextdns.io/profiles/abc123/allowlist'
 }).then((r) => r.json());
 ```
 
-## Domain Format
+## Domain format
 
 Domains can include:
 
@@ -141,16 +141,16 @@ Domains can include:
 { id: "*.ads-network.com", active: true }
 ```
 
-## Use Cases
+## Use cases
 
-### Denylist Use Cases
+### Denylist use cases
 
 - Block specific malicious domains not in blocklists
 - Block distracting websites (social media during work hours)
 - Block specific ad servers
 - Block tracking domains
 
-### Allowlist Use Cases
+### Allowlist use cases
 
 - Unblock false positives from blocklists
 - Allow work-critical domains that might be blocked
@@ -165,7 +165,7 @@ Allowlist has **higher priority** than denylist and all other blocking rules:
 Allowlist > Denylist > Parental Control > Privacy > Security
 ```
 
-## Error Handling
+## Error handling
 
 ```javascript
 try {

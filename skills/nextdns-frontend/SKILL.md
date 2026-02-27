@@ -15,12 +15,12 @@ metadata:
 
 <!-- @case-police-ignore Api -->
 
-# NextDNS Frontend Skills
+# NextDNS frontend skills
 
 Nuxt, Next.js, Astro, SvelteKit, and React Router v7 patterns for building a secure, full-featured
 NextDNS management dashboard.
 
-## Nuxt Rules
+## Nuxt rules
 
 Patterns for Nuxt 4 (Vue) projects.
 
@@ -33,7 +33,7 @@ Patterns for Nuxt 4 (Vue) projects.
 | [analytics-charts](rules/nuxt/analytics-charts.md)           | analytics, charts, time series, dashboard, visualization          | Fetch and render analytics and time-series data      |
 | [error-handling](rules/nuxt/error-handling.md)               | error handling, notifications, toast, createError, api errors     | Map NextDNS API errors to Nuxt UI notifications      |
 
-## Next.js Rules
+## Next.js rules
 
 Patterns for Next.js 15 (React) projects using the App Router.
 
@@ -46,7 +46,7 @@ Patterns for Next.js 15 (React) projects using the App Router.
 | [analytics-charts](rules/nextjs/analytics-charts.md)           | analytics, charts, time series, dashboard, server component      | Fetch and render analytics and time-series data        |
 | [error-handling](rules/nextjs/error-handling.md)               | error handling, error boundary, next response, toast, api errors | Map NextDNS API errors to React/Next.js error UI       |
 
-## Astro Rules
+## Astro rules
 
 Patterns for Astro (React islands) projects.
 
@@ -59,7 +59,7 @@ Patterns for Astro (React islands) projects.
 | [analytics-charts](rules/astro/analytics-charts.md)           | analytics, charts, time series, dashboard, react island, swr         | Fetch and render analytics and time-series data            |
 | [error-handling](rules/astro/error-handling.md)               | error handling, error page, astro actions, api errors, react island  | Map NextDNS API errors to Astro pages and React islands    |
 
-## SvelteKit Rules
+## SvelteKit rules
 
 Patterns for SvelteKit (Svelte 5) projects.
 
@@ -72,7 +72,7 @@ Patterns for SvelteKit (Svelte 5) projects.
 | [analytics-charts](rules/sveltekit/analytics-charts.md)           | analytics, charts, time series, dashboard, visualization           | Fetch and render analytics and time-series data           |
 | [error-handling](rules/sveltekit/error-handling.md)               | error handling, +error.svelte, error(), fail(), api errors         | Map NextDNS API errors to SvelteKit error boundaries      |
 
-## React Router v7 Rules
+## React router v7 rules
 
 Patterns for React Router v7 (formerly Remix) projects.
 
@@ -85,7 +85,7 @@ Patterns for React Router v7 (formerly Remix) projects.
 | [analytics-charts](rules/react-router/analytics-charts.md)           | analytics, charts, time series, dashboard, loader, recharts          | Fetch and render analytics and time-series data             |
 | [error-handling](rules/react-router/error-handling.md)               | error handling, ErrorBoundary, loader errors, action errors, api     | Map NextDNS API errors to React Router error boundaries     |
 
-## Related Skills
+## Related skills
 
 - **nextdns-api**: REST endpoint reference — used by every server route in this skill.
 - **nextdns-ui**: Web dashboard strategy — complements this skill for configuration best practices.

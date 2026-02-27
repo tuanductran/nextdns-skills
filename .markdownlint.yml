@@ -1,7 +1,7 @@
 # Default state for all rules
 default: true
 
-# MD013/line-length: Disable max line length (handled by Prettier proseWrap)
+# MD013/line-length: Disable max line length (handled by Biome formatter)
 MD013: false
 
 # MD024/no-duplicate-heading: Allow duplicated headings if they are in different sections
@@ -22,7 +22,7 @@ MD032: true
 MD046:
   style: fenced
 
-# MD007/ul-indent: Disable to allow Prettier's default indentation (2 spaces)
+# MD007/ul-indent: Disable to allow consistent 2-space indentation
 MD007: false
 
 # MD041/first-line-h1: Disable because files start with YAML frontmatter
@@ -38,14 +38,14 @@ MD012: false
 # MD026/no-trailing-punctuation: Disable to allow punctuation in headings (questions etc.)
 MD026: false
 
-# MD031/blanks-around-fences: Disable because Prettier handles this
+# MD031/blanks-around-fences: Disable because Biome handles formatting
 MD031: false
 
 # MD004/ul-style: Consistent dash style for lists
 MD004:
   style: dash
 
-# MD060/table-column-style: Allow unaligned column pipes (handled by Prettier)
+# MD060/table-column-style: Allow unaligned column pipes (handled by Biome)
 MD060: false
 
 # MD034/no-bare-urls: Allow bare URLs/Emails (common in technical docs)

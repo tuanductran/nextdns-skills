@@ -11,7 +11,7 @@ tags:
   - mac-address
 ---
 
-# Conditional Profile Configuration
+# Conditional profile configuration
 
 Configure the NextDNS CLI to apply different profiles based on LAN client subnets or MAC addresses.
 
@@ -20,7 +20,7 @@ Configure the NextDNS CLI to apply different profiles based on LAN client subnet
 When running as a network-wide resolver (on a router or central server), the NextDNS CLI can
 distinguish between clients and apply specific filtering policies beyond the default profile.
 
-## Correct Usage
+## Correct usage
 
 ### Implementation via CLI
 
@@ -61,7 +61,7 @@ catch-all profile.
 sudo nextdns config set -profile 10.0.4.0/24:123456
 ```
 
-## Best Practices
+## Best practices
 
 - **Order Matters**: Define specific targets (MAC addresses) before broader ones (subnets) if there
   is overlap.

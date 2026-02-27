@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+packages/*/dist/
+
+# Generated files — excluded to avoid MD036 false positives on **Impact: HIGH** bold text
+skills/*/AGENTS.md

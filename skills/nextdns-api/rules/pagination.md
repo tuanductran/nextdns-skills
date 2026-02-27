@@ -17,7 +17,7 @@ tags:
 
 Properly paginate through large result sets
 
-## How Pagination Works
+## How pagination works
 
 Most endpoints that return arrays use cursor-based pagination:
 
@@ -32,7 +32,7 @@ Most endpoints that return arrays use cursor-based pagination:
 }
 ```
 
-## Basic Pagination
+## Basic pagination
 
 ```javascript
 // First page
@@ -51,7 +51,7 @@ if (data.meta.pagination.cursor) {
 }
 ```
 
-## Limit Parameter
+## Limit parameter
 
 Control results per page:
 
@@ -69,7 +69,7 @@ limit: 10; // Minimum for logs
 limit: 1000; // Maximum for logs
 ```
 
-## Fetch All Pages
+## Fetch all pages
 
 ```javascript
 async function fetchAllPages(url, apiKey) {
@@ -106,7 +106,7 @@ const allDomains = await fetchAllPages(
 );
 ```
 
-## Fetch with Progress
+## Fetch with progress
 
 ```javascript
 async function fetchAllPagesWithProgress(url, apiKey, onProgress) {
@@ -158,7 +158,7 @@ const domains = await fetchAllPagesWithProgress(
 );
 ```
 
-## Fetch with Limit
+## Fetch with limit
 
 Stop after a certain number of items:
 
@@ -204,7 +204,7 @@ const top1000 = await fetchUpToLimit(
 );
 ```
 
-## Async Iterator
+## Async iterator
 
 ```javascript
 async function* paginateEndpoint(url, apiKey) {
@@ -245,7 +245,7 @@ for await (const page of paginateEndpoint(
 }
 ```
 
-## Paginated Endpoints
+## Paginated endpoints
 
 These endpoints support pagination:
 
@@ -283,14 +283,14 @@ const oldCursor = 'abc123'; // Cursors expire
 cursor: data.meta.pagination.cursor;
 ```
 
-## Cursor Behavior
+## Cursor behavior
 
 - **Opaque**: Cursors are opaque strings, don't try to parse or modify them
 - **Temporary**: Cursors may expire after some time
 - **Null**: `cursor` is `null` when there are no more pages
 - **Sequential**: Must request pages in order, can't skip pages
 
-## Performance Tips
+## Performance tips
 
 1. **Use appropriate page size**: Balance between number of requests and memory usage
 2. **Don't fetch all pages** if you only need top results
@@ -299,7 +299,7 @@ cursor: data.meta.pagination.cursor;
 5. **Implement rate limiting** to avoid hitting API limits
 6. **Handle errors gracefully** and retry failed pages
 
-## Rate Limiting
+## Rate limiting
 
 Be mindful of rate limits when paginating:
 

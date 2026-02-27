@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# API Key Proxy (BFF Pattern)
+# API key proxy (bff pattern)
 
 Proxy all NextDNS API calls through Nuxt server routes to keep X-Api-Key server-side only
 
@@ -30,7 +30,7 @@ place to attach the key before forwarding requests to `api.nextdns.io`.
 Browser → /api/* (Nuxt server route) → api.nextdns.io (X-Api-Key added here)
 ```
 
-## Correct Usage
+## Correct usage
 
 ### Environment variable setup
 
@@ -40,7 +40,7 @@ NUXT_NEXTDNS_API_KEY=YOUR_API_KEY
 NUXT_NEXTDNS_PROFILE_ID=abc123
 ```
 
-### nuxt.config.ts — server-only runtimeConfig
+### Nuxt.config.ts — server-only runtimeconfig
 
 ```typescript
 // ✅ Keys without the "public" prefix are server-only
@@ -119,7 +119,7 @@ const { data } = await useFetch('https://api.nextdns.io/profiles', {
 });
 ```
 
-## Best Practices
+## Best practices
 
 - **One utility, one key location**: Use `server/utils/nextdns.ts` as the single place where the key
   is attached — never repeat it across route files.
@@ -130,7 +130,7 @@ const { data } = await useFetch('https://api.nextdns.io/profiles', {
 
 ## Troubleshooting
 
-### Issue: `useRuntimeConfig().nextdnsApiKey` is empty at runtime
+### Issue: `useruntimeconfig().nextdnsapikey` is empty at runtime
 
 **Symptoms**: API calls return 401 Unauthorized.
 
@@ -142,7 +142,7 @@ SCREAMING_SNAKE_CASE. The camelCase key `nextdnsApiKey` is overridden by `NUXT_N
 echo $NUXT_NEXTDNS_API_KEY
 ```
 
-### Issue: Server route returns 500 on missing profile ID
+### Issue: server route returns 500 on missing profile id
 
 **Solution**: Guard with an early return:
 

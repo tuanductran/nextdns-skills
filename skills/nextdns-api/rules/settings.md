@@ -17,7 +17,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Profile Settings
+# Profile settings
 
 Manage profile-level settings via the NextDNS API
 
@@ -27,9 +27,9 @@ The `/profiles/{id}/settings` endpoint controls profile-wide behaviour that appl
 query: logging, performance optimisations, block page, and Web3 resolution. Use GET to inspect
 current settings and PATCH to update individual fields without affecting others.
 
-## Correct Usage
+## Correct usage
 
-### Get Current Settings
+### Get current settings
 
 ```javascript
 // ✅ Retrieve all settings for a profile
@@ -40,7 +40,7 @@ const response = await fetch('https://api.nextdns.io/profiles/abc123/settings', 
 const { data } = await response.json();
 ```
 
-### Update Logging Settings
+### Update logging settings
 
 ```javascript
 // ✅ Enable logging with Swiss storage and 30-day retention
@@ -64,7 +64,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/settings', {
 });
 ```
 
-### Update Performance Settings
+### Update performance settings
 
 ```javascript
 // ✅ Enable cache boost and CNAME flattening
@@ -84,7 +84,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/settings', {
 });
 ```
 
-### Disable Block Page
+### Disable block page
 
 ```javascript
 // ✅ Return NXDOMAIN instead of showing a block page
@@ -100,7 +100,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/settings', {
 });
 ```
 
-## Settings Reference
+## Settings reference
 
 | Field                         | Type    | Description                                                                                          |
 | ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------- |
@@ -135,7 +135,7 @@ body: JSON.stringify({
 });
 ```
 
-## Best Practices
+## Best practices
 
 - **PATCH only what changes**: Pass only the keys you want to update; unspecified keys retain their
   current values.
@@ -148,14 +148,14 @@ body: JSON.stringify({
 
 ## Troubleshooting
 
-### Issue: PATCH returns 400 on log retention value
+### Issue: patch returns 400 on log retention value
 
 **Symptoms**: `{"errors": {"logs.retention": "invalid"}}`.
 
 **Solution**: Use only the allowed retention values (in seconds): `0`, `3600`, `21600`, `86400`,
 `604800`, `2592000`, `15552000`, `31536000`.
 
-### Issue: Settings update succeeds but behaviour does not change
+### Issue: settings update succeeds but behaviour does NOT change
 
 **Symptoms**: Response is `200 OK` but the feature does not activate.
 

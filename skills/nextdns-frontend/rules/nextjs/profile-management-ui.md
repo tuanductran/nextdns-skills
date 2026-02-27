@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Profile Management UI
+# Profile management UI
 
 Build profile list, create, update, and delete flows using Next.js App Router patterns
 
@@ -26,9 +26,9 @@ In Next.js App Router, profile data is fetched in **Server Components** (no extr
 key exposure). Mutations (create, update, delete) are triggered from **Client Components** via Route
 Handlers. Server Actions are an alternative for forms.
 
-## Correct Usage
+## Correct usage
 
-### Route Handlers (server-side)
+### Route handlers (server-side)
 
 ```typescript
 // ✅ app/api/profiles/route.ts
@@ -78,7 +78,7 @@ export async function DELETE(_req: Request, context: RouteContext<{ id: string }
 }
 ```
 
-### Server Component — profile list page
+### Server component — profile list page
 
 ```tsx
 // ✅ app/page.tsx — Server Component, no 'use client' needed
@@ -105,7 +105,7 @@ export default async function ProfilesPage() {
 }
 ```
 
-### Client Component — profile actions
+### Client component — profile actions
 
 ```tsx
 // ✅ components/ProfileActions.tsx
@@ -166,7 +166,7 @@ useEffect(() => {
 export default function ProfilesPage() { ... } // ❌ Unnecessary client bundle
 ```
 
-## Best Practices
+## Best practices
 
 - **Use `router.refresh()`** after mutations instead of full page reloads — it re-runs Server
   Component data fetching without a hard navigation.
@@ -177,7 +177,7 @@ export default function ProfilesPage() { ... } // ❌ Unnecessary client bundle
 
 ## Troubleshooting
 
-### Issue: Profile list shows stale data after delete
+### Issue: profile list shows stale data after delete
 
 **Solution**: Call `router.refresh()` after the mutation to revalidate Server Component data:
 

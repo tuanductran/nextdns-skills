@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Error Handling (SvelteKit)
+# Error handling SvelteKit
 
 Map NextDNS API errors to SvelteKit error responses and Svelte component-level feedback
 
@@ -31,7 +31,7 @@ SvelteKit provides two error mechanisms:
 For `+server.ts` API routes, throw `error()` on failure. For form actions, use `fail()` to return
 validation errors without triggering the error boundary.
 
-## Correct Usage
+## Correct usage
 
 ### Error boundary page
 
@@ -151,7 +151,7 @@ try {
 }
 ```
 
-## Best Practices
+## Best practices
 
 - **`error()` in server code, `fail()` in form actions**: `error()` triggers the `+error.svelte`
   boundary; `fail()` returns inline validation data without leaving the current page.
@@ -162,7 +162,7 @@ try {
 
 ## Troubleshooting
 
-### Issue: Error boundary not triggered — page renders blank
+### Issue: error boundary NOT triggered — page renders blank
 
 **Symptoms**: The `+error.svelte` file exists but is not rendered on error.
 

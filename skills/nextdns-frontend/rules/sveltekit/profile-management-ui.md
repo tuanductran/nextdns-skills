@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Profile Management UI (SvelteKit)
+# Profile management UI SvelteKit
 
 Build NextDNS profile list, create, update, and delete flows using SvelteKit load functions and form
 actions
@@ -28,7 +28,7 @@ For NextDNS profile management, always use `+page.server.ts` because it accesses
 `$env/static/private` and proxies API calls. Form actions in `+page.server.ts` handle mutations
 (create, update, delete) without requiring a separate API route.
 
-## Correct Usage
+## Correct usage
 
 ### Load profiles on the server
 
@@ -130,7 +130,7 @@ import { NEXTDNS_API_KEY } from '$env/static/private'; // ❌ Build error
 </script>
 ```
 
-## Best Practices
+## Best practices
 
 - **`+page.server.ts` for all NextDNS data**: Server load functions run only on the server and can
   safely import `$env/static/private`.
@@ -141,7 +141,7 @@ import { NEXTDNS_API_KEY } from '$env/static/private'; // ❌ Build error
 
 ## Troubleshooting
 
-### Issue: `fail()` result not shown in the UI
+### Issue: `fail()` result NOT shown in the UI
 
 **Solution**: Import `form` from `PageProps` and display `form?.message` in the template:
 

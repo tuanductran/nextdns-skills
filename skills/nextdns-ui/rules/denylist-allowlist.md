@@ -13,18 +13,18 @@ tags:
   - windows
 ---
 
-# Denylist and Allowlist
+# Denylist and allowlist
 
 Selective domain blocking and allowing
 
 Manually manage specific domains that should always be blocked or always allowed.
 
-## Expert Denylist (Hardening)
+## Expert denylist (hardening)
 
 Use the **Denylist** to explicitly block domains that bypass your DNS settings or facilitate
 tracking.
 
-### iCloud Private Relay
+### iCloud private relay
 
 Prevents NextDNS from protecting iOS/macOS devices by overriding DNS settings. To force NextDNS
 filtering, block:
@@ -33,16 +33,16 @@ filtering, block:
 - `mask-h2.icloud.com`
 - `mask-canary.icloud.com`
 
-## Expert Allowlist (Fixing Breakage)
+## Expert allowlist (fixing breakage)
 
 Use the **Allowlist** to ensure essential services function correctly even with aggressive
 blocklists.
 
-### General Essentials
+### General essentials
 
 - `nextdns.io`: Prevent blocking access to the NextDNS dashboard itself.
 
-### Fixing Popular Services
+### Fixing popular services
 
 - **Apple Updates**: `xp.apple.com` (Needed for device updates).
 - **Apple Features**: `smoot.apple.com` (Spotlight Search, iMessage GIFs).
@@ -54,7 +54,7 @@ blocklists.
   - `imasdk.googleapis.com`, `pubads.g.doubleclick.net` (May be needed for Paramount+ or CBS
     livestream).
 
-## Best Practice
+## Best practice
 
 Only add domains to the Allowlist if you encounter a specific issue. Over-allowing can compromise
 the effectiveness of your security and privacy filters.

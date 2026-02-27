@@ -16,11 +16,11 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Security Settings
+# Security settings
 
 Configure comprehensive security features for DNS filtering
 
-## Security Configuration
+## Security configuration
 
 ```javascript
 const securitySettings = {
@@ -52,7 +52,7 @@ const securitySettings = {
 };
 ```
 
-## Update Security Settings
+## Update security settings
 
 PATCH to update security settings:
 
@@ -71,7 +71,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security', {
 });
 ```
 
-## Add/Remove TLDs
+## Add/remove TLDs
 
 Manage blocked TLDs via nested endpoint:
 
@@ -93,7 +93,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security/tlds/xyz', {
 });
 ```
 
-## Security Features Explained
+## Security features explained
 
 | Feature                       | Description                                                                        |
 | ----------------------------- | ---------------------------------------------------------------------------------- |
@@ -102,7 +102,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/security/tlds/xyz', {
 | **Google Safe Browsing**      | Block phishing and malware sites via Google's database                             |
 | **Cryptojacking**             | Block cryptocurrency mining scripts                                                |
 | **DNS Rebinding**             | Prevent attacks that bypass same-origin policy                                     |
-| **IDN Homographs**            | Block domains using similar-looking characters (e.g., аpple.com with Cyrillic 'а') |
+| **IDN Homographs**            | Block domains using similar-looking characters (for example, аpple.com with Cyrillic 'а') |
 | **Typosquatting**             | Block common typos of popular domains                                              |
 | **DGA**                       | Block algorithmically generated domains used by malware                            |
 | **NRD**                       | Block newly registered domains (often used in attacks)                             |

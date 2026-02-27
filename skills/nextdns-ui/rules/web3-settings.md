@@ -11,11 +11,11 @@ tags:
   - ipfs
 ---
 
-# Web3 Settings
+# Web3 settings
 
 NextDNS supports the resolution of decentralized domains (Web3) based on blockchain technologies.
 
-## Enabling Web3
+## Enabling web3
 
 Located in the **Settings** tab of your NextDNS dashboard:
 
@@ -23,22 +23,22 @@ Located in the **Settings** tab of your NextDNS dashboard:
 2. Find the **Web3** section.
 3. Toggle the switch to **Enabled**.
 
-## Supported Technologies
+## Supported technologies
 
 When enabled, NextDNS can resolve:
 
 - **ENS (Ethereum Name Service)**: Domains ending in `.eth`.
-- **Unstoppable Domains**: Domains ending in `.crypto`, `.nft`, `.x`, etc.
+- **Unstoppable Domains**: Domains ending in `.crypto`, `.nft`, `.x`, and more
 - **Handshake (HNS)**: A decentralized naming protocol.
 - **IPFS Integration**: Facilitates access to content stored on the InterPlanetary File System.
 
-## Use Cases
+## Use cases
 
 - ✅ **Native Resolution**: Access decentralized websites directly in any browser without needing
-  special extensions (Metamask, etc.) for DNS resolution.
+  special extensions (MetaMask, and more) for DNS resolution.
 - ✅ **Developer Workflow**: Simplifies testing for decentralized applications (dApps).
 
-## Security Note
+## Security note
 
 Web3 domains are not governed by ICANN. While NextDNS attempts to apply standard security filters,
 the decentralized nature of these domains means they may carry different risk profiles than

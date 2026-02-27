@@ -3,6 +3,9 @@ name: Validate Rules
 on:
   push:
     branches: [main, develop]
+    paths:
+      - 'skills/**/rules/**/*.md'
+      - 'packages/nextdns-scripts/src/**'
   pull_request:
     branches: [main, develop]
 
@@ -29,7 +32,10 @@ jobs:
           version: 10.30.3
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
 
       - name: Check frontmatter in new skill files
         if: github.event_name == 'pull_request'

@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Profile Management UI
+# Profile management UI
 
 Build profile list, create, update, and delete flows using Astro pages and React islands
 
@@ -26,7 +26,7 @@ In Astro, page data is fetched in the `.astro` frontmatter (server-side, synchro
 components handle interactivity as **islands** — hydrated selectively with `client:*` directives.
 Mutations (create, update, delete) are triggered from React components via Astro API endpoints.
 
-## Correct Usage
+## Correct usage
 
 ### API endpoints
 
@@ -184,7 +184,7 @@ useEffect(() => {
 }, [])
 ```
 
-## Best Practices
+## Best practices
 
 - **Choose the right `client:*` directive**: Use `client:load` for above-the-fold interactive
   elements. Use `client:visible` for components lower on the page to defer JS loading.
@@ -195,12 +195,12 @@ useEffect(() => {
 
 ## Troubleshooting
 
-### Issue: Delete button has no effect when clicked
+### Issue: delete button has no effect when clicked
 
 **Solution**: Ensure the React component has a `client:load` (or similar) directive in the `.astro`
 template. Without it, the component is static HTML and click handlers are never attached.
 
-### Issue: Profile list doesn't update after mutation without page reload
+### Issue: profile list doesn't update after mutation without page reload
 
 **Solution**: Astro pages are server-rendered. After a mutation, call `window.location.reload()` or
 navigate programmatically to re-run the frontmatter data fetch.

@@ -13,11 +13,11 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Parental Control
+# Parental control
 
 Configure parental controls and content filtering
 
-## Parental Control Configuration
+## Parental control configuration
 
 ```javascript
 const parentalControlSettings = {
@@ -55,7 +55,7 @@ const parentalControlSettings = {
 };
 ```
 
-## Update Parental Control Settings
+## Update parental control settings
 
 ```javascript
 await fetch('https://api.nextdns.io/profiles/abc123/parentalControl', {
@@ -72,7 +72,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl', {
 });
 ```
 
-## Manage Services
+## Manage services
 
 ```javascript
 // Block a service
@@ -102,7 +102,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/services/tik
 });
 ```
 
-## Manage Categories
+## Manage categories
 
 ```javascript
 // Block a category
@@ -126,7 +126,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/categories/g
 });
 ```
 
-## Popular Services
+## Popular services
 
 | Service ID    | Description |
 | ------------- | ----------- |
@@ -149,7 +149,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/categories/g
 | `hulu`        | Hulu        |
 | `spotify`     | Spotify     |
 
-## Content Categories
+## Content categories
 
 | Category ID           | Description                |
 | --------------------- | -------------------------- |
@@ -166,15 +166,15 @@ await fetch('https://api.nextdns.io/profiles/abc123/parentalControl/categories/g
 | `streaming`           | Video streaming services   |
 | `shopping`            | E-commerce sites           |
 
-## Features Explained
+## Features explained
 
-- **Services**: Block or allow specific apps and websites (TikTok, Facebook, etc.)
-- **Categories**: Block entire categories of content (porn, gambling, etc.)
-- **Safe Search**: Force safe search on Google, Bing, DuckDuckGo, etc.
+- **Services**: Block or allow specific apps and websites (TikTok, Facebook, and more)
+- **Categories**: Block entire categories of content (porn, gambling, and more)
+- **Safe Search**: Force safe search on Google, Bing, DuckDuckGo, and more
 - **YouTube Restricted Mode**: Enable YouTube's restricted mode
 - **Block Bypass**: Block VPNs, proxies, and Tor to prevent circumvention
 
-## Active vs Inactive
+## Active vs inactive
 
 - `active: true` = Block the service/category
 - `active: false` = Allow the service/category (but keep in list for quick toggling)

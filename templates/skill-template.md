@@ -15,7 +15,7 @@ metadata:
 
 Brief overview paragraph explaining the purpose and scope of this skill category.
 
-## Capability Rules
+## Capability rules
 
 Rules that address problems AI cannot solve without this specialized knowledge.
 
@@ -24,7 +24,7 @@ Rules that address problems AI cannot solve without this specialized knowledge.
 | [rule-name](rules/rule-name.md)       | keyword1, keyword2, keyword3 | Brief description of what this rule covers |
 | [another-rule](rules/another-rule.md) | keyword1, keyword2           | Another rule description                   |
 
-## Efficiency Rules
+## Efficiency rules
 
 Rules that provide optimal patterns and best practices for problems AI can solve but not well.
 
@@ -33,7 +33,7 @@ Rules that provide optimal patterns and best practices for problems AI can solve
 | [optimization-rule](rules/optimization-rule.md) | keyword1, keyword2 | Description of optimization pattern |
 | [best-practice](rules/best-practice.md)         | keyword1, keyword2 | Description of best practice        |
 
-## Adding New Rules
+## Adding new rules
 
 When adding a new rule to this skill category:
 
@@ -47,7 +47,7 @@ When adding a new rule to this skill category:
 ⚠️ **CRITICAL**: Step 4 is mandatory. Creating orphan files without updating SKILL.md will result in
 CI failure.
 
-## Skill Categories
+## Skill categories
 
 This skill covers the following areas:
 
@@ -55,9 +55,9 @@ This skill covers the following areas:
 - **Area 2**: Description of another area
 - **Area 3**: Additional coverage area
 
-## Usage Examples
+## Usage examples
 
-### Example 1: Common Use Case
+### Example 1: Common use case
 
 Brief description of a common scenario where this skill applies.
 
@@ -66,7 +66,7 @@ Brief description of a common scenario where this skill applies.
 nextdns command --option value
 ```
 
-### Example 2: Another Scenario
+### Example 2: Another scenario
 
 Description of another typical use case.
 
@@ -75,7 +75,7 @@ Description of another typical use case.
 const result = await apiCall();
 ```
 
-## Related Skills
+## Related skills
 
 - **skill-name-1**: Brief description of how it relates
 - **skill-name-2**: Another related skill
@@ -91,6 +91,7 @@ const result = await apiCall();
 
 <!--
 SKILL.md TEMPLATE USAGE NOTES:
-Refer to AGENTS.md for detailed instructions on category manifests,
-keyword indexing, and skill triggering protocols.
+Refer to AGENTS.md (root) for detailed instructions on category manifests,
+keyword indexing, and skill triggering protocols. Note: skills/*/AGENTS.md files
+are auto-generated outputs — edit the source rules in skills/*/rules/ instead.
 -->

@@ -14,15 +14,15 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Analytics Query Parameters
+# Analytics query parameters
 
 Correctly filter and paginate analytics data
 
-## Common Query Parameters
+## Common query parameters
 
 All analytics endpoints support these parameters:
 
-### Date Range Filtering
+### Date range filtering
 
 ```javascript
 // Get analytics for the last 7 days
@@ -35,7 +35,7 @@ const response = await fetch(url, {
 });
 ```
 
-### Date Format Options
+### Date format options
 
 ```javascript
 // ISO 8601
@@ -67,7 +67,7 @@ url.searchParams.set('limit', '50'); // Default: 10, Max: 500
 url.searchParams.set('cursor', 'j2k3zl3b4v');
 ```
 
-### Device Filtering
+### Device filtering
 
 ```javascript
 // Filter by specific device
@@ -77,7 +77,7 @@ url.searchParams.set('device', '8TD1G');
 url.searchParams.set('device', '__UNIDENTIFIED__');
 ```
 
-## Complete Example
+## Complete example
 
 ```javascript
 async function getAnalytics(profileId, options = {}) {
@@ -126,9 +126,9 @@ do {
 } while (cursor);
 ```
 
-## Endpoint-Specific Parameters
+## Endpoint-specific parameters
 
-### Domains Endpoint
+### Domains endpoint
 
 ```javascript
 // Filter by status
@@ -138,19 +138,19 @@ url.searchParams.set('status', 'blocked'); // default | blocked | allowed
 url.searchParams.set('root', 'true');
 ```
 
-### Status Endpoint
+### Status endpoint
 
 No additional parameters.
 
-### Reasons Endpoint
+### Reasons endpoint
 
 No additional parameters.
 
-### Other Endpoints
+### Other endpoints
 
 Check specific endpoint documentation for additional parameters.
 
-## Parameter Validation
+## Parameter validation
 
 ```javascript
 // ✅ Valid limit values
@@ -164,7 +164,7 @@ limit: 1000; // Too large
 limit: '50'; // Should be number in code, string in URL
 ```
 
-## Response with Pagination
+## Response with pagination
 
 ```javascript
 {

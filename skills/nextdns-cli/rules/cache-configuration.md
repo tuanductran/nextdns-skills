@@ -11,16 +11,16 @@ tags:
   - ttl
 ---
 
-# CLI Cache Configuration
+# CLI cache configuration
 
 The NextDNS CLI features a sophisticated built-in cache to reduce latency and minimize upstream
 queries.
 
-## Cache Settings
+## Cache settings
 
 You can configure the cache using the `nextdns config set` command:
 
-### 1. Cache Size (`-cache-size`)
+### 1. Cache size (`-cache-size`)
 
 Sets the total size of the DNS cache.
 
@@ -28,7 +28,7 @@ Sets the total size of the DNS cache.
 - **Command**: `nextdns config set -cache-size=10MB`
 - **Note**: Set to `0` to disable caching.
 
-### 2. Cache Max Age (`-cache-max-age`)
+### 2. Cache max age (`-cache-max-age`)
 
 Overrides the record's TTL if the TTL is higher than this value.
 
@@ -43,7 +43,7 @@ Defines the maximum TTL value handed out to clients.
 - **Difference from Max Age**: `max-ttl` controls what the _client_ sees, while `cache-max-age`
   controls how long the _NextDNS CLI_ keeps it in its own cache.
 
-## Optimization Strategy
+## Optimization strategy
 
 ✅ **Recommended Setup**:
 

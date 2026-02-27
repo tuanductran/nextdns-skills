@@ -14,7 +14,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Logs Streaming
+# Logs streaming
 
 Stream DNS logs in real-time using Server-Sent Events (SSE)
 
@@ -24,7 +24,7 @@ Stream DNS logs in real-time using Server-Sent Events (SSE)
 GET /profiles/:profile/logs/stream
 ```
 
-## Basic Usage
+## Basic usage
 
 ```javascript
 const eventSource = new EventSource('https://api.nextdns.io/profiles/abc123/logs/stream', {
@@ -44,7 +44,7 @@ eventSource.onerror = (error) => {
 };
 ```
 
-## Event Format
+## Event format
 
 Each event contains:
 
@@ -54,7 +54,7 @@ id: 64v32d9r6rwkcctg6cu38e9g60
 data: {"timestamp":"2021-03-16T04:40:30.344Z","domain":"g.whatsapp.net","root":"whatsapp.net","encrypted":true,"protocol":"DNS-over-HTTPS","clientIp":"2a01:e0a:2cd:87a0:5540:d573:57cd:aa1d","client":"apple-profile","device":{"id":"8TD1G","name":"Romain's iPhone","model":"iPhone 12 Pro Max"},"status":"default","reasons":[]}
 ```
 
-## Resume from Last Event
+## Resume from last event
 
 Use the `id` parameter to resume from where you left off:
 
@@ -71,7 +71,7 @@ const eventSource = new EventSource(
 );
 ```
 
-## Stitch Recent Logs with Stream
+## Stitch recent logs with stream
 
 Get the stream ID from the regular logs endpoint:
 
@@ -97,7 +97,7 @@ const eventSource = new EventSource(
 // Now you have all recent logs + new logs without duplicates or gaps
 ```
 
-## Query Parameters
+## Query parameters
 
 All parameters from `/logs` endpoint are supported except:
 
@@ -107,7 +107,7 @@ All parameters from `/logs` endpoint are supported except:
 - `limit` (streams continuously)
 - `cursor` (use `id` instead)
 
-### Supported Parameters
+### Supported parameters
 
 ```javascript
 // Filter by device
@@ -128,7 +128,7 @@ const eventSource = new EventSource(url.toString(), {
 });
 ```
 
-## Complete Example - React
+## Complete example - React
 
 ```javascript
 import { useEffect, useState } from 'react';
@@ -182,7 +182,7 @@ function LogsStream({ profileId, apiKey }) {
 }
 ```
 
-## Complete Example - Node.js
+## Complete example - node.js
 
 ```javascript
 import EventSource from 'eventsource';
@@ -245,7 +245,7 @@ const stream = streamLogs('abc123', process.env.NEXTDNS_API_KEY, {
 // stream.close();
 ```
 
-## Filtering Blocked Domains
+## Filtering blocked domains
 
 ```javascript
 const eventSource = new EventSource(
@@ -261,7 +261,7 @@ eventSource.onmessage = (event) => {
 };
 ```
 
-## Monitor Specific Device
+## Monitor specific device
 
 ```javascript
 const eventSource = new EventSource(
@@ -275,7 +275,7 @@ eventSource.onmessage = (event) => {
 };
 ```
 
-## Error Handling and Reconnection
+## Error handling and reconnection
 
 ```javascript
 function createReconnectingStream(profileId, apiKey, options = {}) {
@@ -345,7 +345,7 @@ eventSource.onmessage = (event) => {
 };
 ```
 
-## Browser Compatibility
+## Browser compatibility
 
 EventSource is supported in all modern browsers. For older browsers or Node.js, use:
 

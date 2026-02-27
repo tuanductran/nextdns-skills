@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, develop]
     paths:
-      - 'skills/**/rules/*.md'
+      - 'skills/**/rules/**/*.md'
   workflow_dispatch:
 
 jobs:
@@ -16,8 +16,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
@@ -30,7 +28,10 @@ jobs:
           version: 10.30.3
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
 
       - name: Update counts
         run: pnpm run update-counts

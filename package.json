@@ -38,33 +38,34 @@
     "ai-agent"
   ],
   "scripts": {
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
     "lint": "pnpm run format:check && pnpm run \"/^lint:(md|rules|syntax)$/\"",
     "lint:all": "pnpm run lint && pnpm run lint:links",
-    "lint:fix": "pnpm run format && pnpm run \"/^lint:(md|rules):fix$/\" && pnpm run lint:rules && pnpm run lint:syntax",
-    "lint:links": "find . -name \"*.md\" -not -path \"*/node_modules/*\" | xargs markdown-link-check -c config.json",
-    "lint:md": "markdownlint --ignore-path=.gitignore .",
-    "lint:md:fix": "markdownlint --ignore-path=.gitignore . --fix",
-    "lint:rules": "node scripts/validate_rules.mjs",
-    "lint:syntax": "eslint \"**/*.md\"",
-    "update-counts": "node scripts/update_counts.mjs"
+    "lint:fix": "pnpm run format && pnpm run lint:md:fix && pnpm run lint:syntax:fix && pnpm run lint:rules",
+    "lint:links": "find . -name \"*.md\" -not -path \"*/node_modules/*\" -not -path \"*/templates/*\" | xargs markdown-link-check -c config.json",
+    "lint:md": "markdownlint .",
+    "lint:md:fix": "markdownlint . --fix",
+    "lint:rules": "nextdns-skills-scripts validate-rules",
+    "lint:syntax": "case-police \"skills/**/rules/**/*.md\"",
+    "lint:syntax:fix": "case-police --fix \"skills/**/rules/**/*.md\"",
+    "build": "turbo build",
+    "build:skills": "nextdns-skills-build build --all",
+    "build:api": "nextdns-skills-build build --skill=nextdns-api",
+    "build:cli": "nextdns-skills-build build --skill=nextdns-cli",
+    "build:ui": "nextdns-skills-build build --skill=nextdns-ui",
+    "build:integrations": "nextdns-skills-build build --skill=integrations",
+    "build:frontend": "nextdns-skills-build build --skill=nextdns-frontend",
+    "update-counts": "nextdns-skills-scripts update-counts",
+    "dev": "turbo dev"
   },
   "devDependencies": {
-    "@eslint/markdown": "^7.5.1",
+    "@biomejs/biome": "^2.4.4",
     "case-police": "^2.1.1",
-    "eslint": "^10.0.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-case-police": "^2.1.1",
-    "eslint-plugin-prettier": "^5.5.5",
     "markdown-link-check": "^3.14.2",
     "markdownlint-cli": "^0.47.0",
-    "prettier": "^3.8.1",
-    "prettier-plugin-pkg": "^0.21.2"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "eslint-plugin-case-police@2.1.1": "patches/eslint-plugin-case-police@2.1.1.patch"
-    }
+    "nextdns-skills-build": "workspace:*",
+    "nextdns-skills-scripts": "workspace:*",
+    "turbo": "^2.8.12"
   }
 }

@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# API Key Proxy (BFF Pattern)
+# API key proxy (bff pattern)
 
 Proxy all NextDNS API calls through SvelteKit `+server.ts` routes to keep X-Api-Key server-side only
 
@@ -31,7 +31,7 @@ attach the key before forwarding requests to `api.nextdns.io`. Environment varia
 Browser → /api/* (SvelteKit +server.ts) → api.nextdns.io (X-Api-Key added here)
 ```
 
-## Correct Usage
+## Correct usage
 
 ### Environment variable setup
 
@@ -128,25 +128,25 @@ import { NEXTDNS_API_KEY } from '$env/static/private'; // ❌ Build error
 </script>
 ```
 
-## Best Practices
+## Best practices
 
 - **`$env/static/private`**: SvelteKit enforces this at build time — importing private vars in
   client-accessible modules is a build error, not just a runtime warning.
 - **`src/lib/server/`**: Any file under `$lib/server/` cannot be imported by client code; SvelteKit
   throws an error if attempted.
 - **`$env/dynamic/private`**: Use `import { env } from '$env/dynamic/private'` when env vars change
-  at runtime (e.g., Docker/Kubernetes secrets) instead of at build time.
+  at runtime (for example, Docker/Kubernetes secrets) instead of at build time.
 
 ## Troubleshooting
 
-### Issue: Build fails with "Cannot import private module"
+### Issue: build fails with "cannot import private module"
 
 **Symptoms**: Build error mentioning `$env/static/private` or `$lib/server/`.
 
 **Solution**: Move all server-only imports to `+server.ts`, `+page.server.ts`, or
 `+layout.server.ts` files. Never import them from `+page.ts` (which runs on client and server).
 
-### Issue: `NEXTDNS_API_KEY` is `undefined`
+### Issue: `nextdns_api_key` is `undefined`
 
 **Symptoms**: The utility throws `NEXTDNS_API_KEY is not set`.
 

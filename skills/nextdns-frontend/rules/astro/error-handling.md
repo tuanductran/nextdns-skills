@@ -14,7 +14,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Error Handling
+# Error handling
 
 Map NextDNS API errors to user-friendly Astro pages and React island notifications
 
@@ -23,12 +23,12 @@ Map NextDNS API errors to user-friendly Astro pages and React island notificatio
 The NextDNS API returns errors in two formats:
 
 - **HTTP 4xx/5xx** with `{ "errors": [...] }` — validation or auth errors.
-- **HTTP 200 OK** with `{ "errors": [...] }` — user-level errors (e.g., duplicate profile name).
+- **HTTP 200 OK** with `{ "errors": [...] }` — user-level errors (for example, duplicate profile name).
 
 Both must be handled. Astro API endpoints should return typed error responses, and React islands
 should surface them inline or via toast-style notifications.
 
-## Correct Usage
+## Correct usage
 
 ### API endpoint — return typed errors
 
@@ -60,7 +60,7 @@ export const POST: APIRoute = async ({ request }) => {
 };
 ```
 
-### lib/nextdns.ts — check both HTTP errors and 200-with-errors
+### Lib/nextdns.ts — check both HTTP errors and 200-with-errors
 
 ```typescript
 // ✅ src/lib/nextdns.ts — error-aware fetcher
@@ -200,7 +200,7 @@ try {
 return new Response(JSON.stringify(err), { status: 500 }); // ❌ May leak internal details
 ```
 
-## Best Practices
+## Best practices
 
 - **Check `json.errors` before checking `res.ok`**: The NextDNS API can return user errors inside a
   200 response — `res.ok` is insufficient.
@@ -213,7 +213,7 @@ return new Response(JSON.stringify(err), { status: 500 }); // ❌ May leak inter
 
 ## Troubleshooting
 
-### Issue: Error from API endpoint not reaching the React island
+### Issue: error from API endpoint NOT reaching the React island
 
 **Solution**: Ensure the API endpoint returns a JSON body and sets `Content-Type: application/json`
 on the error response. Check the status code in the React component:

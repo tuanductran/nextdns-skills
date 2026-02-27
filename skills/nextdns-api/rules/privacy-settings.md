@@ -13,11 +13,11 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Privacy Settings
+# Privacy settings
 
 Configure privacy protection and ad/tracker blocking
 
-## Privacy Configuration
+## Privacy configuration
 
 ```javascript
 const privacySettings = {
@@ -49,7 +49,7 @@ const privacySettings = {
 };
 ```
 
-## Update Privacy Settings
+## Update privacy settings
 
 ```javascript
 await fetch('https://api.nextdns.io/profiles/abc123/privacy', {
@@ -65,7 +65,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy', {
 });
 ```
 
-## Manage Blocklists
+## Manage blocklists
 
 Add or remove blocklists:
 
@@ -87,7 +87,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/blocklists/stevenbla
 });
 ```
 
-## Manage Native Tracking Protection
+## Manage native tracking protection
 
 ```javascript
 // Add native tracking protection
@@ -107,11 +107,11 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/natives/apple', {
 });
 ```
 
-## Popular Blocklists
+## Popular blocklists
 
 | Blocklist ID          | Description                         |
 | --------------------- | ----------------------------------- |
-| `nextdns-recommended` | NextDNS curated ads & trackers list |
+| `nextdns-recommended` | NextDNS curated ads and trackers list |
 | `oisd`                | OISD Big List (comprehensive)       |
 | `energized`           | Energized Protection                |
 | `adguard`             | AdGuard DNS filter                  |
@@ -120,7 +120,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/natives/apple', {
 | `easylist`            | EasyList                            |
 | `easyprivacy`         | EasyPrivacy                         |
 
-## Native Tracking Platforms
+## Native tracking platforms
 
 | Platform ID | Description                  |
 | ----------- | ---------------------------- |
@@ -133,7 +133,7 @@ await fetch('https://api.nextdns.io/profiles/abc123/privacy/natives/apple', {
 | `roku`      | Roku tracking                |
 | `sonos`     | Sonos telemetry              |
 
-## Privacy Features Explained
+## Privacy features explained
 
 - **Blocklists**: Curated lists of known ad and tracker domains
 - **Native Tracking**: Block built-in telemetry from device manufacturers

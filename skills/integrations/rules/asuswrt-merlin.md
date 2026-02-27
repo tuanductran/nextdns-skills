@@ -11,12 +11,12 @@ tags:
   - installation
 ---
 
-# AsusWRT-Merlin Integration
+# Asuswrt-merlin integration
 
 Installing NextDNS on Asus routers running Merlin firmware provides network-wide encrypted DNS with
 client identification.
 
-## Installation Steps
+## Installation steps
 
 1. **Enable SSH Access**:
    - Log in to your router's web interface.
@@ -36,7 +36,7 @@ client identification.
    - Enable **Setup Router** when asked.
    - Enable **Report Client Info** to see device names in logs.
 
-## Performance Optimization
+## Performance optimization
 
 For the best experience on AsusWRT-Merlin:
 

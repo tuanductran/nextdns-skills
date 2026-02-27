@@ -10,7 +10,7 @@ tags:
   - update
 ---
 
-# Upgrade and Uninstall
+# Upgrade and uninstall
 
 Maintaining or cleaning up the NextDNS installation
 
@@ -38,16 +38,16 @@ sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 1. Select the **Uninstall** option from the menu.
 2. The script will:
    - Stop the daemon.
-   - Remove the service from the system (systemd, launchd, etc.).
+   - Remove the service from the system (systemd, launchd, and more).
    - Restore original system DNS settings (equivalent to `nextdns deactivate`).
    - Remove the binary from your system path.
 
-### Manual Deactivation (Before Uninstall)
+### Manual deactivation (before uninstall)
 
 It is good practice to run `sudo nextdns deactivate` before a manual uninstallation to ensure your
 system DNS is not left pointing to a non-existent local proxy.
 
-## Troubleshooting Upgrades
+## Troubleshooting upgrades
 
 If an upgrade fails:
 

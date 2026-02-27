@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Project Setup
+# Project setup
 
 Bootstrap a Nuxt 4 project configured to integrate with the NextDNS API
 
@@ -29,7 +29,7 @@ A NextDNS Nuxt frontend requires:
 3. A `server/utils/nextdns.ts` shared fetcher
 4. Optional: Nuxt UI for components, VueUse for composables
 
-## Correct Usage
+## Correct usage
 
 ### Create the project
 
@@ -50,7 +50,7 @@ pnpm add @nuxt/ui
 pnpm add @vueuse/nuxt @vueuse/core
 ```
 
-### nuxt.config.ts
+### Nuxt.config.ts
 
 ```typescript
 // ✅ Complete configuration for a NextDNS frontend
@@ -170,11 +170,11 @@ const apiKey = useRuntimeConfig().public.nextdnsApiKey; // ❌ exposed to browse
 
 ## Troubleshooting
 
-### Issue: `@nuxt/ui` styles not loading
+### Issue: `@nuxt/ui` styles NOT loading
 
 **Solution**: Add `@nuxt/ui` to `modules` in `nuxt.config.ts` and restart the dev server.
 
-### Issue: TypeScript errors on `useRuntimeConfig()` in server routes
+### Issue: TypeScript errors on `useruntimeconfig()` in server routes
 
 **Solution**: Nuxt auto-generates types for `runtimeConfig`. Run `nuxi prepare` to refresh:
 

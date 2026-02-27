@@ -21,7 +21,7 @@ tags:
   - lightweight
 ---
 
-# Mobile Native Encrypted DNS Configuration
+# Mobile native encrypted DNS configuration
 
 Enables NextDNS protection on mobile devices using built-in OS features without battery-draining
 background apps
@@ -30,9 +30,9 @@ Modern mobile operating systems include native support for encrypted DNS protoco
 need for third-party apps. This provides a lightweight, battery-efficient method for NextDNS
 protection on smartphones and tablets.
 
-## Why Use Native Configuration Over Apps
+## Why use native configuration over apps
 
-### Advantages of Native Integration
+### Advantages of native integration
 
 - **No Background Process**: Zero battery impact from background services
 - **OS-Level Integration**: More reliable than third-party apps
@@ -41,7 +41,7 @@ protection on smartphones and tablets.
 - **No App Permissions**: No privacy concerns from third-party applications
 - **Always Active**: Cannot be accidentally closed or force-stopped
 
-### When to Use the NextDNS App Instead
+### When to use the NextDNS app instead
 
 - You need advanced features like:
   - Custom DNS server selection per network
@@ -49,16 +49,16 @@ protection on smartphones and tablets.
   - Detailed connection logs
   - Manual profile switching
 
-## Android Configuration (Version 9+)
+## Android configuration (version 9+)
 
 Android 9 (Pie) and later include **Private DNS** support using DNS-over-TLS (DoT).
 
-### Configuration Steps
+### Configuration steps
 
 1. Open **Settings** on your Android device
 
 2. Navigate to:
-   - **Network & internet** (or **Connections** on Samsung devices)
+   - **Network and internet** (or **Connections** on Samsung devices)
 
 3. Select **Private DNS** (or **Advanced** → **Private DNS**)
 
@@ -69,13 +69,13 @@ Android 9 (Pie) and later include **Private DNS** support using DNS-over-TLS (Do
 
 6. Tap **Save**
 
-### Finding Your Configuration ID
+### Finding your configuration id
 
 1. Log in to [https://my.nextdns.io](https://my.nextdns.io)
 2. Select your configuration
 3. Your Configuration ID is the 6-character alphanumeric code in the URL
 
-### Visual Path Reference
+### Visual path reference
 
 **Stock Android:**
 
@@ -109,7 +109,7 @@ Settings
 
 ### Troubleshooting Android
 
-#### Private DNS Not Working
+#### Private DNS NOT working
 
 **Symptoms:** Websites not loading, "Couldn't connect to server" errors
 
@@ -132,14 +132,14 @@ Settings
 
 4. **Clear DNS cache:** `Settings → Apps → Show system apps → DNS Client → Storage → Clear cache`
 
-## iOS Configuration (Version 14+)
+## iOS configuration (version 14+)
 
 iOS 14 and later support **Encrypted DNS Profiles** using DNS-over-HTTPS (DoH) or DNS-over-TLS (DoT)
 via signed configuration profiles.
 
-### Configuration Steps
+### Configuration steps
 
-#### Method 1: Via NextDNS Setup Page (Recommended)
+#### Method 1: via NextDNS setup page (recommended)
 
 1. On your iOS device, visit [https://my.nextdns.io](https://my.nextdns.io)
 
@@ -168,7 +168,7 @@ via signed configuration profiles.
 
 12. Tap **Done** when installation completes
 
-#### Method 2: Manual Profile Installation
+#### Method 2: manual profile installation
 
 If you have a `.mobileconfig` file from NextDNS:
 
@@ -176,7 +176,7 @@ If you have a `.mobileconfig` file from NextDNS:
 2. Tap the file to open
 3. Follow steps 6-11 above
 
-### Visual Path Reference
+### Visual path reference
 
 ```text
 Safari (my.nextdns.io)

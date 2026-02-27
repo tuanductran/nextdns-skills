@@ -21,7 +21,7 @@ tags:
   - dns shield
 ---
 
-# Ubiquiti (UniFi) Integration
+# Ubiquiti UniFi integration
 
 Essential for preventing DNS conflicts on Ubiquiti UniFi Dream Machines and Gateways
 
@@ -29,19 +29,19 @@ Ubiquiti UniFi devices (UDM, UDM-Pro, UDM-SE, UXG-Pro, and UXG-Max families) are
 gateways that can integrate with NextDNS. However, improper configuration can cause conflicts with
 UniFi's built-in DNS features, resulting in network-wide DNS failures.
 
-## Integration Methods
+## Integration methods
 
 Ubiquiti devices support two methods for NextDNS integration, depending on firmware version and use
 case.
 
-### Method 1: DNS Shield (Native - Recommended for UniFi OS 3.0+)
+### Method 1: DNS shield (native - recommended for UniFi os 3.0+)
 
 **Availability**: UniFi OS 3.0 and later
 
 DNS Shield is a native feature that provides DNS-over-HTTPS without requiring command-line
 configuration.
 
-#### Setup Steps
+#### Setup steps
 
 1. Open the UniFi Network Application
 2. Navigate to **Settings → Security → DNS Shield**
@@ -62,7 +62,7 @@ configuration.
 - Only available on UniFi OS 3.0+
 - Limited advanced configuration options
 
-### Method 2: NextDNS CLI (Advanced/Legacy)
+### Method 2: NextDNS CLI (advanced/legacy)
 
 **Use Cases**:
 
@@ -77,15 +77,15 @@ configuration.
 - Root privileges
 - Internet connectivity from the device
 
-#### Installation Steps
+#### Installation steps
 
-##### Step 1: Enable SSH Access
+##### Step 1: enable SSH access
 
 1. Open UniFi Network Application
 2. Navigate to **Settings → System → Console Settings**
 3. Enable SSH and note your password
 
-##### Step 2: Connect to Device
+##### Step 2: connect to device
 
 ```bash
 ssh root@setup.ui.com
@@ -97,7 +97,7 @@ Or use the device's IP address:
 ssh root@192.168.1.1
 ```
 
-##### Step 3: Run NextDNS Installer
+##### Step 3: run NextDNS installer
 
 Execute the official installer script:
 
@@ -107,19 +107,19 @@ sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 
 Follow the interactive prompts to complete installation.
 
-#### Critical Conflicts (Must Resolve)
+#### Critical conflicts (must resolve)
 
 The NextDNS CLI is **incompatible** with UniFi's built-in DNS filtering features. You **must**
 disable both features to prevent DNS failures:
 
-##### Disable Content Filtering
+##### Disable content filtering
 
 1. Navigate to **Settings → Network**
 2. Locate **Content Filtering**
 3. Set to **None**
 4. Click **Apply Changes**
 
-##### Disable Ad Blocking
+##### Disable ad blocking
 
 1. Navigate to **Settings → Application Firewall → General**
 2. Locate **Ad Blocking**
@@ -129,7 +129,7 @@ disable both features to prevent DNS failures:
 **Warning**: Failing to disable these features will cause DNS resolution conflicts, potentially
 breaking network connectivity for all devices.
 
-#### Known Limitation: UDM Self-Queries
+#### Known limitation: udm self-queries
 
 Queries originating from the UDM/UXG device itself (not network clients) will **not** be routed
 through NextDNS. Only traffic from connected network devices will be filtered. This is a known
@@ -137,9 +137,9 @@ limitation of the CLI installation method.
 
 ## Troubleshooting
 
-### Installation Failures
+### Installation failures
 
-#### Debug Mode Installation
+#### Debug mode installation
 
 If installation fails, run the installer with debug output enabled:
 
@@ -149,7 +149,7 @@ DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 
 This generates verbose logs that help identify the root cause of failures.
 
-#### APT Error on Debian Stretch
+#### Apt error on debian stretch
 
 If you encounter APT repository errors (common on older UDM firmware), the Debian Stretch
 repositories may be archived:
@@ -165,9 +165,9 @@ apt update
 
 Then retry the NextDNS installation.
 
-### DNS Resolution Failures
+### DNS resolution failures
 
-#### Check Service Status
+#### Check service status
 
 Verify the NextDNS service is running:
 
@@ -177,13 +177,13 @@ nextdns status
 
 Expected output: `running`
 
-#### Restart Service
+#### Restart service
 
 ```bash
 nextdns restart
 ```
 
-#### Check Configuration
+#### Check configuration
 
 ```bash
 nextdns config
@@ -191,7 +191,7 @@ nextdns config
 
 Verify your profile ID is correctly configured.
 
-### Queries Not Appearing in NextDNS Logs
+### Queries NOT appearing in NextDNS logs
 
 **Possible Causes**:
 
@@ -206,7 +206,7 @@ Verify your profile ID is correctly configured.
 2. Confirm it detects your NextDNS profile
 3. Check the NextDNS logs for recent queries from your network
 
-### Firmware Update Loses Configuration
+### Firmware update loses configuration
 
 **CLI Method Only**: Firmware updates may remove the NextDNS CLI installation.
 
@@ -215,7 +215,7 @@ Verify your profile ID is correctly configured.
 - Re-run the installer after firmware updates
 - Consider switching to DNS Shield (Method 1) if available on your firmware version
 
-## Best Practices
+## Best practices
 
 - **Prefer DNS Shield** when available (UniFi OS 3.0+) for better compatibility and update
   resilience
@@ -226,7 +226,7 @@ Verify your profile ID is correctly configured.
 - **Use CLI for Advanced Needs**: Only use CLI method if you need features not available in DNS
   Shield
 
-## Common Pitfalls
+## Common pitfalls
 
 - **Not Disabling Conflicts**: The most critical mistake is leaving Content Filtering or Ad Blocking
   enabled with CLI installation
@@ -235,7 +235,7 @@ Verify your profile ID is correctly configured.
 - **Post-Update Testing**: Always verify DNS after UniFi firmware updates
 - **SSH Access**: Ensure SSH remains enabled if you need to troubleshoot CLI installations
 
-## Comparison: DNS Shield vs. CLI
+## Comparison: DNS shield vs. CLI
 
 | Feature                | DNS Shield (Native) | NextDNS CLI                  |
 | ---------------------- | ------------------- | ---------------------------- |

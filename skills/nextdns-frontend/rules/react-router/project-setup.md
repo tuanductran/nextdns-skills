@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# React Router v7 Project Setup
+# React router v7 project setup
 
 Bootstrap a React Router v7 project with SSR enabled, TypeScript, and secure environment variable
 handling for NextDNS API integration
@@ -28,7 +28,7 @@ tool and supports multiple rendering modes: SSR, CSR, and static pre-rendering. 
 integration, **SSR must be enabled** so that `loader` and `action` functions run on the server where
 `process.env.NEXTDNS_API_KEY` is available.
 
-## Correct Usage
+## Correct usage
 
 ### Create a new project
 
@@ -41,7 +41,7 @@ npm install
 
 Select **TypeScript** when prompted.
 
-### `react-router.config.ts`
+### `React-router.config.ts`
 
 ```typescript
 // ✅ react-router.config.ts — SSR must be true
@@ -131,7 +131,7 @@ VITE_NEXTDNS_API_KEY=YOUR_API_KEY  # ❌
 **Solution**: Set `ssr: true` in `react-router.config.ts`. Without SSR, React Router falls back to
 client-side data loading which exposes the API key.
 
-### Issue: TypeScript errors for `Route.LoaderArgs`
+### Issue: TypeScript errors for `route.loaderargs`
 
 **Solution**: Run `npm run typecheck` or `npm run dev` once — React Router auto-generates type files
 under `app/routes/+types/` based on your route config.

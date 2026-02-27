@@ -14,11 +14,11 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Logs Management
+# Logs management
 
 Query and filter DNS logs for debugging and analysis
 
-## Get Logs
+## Get logs
 
 ```javascript
 const response = await fetch('https://api.nextdns.io/profiles/abc123/logs?from=-1h&limit=100', {
@@ -28,9 +28,9 @@ const response = await fetch('https://api.nextdns.io/profiles/abc123/logs?from=-
 const logs = await response.json();
 ```
 
-## Query Parameters
+## Query parameters
 
-### Date Range
+### Date range
 
 ```javascript
 // Last hour
@@ -64,7 +64,7 @@ limit: 100;
 cursor: 'abc123xyz';
 ```
 
-### Device Filtering
+### Device filtering
 
 ```javascript
 // Specific device
@@ -74,7 +74,7 @@ device: '8TD1G';
 device: '__UNIDENTIFIED__';
 ```
 
-### Status Filtering
+### Status filtering
 
 ```javascript
 // Only blocked queries
@@ -100,7 +100,7 @@ search: 'facebook'; // Matches facebook.com, facebook.hello.com, etc.
 search: 'facebook.com';
 ```
 
-### Raw Logs
+### Raw logs
 
 ```javascript
 // Deduplicated, navigational queries only (default)
@@ -110,7 +110,7 @@ raw: false;
 raw: true;
 ```
 
-## Response Format
+## Response format
 
 ```javascript
 {
@@ -164,7 +164,7 @@ raw: true;
 }
 ```
 
-## Complete Example
+## Complete example
 
 ```javascript
 async function getLogs(profileId, options = {}) {
@@ -218,7 +218,7 @@ const rawLogs = await getLogs('abc123', {
 });
 ```
 
-## Paginate Through All Logs
+## Paginate through all logs
 
 ```javascript
 async function getAllLogs(profileId, options = {}) {
@@ -246,24 +246,24 @@ const allBlocked = await getAllLogs('abc123', {
 });
 ```
 
-## Raw vs Deduplicated Logs
+## Raw vs deduplicated logs
 
 ### Deduplicated (default, `raw=false`)
 
 - Only navigational query types (A, AAAA, HTTPS)
 - Automatically deduplicated
-- Noise filtered out (Chrome random lookups, etc.)
+- Noise filtered out (Chrome random lookups, and more)
 - Clearer overview of network access
 
 ### Raw (`raw=true`)
 
 - All DNS queries
-- All query types (A, AAAA, CNAME, TXT, MX, etc.)
+- All query types (A, AAAA, CNAME, TXT, MX, and more)
 - No deduplication
 - Includes all noise
 - Useful for debugging
 
-## Common Use Cases
+## Common use cases
 
 ### Find all blocked domains for a device
 
@@ -322,7 +322,7 @@ raw: true;
 raw: '1';
 ```
 
-## Performance Tips
+## Performance tips
 
 1. **Use smaller time ranges** for faster queries
 2. **Filter by device** when possible to reduce data

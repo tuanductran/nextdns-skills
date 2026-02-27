@@ -15,7 +15,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Profile Management UI
+# Profile management UI
 
 Build profile list, create, update, and delete flows with Nuxt 4 composables
 
@@ -24,9 +24,9 @@ Build profile list, create, update, and delete flows with Nuxt 4 composables
 Profile management in a Nuxt frontend relies on calling the Nuxt server routes (which proxy to the
 NextDNS API) via `useFetch` or `$fetch`. Keep data-fetching logic in composables and UI in pages.
 
-## Correct Usage
+## Correct usage
 
-### Composable — profile CRUD
+### Composable — profile crud
 
 ```typescript
 // ✅ app/composables/useProfiles.ts
@@ -152,7 +152,7 @@ const { data } = await useFetch('https://api.nextdns.io/profiles', {
 profiles.value.push({ id: 'unknown', name }); // ❌ ID is server-generated
 ```
 
-## Best Practices
+## Best practices
 
 - **Always use server-generated IDs**: After `createProfile`, call `fetchProfiles()` to get the real
   ID assigned by NextDNS — never assume or generate IDs client-side.
@@ -163,7 +163,7 @@ profiles.value.push({ id: 'unknown', name }); // ❌ ID is server-generated
 
 ## Troubleshooting
 
-### Issue: `useFetch` returns stale data after mutation
+### Issue: `usefetch` returns stale data after mutation
 
 **Solution**: Call `refreshNuxtData()` or re-fetch explicitly after mutations:
 

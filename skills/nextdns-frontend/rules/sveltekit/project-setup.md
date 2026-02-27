@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# SvelteKit Project Setup
+# SvelteKit project setup
 
 Bootstrap a SvelteKit project with TypeScript, an SSR adapter, and secure environment variable
 handling for NextDNS API integration
@@ -25,10 +25,10 @@ handling for NextDNS API integration
 
 SvelteKit requires an **adapter** to deploy to a target platform. The adapter determines how server
 routes (`+server.ts`) run — `@sveltejs/adapter-node` for Node.js servers, platform-specific adapters
-for Vercel, Netlify, Cloudflare, etc. Without a server-capable adapter, `+server.ts` routes cannot
+for Vercel, Netlify, Cloudflare, and more Without a server-capable adapter, `+server.ts` routes cannot
 run and API key security is broken.
 
-## Correct Usage
+## Correct usage
 
 ### Create a new project
 
@@ -48,7 +48,7 @@ When prompted: select **SvelteKit minimal** template and enable **TypeScript**.
 npm install --save-dev @sveltejs/adapter-node
 ```
 
-### `svelte.config.js`
+### `Svelte.config.js`
 
 ```javascript
 // ✅ svelte.config.js
@@ -119,12 +119,12 @@ adapter: adapter({ fallback: 'index.html' });
 
 ## Troubleshooting
 
-### Issue: Dev server starts but `/api/*` routes return 404
+### Issue: dev server starts but API routes return 404
 
 **Solution**: Ensure `src/routes/api/profiles/+server.ts` exists (with the `+server` prefix) and
-exports at least one handler (`GET`, `POST`, etc.).
+exports at least one handler (`GET`, `POST`, and more).
 
-### Issue: Environment variable is `undefined` in production
+### Issue: environment variable is `undefined` in production
 
 **Solution**: Platform-specific secret management is required in production. For Vercel, add secrets
 in Project Settings → Environment Variables. For Docker, pass `--env-file .env`.
