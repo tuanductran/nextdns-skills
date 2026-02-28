@@ -10,7 +10,7 @@ description:
 license: MIT
 metadata:
   author: tuanductran
-  version: '4.0.0'
+  version: '1.0.0'
 ---
 
 <!-- @case-police-ignore Api -->
