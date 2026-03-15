@@ -60,7 +60,7 @@
     "dev": "turbo dev"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.4",
+    "@biomejs/biome": "^2.4.7",
     "case-police": "^2.1.1",
     "markdown-link-check": "^3.14.2",
     "markdownlint-cli": "^0.48.0",
