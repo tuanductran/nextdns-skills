@@ -21,11 +21,11 @@ domain-specific context:
 ```text
 nextdns-skills/
 ├── skills/                     # Domain-specific knowledge categories
-│   ├── nextdns-api/            # 20 rules (API protocols & endpoints)
-│   ├── nextdns-cli/            # 21 rules (Deployment & SysConfig)
-│   ├── nextdns-ui/             # 13 rules (Web Dashboard Strategy)
-│   ├── integrations/           # 15 rules (Platform Connectivity)
-│   └── nextdns-frontend/       # 30 rules (Nuxt, Next.js, Astro, SvelteKit, React Router)
+│   ├── nextdns-api/            # 23 rules (API protocols & endpoints)
+│   ├── nextdns-cli/            # 24 rules (Deployment & SysConfig)
+│   ├── nextdns-ui/             # 16 rules (Web Dashboard Strategy)
+│   ├── integrations/           # 20 rules (Platform Connectivity)
+│   └── nextdns-frontend/       # 35 rules (Nuxt, Next.js, Astro, SvelteKit, React Router)
 ├── packages/
 │   ├── nextdns-skills-build/   # Compiles rule files into AGENTS.md
 │   └── nextdns-scripts/        # Validation & maintenance scripts
