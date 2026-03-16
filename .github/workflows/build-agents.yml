@@ -13,9 +13,14 @@ on:
         required: false
         default: ''
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build-agents:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       contents: write
 
@@ -23,15 +28,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version-file: '.node-version'
-
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.30.3
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -45,13 +49,13 @@ jobs:
 
       - name: Build AGENTS.md (single skill)
         if: ${{ github.event.inputs.skill != '' }}
-        run: pnpm nextdns-skills-build build --skill=${{ github.event.inputs.skill }}
+        run: pnpm -F nextdns-skills-build build-agents --skill=${{ github.event.inputs.skill }}
 
       - name: Commit and push AGENTS.md changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add skills/**/AGENTS.md
+          git add 'skills/**/AGENTS.md'
           if git diff --cached --quiet; then
             echo "No AGENTS.md changes to commit"
           else
