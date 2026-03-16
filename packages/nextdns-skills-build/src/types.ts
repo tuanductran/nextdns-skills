@@ -37,13 +37,18 @@ export interface Section {
   rules: Rule[];
 }
 
+export interface DocumentReference {
+  title: string;
+  url: string;
+}
+
 export interface GuidelinesDocument {
   version: string;
   organization: string;
   date: string;
   abstract: string;
   sections: Section[];
-  references?: string[];
+  references?: DocumentReference[];
 }
 
 export interface TestCase {

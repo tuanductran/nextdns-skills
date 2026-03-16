@@ -23,12 +23,6 @@ importers:
       markdownlint-cli:
         specifier: ^0.48.0
         version: 0.48.0
-      nextdns-skills-build:
-        specifier: workspace:*
-        version: link:packages/nextdns-skills-build
-      nextdns-skills-scripts:
-        specifier: workspace:*
-        version: link:packages/nextdns-scripts
       turbo:
         specifier: ^2.8.17
         version: 2.8.17

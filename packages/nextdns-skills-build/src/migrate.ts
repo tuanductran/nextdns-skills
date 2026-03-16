@@ -14,7 +14,7 @@ import { DEFAULT_SKILL, SKILLS } from './config.js';
 const args = process.argv.slice(2);
 function getArg(name: string): string | undefined {
   const arg = args.find((a) => a.startsWith(`--${name}=`));
-  return arg ? arg.split('=')[1] : undefined;
+  return arg ? (arg.split('=')[1] ?? undefined) : undefined;
 }
 
 const skillName = getArg('skill') ?? DEFAULT_SKILL;

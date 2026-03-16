@@ -57,7 +57,7 @@ async function validate() {
     // Support --skill= flag (same as build.ts)
     const args = process.argv.slice(2);
     const skillArg = args.find((a) => a.startsWith('--skill='));
-    const skillName = skillArg ? skillArg.split('=')[1] : DEFAULT_SKILL;
+    const skillName = skillArg ? (skillArg.split('=')[1] ?? DEFAULT_SKILL) : DEFAULT_SKILL;
     const skillConfig = SKILLS[skillName];
     if (!skillConfig) {
       console.error(`Unknown skill: ${skillName}`);

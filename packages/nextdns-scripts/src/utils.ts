@@ -38,7 +38,7 @@ export function parseFrontmatter(content: string): Record<string, string | strin
   for (const line of block.split('\n')) {
     const arrayItem = line.match(/^\s+-\s+(.+)/);
     if (arrayItem) {
-      if (inArray) arrayValues.push(arrayItem[1].trim().replace(/^["']|["']$/g, ''));
+      if (inArray) arrayValues.push((arrayItem[1] ?? '').trim().replace(/^["']|["']$/g, ''));
       continue;
     }
     if (inArray && currentKey) {

@@ -64,7 +64,7 @@ function loadAllRules(): RuleEntry[] {
       // Determine subdir (first path component inside rules/)
       const rel = path.relative(path.join(dir, 'rules'), filePath);
       const parts = rel.split(path.sep);
-      const subdir = parts.length > 1 ? parts[0] : '';
+      const subdir = parts.length > 1 ? (parts[0] ?? '') : '';
 
       entries.push({
         file: path.relative(REPO_ROOT, filePath),
@@ -96,6 +96,8 @@ function checkDuplicateTitles(rules: RuleEntry[]): { errors: number; warnings: n
 
   for (const [, group] of byTitle) {
     if (group.length < 2) continue;
+    const first = group[0];
+    if (!first) continue;
 
     const skills = [...new Set(group.map((r) => r.skill))];
     const isSingleSkill = skills.length === 1;
@@ -104,7 +106,7 @@ function checkDuplicateTitles(rules: RuleEntry[]): { errors: number; warnings: n
 
     if (isFrontendFrameworks) {
       // Expected pattern — same concept implemented per framework
-      console.log(`\n${BLUE}ℹ️  Framework variants (expected): "${group[0].title}"${NC}`);
+      console.log(`\n${BLUE}ℹ️  Framework variants (expected): "${first.title}"${NC}`);
       for (const r of group) console.log(`  → ${r.file} [${r.subdir}]`);
       continue;
     }
@@ -112,14 +114,14 @@ function checkDuplicateTitles(rules: RuleEntry[]): { errors: number; warnings: n
     if (isSingleSkill) {
       // Within same skill — likely unintentional
       console.log(
-        `\n${RED}❌ ERROR — duplicate within skill "${group[0].skill}": "${group[0].title}"${NC}`
+        `\n${RED}❌ ERROR — duplicate within skill "${first.skill}": "${first.title}"${NC}`
       );
       for (const r of group) console.log(`  → ${r.file}`);
       errors++;
     } else {
       // Across different skills — may be intentional (same feature, different angle)
       console.log(
-        `\n${YELLOW}⚠️  WARN — same title across skills [${skills.join(', ')}]: "${group[0].title}"${NC}`
+        `\n${YELLOW}⚠️  WARN — same title across skills [${skills.join(', ')}]: "${first.title}"${NC}`
       );
       for (const r of group) console.log(`  → ${r.file}`);
       warnings++;

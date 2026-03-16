@@ -65,7 +65,7 @@ function parseFm(content: string): Record<string, string | string[]> {
   for (const line of block.split('\n')) {
     const item = line.match(/^\s+-\s+(.+)/);
     if (item) {
-      if (inArr) arr.push(item[1].trim().replace(/^["']|["']$/g, ''));
+      if (inArr) arr.push((item[1] ?? '').trim().replace(/^["']|["']$/g, ''));
       continue;
     }
     if (inArr && curKey) {

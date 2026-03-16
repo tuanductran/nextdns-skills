@@ -1,7 +1,7 @@
 # AGENTS.md
 
-This file provides critical guidance to AI coding agents (Claude Code, Cursor, Copilot, etc.) when
-working with the `nextdns-skills` repository (Claude Code, Cursor, Copilot, and more).
+This file provides critical guidance to AI coding agents (Claude Code, Cursor, Copilot, and more)
+when working with the `nextdns-skills` repository.
 
 <!-- @case-police-ignore Api -->
 
@@ -20,17 +20,76 @@ domain-specific context:
 
 ```text
 nextdns-skills/
-├── skills/                     # Domain-specific knowledge categories
-│   ├── nextdns-api/            # 23 rules (API protocols & endpoints)
-│   ├── nextdns-cli/            # 24 rules (Deployment & SysConfig)
-│   ├── nextdns-ui/             # 16 rules (Web Dashboard Strategy)
-│   ├── integrations/           # 20 rules (Platform Connectivity)
-│   └── nextdns-frontend/       # 35 rules (Nuxt, Next.js, Astro, SvelteKit, React Router)
+├── skills/                      # Domain-specific knowledge categories
+│   ├── nextdns-api/             # 23 rules (API protocols and endpoints)
+│   ├── nextdns-cli/             # 24 rules (Deployment and SysConfig)
+│   ├── nextdns-ui/              # 16 rules (Web Dashboard Strategy)
+│   ├── integrations/            # 20 rules (Platform Connectivity)
+│   └── nextdns-frontend/        # 35 rules (Nuxt, Next.js, Astro, SvelteKit, React Router)
 ├── packages/
-│   ├── nextdns-skills-build/   # Compiles rule files into AGENTS.md
-│   └── nextdns-scripts/        # Validation & maintenance scripts
-├── templates/                  # Standardized blueprints
-└── data/schemas/               # JSON schemas for NextDNS entities
+│   ├── nextdns-skills-build/    # Compiles rule files into AGENTS.md
+│   │   ├── src/
+│   │   │   ├── index.ts         # Public programmatic API (re-exports types, parser, config)
+│   │   │   ├── build.ts         # Core build script
+│   │   │   ├── validate.ts      # Rule validation
+│   │   │   ├── parser.ts        # Markdown → Rule parser
+│   │   │   ├── config.ts        # Skill registry (SKILLS, SKILLS_DIR, DEFAULT_SKILL)
+│   │   │   ├── types.ts         # Shared TypeScript types
+│   │   │   ├── search.ts        # Rule search CLI
+│   │   │   ├── export.ts        # Export rules to JSON or CSV
+│   │   │   ├── extract-tests.ts # Extract test cases to JSON
+│   │   │   └── migrate.ts       # Scaffold new rule from template
+│   │   ├── dist/                # Compiled output (ESM + .d.ts types)
+│   │   └── tsconfig.json        # NodeNext, strict, esModuleInterop, dts
+│   └── nextdns-scripts/         # Validation and maintenance scripts
+│       ├── src/
+│       │   ├── index.ts         # Public programmatic API (re-exports utils)
+│       │   ├── validate-rules.ts
+│       │   ├── update-counts.ts
+│       │   ├── check-duplicates.ts
+│       │   ├── check-tags.ts
+│       │   └── generate-stats.ts
+│       ├── dist/                # Compiled output (ESM + .d.ts types)
+│       └── tsconfig.json        # NodeNext, strict, esModuleInterop, dts
+├── templates/                   # Standardized blueprints
+└── data/schemas/                # JSON schemas for NextDNS entities
+```
+
+## 📦 Package architecture (no bin/)
+
+Both packages follow the same pattern — no `bin/` dispatcher, scripts call `dist/` directly:
+
+```json
+{
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "validate-rules": "node dist/validate-rules.js"
+  }
+}
+```
+
+**Programmatic API** — import types and utilities directly in TypeScript:
+
+```typescript
+// From nextdns-skills-build
+import { parseRuleFile, SKILLS, DEFAULT_SKILL } from 'nextdns-skills-build';
+import type { Rule, ImpactLevel, DocumentReference } from 'nextdns-skills-build';
+
+// From nextdns-skills-scripts
+import { parseFrontmatter, collectRuleFiles, walkDir } from 'nextdns-skills-scripts';
+```
+
+Root scripts use `pnpm -F <package> <script>` — never bin-style invocation:
+
+```jsonc
+// root package.json — correct pattern
+"lint:rules": "pnpm -F nextdns-skills-scripts validate-rules"
+
+// WRONG — do not use
+"lint:rules": "nextdns-skills-scripts validate-rules"
 ```
 
 ## 🛠️ Skill development lifecycle
@@ -43,7 +102,7 @@ New rules and skills must follow this exact hierarchy:
 skills/{category}/
   SKILL.md              # Mandatory: Category manifest with keyword index
   rules/                # Mandatory: Directory for specific rule files
-    {rule-name}.md      # kebab-case filename (e.g., parental-control.md)
+    {rule-name}.md      # kebab-case filename (for example, parental-control.md)
 ```
 
 - **Category Name**: `kebab-case` (for example, `nextdns-api`).
@@ -74,7 +133,7 @@ All rules MUST be created using `templates/rule-template.md`.
   - `impactDescription`: One-sentence consequence of non-compliance.
   - `type`: `capability` (AI needs this to solve the task) or `efficiency` (AI can solve, but this
     optimizes it).
-  - `tags`: 3-7 keywords for task-specific triggering (must be YAML array format, not string).
+  - `tags`: 3-10 keywords for task-specific triggering (must be YAML array format, not string).
 - **Standard Sections**:
   - `H1 Heading`: Immediately followed by a one-line description.
   - `Overview`: Context and scenario.
@@ -98,7 +157,7 @@ AI agents MUST strictly adhere to these protocols:
    `abc123`, `example.com`.
 5. **Markdown Aesthetics**: Maintain high-fidelity spacing. Always use a blank line between a
    paragraph and a list/code block to ensure clear visual separation.
-6. **Code Block Standards**: Specify language tags (bash, python, etc.). Use markers ✅/❌.
+6. **Code Block Standards**: Specify language tags (bash, python, and so on). Use markers ✅/❌.
 7. **Conventional Commits**: `type(scope): description` (for example, `feat(api): add rewrite rule`).
 8. **Schema Consistency**: Sync any structural changes with `data/schemas/profile.json`.
 9. **TypeScript Type Safety**: All TypeScript code examples in frontend rules MUST use explicit,
@@ -181,6 +240,7 @@ Reviewers MUST reject PRs that:
 - Add a rule file without updating `SKILL.md`.
 - Leave unlabeled code fences (triggers `MD040`).
 - Use deprecated framework APIs that conflict with official documentation.
+- Add or restore a `bin/` dispatcher — use `pnpm -F <package> <script>` instead.
 
 ## 🚀 Efficiency and validation
 
@@ -195,17 +255,64 @@ Reviewers MUST reject PRs that:
 
 Before finalizing any changes, always execute the full validation suite:
 
-- `pnpm run lint:all` - Comprehensive check (formatting, rules, syntax, and links).
-- `pnpm lint:fix` - Auto-fix formatting, terms, and syntax.
-- `pnpm lint:rules` - Verify referential integrity and frontmatter schema.
-- `pnpm update-counts` - Synchronize rule counts across documentation.
+| Command | Purpose |
+| :--- | :--- |
+| `pnpm lint:fix` | Auto-fix formatting, terms, markdown, and syntax |
+| `pnpm lint:rules` | Verify referential integrity and frontmatter schema |
+| `pnpm lint:all` | Full check — formatting, rules, syntax, and links |
+| `pnpm check-duplicates` | Detect duplicate titles across and within skills |
+| `pnpm check-tags` | Validate tag count (3–10), uniqueness, and casing |
+| `pnpm update-counts` | Synchronize rule counts in README.md |
+| `pnpm stats` | Print per-skill rule count and impact distribution |
+| `pnpm test` | Run Vitest across both packages (113 tests) |
+| `pnpm test:coverage` | Run Vitest with v8 coverage report |
 
-### Building AGENTS.md
+### Building skill AGENTS.md files
 
 After modifying rule files, rebuild the compiled output:
 
-- `pnpm build:skills` - Build all skills at once.
-- `pnpm build:api` / `pnpm build:cli` / `pnpm build:ui` / `pnpm build:integrations` / `pnpm build:frontend` - Build one skill.
+| Command | Purpose |
+| :--- | :--- |
+| `pnpm build:skills` | Build all skills at once |
+| `pnpm build:api` | Build nextdns-api only |
+| `pnpm build:cli` | Build nextdns-cli only |
+| `pnpm build:ui` | Build nextdns-ui only |
+| `pnpm build:integrations` | Build integrations only |
+| `pnpm build:frontend` | Build nextdns-frontend only |
+
+### Searching and exporting rules
+
+```bash
+# Search rules by keyword, tag, skill, or impact level
+pnpm rule-search -- --query=authentication
+pnpm rule-search -- --query=docker --skill=integrations
+pnpm rule-search -- --tag=dns --impact=HIGH --json
+
+# Export all rules
+pnpm rule-export -- --format=json --out=rules.json
+pnpm rule-export -- --format=csv  --out=rules.csv
+```
+
+### Package scripts
+
+Both packages expose their scripts via `pnpm -F`:
+
+```bash
+# nextdns-scripts scripts
+pnpm -F nextdns-skills-scripts validate-rules
+pnpm -F nextdns-skills-scripts update-counts
+pnpm -F nextdns-skills-scripts check-duplicates
+pnpm -F nextdns-skills-scripts check-tags
+pnpm -F nextdns-skills-scripts generate-stats --text
+
+# nextdns-skills-build scripts
+pnpm -F nextdns-skills-build build-all
+pnpm -F nextdns-skills-build build-agents --skill=nextdns-api
+pnpm -F nextdns-skills-build validate
+pnpm -F nextdns-skills-build search -- --query=authentication
+pnpm -F nextdns-skills-build export -- --format=json
+pnpm -F nextdns-skills-build migrate -- --skill=nextdns-api
+```
 
 ## ✍️ Content standards
 

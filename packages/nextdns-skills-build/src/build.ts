@@ -14,7 +14,7 @@ import type { Section } from './types.js';
 const args = process.argv.slice(2);
 const upgradeVersion = args.includes('--upgrade-version');
 const skillArg = args.find((arg) => arg.startsWith('--skill='));
-const skillName = skillArg ? skillArg.split('=')[1] : null;
+const skillName = skillArg ? (skillArg.split('=')[1] ?? null) : null;
 const buildAll = args.includes('--all');
 
 /**
@@ -22,8 +22,8 @@ const buildAll = args.includes('--all');
  */
 function incrementVersion(version: string): string {
   const parts = version.split('.').map(Number);
-  // Increment the last part
-  parts[parts.length - 1]++;
+  const last = parts[parts.length - 1];
+  if (last !== undefined) parts[parts.length - 1] = last + 1;
   return parts.join('.');
 }
 
@@ -37,7 +37,7 @@ function generateMarkdown(
     organization: string;
     date: string;
     abstract: string;
-    references?: string[];
+    references?: { title: string; url: string }[];
   },
   skillConfig: SkillConfig
 ): string {
@@ -120,7 +120,7 @@ function generateMarkdown(
   if (metadata.references && metadata.references.length > 0) {
     md += `## References\n\n`;
     metadata.references.forEach((ref, i) => {
-      md += `${i + 1}. [${ref}](${ref})\n`;
+      md += `${i + 1}. [${ref.title}](${ref.url})\n`;
     });
   }
 
@@ -274,7 +274,8 @@ async function build() {
       await buildSkill(skill);
     } else {
       // Build default skill (backwards compatibility)
-      await buildSkill(SKILLS[DEFAULT_SKILL]);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      await buildSkill(SKILLS[DEFAULT_SKILL]!);
     }
 
     console.log('\n✓ Build complete');
