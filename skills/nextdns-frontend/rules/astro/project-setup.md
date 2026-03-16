@@ -36,24 +36,24 @@ A NextDNS Astro + React frontend requires:
 
 ```bash
 # ✅ Bootstrap with create-astro (TypeScript template recommended)
-npm create astro@latest nextdns-dashboard
+pnpm create astro@latest nextdns-dashboard
 cd nextdns-dashboard
 
 # ✅ Add React integration
-npx astro add react
+pnpm astro add react
 
 # ✅ Add Node.js adapter for SSR (or replace with netlify/vercel/cloudflare)
-npx astro add node
+pnpm astro add node
 ```
 
 ### Install recommended packages
 
 ```bash
 # ✅ SWR — lightweight Client Component data fetching
-npm install swr
+pnpm add swr
 
 # ✅ Or React Query — more feature-rich alternative
-npm install @tanstack/react-query
+pnpm add @tanstack/react-query
 ```
 
 ### Astro.config.mjs

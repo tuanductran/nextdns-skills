@@ -34,7 +34,7 @@ from those, never directly from `api.nextdns.io`.
 ### Install dependencies
 
 ```bash
-npm install @tanstack/react-query @tanstack/react-query-devtools
+pnpm add @tanstack/react-query @tanstack/react-query-devtools
 ```
 
 ### Create the query client provider

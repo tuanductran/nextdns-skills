@@ -35,7 +35,7 @@ A NextDNS Next.js frontend requires:
 
 ```bash
 # ✅ Bootstrap with create-next-app (TypeScript + App Router + Tailwind by default)
-npx create-next-app@latest nextdns-dashboard
+pnpm create next-app@latest nextdns-dashboard
 cd nextdns-dashboard
 ```
 
@@ -43,13 +43,13 @@ cd nextdns-dashboard
 
 ```bash
 # ✅ shadcn/ui — component library (buttons, cards, tables, toasts)
-npx shadcn@latest init
+pnpm dlx shadcn@latest init
 
 # ✅ SWR — lightweight Client Component data fetching
-npm install swr
+pnpm add swr
 
 # ✅ Or React Query — more feature-rich alternative
-npm install @tanstack/react-query
+pnpm add @tanstack/react-query
 ```
 
 ### Environment variables
@@ -162,7 +162,7 @@ export default { output: 'export' }; // ❌ Breaks all Route Handlers
 generation). Run:
 
 ```bash
-npx next typegen
+pnpm exec next typegen
 ```
 
 ### Issue: `lib/nextdns.ts` imported in a client component causes build error

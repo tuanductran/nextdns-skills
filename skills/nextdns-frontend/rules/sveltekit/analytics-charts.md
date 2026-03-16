@@ -102,7 +102,7 @@ export const load: PageServerLoad = async ({ params, url }) => {
 ### Install charting dependency
 
 ```bash
-npm install svelte-chartjs chart.js
+pnpm add svelte-chartjs chart.js
 ```
 
 ## Do NOT Use

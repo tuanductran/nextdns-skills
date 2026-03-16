@@ -12,7 +12,7 @@ management.
 ### ⚙️ Installation
 
 ```bash
-npx skills add tuanductran/nextdns-skills
+pnpm dlx skills add tuanductran/nextdns-skills
 ```
 
 ### 💡 Usage
