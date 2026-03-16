@@ -13,7 +13,10 @@
     "dev": "tsup --watch",
     "check-duplicates": "node bin/cli.js check-duplicates",
     "check-tags": "node bin/cli.js check-tags",
-    "generate-stats": "node bin/cli.js generate-stats"
+    "generate-stats": "node bin/cli.js generate-stats",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "nextdns",
@@ -24,8 +27,9 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^25.3.2",
+    "@types/node": "^25.5.0",
     "tsup": "^8.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^4.1.0"
   }
 }

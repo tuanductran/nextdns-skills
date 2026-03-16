@@ -63,16 +63,18 @@
     "stats": "nextdns-skills-scripts generate-stats --text",
     "lint:quality": "pnpm run check-duplicates && pnpm run check-tags",
     "rule-search": "nextdns-skills-build search",
-    "rule-export": "nextdns-skills-build export"
+    "rule-export": "nextdns-skills-build export",
+    "test": "turbo test",
+    "test:coverage": "turbo test:coverage"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.4",
+    "@biomejs/biome": "^2.4.7",
     "case-police": "^2.1.1",
     "markdown-link-check": "^3.14.2",
     "markdownlint-cli": "^0.48.0",
     "nextdns-skills-build": "workspace:*",
     "nextdns-skills-scripts": "workspace:*",
-    "turbo": "^2.8.12"
+    "turbo": "^2.8.17"
   },
   "pnpm": {
     "overrides": {

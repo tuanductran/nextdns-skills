@@ -11,6 +11,16 @@
       "inputs": ["src/**"],
       "outputs": []
     },
+    "test": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**", "vitest.config.ts"],
+      "outputs": []
+    },
+    "test:coverage": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**", "vitest.config.ts"],
+      "outputs": ["coverage/**"]
+    },
     "dev": {
       "dependsOn": ["^build"],
       "cache": false,

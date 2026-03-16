@@ -23,7 +23,10 @@
     "migrate": "node bin/cli.js migrate",
     "dev": "tsup --watch",
     "search": "node bin/cli.js search",
-    "export": "node bin/cli.js export"
+    "export": "node bin/cli.js export",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "nextdns",
@@ -35,8 +38,9 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^25.3.2",
+    "@types/node": "^25.5.0",
     "tsup": "^8.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^4.1.0"
   }
 }

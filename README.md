@@ -72,6 +72,8 @@ AI agents.
 | **Statistics Report**         | `pnpm stats`                     |
 | **Search Rules**              | `pnpm rule-search -- --query=<text>` |
 | **Export Rules (JSON/CSV)**   | `pnpm rule-export -- --format=csv`   |
+| **Run Tests**                 | `pnpm test`                          |
+| **Run Tests (coverage)**      | `pnpm test:coverage`                 |
 
 ### Adding new rules
 
