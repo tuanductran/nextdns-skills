@@ -16,6 +16,7 @@ tags:
   - windows
 ---
 
+<!-- @case-police-ignore Api -->
 # MDM deployment (jamf, intune, apple configurator)
 
 Deploy NextDNS DNS configuration to an entire device fleet via MDM without manual per-device setup
@@ -123,8 +124,8 @@ IPv4 address: 45.90.28.0
 IPv6 address: 2a07:a8c0::  
 ```
 
-6. Assign to the Windows device group
-7. Click **Review + Create**
+1. Assign to the Windows device group
+1. Click **Review + Create**
 
 ### Configure via Group Policy (on-premises)
 

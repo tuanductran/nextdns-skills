@@ -13,6 +13,7 @@ tags:
   - transition
 ---
 
+<!-- @case-police-ignore Api -->
 # Pi-hole to NextDNS migration
 
 Migrate from Pi-hole to NextDNS while preserving custom blocklist entries, local DNS records, and DHCP settings
