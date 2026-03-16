@@ -25,6 +25,8 @@ metadata:
 | [configuration-management](rules/configuration-management.md) | profile name, log location, performance, cache boost       | Manage profile global settings            |
 | [web3-settings](rules/web3-settings.md)                       | web3, blockchain, ens, unstoppable domains                 | Enable resolution for blockchain domains  |
 | [rewrites](rules/rewrites.md)                                 | rewrites, custom dns, hostname override, local dns, cname  | Override DNS resolution for hostnames     |
+| [root-ca-installation](rules/root-ca-installation.md)         | root ca, certificate, block page, https, ssl, windows, macos, ios, android | Install Root CA to enable HTTPS block pages |
+| [device-management](rules/device-management.md)               | devices, client identification, device names, linked ip, doh, dot | Identify and manage devices in the dashboard |
 
 ## Efficiency rules
 
@@ -34,3 +36,4 @@ metadata:
 | [recommended-settings](rules/recommended-settings.md) | guidelines, best practices, optimization, basics     | Optimal settings based on NextDNS-Config   |
 | [setup-optimization](rules/setup-optimization.md)     | cache boost, cname flattening, performance           | Optimize DNS performance                   |
 | [troubleshooting-ui](rules/troubleshooting-ui.md)     | log inspection, reload logs, identification          | Troubleshoot false positives via dashboard |
+| [multiple-profiles-strategy](rules/multiple-profiles-strategy.md) | profiles, strategy, family, router, segmentation, multi-device | Organise profiles per device category |

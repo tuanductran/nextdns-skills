@@ -37,6 +37,9 @@ metadata:
 | [Advanced Linux Support](rules/linux-advanced.md)       | linux, arch, alpine, aur, apk                                | Advanced Linux installation methods        |
 | [nix](rules/nix.md)                                     | nix, nixos, declarative, configuration.nix, services.nextdns | Install NextDNS on NixOS declaratively     |
 | [freebsd](rules/freebsd.md)                             | freebsd, bsd, pkg, ports, rc.conf                            | Install NextDNS on FreeBSD via pkg/ports   |
+| [raspberry-pi](rules/raspberry-pi.md)                   | raspberry pi, linux, dhcp, pi-hole alternative, network-wide | Deploy NextDNS CLI on Raspberry Pi as LAN DNS server |
+| [gl-inet](rules/gl-inet.md)                             | gl.inet, gl-mt3000, gl-axt1800, adguard, travel router       | Install NextDNS CLI on GL.iNet routers     |
+| [systemd-advanced](rules/systemd-advanced.md)           | systemd-resolved, resolvectl, stub resolver, port 53, linux  | Integrate NextDNS with systemd-resolved on modern Linux |
 
 ## Efficiency rules
 
