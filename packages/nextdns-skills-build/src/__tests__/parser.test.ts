@@ -253,7 +253,15 @@ describe('parseRuleFile — references', () => {
     );
     const file = write(dir, 'rule.md', content);
     const { rule } = await parseRuleFile(file, SECTION_MAP);
-    expect(rule.references?.some((r) => r.includes('nextdns.github.io'))).toBe(true);
+    expect(
+      rule.references?.some((r) => {
+        try {
+          return new URL(r).hostname === 'nextdns.github.io';
+        } catch {
+          return false;
+        }
+      })
+    ).toBe(true);
   });
 });
 
