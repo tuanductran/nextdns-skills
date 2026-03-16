@@ -1,7 +1,7 @@
 {
   "name": "nextdns-skills-build",
   "version": "1.0.0",
-  "description": "Build tooling for NextDNS Skills (API, CLI, UI, Integrations, Frontend)",
+  "description": "Build tooling for NextDNS Skills: build AGENTS.md, validate, scaffold rules, search, and export",
   "type": "module",
   "bin": {
     "nextdns-skills-build": "./bin/cli.js"
@@ -21,7 +21,9 @@
     "validate": "node bin/cli.js validate",
     "extract-tests": "node bin/cli.js extract-tests",
     "migrate": "node bin/cli.js migrate",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "search": "node bin/cli.js search",
+    "export": "node bin/cli.js export"
   },
   "keywords": [
     "nextdns",

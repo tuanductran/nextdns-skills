@@ -3,9 +3,10 @@
  * Extract test cases from NextDNS skill rules for LLM evaluation
  */
 
-import { readdir, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { DEFAULT_SKILL, SKILLS, TEST_CASES_FILE } from './config.js';
+import { collectRuleFiles } from './utils.js';
 import { parseRuleFile } from './parser.js';
 import type { Rule, TestCase } from './types.js';
 
@@ -66,26 +67,7 @@ async function extractTests() {
     console.log(`Rules directory: ${skillConfig.rulesDir}`);
     console.log(`Output file: ${TEST_CASES_FILE}`);
 
-    // Collect all .md rule files recursively
-    async function collectFiles(dir: string): Promise<string[]> {
-      const entries = await readdir(dir, { withFileTypes: true });
-      const files: string[] = [];
-      for (const entry of entries) {
-        const fullPath = join(dir, entry.name);
-        if (entry.isDirectory()) {
-          files.push(...(await collectFiles(fullPath)));
-        } else if (
-          entry.name.endsWith('.md') &&
-          !entry.name.startsWith('_') &&
-          entry.name !== 'README.md'
-        ) {
-          files.push(fullPath);
-        }
-      }
-      return files.sort();
-    }
-
-    const ruleFilePaths = await collectFiles(skillConfig.rulesDir);
+    const ruleFilePaths = await collectRuleFiles(skillConfig.rulesDir);
     const allTestCases: TestCase[] = [];
 
     for (const filePath of ruleFilePaths) {

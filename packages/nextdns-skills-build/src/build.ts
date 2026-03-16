@@ -3,10 +3,11 @@
  * Build script to compile individual rule files into AGENTS.md
  */
 
-import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { DEFAULT_SKILL, SKILLS, type SkillConfig } from './config.js';
 import { parseRuleFile, type RuleFile } from './parser.js';
+import { collectRuleFiles } from './utils.js';
 import type { Section } from './types.js';
 
 // Parse command line arguments
@@ -124,29 +125,6 @@ function generateMarkdown(
   }
 
   return md;
-}
-
-/**
- * Recursively collect all .md rule files under a directory.
- * Excludes files starting with '_' and README.md.
- */
-async function collectRuleFiles(dir: string): Promise<string[]> {
-  const entries = await readdir(dir, { withFileTypes: true });
-  const files: string[] = [];
-  for (const entry of entries) {
-    const fullPath = join(dir, entry.name);
-    if (entry.isDirectory()) {
-      const nested = await collectRuleFiles(fullPath);
-      files.push(...nested);
-    } else if (
-      entry.name.endsWith('.md') &&
-      !entry.name.startsWith('_') &&
-      entry.name !== 'README.md'
-    ) {
-      files.push(fullPath);
-    }
-  }
-  return files.sort();
 }
 
 /**

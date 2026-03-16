@@ -10,11 +10,19 @@
  *   validate        Validate rule files
  *   extract-tests   Extract test cases to JSON
  *   migrate         Create a new rule from template
+ *   search          Search rules by keyword, tag, skill, or impact
+ *   export          Export all rules to JSON or CSV
  *
  * Options:
- *   --skill=<name>  Target skill (nextdns-api, nextdns-cli, nextdns-ui, integrations, nextdns-frontend)
- *   --all           Build all skills (build command only)
- *   --upgrade-version  Bump metadata version (build command only)
+ *   --skill=<name>       Target skill (nextdns-api, nextdns-cli, nextdns-ui, integrations, nextdns-frontend)
+ *   --all                Build all skills (build command only)
+ *   --upgrade-version    Bump metadata version (build command only)
+ *   --query=<text>       Search keyword (search command)
+ *   --tag=<tag>          Filter by tag (search command)
+ *   --impact=<level>     Filter by impact HIGH|MEDIUM|LOW (search command)
+ *   --json               JSON output (search command)
+ *   --format=json|csv    Output format (export command, default: json)
+ *   --out=<file>         Write output to file (export command)
  */
 
 import { existsSync } from 'node:fs';
@@ -29,6 +37,8 @@ const COMMANDS = {
   validate: 'validate.js',
   'extract-tests': 'extract-tests.js',
   migrate: 'migrate.js',
+  search: 'search.js',
+  export: 'export.js',
 };
 
 const [, , cmd = '', ...rest] = process.argv;
@@ -43,12 +53,20 @@ if (!Object.hasOwn(COMMANDS, cmd)) {
   console.error('  validate           Validate rule files structure');
   console.error('  extract-tests      Extract test cases to JSON');
   console.error('  migrate            Create a new rule from template');
+  console.error('  search             Search rules by keyword, tag, skill, or impact');
+  console.error('  export             Export all rules to JSON or CSV');
   console.error('\nOptions:');
   console.error(
-    '  --skill=<name>     Target skill (nextdns-api, nextdns-cli, nextdns-ui, integrations, nextdns-frontend)'
+    '  --skill=<name>       Target skill (nextdns-api, nextdns-cli, nextdns-ui, integrations, nextdns-frontend)'
   );
-  console.error('  --all              Build all skills (build only)');
-  console.error('  --upgrade-version  Bump metadata version (build only)');
+  console.error('  --all                Build all skills (build only)');
+  console.error('  --upgrade-version    Bump metadata version (build only)');
+  console.error('  --query=<text>       Search keyword (search)');
+  console.error('  --tag=<tag>          Filter by tag (search)');
+  console.error('  --impact=<level>     Filter by impact HIGH|MEDIUM|LOW (search)');
+  console.error('  --json               JSON output (search)');
+  console.error('  --format=json|csv    Output format (export, default: json)');
+  console.error('  --out=<file>         Write to file (export)');
   process.exit(cmd ? 1 : 0);
 }
 
@@ -59,7 +77,6 @@ if (!existsSync(distFile)) {
   process.exit(1);
 }
 
-// Rewrite argv so the subcommand sees its own args correctly
 process.argv = [process.argv[0], distFile, ...rest];
 
 await import(distFile);

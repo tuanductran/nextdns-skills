@@ -57,7 +57,13 @@
     "build:integrations": "nextdns-skills-build build --skill=integrations",
     "build:frontend": "nextdns-skills-build build --skill=nextdns-frontend",
     "update-counts": "nextdns-skills-scripts update-counts",
-    "dev": "turbo dev"
+    "dev": "turbo dev",
+    "check-duplicates": "nextdns-skills-scripts check-duplicates",
+    "check-tags": "nextdns-skills-scripts check-tags",
+    "stats": "nextdns-skills-scripts generate-stats --text",
+    "lint:quality": "pnpm run check-duplicates && pnpm run check-tags",
+    "rule-search": "nextdns-skills-build search",
+    "rule-export": "nextdns-skills-build export"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.4",

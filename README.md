@@ -55,17 +55,23 @@ AI agents.
 
 ### Quick commands
 
-| Task                     | Command               |
-| :----------------------- | :-------------------- |
-| **Setup**                | `pnpm install`        |
-| **Auto-Format Code**     | `pnpm run format`     |
-| **Full Quality Check**   | `pnpm lint`           |
-| **Fix Formatting/Terms** | `pnpm lint:fix`       |
-| **Check Rule Logic**     | `pnpm lint:rules`     |
-| **Check Syntax**         | `pnpm lint:syntax`    |
-| **Check Broken Links**   | `pnpm lint:links`     |
-| **Build All Skills**     | `pnpm build:skills`   |
-| **Sync Rule Counts**     | `pnpm update-counts`  |
+| Task                          | Command                          |
+| :---------------------------- | :------------------------------- |
+| **Setup**                     | `pnpm install`                   |
+| **Auto-Format Code**          | `pnpm run format`                |
+| **Full Quality Check**        | `pnpm lint`                      |
+| **Fix Formatting/Terms**      | `pnpm lint:fix`                  |
+| **Check Rule Logic**          | `pnpm lint:rules`                |
+| **Check Syntax**              | `pnpm lint:syntax`               |
+| **Check Broken Links**        | `pnpm lint:links`                |
+| **Check Duplicate Titles**    | `pnpm check-duplicates`          |
+| **Check Tag Hygiene**         | `pnpm check-tags`                |
+| **Quality Checks (all)**      | `pnpm lint:quality`              |
+| **Build All Skills**          | `pnpm build:skills`              |
+| **Sync Rule Counts**          | `pnpm update-counts`             |
+| **Statistics Report**         | `pnpm stats`                     |
+| **Search Rules**              | `pnpm rule-search -- --query=<text>` |
+| **Export Rules (JSON/CSV)**   | `pnpm rule-export -- --format=csv`   |
 
 ### Adding new rules
 

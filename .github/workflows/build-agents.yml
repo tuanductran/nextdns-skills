@@ -1,0 +1,60 @@
+name: Build AGENTS.md
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'skills/**/rules/**/*.md'
+      - 'skills/**/metadata.json'
+  workflow_dispatch:
+    inputs:
+      skill:
+        description: 'Skill to build (leave empty for all)'
+        required: false
+        default: ''
+
+jobs:
+  build-agents:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.node-version'
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.30.3
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Build AGENTS.md (all skills)
+        if: ${{ github.event.inputs.skill == '' }}
+        run: pnpm build:skills
+
+      - name: Build AGENTS.md (single skill)
+        if: ${{ github.event.inputs.skill != '' }}
+        run: pnpm nextdns-skills-build build --skill=${{ github.event.inputs.skill }}
+
+      - name: Commit and push AGENTS.md changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add skills/**/AGENTS.md
+          if git diff --cached --quiet; then
+            echo "No AGENTS.md changes to commit"
+          else
+            git commit -m "docs: rebuild AGENTS.md [skip ci]"
+            git push
+          fi

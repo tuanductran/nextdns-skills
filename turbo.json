@@ -6,6 +6,11 @@
       "inputs": ["src/**", "tsup.config.ts"],
       "outputs": ["dist/**"]
     },
+    "lint": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**"],
+      "outputs": []
+    },
     "dev": {
       "dependsOn": ["^build"],
       "cache": false,
