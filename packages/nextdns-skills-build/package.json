@@ -8,23 +8,18 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
     "./build": {
-      "types": "./dist/build.d.ts",
       "import": "./dist/build.js"
     },
     "./validate": {
-      "types": "./dist/validate.d.ts",
       "import": "./dist/validate.js"
     },
     "./search": {
-      "types": "./dist/search.d.ts",
       "import": "./dist/search.js"
     },
     "./export": {
-      "types": "./dist/export.d.ts",
       "import": "./dist/export.js"
     }
   },
@@ -60,6 +55,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^25.5.0",
+    "@vitest/coverage-v8": "^4.1.0",
     "tsup": "^8.0.0",
     "typescript": "^5.0.0",
     "vitest": "^4.1.0"
