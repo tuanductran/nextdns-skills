@@ -55,7 +55,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add 'skills/**/AGENTS.md'
+          git add -f 'skills/**/AGENTS.md'
           if git diff --cached --quiet; then
             echo "No AGENTS.md changes to commit"
           else
