@@ -15,7 +15,6 @@ tags:
   - dream machine
   - gateway
   - content filtering
-  - ad blocking
   - ssh
   - cli
   - dns shield

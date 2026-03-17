@@ -39,8 +39,8 @@ nextdns-skills/
 │   │   │   ├── export.ts        # Export rules to JSON or CSV
 │   │   │   ├── extract-tests.ts # Extract test cases to JSON
 │   │   │   └── migrate.ts       # Scaffold new rule from template
-│   │   ├── dist/                # Compiled output (ESM + .d.ts types)
-│   │   └── tsconfig.json        # NodeNext, strict, esModuleInterop, dts
+│   │   ├── dist/                # Compiled output (ESM)
+│   │   └── tsconfig.json        # NodeNext, strict, esModuleInterop
 │   └── nextdns-scripts/         # Validation and maintenance scripts
 │       ├── src/
 │       │   ├── index.ts         # Public programmatic API (re-exports utils)
@@ -49,8 +49,8 @@ nextdns-skills/
 │       │   ├── check-duplicates.ts
 │       │   ├── check-tags.ts
 │       │   └── generate-stats.ts
-│       ├── dist/                # Compiled output (ESM + .d.ts types)
-│       └── tsconfig.json        # NodeNext, strict, esModuleInterop, dts
+│       ├── dist/                # Compiled output (ESM)
+│       └── tsconfig.json        # NodeNext, strict, esModuleInterop
 ├── templates/                   # Standardized blueprints
 └── data/schemas/                # JSON schemas for NextDNS entities
 ```
@@ -62,7 +62,7 @@ Both packages follow the same pattern — no `bin/` dispatcher, scripts call `di
 ```json
 {
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }
+    ".": { "import": "./dist/index.js" }
   },
   "files": ["dist"],
   "scripts": {
@@ -257,7 +257,7 @@ Before finalizing any changes, always execute the full validation suite:
 
 | Command | Purpose |
 | :--- | :--- |
-| `pnpm lint:fix` | Auto-fix formatting, terms, markdown, and syntax |
+| `pnpm lint:fix` | Auto-fix formatting, terms, markdown, syntax, and TypeScript type-checking |
 | `pnpm lint:rules` | Verify referential integrity and frontmatter schema |
 | `pnpm lint:all` | Full check — formatting, rules, syntax, and links |
 | `pnpm check-duplicates` | Detect duplicate titles across and within skills |

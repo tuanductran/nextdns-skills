@@ -7,7 +7,7 @@ description:
 license: MIT
 metadata:
   author: tuanductran
-  version: '1.0.0'
+  version: '1.0.1'
 ---
 
 # NextDNS web UI skills
@@ -20,7 +20,7 @@ metadata:
 | [privacy-settings](rules/privacy-settings.md)                 | blocklists, Hagezi, OISD, native tracking, privacy         | Manage privacy and ad-blocking lists      |
 | [parental-control](rules/parental-control.md)                 | apps and games, categories, recreation time, restricted mode | Set up restrictions for family members    |
 | [ddns-settings](rules/ddns-settings.md)                       | linked ip, ddns, noip, dynamic dns, router                 | Manage network IP linking and dynamic DNS |
-| [denylist-allowlist](rules/denylist-allowlist.md)             | block domain, allow domain, whitelist, fixing breakage     | Manually manage domain accessibility      |
+| [denylist-allowlist](rules/denylist-allowlist.md)             | block domain, allow domain, allowlist, fixing breakage     | Manually manage domain accessibility      |
 | [analytics-logs](rules/analytics-logs.md)                     | monitoring, logs, blocked queries, identifier              | Monitor network activity and troubleshoot |
 | [configuration-management](rules/configuration-management.md) | profile name, log location, performance, cache boost       | Manage profile global settings            |
 | [web3-settings](rules/web3-settings.md)                       | web3, blockchain, ens, unstoppable domains                 | Enable resolution for blockchain domains  |

@@ -165,4 +165,4 @@ DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 
 - [NextDNS CLI GitHub](https://github.com/nextdns/nextdns)
 - [NextDNS CLI Wiki — Linux](https://github.com/nextdns/nextdns/wiki)
-- [Raspberry Pi OS Documentation](https://www.raspberrypi.com/documentation/)
+- [Raspberry Pi Documentation (GitHub)](https://github.com/raspberrypi/documentation)

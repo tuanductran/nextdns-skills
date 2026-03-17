@@ -6,10 +6,9 @@ type: capability
 tags:
   - allowlist
   - denylist
-  - whitelist
-  - blacklist
   - domain blocking
   - domain allowing
+  - custom filtering
 ---
 
 <!-- @case-police-ignore Api -->

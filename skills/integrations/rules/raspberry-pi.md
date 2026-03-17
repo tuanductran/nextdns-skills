@@ -152,4 +152,4 @@ sudo nextdns restart
 
 - [NextDNS CLI GitHub](https://github.com/nextdns/nextdns)
 - [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)
-- [Raspberry Pi Documentation](https://www.raspberrypi.com/documentation/)
+- [Raspberry Pi Documentation (GitHub)](https://github.com/raspberrypi/documentation)

@@ -151,4 +151,4 @@ device to use DoH/DoT with your profile ID in the URL/hostname.
 
 - [NextDNS Help Center — Device Identification](https://help.nextdns.io)
 - [NextDNS CLI — Report Client Info](https://github.com/nextdns/nextdns#configuration)
-- [Android Private DNS Setup](https://nextdns.io/blog/android-private-dns)
+- [NextDNS Dashboard — Setup](https://my.nextdns.io/setup)

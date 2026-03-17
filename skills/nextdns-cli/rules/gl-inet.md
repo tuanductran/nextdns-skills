@@ -73,7 +73,7 @@ sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 
 When the installer prompts:
 
-- **Profile ID**: Enter your NextDNS Configuration ID
+- **Profile ID**: Enter your NextDNS profile ID
 - **Setup as router?**: Choose **Yes**
 - **Report client info?**: Choose **Yes** — enables device names in the NextDNS dashboard
 - **Auto-activate?**: Choose **Yes**
@@ -136,5 +136,5 @@ DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 ## Reference
 
 - [NextDNS CLI Wiki — OpenWrt](https://github.com/nextdns/nextdns/wiki/OpenWrt)
-- [GL.iNet Developer Docs — SSH Access](https://docs.gl-inet.com/router/en/4/interface_guide/ssh/)
+- [GL.iNet Docs — Interface guide](https://docs.gl-inet.com/router/en/4/interface_guide/)
 - [GL.iNet AdGuard Home Docs](https://docs.gl-inet.com/router/en/4/interface_guide/adguardhome/)

@@ -178,6 +178,6 @@ sudo nextdns restart
 
 ## Reference
 
-- [systemd-resolved man page](https://www.freedesktop.org/software/systemd/man/resolved.conf.html)
+- [systemd-resolved man page](https://manpages.debian.org/bookworm/systemd-resolved/resolved.conf.5.en.html)
 - [NextDNS CLI GitHub](https://github.com/nextdns/nextdns)
 - [NextDNS CLI Wiki](https://github.com/nextdns/nextdns/wiki)

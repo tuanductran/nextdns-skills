@@ -175,7 +175,7 @@ Get-DnsClientGlobalSetting | Select-Object -Property EnableDnsDo*
 
 ## Reference
 
-- [Apple — MDM DNS Payload](https://developer.apple.com/documentation/devicemanagement/dns)
+- [Apple — DNS Settings payload](https://developer.apple.com/documentation/devicemanagement/dnssettings)
 - [Jamf Pro Documentation](https://docs.jamf.com)
 - [Microsoft Intune — Custom profiles](https://learn.microsoft.com/en-us/intune/intune-service/configuration/custom-settings-configure)
 - [NextDNS Dashboard — Setup](https://my.nextdns.io)

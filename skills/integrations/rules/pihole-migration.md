@@ -23,7 +23,7 @@ Migrate from Pi-hole to NextDNS while preserving custom blocklist entries, local
 Pi-hole users switching to NextDNS typically want to preserve:
 
 1. **Custom blocked domains** (ad-hoc additions to Pi-hole's blocklist)
-2. **Custom allowed domains** (whitelist entries for false positives)
+2. **Custom allowed domains** (allowlist entries for false positives)
 3. **Local DNS records** (hostname → IP mappings for home devices)
 4. **DHCP settings** (if Pi-hole was acting as the DHCP server)
 
@@ -35,26 +35,26 @@ replicate these settings programmatically.
 ### Export custom blocklist (exact domains)
 
 ```bash
-# ✅ On the Pi-hole device — export exact domain blacklist
+# ✅ On the Pi-hole device — export exact domain blocklist
 # Pi-hole stores custom exact blocks in its gravity database
 sqlite3 /etc/pihole/gravity.db \
   "SELECT domain FROM domainlist WHERE type=1 AND enabled=1;" \
-  > ~/pihole-blacklist.txt
+  > ~/pihole-blocklist.txt
 
 echo "Custom blocked domains:"
-wc -l ~/pihole-blacklist.txt
+wc -l ~/pihole-blocklist.txt
 ```
 
-### Export whitelist (exact domains)
+### Export allowlist (exact domains)
 
 ```bash
-# ✅ Export exact whitelist entries
+# ✅ Export exact allowlist entries
 sqlite3 /etc/pihole/gravity.db \
   "SELECT domain FROM domainlist WHERE type=0 AND enabled=1;" \
-  > ~/pihole-whitelist.txt
+  > ~/pihole-allowlist.txt
 
-echo "Whitelisted domains:"
-wc -l ~/pihole-whitelist.txt
+echo "Allowed domains:"
+wc -l ~/pihole-allowlist.txt
 ```
 
 ### Export local DNS records (custom A records)
@@ -71,7 +71,7 @@ cat ~/pihole-local-dns.txt
 ## Step 2: import blocklist entries into NextDNS
 
 ```javascript
-// ✅ Import Pi-hole blacklist into NextDNS denylist via API
+// ✅ Import Pi-hole blocklist into NextDNS denylist via API
 import fs from 'node:fs';
 
 const API_KEY = 'YOUR_API_KEY';
@@ -128,13 +128,13 @@ async function importDenylist(filepath) {
   console.log(`Done: ${imported} imported, ${skipped} skipped`);
 }
 
-await importDenylist('./pihole-blacklist.txt');
+await importDenylist('./pihole-blocklist.txt');
 ```
 
 ## Step 3: import allowlist entries into NextDNS
 
 ```javascript
-// ✅ Import Pi-hole whitelist into NextDNS allowlist via API
+// ✅ Import Pi-hole allowlist into NextDNS allowlist via API
 async function importAllowlist(filepath) {
   const domains = fs.readFileSync(filepath, 'utf8')
     .split('\n')
@@ -164,7 +164,7 @@ async function importAllowlist(filepath) {
   console.log('Allowlist import complete');
 }
 
-await importAllowlist('./pihole-whitelist.txt');
+await importAllowlist('./pihole-allowlist.txt');
 ```
 
 ## Step 4: import local DNS records into NextDNS rewrites

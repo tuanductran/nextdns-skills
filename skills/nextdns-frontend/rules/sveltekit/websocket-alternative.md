@@ -48,15 +48,16 @@ export const GET: RequestHandler = async ({ params, url }) => {
   const cursor = url.searchParams.get('cursor');
 
   try {
-    const params_obj = new URLSearchParams({ limit, sort: 'desc' });
-    if (cursor) params_obj.set('cursor', cursor);
+    const paramsObj = new URLSearchParams({ limit, sort: 'desc' });
+    if (cursor) paramsObj.set('cursor', cursor);
 
     const data = await nextdnsFetch(
-      `/profiles/${params.id}/logs?${params_obj}`
+      `/profiles/${params.id}/logs?${paramsObj}`
     );
     return json(data);
-  } catch (err) {
-    error(502, { message: (err as Error).message });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    error(502, { message });
   }
 };
 ```
@@ -79,6 +80,35 @@ export const GET: RequestHandler = async ({ params, url }) => {
     protocol: string;
   }
 
+  function isRecord(value: unknown): value is Record<string, unknown> {
+    return typeof value === 'object' && value !== null;
+  }
+
+  function parseStatus(value: unknown): LogEntry['status'] | null {
+    if (value === 'default' || value === 'blocked' || value === 'allowed' || value === 'error') {
+      return value;
+    }
+    return null;
+  }
+
+  function parseLogEntry(value: unknown): LogEntry | null {
+    if (!isRecord(value)) return null;
+
+    const timestamp = value.timestamp;
+    const domain = value.domain;
+    const status = parseStatus(value.status);
+    const encrypted = value.encrypted;
+    const protocol = value.protocol;
+
+    if (typeof timestamp !== 'string') return null;
+    if (typeof domain !== 'string') return null;
+    if (!status) return null;
+    if (typeof encrypted !== 'boolean') return null;
+    if (typeof protocol !== 'string') return null;
+
+    return { timestamp, domain, status, encrypted, protocol };
+  }
+
   let logs = $state<LogEntry[]>([]);
   let cursor = $state<string | null>(null);
   let isLoading = $state(false);
@@ -98,18 +128,33 @@ export const GET: RequestHandler = async ({ params, url }) => {
       );
 
       if (!res.ok) {
-        const { message } = await res.json().catch(() => ({}));
+        const errorBody: unknown = await res.json().catch(() => null);
+        const message =
+          isRecord(errorBody) && typeof errorBody.message === 'string'
+            ? errorBody.message
+            : null;
+
         throw new Error(message ?? `HTTP ${res.status}`);
       }
 
-      const json = await res.json();
+      const json: unknown = await res.json();
+      if (!isRecord(json)) throw new Error('Invalid response');
 
       // Prepend new entries (newest-first display)
-      const newLogs: LogEntry[] = json.data ?? [];
+      const dataValue = json.data;
+      const newLogs = Array.isArray(dataValue)
+        ? dataValue.map(parseLogEntry).filter((x): x is LogEntry => x !== null)
+        : [];
+
       logs = [...newLogs, ...logs].slice(0, 500);
 
       // Save cursor for next poll to avoid re-fetching old entries
-      cursor = json.meta?.stream?.id ?? null;
+      const metaValue = json.meta;
+      if (isRecord(metaValue) && isRecord(metaValue.stream) && typeof metaValue.stream.id === 'string') {
+        cursor = metaValue.stream.id;
+      } else {
+        cursor = null;
+      }
     } catch (err: unknown) {
       error = err instanceof Error ? err.message : 'Unknown error';
     } finally {
@@ -210,4 +255,5 @@ export const GET: RequestHandler = async ({ params }) => {
 
 - [NextDNS API — Logs](https://nextdns.github.io/api/#logs)
 - [SvelteKit — Server Routes](https://kit.svelte.dev/docs/routing#server)
-- [Cloudflare Workers — Streaming](https://developers.cloudflare.com/workers/examples/streaming-responses/)
+- [Cloudflare Workers — Streams](https://developers.cloudflare.com/workers/runtime-apis/streams/)
+- [MDN — TransformStream](https://developer.mozilla.org/en-US/docs/Web/API/TransformStream)

@@ -9,7 +9,7 @@ description:
 license: MIT
 metadata:
   author: tuanductran
-  version: '1.0.0'
+  version: '1.0.1'
 ---
 
 # NextDNS CLI skills

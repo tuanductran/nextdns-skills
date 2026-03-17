@@ -16,7 +16,7 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Data revalidation strategies React router v7)
+# Data Revalidation Strategies (React Router v7)
 
 Control when React Router v7 re-runs loaders and implement background mutations with fetchers
 
@@ -82,7 +82,11 @@ export async function action({ request }: Route.ActionArgs) {
   const intent = form.get('intent');
 
   if (intent === 'toggle-security') {
-    const profileId = form.get('profileId') as string;
+    const profileIdValue = form.get('profileId');
+    if (typeof profileIdValue !== 'string' || profileIdValue.length === 0) {
+      throw new Response('Missing profileId', { status: 400 });
+    }
+    const profileId = profileIdValue;
     const enabled = form.get('cryptojacking') === 'true';
 
     await nextdnsFetch(`/profiles/${profileId}/security`, {
@@ -139,13 +143,17 @@ import { nextdnsFetch } from '~/lib/nextdns.server';
 import type { Route } from './+types/profiles.$id';
 
 export async function loader({ params }: Route.LoaderArgs) {
+  type Profile = { id: string; name: string };
+  type AnalyticsItem = { status: string; queries: number };
+  type AnalyticsResponse = { data: AnalyticsItem[] };
+
   // Profile data — fetch synchronously (fast, needed for page title)
-  const profile = await nextdnsFetch<{ data: { id: string; name: string } }>(
+  const profile = await nextdnsFetch<{ data: Profile }>(
     `/profiles/${params.id}`
   );
 
   // Analytics — defer (can be slow, not needed for initial render)
-  const analyticsPromise = nextdnsFetch(
+  const analyticsPromise = nextdnsFetch<AnalyticsResponse>(
     `/profiles/${params.id}/analytics/status?from=-7d`
   );
 
@@ -175,9 +183,9 @@ export default function ProfilePage() {
           resolve={analytics}
           errorElement={<p>Analytics failed to load.</p>}
         >
-          {(data) => (
+          {(data: { data: Array<{ status: string; queries: number }> }) => (
             <ul>
-              {data.data.map((item: { status: string; queries: number }) => (
+              {data.data.map((item) => (
                 <li key={item.status}>
                   {item.status}: {item.queries}
                 </li>
@@ -195,8 +203,7 @@ export default function ProfilePage() {
 
 ```tsx
 // ✅ Auto-refresh analytics every 60 seconds without full navigation
-'use client'; // Not needed in React Router — shown for clarity
-import { useFetcher, useLoaderData } from 'react-router';
+import { useFetcher } from 'react-router';
 import { useEffect } from 'react';
 
 export default function AnalyticsPanel({ profileId }: { profileId: string }) {
@@ -240,6 +247,7 @@ navigate('.'); // ❌ Use fetcher.submit instead
 
 ## Reference
 
-- [React Router v7 — shouldRevalidate](https://reactrouter.com/api/hooks/useFetcher)
-- [React Router v7 — Fetchers](https://reactrouter.com/start/framework/pending-ui#optimistic-ui)
-- [React Router v7 — Deferred Data](https://reactrouter.com/how-to/streaming)
+- [React Router v7 — Data loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v7 — Fetchers](https://reactrouter.com/api/hooks/useFetcher)
+- [React Router v7 — Defer and Await](https://reactrouter.com/api/utils/data)
+- [React Router v7 — Await](https://reactrouter.com/api/components/Await)

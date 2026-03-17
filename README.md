@@ -59,8 +59,9 @@ AI agents.
 | :---------------------------- | :------------------------------- |
 | **Setup**                     | `pnpm install`                   |
 | **Auto-Format Code**          | `pnpm run format`                |
+| **TypeScript Type Check**     | `pnpm types:check`               |
 | **Full Quality Check**        | `pnpm lint`                      |
-| **Fix Formatting/Terms**      | `pnpm lint:fix`                  |
+| **Fix Issues (incl. TS)**     | `pnpm lint:fix`                  |
 | **Check Rule Logic**          | `pnpm lint:rules`                |
 | **Check Syntax**              | `pnpm lint:syntax`               |
 | **Check Broken Links**        | `pnpm lint:links`                |
