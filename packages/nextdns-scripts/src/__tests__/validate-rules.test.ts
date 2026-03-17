@@ -149,14 +149,16 @@ describe('content structure validation', () => {
     const body = '# My Rule\n\nBrief description here.\n\n## Overview';
     const h1Match = body.match(/^#\s+.*$/m);
     expect(h1Match).not.toBeNull();
-    const afterH1 = body.slice((h1Match!.index ?? 0) + h1Match![0].length).trim();
+    if (!h1Match) throw new Error('Expected an H1 match');
+    const afterH1 = body.slice((h1Match.index ?? 0) + h1Match[0].length).trim();
     expect(afterH1.length).toBeGreaterThan(0);
   });
 
   it('detects H1 with no following content', () => {
     const body = '# My Rule\n';
     const h1Match = body.match(/^#\s+.*$/m);
-    const afterH1 = body.slice((h1Match!.index ?? 0) + h1Match![0].length).trim();
+    if (!h1Match) throw new Error('Expected an H1 match');
+    const afterH1 = body.slice((h1Match.index ?? 0) + h1Match[0].length).trim();
     expect(afterH1.length).toBe(0);
   });
 });

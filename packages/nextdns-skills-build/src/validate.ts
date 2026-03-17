@@ -3,7 +3,7 @@
  * Validate NextDNS skill rule files follow the correct structure
  */
 
-import { join, relative } from 'node:path';
+import { relative } from 'node:path';
 import { DEFAULT_SKILL, SKILLS } from './config.js';
 import { collectRuleFiles } from './utils.js';
 import { parseRuleFile } from './parser.js';

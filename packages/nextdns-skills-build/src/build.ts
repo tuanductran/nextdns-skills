@@ -274,8 +274,13 @@ async function build() {
       await buildSkill(skill);
     } else {
       // Build default skill (backwards compatibility)
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      await buildSkill(SKILLS[DEFAULT_SKILL]!);
+      const defaultSkill = SKILLS[DEFAULT_SKILL];
+      if (!defaultSkill) {
+        console.error(`Unknown default skill: ${DEFAULT_SKILL}`);
+        console.error(`Available skills: ${Object.keys(SKILLS).join(', ')}`);
+        process.exit(1);
+      }
+      await buildSkill(defaultSkill);
     }
 
     console.log('\n✓ Build complete');

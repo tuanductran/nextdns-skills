@@ -13,8 +13,8 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { DEFAULT_SKILL, SKILLS } from './config.js';
+import { fileURLToPath } from 'url';
+import { SKILLS } from './config.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(__dirname, '../../..');

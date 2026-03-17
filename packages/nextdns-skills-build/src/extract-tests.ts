@@ -4,7 +4,7 @@
  */
 
 import { writeFile } from 'node:fs/promises';
-import { join, relative } from 'node:path';
+import { relative } from 'node:path';
 import { DEFAULT_SKILL, SKILLS, TEST_CASES_FILE } from './config.js';
 import { collectRuleFiles } from './utils.js';
 import { parseRuleFile } from './parser.js';

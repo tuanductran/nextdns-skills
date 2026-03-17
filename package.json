@@ -12,7 +12,7 @@
   },
   "author": "Tuan Duc Tran <tuanductran.dev@gmail.com>",
   "license": "MIT",
-  "packageManager": "pnpm@10.30.3",
+  "packageManager": "pnpm@10.32.1",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -40,13 +40,13 @@
   "scripts": {
     "format": "biome format --write .",
     "format:check": "biome format .",
-    "lint": "pnpm run format:check && pnpm run \"/^lint:(md|rules|syntax)$/\"",
+    "lint": "pnpm run format:check && pnpm run types:check && pnpm run \"/^lint:(md|rules|syntax)$/\"",
     "lint:all": "pnpm run lint && pnpm run lint:links",
-    "lint:fix": "pnpm run format && pnpm run lint:md:fix && pnpm run lint:syntax:fix && pnpm run lint:rules",
+    "lint:fix": "pnpm run format && pnpm run lint:md:fix && pnpm run lint:syntax:fix && pnpm run lint:rules && pnpm run types:check",
     "lint:links": "find . -name \"*.md\" -not -path \"*/node_modules/*\" -not -path \"*/templates/*\" | xargs markdown-link-check -c config.json",
     "lint:md": "markdownlint .",
     "lint:md:fix": "markdownlint . --fix",
-    "lint:rules": "pnpm -F nextdns-skills-scripts validate-rules",
+    "lint:rules": "pnpm -F nextdns-skills-scripts build && pnpm -F nextdns-skills-scripts validate-rules",
     "lint:syntax": "case-police \"skills/**/rules/**/*.md\"",
     "lint:syntax:fix": "case-police --fix \"skills/**/rules/**/*.md\"",
     "build": "turbo build",
@@ -56,23 +56,26 @@
     "build:ui": "pnpm -F nextdns-skills-build build-ui",
     "build:integrations": "pnpm -F nextdns-skills-build build-integrations",
     "build:frontend": "pnpm -F nextdns-skills-build build-frontend",
-    "update-counts": "pnpm -F nextdns-skills-scripts update-counts",
+    "update-counts": "pnpm -F nextdns-skills-scripts build && pnpm -F nextdns-skills-scripts update-counts",
     "dev": "turbo dev",
-    "check-duplicates": "pnpm -F nextdns-skills-scripts check-duplicates",
-    "check-tags": "pnpm -F nextdns-skills-scripts check-tags",
-    "stats": "pnpm -F nextdns-skills-scripts generate-stats --text",
+    "check-duplicates": "pnpm -F nextdns-skills-scripts build && pnpm -F nextdns-skills-scripts check-duplicates",
+    "check-tags": "pnpm -F nextdns-skills-scripts build && pnpm -F nextdns-skills-scripts check-tags",
+    "stats": "pnpm -F nextdns-skills-scripts build && pnpm -F nextdns-skills-scripts generate-stats --text",
     "lint:quality": "pnpm run check-duplicates && pnpm run check-tags",
     "rule-search": "pnpm -F nextdns-skills-build search",
     "rule-export": "pnpm -F nextdns-skills-build export",
     "test": "turbo test",
-    "test:coverage": "turbo test:coverage"
+    "test:coverage": "turbo test:coverage",
+    "types:check": "tsc -p tsconfig.json"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.7",
+    "@types/node": "^25.5.0",
     "case-police": "^2.1.1",
     "markdown-link-check": "^3.14.2",
     "markdownlint-cli": "^0.48.0",
-    "turbo": "^2.8.17"
+    "turbo": "^2.8.17",
+    "typescript": "^5.0.0"
   },
   "pnpm": {
     "overrides": {
