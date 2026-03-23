@@ -69,13 +69,13 @@
     "types:check": "tsc -p tsconfig.json"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.7",
+    "@biomejs/biome": "^2.4.8",
     "@types/node": "^25.5.0",
-    "case-police": "^2.1.1",
+    "case-police": "^2.2.0",
     "markdown-link-check": "^3.14.2",
     "markdownlint-cli": "^0.48.0",
-    "turbo": "^2.8.17",
-    "typescript": "^5.0.0"
+    "turbo": "^2.8.20",
+    "typescript": "^5.9.3"
   },
   "pnpm": {
     "overrides": {
