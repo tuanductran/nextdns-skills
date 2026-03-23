@@ -6,8 +6,8 @@ type: capability
 tags:
   - block domain
   - allow domain
-  - whitelist
-  - blacklist
+  - allowlist
+  - blocklist
   - custom rules
   - apple
   - windows

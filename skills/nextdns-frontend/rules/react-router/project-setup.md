@@ -34,9 +34,9 @@ integration, **SSR must be enabled** so that `loader` and `action` functions run
 
 ```bash
 # ✅ Bootstrap with official CLI
-npx create-react-router@latest my-nextdns-app
+pnpm create react-router@latest my-nextdns-app
 cd my-nextdns-app
-npm install
+pnpm install
 ```
 
 Select **TypeScript** when prompted.
@@ -104,7 +104,7 @@ export async function nextdnsFetch<T>(path: string, options?: RequestInit): Prom
 ### Start development server
 
 ```bash
-npm run dev
+pnpm dev
 # Opens http://localhost:5173
 ```
 
@@ -133,7 +133,7 @@ client-side data loading which exposes the API key.
 
 ### Issue: TypeScript errors for `route.loaderargs`
 
-**Solution**: Run `npm run typecheck` or `npm run dev` once — React Router auto-generates type files
+**Solution**: Run `pnpm typecheck` or `pnpm dev` once — React Router auto-generates type files
 under `app/routes/+types/` based on your route config.
 
 ## Reference

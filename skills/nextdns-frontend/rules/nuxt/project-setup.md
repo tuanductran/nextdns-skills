@@ -35,7 +35,7 @@ A NextDNS Nuxt frontend requires:
 
 ```bash
 # ✅ Bootstrap with Nuxt 4 (pnpm recommended)
-npm create nuxt@latest nextdns-dashboard
+pnpm create nuxt@latest nextdns-dashboard
 cd nextdns-dashboard
 pnpm install
 ```

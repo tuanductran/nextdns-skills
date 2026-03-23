@@ -4,7 +4,7 @@
 
 import { readFile } from 'node:fs/promises';
 import { basename } from 'node:path';
-import type { ImpactLevel, Rule, RuleType } from './types.js';
+import type { CodeExample, ImpactLevel, Rule, RuleType } from './types.js';
 
 export interface RuleFile {
   section: number;
@@ -12,10 +12,6 @@ export interface RuleFile {
   rule: Rule;
 }
 
-/**
- * Parse YAML frontmatter from a markdown file.
- * Handles both scalar values and YAML array format (- item).
- */
 function parseFrontmatter(text: string): Record<string, unknown> {
   const result: Record<string, unknown> = {};
   let currentKey = '';
@@ -23,32 +19,22 @@ function parseFrontmatter(text: string): Record<string, unknown> {
   const arrayValues: string[] = [];
 
   for (const line of text.split('\n')) {
-    // YAML array item: "  - value"
     const arrayItemMatch = line.match(/^\s+-\s+(.+)/);
     if (arrayItemMatch) {
-      if (inArray) {
-        arrayValues.push(arrayItemMatch[1].trim().replace(/^["']|["']$/g, ''));
-      }
+      if (inArray) arrayValues.push((arrayItemMatch[1] ?? '').trim().replace(/^["']|["']$/g, ''));
       continue;
     }
-
-    // Flush accumulated array before processing the next key
     if (inArray && currentKey) {
       result[currentKey] = arrayValues.slice();
       inArray = false;
       arrayValues.length = 0;
     }
-
     const colonIdx = line.indexOf(':');
     if (colonIdx === -1) continue;
-
     const key = line.slice(0, colonIdx).trim();
     const value = line.slice(colonIdx + 1).trim();
-
     if (!key) continue;
-
     if (value === '') {
-      // Start of YAML array block
       currentKey = key;
       inArray = true;
     } else {
@@ -56,24 +42,24 @@ function parseFrontmatter(text: string): Record<string, unknown> {
       result[key] = value.replace(/^["']|["']$/g, '');
     }
   }
-
-  // Flush array at end of frontmatter
-  if (inArray && currentKey) {
-    result[currentKey] = arrayValues.slice();
-  }
-
+  if (inArray && currentKey) result[currentKey] = arrayValues.slice();
   return result;
 }
 
-/**
- * Parse a rule markdown file into a Rule object.
- * Supports the NextDNS rule format:
- *   - YAML frontmatter (title, impact, impactDescription, type, tags)
- *   - # H1 Title + one-line description
- *   - ## Correct Usage  → examples with label "Correct"
- *   - ## Do NOT Use     → examples with label "Incorrect"
- *   - Other ## sections → explanation / additional context
- */
+/** Build a CodeExample omitting undefined optional fields (exactOptionalPropertyTypes). */
+function makeExample(
+  label: string,
+  code: string,
+  language: string,
+  description?: string,
+  additionalText?: string
+): CodeExample {
+  const ex: CodeExample = { label, code, language };
+  if (description !== undefined) ex.description = description;
+  if (additionalText !== undefined) ex.additionalText = additionalText;
+  return ex;
+}
+
 export async function parseRuleFile(
   filePath: string,
   sectionMap?: Record<string, number>,
@@ -82,37 +68,35 @@ export async function parseRuleFile(
   const rawContent = await readFile(filePath, 'utf-8');
   const content = rawContent.replace(/\r\n/g, '\n');
 
-  // --- Frontmatter ---
   let frontmatter: Record<string, unknown> = {};
   let contentStart = 0;
 
   if (content.startsWith('---')) {
     const frontmatterEnd = content.indexOf('\n---', 3);
     if (frontmatterEnd !== -1) {
-      const frontmatterText = content.slice(3, frontmatterEnd).trim();
-      frontmatter = parseFrontmatter(frontmatterText);
+      frontmatter = parseFrontmatter(content.slice(3, frontmatterEnd).trim());
       contentStart = frontmatterEnd + 4;
     }
   }
 
-  const ruleContent = content.slice(contentStart).trim();
-  const ruleLines = ruleContent.split('\n');
+  const ruleLines = content.slice(contentStart).trim().split('\n');
 
-  // --- Extract H1 title and one-line description ---
   let title = '';
   let titleLine = -1;
   let description = '';
 
   for (let i = 0; i < ruleLines.length; i++) {
     const line = ruleLines[i];
+    if (line === undefined) continue;
     if (line.startsWith('# ') && !line.startsWith('## ')) {
       title = line.replace(/^#\s+/, '').trim();
       titleLine = i;
-      // Next non-empty line is the one-line description
       for (let j = i + 1; j < ruleLines.length; j++) {
-        const next = ruleLines[j].trim();
-        if (next && !next.startsWith('#') && !next.startsWith('<!--')) {
-          description = next;
+        const next = ruleLines[j];
+        if (next === undefined) continue;
+        const trimmed = next.trim();
+        if (trimmed && !trimmed.startsWith('#') && !trimmed.startsWith('<!--')) {
+          description = trimmed;
           break;
         }
       }
@@ -120,9 +104,8 @@ export async function parseRuleFile(
     }
   }
 
-  // --- Parse sections and examples ---
   let explanation = description;
-  const examples: Rule['examples'] = [];
+  const examples: CodeExample[] = [];
   const references: string[] = [];
 
   type ExampleSection = 'correct' | 'incorrect' | null;
@@ -132,51 +115,53 @@ export async function parseRuleFile(
   let codeBlockLanguage = 'bash';
   let codeBlockContent: string[] = [];
   let additionalText: string[] = [];
-  let currentExample: Rule['examples'][number] | null = null;
 
-  function flushExample() {
-    if (currentExample) {
-      if (additionalText.length > 0) {
-        currentExample.additionalText = additionalText.join('\n\n');
-        additionalText = [];
-      }
-      examples.push(currentExample);
-      currentExample = null;
-    }
+  let draftLabel = '';
+  let draftDescription: string | undefined;
+  let draftCode = '';
+  let draftLanguage = 'bash';
+
+  function flushExample(): void {
+    if (!draftLabel) return;
+    examples.push(
+      makeExample(
+        draftLabel,
+        draftCode,
+        draftLanguage,
+        draftDescription,
+        additionalText.length > 0 ? additionalText.join('\n\n') : undefined
+      )
+    );
+    draftLabel = '';
+    draftDescription = undefined;
+    draftCode = '';
+    draftLanguage = 'bash';
+    additionalText = [];
   }
 
   for (let i = titleLine + 1; i < ruleLines.length; i++) {
     const line = ruleLines[i];
-
-    // Skip HTML comments (e.g., <!-- @case-police-ignore -->)
+    if (line === undefined) continue;
     if (line.startsWith('<!--')) continue;
 
-    // Code block boundaries
     if (line.startsWith('```')) {
       if (inCodeBlock) {
-        // End of code block — save to current example
-        if (currentSection && currentExample) {
-          currentExample.code = codeBlockContent.join('\n');
-          currentExample.language = codeBlockLanguage;
+        if (currentSection && draftLabel) {
+          draftCode = codeBlockContent.join('\n');
+          draftLanguage = codeBlockLanguage;
         }
         codeBlockContent = [];
         inCodeBlock = false;
       } else {
-        // Start of code block
         inCodeBlock = true;
         codeBlockLanguage = line.slice(3).trim() || 'bash';
         codeBlockContent = [];
-
         if (currentSection) {
-          // Save previous example before starting a new code-based one
           flushExample();
-          const label = currentSection === 'correct' ? 'Correct' : 'Incorrect';
-          currentExample = {
-            label,
-            description: currentH3,
-            code: '',
-            language: codeBlockLanguage,
-          };
+          draftLabel = currentSection === 'correct' ? 'Correct' : 'Incorrect';
+          draftDescription = currentH3;
+          draftCode = '';
+          draftLanguage = codeBlockLanguage;
           currentH3 = undefined;
         }
       }
@@ -188,12 +173,12 @@ export async function parseRuleFile(
       continue;
     }
 
-    // H2 section headings
     if (line.startsWith('## ')) {
       flushExample();
-      const heading = line.replace(/^##\s+/, '').trim();
-      const headingLower = heading.toLowerCase();
-
+      const headingLower = line
+        .replace(/^##\s+/, '')
+        .trim()
+        .toLowerCase();
       if (headingLower.includes('correct usage') || headingLower.includes('correct use')) {
         currentSection = 'correct';
       } else if (
@@ -204,58 +189,45 @@ export async function parseRuleFile(
       ) {
         currentSection = 'incorrect';
       } else {
-        // Non-example section: reset section context
         currentSection = null;
         currentH3 = undefined;
       }
       continue;
     }
 
-    // H3 subheadings within example sections (become example descriptions)
     if (line.startsWith('### ') && currentSection) {
       flushExample();
       currentH3 = line.replace(/^###\s+/, '').trim();
       continue;
     }
 
-    // Legacy **Label:** pattern (backwards compatibility)
     const labelMatch = line.match(/^\*\*([^:]+?):\*?\*?$/);
     if (labelMatch && !currentSection) {
       flushExample();
-      const fullLabel = labelMatch[1].trim();
+      const fullLabel = (labelMatch[1] ?? '').trim();
       const descMatch = fullLabel.match(/^([A-Za-z]+(?:\s+[A-Za-z]+)*)\s*\(([^()]+)\)$/);
-      currentExample = {
-        label: descMatch ? descMatch[1].trim() : fullLabel,
-        description: descMatch ? descMatch[2].trim() : undefined,
-        code: '',
-        language: codeBlockLanguage,
-      };
+      draftLabel = descMatch ? (descMatch[1] ?? fullLabel).trim() : fullLabel;
+      draftDescription = descMatch ? (descMatch[2] ?? undefined) : undefined;
+      draftCode = '';
+      draftLanguage = codeBlockLanguage;
       continue;
     }
 
-    // Reference links
     if (line.startsWith('Reference:') || line.startsWith('References:')) {
       flushExample();
       const refMatches = line.match(/\[([^\]]+)\]\(([^)]+)\)/g);
       if (refMatches) {
         references.push(
-          ...refMatches.map((ref) => {
-            const m = ref.match(/\[([^\]]+)\]\(([^)]+)\)/);
-            return m ? m[2] : ref;
-          })
+          ...refMatches.map((ref) => ref.match(/\[([^\]]+)\]\(([^)]+)\)/)?.[2] ?? ref)
         );
       }
       continue;
     }
 
-    // Plain text
     if (line.trim() && !line.startsWith('#')) {
-      if (!currentSection && !currentExample) {
-        // Explanation content outside of example sections
-        if (!line.startsWith('<!--')) {
-          explanation += (explanation ? '\n\n' : '') + line;
-        }
-      } else if (currentExample) {
+      if (!currentSection && !draftLabel) {
+        if (!line.startsWith('<!--')) explanation += (explanation ? '\n\n' : '') + line;
+      } else if (draftLabel) {
         additionalText.push(line);
       }
     }
@@ -263,79 +235,75 @@ export async function parseRuleFile(
 
   flushExample();
 
-  // --- Determine section number ---
-  const ruleType = frontmatter.type as RuleType | undefined;
+  const ruleType = frontmatter['type'] as RuleType | undefined;
   const effectiveSectionMap = sectionMap ?? { capability: 1, efficiency: 2 };
-
   let section = 0;
 
-  // 1. Use type frontmatter against sectionMap (for non-frontend skills)
-  if (ruleType && effectiveSectionMap[ruleType] !== undefined) {
-    section = effectiveSectionMap[ruleType];
+  if (ruleType !== undefined) {
+    section = effectiveSectionMap[ruleType] ?? 0;
   }
 
-  // 2. Use subdirectory prefix (for nextdns-frontend nested rules)
   if (section === 0 && relativePath) {
     const parts = relativePath.replace(/\\/g, '/').split('/');
     if (parts.length > 1) {
-      // Try longest prefix first from directory components
-      for (let len = parts.length - 1; len > 0; len--) {
+      outer: for (let len = parts.length - 1; len > 0; len--) {
         const prefix = parts.slice(0, len).join('/');
         if (effectiveSectionMap[prefix] !== undefined) {
-          section = effectiveSectionMap[prefix];
-          break;
+          section = effectiveSectionMap[prefix] ?? 0;
+          break outer;
         }
-        // Try last component only (e.g., "nextjs" from "nextjs/api-proxy.md")
         const dirName = parts[len - 1];
-        if (effectiveSectionMap[dirName] !== undefined) {
-          section = effectiveSectionMap[dirName];
-          break;
+        if (dirName !== undefined && effectiveSectionMap[dirName] !== undefined) {
+          section = effectiveSectionMap[dirName] ?? 0;
+          break outer;
         }
       }
     }
   }
 
-  // 3. Fall back to filename prefix matching
   if (section === 0) {
     const filename = basename(filePath);
     const filenameParts = filename.replace('.md', '').split('-');
     for (let len = filenameParts.length; len > 0; len--) {
       const prefix = filenameParts.slice(0, len).join('-');
       if (effectiveSectionMap[prefix] !== undefined) {
-        section = effectiveSectionMap[prefix];
+        section = effectiveSectionMap[prefix] ?? 0;
         break;
       }
     }
   }
 
-  // 4. Use frontmatter section override
-  if (frontmatter.section) {
-    section = Number(frontmatter.section) || section;
-  }
+  if (frontmatter['section']) section = Number(frontmatter['section']) || section;
 
   const validImpacts: ImpactLevel[] = ['HIGH', 'MEDIUM', 'LOW'];
-  const rawImpact = (frontmatter.impact as string | undefined) || 'MEDIUM';
+  const rawImpact = (frontmatter['impact'] as string | undefined) ?? 'MEDIUM';
   const impact: ImpactLevel = validImpacts.includes(rawImpact as ImpactLevel)
     ? (rawImpact as ImpactLevel)
     : 'MEDIUM';
 
+  const impactDescription = (frontmatter['impactDescription'] as string | undefined) ?? '';
+
+  const rawTags = frontmatter['tags'];
+  const tags: string[] | undefined = Array.isArray(rawTags)
+    ? (rawTags as unknown[]).filter((t): t is string => typeof t === 'string')
+    : typeof rawTags === 'string'
+      ? (rawTags as string).split(',').map((t: string) => t.trim())
+      : undefined;
+
+  // With exactOptionalPropertyTypes, we must omit optional props instead of
+  // assigning undefined to them. Use conditional spread for all optional fields.
   const rule: Rule = {
     id: '',
-    title: (frontmatter.title as string | undefined) || title,
+    title: (frontmatter['title'] as string | undefined) ?? title,
     section,
-    subsection: undefined,
-    type: ruleType,
     impact,
-    impactDescription: (frontmatter.impactDescription as string | undefined) || '',
+    impactDescription,
     explanation: explanation.trim(),
     examples,
     references,
-    tags: Array.isArray(frontmatter.tags)
-      ? (frontmatter.tags as unknown[]).filter((t): t is string => typeof t === 'string')
-      : typeof frontmatter.tags === 'string'
-        ? (frontmatter.tags as string).split(',').map((t: string) => t.trim())
-        : undefined,
+    ...(ruleType !== undefined ? { type: ruleType } : {}),
+    ...(tags !== undefined ? { tags } : {}),
   };
 
-  return { section, subsection: 0, rule };
+  return { section, rule };
 }

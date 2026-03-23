@@ -1,7 +1,7 @@
 ---
 name: nextdns-frontend
 description:
-  Frontend integration for the NextDNS API using Nuxt 4, Next.js, Astro, SvelteKit, or React Router
+  Frontend integration for the NextDNS API using Nuxt 4, Next.js 15, Astro, SvelteKit, or React Router
   v7. This skill covers secure API key proxying via the BFF pattern, profile management UI,
   real-time SSE log streaming, analytics chart data preparation, and error handling. Use this skill
   when building a custom NextDNS dashboard or management interface with any popular full-stack
@@ -10,7 +10,7 @@ description:
 license: MIT
 metadata:
   author: tuanductran
-  version: '1.0.0'
+  version: '1.0.1'
 ---
 
 <!-- @case-police-ignore Api -->
@@ -32,6 +32,7 @@ Patterns for Nuxt 4 (Vue) projects.
 | [logs-streaming](rules/nuxt/logs-streaming.md)               | logs, streaming, sse, event source, real-time, server-sent events | Proxy and consume the NextDNS SSE log stream         |
 | [analytics-charts](rules/nuxt/analytics-charts.md)           | analytics, charts, time series, dashboard, visualization          | Fetch and render analytics and time-series data      |
 | [error-handling](rules/nuxt/error-handling.md)               | error handling, notifications, toast, createError, api errors     | Map NextDNS API errors to Nuxt UI notifications      |
+| [tanstack-query](rules/nuxt/tanstack-query.md)               | tanstack query, vue query, cache, mutation, optimistic, infinite  | Advanced data fetching with Vue Query and cache invalidation |
 
 ## Next.js rules
 
@@ -45,6 +46,7 @@ Patterns for Next.js 15 (React) projects using the App Router.
 | [logs-streaming](rules/nextjs/logs-streaming.md)               | logs, streaming, sse, readable stream, real-time, server-sent    | Proxy and consume the NextDNS SSE log stream           |
 | [analytics-charts](rules/nextjs/analytics-charts.md)           | analytics, charts, time series, dashboard, server component      | Fetch and render analytics and time-series data        |
 | [error-handling](rules/nextjs/error-handling.md)               | error handling, error boundary, next response, toast, api errors | Map NextDNS API errors to React/Next.js error UI       |
+| [tanstack-query](rules/nextjs/tanstack-query.md)               | tanstack query v5, react query, hydration, prefetch, infinite    | Prefetch in Server Components and mutate in Client Components |
 
 ## Astro rules
 
@@ -58,6 +60,7 @@ Patterns for Astro (React islands) projects.
 | [logs-streaming](rules/astro/logs-streaming.md)               | logs, streaming, sse, readable stream, real-time, client:only        | Proxy and consume the NextDNS SSE log stream               |
 | [analytics-charts](rules/astro/analytics-charts.md)           | analytics, charts, time series, dashboard, react island, swr         | Fetch and render analytics and time-series data            |
 | [error-handling](rules/astro/error-handling.md)               | error handling, error page, astro actions, api errors, react island  | Map NextDNS API errors to Astro pages and React islands    |
+| [server-islands](rules/astro/server-islands.md)               | server islands, server:defer, lazy load, performance, astro 5        | Lazy-load analytics panels with Astro 5 Server Islands     |
 
 ## SvelteKit rules
 
@@ -71,6 +74,7 @@ Patterns for SvelteKit (Svelte 5) projects.
 | [logs-streaming](rules/sveltekit/logs-streaming.md)               | logs, streaming, sse, event source, real-time, readable stream     | Proxy and consume the NextDNS SSE log stream              |
 | [analytics-charts](rules/sveltekit/analytics-charts.md)           | analytics, charts, time series, dashboard, visualization           | Fetch and render analytics and time-series data           |
 | [error-handling](rules/sveltekit/error-handling.md)               | error handling, +error.svelte, error(), fail(), api errors         | Map NextDNS API errors to SvelteKit error boundaries      |
+| [websocket-alternative](rules/sveltekit/websocket-alternative.md) | polling, long-polling, cloudflare, edge, sse fallback, interval    | Polling-based log fetching for platforms without SSE      |
 
 ## React router v7 rules
 
@@ -84,6 +88,7 @@ Patterns for React Router v7 (formerly Remix) projects.
 | [logs-streaming](rules/react-router/logs-streaming.md)               | logs, streaming, sse, resource route, readable stream, real-time     | Proxy and consume the NextDNS SSE log stream                |
 | [analytics-charts](rules/react-router/analytics-charts.md)           | analytics, charts, time series, dashboard, loader, recharts          | Fetch and render analytics and time-series data             |
 | [error-handling](rules/react-router/error-handling.md)               | error handling, ErrorBoundary, loader errors, action errors, api     | Map NextDNS API errors to React Router error boundaries     |
+| [data-revalidation](rules/react-router/data-revalidation.md)         | shouldRevalidate, fetcher, defer, await, revalidation, performance   | Control loader revalidation and background mutations        |
 
 ## Related skills
 
@@ -101,3 +106,4 @@ Patterns for React Router v7 (formerly Remix) projects.
 - [React Router v7 Documentation](https://reactrouter.com/start/framework/installation)
 - [NextDNS API Reference](https://nextdns.github.io/api/)
 - [VueUse](https://vueuse.org)
+- [TanStack Query](https://tanstack.com/query/latest)

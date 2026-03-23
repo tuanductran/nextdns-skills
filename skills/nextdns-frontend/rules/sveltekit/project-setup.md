@@ -34,9 +34,9 @@ run and API key security is broken.
 
 ```bash
 # ✅ Bootstrap with TypeScript enabled
-npx sv create my-nextdns-app
+pnpm dlx sv create my-nextdns-app
 cd my-nextdns-app
-npm install
+pnpm install
 ```
 
 When prompted: select **SvelteKit minimal** template and enable **TypeScript**.
@@ -45,7 +45,7 @@ When prompted: select **SvelteKit minimal** template and enable **TypeScript**.
 
 ```bash
 # ✅ Node.js adapter (for self-hosted / Docker deployments)
-npm install --save-dev @sveltejs/adapter-node
+pnpm add -D @sveltejs/adapter-node
 ```
 
 ### `Svelte.config.js`
@@ -109,7 +109,7 @@ import { NEXTDNS_API_KEY } from '$env/static/private';
 
 ```bash
 # ❌ Do NOT use adapter-static — it generates a pure static site with no server routes
-npm install @sveltejs/adapter-static
+pnpm add @sveltejs/adapter-static
 ```
 
 ```javascript

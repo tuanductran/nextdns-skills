@@ -10,8 +10,6 @@ tags:
   - mobile
   - android
   - ios
-  - iphone
-  - ipad
   - private-dns
   - dot
   - dns-over-tls

@@ -1,0 +1,52 @@
+name: Quality Checks
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'skills/**/rules/**/*.md'
+      - 'packages/**'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'skills/**/rules/**/*.md'
+      - 'packages/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.node-version'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Check duplicate rule titles and tag sets
+        run: pnpm check-duplicates
+
+      - name: Check tag hygiene
+        run: pnpm check-tags
+
+      - name: Print skill statistics
+        run: pnpm stats

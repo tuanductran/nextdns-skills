@@ -11,7 +11,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath } from 'url';
 import { walkDir } from './utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -74,9 +74,9 @@ function checkMissingReferences(
   skillContent: string
 ): boolean {
   let errorsFound = false;
-  const referencedRules = [...skillContent.matchAll(/\[.*?\]\(rules\/(.*?\.md)\)/g)].map(
-    (m) => m[1]
-  );
+  const referencedRules = [...skillContent.matchAll(/\[.*?\]\(rules\/(.*?\.md)\)/g)]
+    .map((m) => m[1] ?? '')
+    .filter(Boolean);
 
   for (const ruleRef of referencedRules) {
     const rulePath = path.join(rulesDir, ruleRef);
@@ -108,7 +108,7 @@ function validateFieldValues(file: string, frontmatter: string): boolean {
 
   const impactMatch = frontmatter.match(/^impact:\s*(.*)/m);
   if (impactMatch) {
-    const impact = impactMatch[1].trim();
+    const impact = (impactMatch[1] ?? '').trim();
     if (!VALID_IMPACTS.includes(impact as ImpactLevel)) {
       printError(
         `Invalid impact in ${file}: '${impact}'. Must be one of: ${VALID_IMPACTS.join(', ')}`
@@ -119,7 +119,7 @@ function validateFieldValues(file: string, frontmatter: string): boolean {
 
   const typeMatch = frontmatter.match(/^type:\s*(.*)/m);
   if (typeMatch) {
-    const type = typeMatch[1].trim();
+    const type = (typeMatch[1] ?? '').trim();
     if (!VALID_TYPES.includes(type as RuleType)) {
       printError(`Invalid type in ${file}: '${type}'. Must be one of: ${VALID_TYPES.join(', ')}`);
       errorsFound = true;
@@ -191,9 +191,11 @@ function validateFrontmatter(): boolean {
       continue;
     }
 
-    if (validateRequiredFields(file, parts[1])) totalErrors++;
-    if (validateFieldValues(file, parts[1])) totalErrors++;
-    if (validateContentStructure(file, parts[2])) totalErrors++;
+    const frontmatter = parts[1] ?? '';
+    const body = parts[2] ?? '';
+    if (validateRequiredFields(file, frontmatter)) totalErrors++;
+    if (validateFieldValues(file, frontmatter)) totalErrors++;
+    if (validateContentStructure(file, body)) totalErrors++;
   }
   return totalErrors === 0;
 }

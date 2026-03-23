@@ -8,7 +8,7 @@ description:
 license: MIT
 metadata:
   author: tuanductran
-  version: '1.0.0'
+  version: '1.0.1'
 ---
 
 <!-- @case-police-ignore Api -->
@@ -37,6 +37,8 @@ metadata:
 | [nested-endpoints](rules/nested-endpoints.md)       | nested objects, child endpoints, PATCH, DELETE                             | Work with nested endpoints    |
 | [rewrites](rules/rewrites.md)                       | rewrites, dns records, custom dns, hostname override, cname                | Manage DNS rewrite records    |
 | [settings](rules/settings.md)                       | settings, logs, log retention, log location, cache boost, cname flattening | Manage profile settings       |
+| [account-management](rules/account-management.md)   | account, profiles list, profile enumeration, ownership, plan               | Retrieve account info and all profiles |
+| [profile-copy](rules/profile-copy.md)               | copy profile, clone profile, duplicate, backup, migration                  | Clone an existing profile to a new one |
 
 ## Efficiency rules
 
@@ -44,3 +46,4 @@ metadata:
 | ------------------------------------------- | -------------------------------------- | ------------------- |
 | [response-format](rules/response-format.md) | data, meta, errors, response structure | Parse API responses |
 | [logs-download](rules/logs-download.md)     | download logs, export logs, redirect   | Download log files  |
+| [rate-limiting](rules/rate-limiting.md)     | rate limit, 429, retry, backoff, resilience, exponential | Retry transient API errors with backoff |

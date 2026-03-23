@@ -103,7 +103,7 @@ export default function AnalyticsPage({ loaderData }: Route.ComponentProps) {
 ### Install recharts
 
 ```bash
-npm install recharts
+pnpm add recharts
 ```
 
 ## Do NOT Use

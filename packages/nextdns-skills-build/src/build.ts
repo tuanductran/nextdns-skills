@@ -3,17 +3,18 @@
  * Build script to compile individual rule files into AGENTS.md
  */
 
-import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { DEFAULT_SKILL, SKILLS, type SkillConfig } from './config.js';
 import { parseRuleFile, type RuleFile } from './parser.js';
+import { collectRuleFiles } from './utils.js';
 import type { Section } from './types.js';
 
 // Parse command line arguments
 const args = process.argv.slice(2);
 const upgradeVersion = args.includes('--upgrade-version');
 const skillArg = args.find((arg) => arg.startsWith('--skill='));
-const skillName = skillArg ? skillArg.split('=')[1] : null;
+const skillName = skillArg ? (skillArg.split('=')[1] ?? null) : null;
 const buildAll = args.includes('--all');
 
 /**
@@ -21,8 +22,8 @@ const buildAll = args.includes('--all');
  */
 function incrementVersion(version: string): string {
   const parts = version.split('.').map(Number);
-  // Increment the last part
-  parts[parts.length - 1]++;
+  const last = parts[parts.length - 1];
+  if (last !== undefined) parts[parts.length - 1] = last + 1;
   return parts.join('.');
 }
 
@@ -36,7 +37,7 @@ function generateMarkdown(
     organization: string;
     date: string;
     abstract: string;
-    references?: string[];
+    references?: { title: string; url: string }[];
   },
   skillConfig: SkillConfig
 ): string {
@@ -119,34 +120,11 @@ function generateMarkdown(
   if (metadata.references && metadata.references.length > 0) {
     md += `## References\n\n`;
     metadata.references.forEach((ref, i) => {
-      md += `${i + 1}. [${ref}](${ref})\n`;
+      md += `${i + 1}. [${ref.title}](${ref.url})\n`;
     });
   }
 
   return md;
-}
-
-/**
- * Recursively collect all .md rule files under a directory.
- * Excludes files starting with '_' and README.md.
- */
-async function collectRuleFiles(dir: string): Promise<string[]> {
-  const entries = await readdir(dir, { withFileTypes: true });
-  const files: string[] = [];
-  for (const entry of entries) {
-    const fullPath = join(dir, entry.name);
-    if (entry.isDirectory()) {
-      const nested = await collectRuleFiles(fullPath);
-      files.push(...nested);
-    } else if (
-      entry.name.endsWith('.md') &&
-      !entry.name.startsWith('_') &&
-      entry.name !== 'README.md'
-    ) {
-      files.push(fullPath);
-    }
-  }
-  return files.sort();
 }
 
 /**
@@ -296,7 +274,13 @@ async function build() {
       await buildSkill(skill);
     } else {
       // Build default skill (backwards compatibility)
-      await buildSkill(SKILLS[DEFAULT_SKILL]);
+      const defaultSkill = SKILLS[DEFAULT_SKILL];
+      if (!defaultSkill) {
+        console.error(`Unknown default skill: ${DEFAULT_SKILL}`);
+        console.error(`Available skills: ${Object.keys(SKILLS).join(', ')}`);
+        process.exit(1);
+      }
+      await buildSkill(defaultSkill);
     }
 
     console.log('\n✓ Build complete');

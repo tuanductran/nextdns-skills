@@ -6,6 +6,19 @@
       "inputs": ["src/**", "tsup.config.ts"],
       "outputs": ["dist/**"]
     },
+    "lint": {
+      "dependsOn": ["build"],
+      "inputs": ["src/**"],
+      "outputs": []
+    },
+    "test": {
+      "inputs": ["src/**", "vitest.config.ts"],
+      "outputs": []
+    },
+    "test:coverage": {
+      "inputs": ["src/**", "vitest.config.ts"],
+      "outputs": ["coverage/**"]
+    },
     "dev": {
       "dependsOn": ["^build"],
       "cache": false,

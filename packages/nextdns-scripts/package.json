@@ -1,16 +1,29 @@
 {
   "name": "nextdns-skills-scripts",
   "version": "1.0.0",
-  "description": "Maintenance scripts for NextDNS Skills: validate rule integrity and sync rule counts",
+  "description": "Maintenance scripts for NextDNS Skills: validate rule integrity, sync counts, check duplicates/tags, and generate stats",
   "type": "module",
-  "bin": {
-    "nextdns-skills-scripts": "./bin/cli.js"
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
   },
   "scripts": {
     "build": "tsup",
-    "validate-rules": "node bin/cli.js validate-rules",
-    "update-counts": "node bin/cli.js update-counts",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "types:check": "tsc --noEmit",
+    "prepublishOnly": "pnpm build",
+    "validate-rules": "node dist/validate-rules.js",
+    "update-counts": "node dist/update-counts.js",
+    "check-duplicates": "node dist/check-duplicates.js",
+    "check-tags": "node dist/check-tags.js",
+    "generate-stats": "node dist/generate-stats.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "nextdns",
@@ -22,7 +35,9 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^25.5.0",
-    "tsup": "^8.0.0",
-    "typescript": "^5.0.0"
+    "@vitest/coverage-v8": "^4.1.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.0"
   }
 }

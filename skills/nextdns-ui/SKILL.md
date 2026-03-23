@@ -7,7 +7,7 @@ description:
 license: MIT
 metadata:
   author: tuanductran
-  version: '1.0.0'
+  version: '1.0.1'
 ---
 
 # NextDNS web UI skills
@@ -20,11 +20,13 @@ metadata:
 | [privacy-settings](rules/privacy-settings.md)                 | blocklists, Hagezi, OISD, native tracking, privacy         | Manage privacy and ad-blocking lists      |
 | [parental-control](rules/parental-control.md)                 | apps and games, categories, recreation time, restricted mode | Set up restrictions for family members    |
 | [ddns-settings](rules/ddns-settings.md)                       | linked ip, ddns, noip, dynamic dns, router                 | Manage network IP linking and dynamic DNS |
-| [denylist-allowlist](rules/denylist-allowlist.md)             | block domain, allow domain, whitelist, fixing breakage     | Manually manage domain accessibility      |
+| [denylist-allowlist](rules/denylist-allowlist.md)             | block domain, allow domain, allowlist, fixing breakage     | Manually manage domain accessibility      |
 | [analytics-logs](rules/analytics-logs.md)                     | monitoring, logs, blocked queries, identifier              | Monitor network activity and troubleshoot |
 | [configuration-management](rules/configuration-management.md) | profile name, log location, performance, cache boost       | Manage profile global settings            |
 | [web3-settings](rules/web3-settings.md)                       | web3, blockchain, ens, unstoppable domains                 | Enable resolution for blockchain domains  |
 | [rewrites](rules/rewrites.md)                                 | rewrites, custom dns, hostname override, local dns, cname  | Override DNS resolution for hostnames     |
+| [root-ca-installation](rules/root-ca-installation.md)         | root ca, certificate, block page, https, ssl, windows, macos, ios, android | Install Root CA to enable HTTPS block pages |
+| [device-management](rules/device-management.md)               | devices, client identification, device names, linked ip, doh, dot | Identify and manage devices in the dashboard |
 
 ## Efficiency rules
 
@@ -34,3 +36,4 @@ metadata:
 | [recommended-settings](rules/recommended-settings.md) | guidelines, best practices, optimization, basics     | Optimal settings based on NextDNS-Config   |
 | [setup-optimization](rules/setup-optimization.md)     | cache boost, cname flattening, performance           | Optimize DNS performance                   |
 | [troubleshooting-ui](rules/troubleshooting-ui.md)     | log inspection, reload logs, identification          | Troubleshoot false positives via dashboard |
+| [multiple-profiles-strategy](rules/multiple-profiles-strategy.md) | profiles, strategy, family, router, segmentation, multi-device | Organise profiles per device category |

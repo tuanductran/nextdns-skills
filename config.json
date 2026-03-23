@@ -18,7 +18,33 @@
   ],
   "httpHeaders": [
     {
-      "urls": ["https://github.com/", "https://help.nextdns.io/"],
+      "urls": [
+        "https://github.com/",
+        "https://help.nextdns.io/",
+        "https://nextdns.github.io/",
+        "https://my.nextdns.io/",
+        "https://nextdns.io/",
+        "https://docs.gl-inet.com/",
+        "https://forum.gl-inet.com/",
+        "https://docs.jamf.com/",
+        "https://learn.microsoft.com/",
+        "https://developer.apple.com/",
+        "https://developer.mozilla.org/",
+        "https://www.raspberrypi.com/",
+        "https://www.freedesktop.org/",
+        "https://tanstack.com/",
+        "https://reactrouter.com/",
+        "https://kit.svelte.dev/",
+        "https://nuxt.com/",
+        "https://docs.astro.build/",
+        "https://developers.cloudflare.com/",
+        "https://hub.docker.com/",
+        "https://docs.docker.com/",
+        "https://docs.pi-hole.net/",
+        "https://support.apple.com/",
+        "https://www.snbforums.com/",
+        "https://x.com/"
+      ],
       "headers": {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
       }

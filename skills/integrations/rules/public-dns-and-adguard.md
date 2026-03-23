@@ -12,7 +12,6 @@ tags:
   - anycast
   - doh
   - dot
-  - browser setup
   - windows
   - android
   - ios

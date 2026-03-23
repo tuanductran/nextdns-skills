@@ -1,0 +1,100 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'packages/**'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'packages/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Vitest — ${{ matrix.package }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - package: nextdns-scripts
+            dir: packages/nextdns-scripts
+          - package: nextdns-skills-build
+            dir: packages/nextdns-skills-build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.node-version'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Run tests
+        working-directory: ${{ matrix.dir }}
+        run: pnpm test
+
+  coverage:
+    name: Coverage Report
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: test
+    permissions:
+      contents: read
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.node-version'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Coverage — nextdns-scripts
+        working-directory: packages/nextdns-scripts
+        run: pnpm test:coverage
+
+      - name: Coverage — nextdns-skills-build
+        working-directory: packages/nextdns-skills-build
+        run: pnpm test:coverage
+
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-reports
+          path: |
+            packages/nextdns-scripts/coverage/
+            packages/nextdns-skills-build/coverage/
+          retention-days: 7

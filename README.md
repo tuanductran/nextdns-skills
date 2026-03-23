@@ -12,7 +12,7 @@ management.
 ### ⚙️ Installation
 
 ```bash
-npx skills add tuanductran/nextdns-skills
+pnpm dlx skills add tuanductran/nextdns-skills
 ```
 
 ### 💡 Usage
@@ -29,11 +29,11 @@ use nextdns skill, <your request here>
 
 | Category                                                 | Rules  | Focus                                                                            |
 | :------------------------------------------------------- | :----: | :------------------------------------------------------------------------------- |
-| [**NextDNS API**](skills/nextdns-api/SKILL.md)           | **20** | Authentication, Profile management, Analytics, and Logs.                         |
-| [**NextDNS CLI**](skills/nextdns-cli/SKILL.md)           | **21** | Installation, system-wide configuration, and client monitoring.                  |
-| [**NextDNS Web UI**](skills/nextdns-ui/SKILL.md)         | **13** | Strategic configuration, content filtering, and security modeling.               |
-| [**Integrations**](skills/integrations/SKILL.md)         | **15** | Third-party platform connectivity (OpenWrt, pfSense, Tailscale, and more).       |
-| [**NextDNS Frontend**](skills/nextdns-frontend/SKILL.md) | **30** | Nuxt, Next.js, Astro, SvelteKit, and React Router: BFF proxy, profile UI, SSE logs, analytics. |
+| [**NextDNS API**](skills/nextdns-api/SKILL.md)           | **23** | Authentication, Profile management, Analytics, and Logs.                         |
+| [**NextDNS CLI**](skills/nextdns-cli/SKILL.md)           | **24** | Installation, system-wide configuration, and client monitoring.                  |
+| [**NextDNS Web UI**](skills/nextdns-ui/SKILL.md)         | **16** | Strategic configuration, content filtering, and security modeling.               |
+| [**Integrations**](skills/integrations/SKILL.md)         | **20** | Third-party platform connectivity (OpenWrt, pfSense, Tailscale, and more).       |
+| [**NextDNS Frontend**](skills/nextdns-frontend/SKILL.md) | **35** | Nuxt, Next.js, Astro, SvelteKit, and React Router: BFF proxy, profile UI, SSE logs, analytics. |
 
 ---
 
@@ -55,17 +55,26 @@ AI agents.
 
 ### Quick commands
 
-| Task                     | Command               |
-| :----------------------- | :-------------------- |
-| **Setup**                | `pnpm install`        |
-| **Auto-Format Code**     | `pnpm run format`     |
-| **Full Quality Check**   | `pnpm lint`           |
-| **Fix Formatting/Terms** | `pnpm lint:fix`       |
-| **Check Rule Logic**     | `pnpm lint:rules`     |
-| **Check Syntax**         | `pnpm lint:syntax`    |
-| **Check Broken Links**   | `pnpm lint:links`     |
-| **Build All Skills**     | `pnpm build:skills`   |
-| **Sync Rule Counts**     | `pnpm update-counts`  |
+| Task                          | Command                          |
+| :---------------------------- | :------------------------------- |
+| **Setup**                     | `pnpm install`                   |
+| **Auto-Format Code**          | `pnpm run format`                |
+| **TypeScript Type Check**     | `pnpm types:check`               |
+| **Full Quality Check**        | `pnpm lint`                      |
+| **Fix Issues (incl. TS)**     | `pnpm lint:fix`                  |
+| **Check Rule Logic**          | `pnpm lint:rules`                |
+| **Check Syntax**              | `pnpm lint:syntax`               |
+| **Check Broken Links**        | `pnpm lint:links`                |
+| **Check Duplicate Titles**    | `pnpm check-duplicates`          |
+| **Check Tag Hygiene**         | `pnpm check-tags`                |
+| **Quality Checks (all)**      | `pnpm lint:quality`              |
+| **Build All Skills**          | `pnpm build:skills`              |
+| **Sync Rule Counts**          | `pnpm update-counts`             |
+| **Statistics Report**         | `pnpm stats`                     |
+| **Search Rules**              | `pnpm rule-search -- --query=<text>` |
+| **Export Rules (JSON/CSV)**   | `pnpm rule-export -- --format=csv`   |
+| **Run Tests**                 | `pnpm test`                          |
+| **Run Tests (coverage)**      | `pnpm test:coverage`                 |
 
 ### Adding new rules
 

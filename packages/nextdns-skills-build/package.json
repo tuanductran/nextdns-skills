@@ -1,27 +1,48 @@
 {
   "name": "nextdns-skills-build",
   "version": "1.0.0",
-  "description": "Build tooling for NextDNS Skills (API, CLI, UI, Integrations, Frontend)",
+  "description": "Build tooling for NextDNS Skills: build AGENTS.md, validate, scaffold rules, search, and export",
   "type": "module",
-  "bin": {
-    "nextdns-skills-build": "./bin/cli.js"
-  },
+  "files": [
+    "dist"
+  ],
   "exports": {
-    ".": "./bin/cli.js"
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./build": {
+      "import": "./dist/build.js"
+    },
+    "./validate": {
+      "import": "./dist/validate.js"
+    },
+    "./search": {
+      "import": "./dist/search.js"
+    },
+    "./export": {
+      "import": "./dist/export.js"
+    }
   },
   "scripts": {
     "build": "tsup",
-    "build-agents": "node bin/cli.js build",
-    "build-all": "node bin/cli.js build --all",
-    "build-api": "node bin/cli.js build --skill=nextdns-api",
-    "build-cli": "node bin/cli.js build --skill=nextdns-cli",
-    "build-ui": "node bin/cli.js build --skill=nextdns-ui",
-    "build-integrations": "node bin/cli.js build --skill=integrations",
-    "build-frontend": "node bin/cli.js build --skill=nextdns-frontend",
-    "validate": "node bin/cli.js validate",
-    "extract-tests": "node bin/cli.js extract-tests",
-    "migrate": "node bin/cli.js migrate",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "types:check": "tsc --noEmit",
+    "prepublishOnly": "pnpm build",
+    "build-agents": "node dist/build.js",
+    "build-all": "node dist/build.js --all",
+    "build-api": "node dist/build.js --skill=nextdns-api",
+    "build-cli": "node dist/build.js --skill=nextdns-cli",
+    "build-ui": "node dist/build.js --skill=nextdns-ui",
+    "build-integrations": "node dist/build.js --skill=integrations",
+    "build-frontend": "node dist/build.js --skill=nextdns-frontend",
+    "validate": "node dist/validate.js",
+    "extract-tests": "node dist/extract-tests.js",
+    "migrate": "node dist/migrate.js",
+    "search": "node dist/search.js",
+    "export": "node dist/export.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "nextdns",
@@ -34,7 +55,9 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^25.5.0",
-    "tsup": "^8.0.0",
-    "typescript": "^5.0.0"
+    "@vitest/coverage-v8": "^4.1.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.0"
   }
 }
