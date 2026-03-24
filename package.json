@@ -75,7 +75,7 @@
     "markdown-link-check": "^3.14.2",
     "markdownlint-cli": "^0.48.0",
     "turbo": "^2.8.20",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.0"
   },
   "pnpm": {
     "overrides": {
