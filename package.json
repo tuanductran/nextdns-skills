@@ -73,7 +73,7 @@
     "@types/node": "^25.5.0",
     "case-police": "^2.2.0",
     "markdown-link-check": "^3.14.2",
-    "markdownlint-cli": "^0.48.0",
+    "markdownlint-cli": "^0.49.0",
     "turbo": "^2.8.20",
     "typescript": "^6.0.0"
   },
