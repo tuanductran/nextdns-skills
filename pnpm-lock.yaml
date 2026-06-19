@@ -16,7 +16,7 @@ importers:
         version: 2.5.0
       '@types/node':
         specifier: ^25.5.0
-        version: 25.9.1
+        version: 25.9.4
       case-police:
         specifier: ^2.2.0
         version: 2.2.1
@@ -37,7 +37,7 @@ importers:
     devDependencies:
       '@types/node':
         specifier: ^25.5.0
-        version: 25.9.1
+        version: 25.9.4
       '@vitest/coverage-v8':
         specifier: ^4.1.0
         version: 4.1.9(vitest@4.1.9)
@@ -49,13 +49,13 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.9(@types/node@25.9.1)(@vitest/coverage-v8@4.1.9)(vite@8.0.13(@types/node@25.9.1)(esbuild@0.27.7))
+        version: 4.1.9(@types/node@25.9.4)(@vitest/coverage-v8@4.1.9)(vite@8.0.13(@types/node@25.9.4)(esbuild@0.27.7))
 
   packages/nextdns-skills-build:
     devDependencies:
       '@types/node':
         specifier: ^25.5.0
-        version: 25.9.1
+        version: 25.9.4
       '@vitest/coverage-v8':
         specifier: ^4.1.0
         version: 4.1.9(vitest@4.1.9)
@@ -67,7 +67,7 @@ importers:
         version: 6.0.3
       vitest:
         specifier: ^4.1.0
-        version: 4.1.9(@types/node@25.9.1)(@vitest/coverage-v8@4.1.9)(vite@8.0.13(@types/node@25.9.1)(esbuild@0.27.7))
+        version: 4.1.9(@types/node@25.9.4)(@vitest/coverage-v8@4.1.9)(vite@8.0.13(@types/node@25.9.4)(esbuild@0.27.7))
 
 packages:
 
@@ -648,8 +648,8 @@ packages:
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
 
-  '@types/node@25.9.1':
-    resolution: {integrity: sha512-xfrlY7UD5rMJk3ZVJP8BNzS28J36YJg+xp+LPXV1TdWxr8uMH5A860QNxYDGQe/ylDSgjxE52Q9VnO7p75tJxg==}
+  '@types/node@25.9.4':
+    resolution: {integrity: sha512-dszCsrKb5U7ZsVZBWiHFklTloVl0mSEnWH/iZXfZUlI4rzCUnsvGmgqfuVRHL54ugE7/wRuxEIXRa2iMZ+BG6g==}
 
   '@types/unist@2.0.11':
     resolution: {integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA==}
@@ -1255,8 +1255,8 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
-  nanoid@3.3.12:
-    resolution: {integrity: sha512-ZB9RH/39qpq5Vu6Y+NmUaFhQR6pp+M2Xt76XBnEwDaGcVAqhlvxrl3B2bKS5D3NH3QR76v3aSrKaF/Kiy7lEtQ==}
+  nanoid@3.3.13:
+    resolution: {integrity: sha512-sPdqC6ByMVVGvF1ynvvMo0/o+oD1VX7DaHhijt1bFgjvBkHBib4t49GoNDhf2NDta4oeUNlaGbSt5K7qjZ955Q==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -1994,7 +1994,7 @@ snapshots:
 
   '@types/ms@2.1.0': {}
 
-  '@types/node@25.9.1':
+  '@types/node@25.9.4':
     dependencies:
       undici-types: 7.24.6
 
@@ -2012,7 +2012,7 @@ snapshots:
       obug: 2.1.3
       std-env: 4.1.0
       tinyrainbow: 3.1.0
-      vitest: 4.1.9(@types/node@25.9.1)(@vitest/coverage-v8@4.1.9)(vite@8.0.13(@types/node@25.9.1)(esbuild@0.27.7))
+      vitest: 4.1.9(@types/node@25.9.4)(@vitest/coverage-v8@4.1.9)(vite@8.0.13(@types/node@25.9.4)(esbuild@0.27.7))
 
   '@vitest/expect@4.1.9':
     dependencies:
@@ -2023,13 +2023,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.9(vite@8.0.13(@types/node@25.9.1)(esbuild@0.27.7))':
+  '@vitest/mocker@4.1.9(vite@8.0.13(@types/node@25.9.4)(esbuild@0.27.7))':
     dependencies:
       '@vitest/spy': 4.1.9
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.0.13(@types/node@25.9.1)(esbuild@0.27.7)
+      vite: 8.0.13(@types/node@25.9.4)(esbuild@0.27.7)
 
   '@vitest/pretty-format@4.1.9':
     dependencies:
@@ -2718,7 +2718,7 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  nanoid@3.3.12: {}
+  nanoid@3.3.13: {}
 
   needle@3.5.0:
     dependencies:
@@ -2803,7 +2803,7 @@ snapshots:
 
   postcss@8.5.15:
     dependencies:
-      nanoid: 3.3.12
+      nanoid: 3.3.13
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -3031,7 +3031,7 @@ snapshots:
 
   validator@13.15.35: {}
 
-  vite@8.0.13(@types/node@25.9.1)(esbuild@0.27.7):
+  vite@8.0.13(@types/node@25.9.4)(esbuild@0.27.7):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
@@ -3039,14 +3039,14 @@ snapshots:
       rolldown: 1.0.1
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 25.9.1
+      '@types/node': 25.9.4
       esbuild: 0.27.7
       fsevents: 2.3.3
 
-  vitest@4.1.9(@types/node@25.9.1)(@vitest/coverage-v8@4.1.9)(vite@8.0.13(@types/node@25.9.1)(esbuild@0.27.7)):
+  vitest@4.1.9(@types/node@25.9.4)(@vitest/coverage-v8@4.1.9)(vite@8.0.13(@types/node@25.9.4)(esbuild@0.27.7)):
     dependencies:
       '@vitest/expect': 4.1.9
-      '@vitest/mocker': 4.1.9(vite@8.0.13(@types/node@25.9.1)(esbuild@0.27.7))
+      '@vitest/mocker': 4.1.9(vite@8.0.13(@types/node@25.9.4)(esbuild@0.27.7))
       '@vitest/pretty-format': 4.1.9
       '@vitest/runner': 4.1.9
       '@vitest/snapshot': 4.1.9
@@ -3063,10 +3063,10 @@ snapshots:
       tinyexec: 1.2.4
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
-      vite: 8.0.13(@types/node@25.9.1)(esbuild@0.27.7)
+      vite: 8.0.13(@types/node@25.9.4)(esbuild@0.27.7)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 25.9.1
+      '@types/node': 25.9.4
       '@vitest/coverage-v8': 4.1.9(vitest@4.1.9)
     transitivePeerDependencies:
       - msw
