@@ -1,28 +1,116 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "ui": "stream",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["src/**", "tsup.config.ts"],
+      "inputs": ["src/**", "tsup.config.ts", "tsconfig.json", "package.json"],
       "outputs": ["dist/**"]
-    },
-    "lint": {
-      "dependsOn": ["build"],
-      "inputs": ["src/**"],
-      "outputs": []
-    },
-    "test": {
-      "inputs": ["src/**", "vitest.config.ts"],
-      "outputs": []
-    },
-    "test:coverage": {
-      "inputs": ["src/**", "vitest.config.ts"],
-      "outputs": ["coverage/**"]
     },
     "dev": {
       "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
+    },
+    "types:check": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**", "tsconfig.json"],
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**", "vitest.config.ts"],
+      "outputs": []
+    },
+    "test:coverage": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/**", "vitest.config.ts"],
+      "outputs": ["coverage/**"]
+    },
+    "build-all": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/**/*.md", "$TURBO_ROOT$/templates/**/*.md"],
+      "outputs": [
+        "$TURBO_ROOT$/AGENTS.md",
+        "$TURBO_ROOT$/skills/*/AGENTS.md",
+        "$TURBO_ROOT$/skills/*/skill.json"
+      ]
+    },
+    "build-agents": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/**/*.md"],
+      "outputs": ["$TURBO_ROOT$/AGENTS.md"]
+    },
+    "build-api": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/nextdns-api/**/*.md"],
+      "outputs": ["$TURBO_ROOT$/skills/nextdns-api/AGENTS.md"]
+    },
+    "build-cli": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/nextdns-cli/**/*.md"],
+      "outputs": ["$TURBO_ROOT$/skills/nextdns-cli/AGENTS.md"]
+    },
+    "build-ui": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/nextdns-ui/**/*.md"],
+      "outputs": ["$TURBO_ROOT$/skills/nextdns-ui/AGENTS.md"]
+    },
+    "build-integrations": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/integrations/**/*.md"],
+      "outputs": ["$TURBO_ROOT$/skills/integrations/AGENTS.md"]
+    },
+    "build-frontend": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/nextdns-frontend/**/*.md"],
+      "outputs": ["$TURBO_ROOT$/skills/nextdns-frontend/AGENTS.md"]
+    },
+    "validate": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/**/*.md"],
+      "outputs": []
+    },
+    "validate-rules": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/**/*.md"],
+      "outputs": []
+    },
+    "check-duplicates": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/**/*.md"],
+      "outputs": []
+    },
+    "check-tags": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/**/*.md"],
+      "outputs": []
+    },
+    "generate-stats": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/**/*.md"],
+      "cache": false
+    },
+    "update-counts": {
+      "dependsOn": ["build"],
+      "inputs": ["$TURBO_ROOT$/skills/**/*.md"],
+      "outputs": ["$TURBO_ROOT$/README.md", "$TURBO_ROOT$/skills/*/AGENTS.md"]
+    },
+    "search": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "export": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "extract-tests": {
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "migrate": {
+      "dependsOn": ["build"],
+      "cache": false
     }
   }
 }

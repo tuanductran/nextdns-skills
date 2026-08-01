@@ -1,5 +1,5 @@
 ---
-title: 'Log Streaming via SSE (React Router v7)'
+title: 'Log Streaming via SSE (React Router v8)'
 impact: MEDIUM
 impactDescription:
   'Opening the NextDNS log stream directly from the browser exposes the API key; streaming must be
@@ -17,15 +17,15 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Log streaming via sse React router v7)
+# Log streaming via sse React router v8)
 
-Proxy the NextDNS real-time log stream through a React Router v7 resource route and consume it in a
+Proxy the NextDNS real-time log stream through a React Router v8 resource route and consume it in a
 React component
 
 ## Overview
 
 The NextDNS API exposes a Server-Sent Events (SSE) stream at `/logs/stream`. The API key must be
-added on the server side. A React Router v7 resource route (a route module without a default
+added on the server side. A React Router v8 resource route (a route module without a default
 component export) proxies the upstream SSE stream as a `ReadableStream` response. The React
 component connects to the local resource route URL and parses incoming `data:` events.
 
@@ -173,6 +173,6 @@ deployment platform does not buffer streaming responses (Vercel: use Edge Functi
 
 ## Reference
 
-- [React Router v7 — Resource Routes](https://reactrouter.com/how-to/resource-routes)
+- [React Router v8 — Resource Routes](https://reactrouter.com/how-to/resource-routes)
 - [MDN — EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
 - [NextDNS API — Log Streaming](https://nextdns.github.io/api/#logs)

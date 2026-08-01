@@ -40,17 +40,17 @@ describe('SKILLS registry', () => {
     const nonFrontend = ['nextdns-api', 'nextdns-cli', 'nextdns-ui', 'integrations'];
     for (const key of nonFrontend) {
       const { sectionMap } = SKILLS[key];
-      expect(sectionMap['capability'], `${key} capability section`).toBe(1);
-      expect(sectionMap['efficiency'], `${key} efficiency section`).toBe(2);
+      expect(sectionMap.capability, `${key} capability section`).toBe(1);
+      expect(sectionMap.efficiency, `${key} efficiency section`).toBe(2);
     }
   });
 
   it('nextdns-frontend has framework sections', () => {
     const { sectionMap } = SKILLS['nextdns-frontend'];
-    expect(sectionMap['nuxt']).toBe(1);
-    expect(sectionMap['nextjs']).toBe(2);
-    expect(sectionMap['astro']).toBe(3);
-    expect(sectionMap['sveltekit']).toBe(4);
+    expect(sectionMap.nuxt).toBe(1);
+    expect(sectionMap.nextjs).toBe(2);
+    expect(sectionMap.astro).toBe(3);
+    expect(sectionMap.sveltekit).toBe(4);
     expect(sectionMap['react-router']).toBe(5);
   });
 

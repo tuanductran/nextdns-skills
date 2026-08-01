@@ -1,5 +1,5 @@
 ---
-title: 'Profile Management UI (React Router v7)'
+title: 'Profile Management UI (React Router v8)'
 impact: MEDIUM
 impactDescription:
   'Using clientLoader instead of loader for API-key-protected data fetches the key on the browser
@@ -16,14 +16,14 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Profile management UI React router v7)
+# Profile management UI React router v8)
 
-Build NextDNS profile list, create, update, and delete flows using React Router v7 `loader` and
+Build NextDNS profile list, create, update, and delete flows using React Router v8 `loader` and
 `action` functions
 
 ## Overview
 
-React Router v7 uses `loader` (server-side data fetching) and `action` (server-side mutations) in
+React Router v8 uses `loader` (server-side data fetching) and `action` (server-side mutations) in
 route modules. All NextDNS API calls must go through `loader`/`action` because they run only on the
 server and have access to `process.env.NEXTDNS_API_KEY`. The component receives `loaderData` as a
 prop automatically typed by the framework.
@@ -142,7 +142,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 
 ## Best practices
 
-- **`loader` for GET, `action` for mutations**: This is the React Router v7 convention. `loader`
+- **`loader` for GET, `action` for mutations**: This is the React Router v8 convention. `loader`
   runs on GET requests; `action` handles POST, PATCH, DELETE, PUT form submissions.
 - **`Form` component over `fetch`**: Use the `<Form>` component from `react-router` for mutations —
   it progressively enhances and triggers `action` on submit.
@@ -163,6 +163,6 @@ revalidation.
 
 ## Reference
 
-- [React Router v7 — Data Loading](https://reactrouter.com/start/framework/data-loading)
-- [React Router v7 — Actions](https://reactrouter.com/start/framework/actions)
+- [React Router v8 — Data Loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Actions](https://reactrouter.com/start/framework/actions)
 - [NextDNS API — Profiles](https://nextdns.github.io/api/#profiles)

@@ -7,8 +7,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { DEFAULT_SKILL, SKILLS, type SkillConfig } from './config.js';
 import { parseRuleFile, type RuleFile } from './parser.js';
-import { collectRuleFiles } from './utils.js';
 import type { Section } from './types.js';
+import { collectRuleFiles } from './utils.js';
 
 // Parse command line arguments
 const args = process.argv.slice(2);

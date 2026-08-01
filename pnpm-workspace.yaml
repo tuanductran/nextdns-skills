@@ -1,2 +1,8 @@
 packages:
   - 'packages/*'
+
+allowBuilds:
+  esbuild: true
+
+overrides:
+  minimatch: '>=10.2.3'

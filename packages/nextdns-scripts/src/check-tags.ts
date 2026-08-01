@@ -12,7 +12,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 import { collectRuleFiles, parseFrontmatter } from './utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -49,7 +49,7 @@ function validateTags(): boolean {
       const rel = path.relative(REPO_ROOT, filePath);
       const content = fs.readFileSync(filePath, 'utf8');
       const fm = parseFrontmatter(content);
-      const tags = Array.isArray(fm['tags']) ? (fm['tags'] as string[]) : [];
+      const tags = Array.isArray(fm.tags) ? (fm.tags as string[]) : [];
 
       if (tags.length === 0) {
         errors.push({ file: rel, level: 'error', message: 'No tags defined (minimum 3 required)' });

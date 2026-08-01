@@ -12,9 +12,10 @@
   },
   "author": "Tuan Duc Tran <tuanductran.dev@gmail.com>",
   "license": "MIT",
-  "packageManager": "pnpm@10.34.4",
+  "packageManager": "pnpm@11.18.0",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=20.0.0",
+    "pnpm": ">=11.0.0"
   },
   "keywords": [
     "nextdns",
@@ -46,40 +47,35 @@
     "lint:links": "find . -name \"*.md\" -not -path \"*/node_modules/*\" -not -path \"*/templates/*\" | xargs markdown-link-check -c config.json",
     "lint:md": "markdownlint .",
     "lint:md:fix": "markdownlint . --fix",
-    "lint:rules": "pnpm -F nextdns-skills-scripts build && pnpm -F nextdns-skills-scripts validate-rules",
+    "lint:rules": "turbo run validate-rules",
     "lint:syntax": "case-police \"skills/**/rules/**/*.md\"",
     "lint:syntax:fix": "case-police --fix \"skills/**/rules/**/*.md\"",
-    "build": "turbo build",
-    "build:skills": "pnpm -F nextdns-skills-build build-all",
-    "build:api": "pnpm -F nextdns-skills-build build-api",
-    "build:cli": "pnpm -F nextdns-skills-build build-cli",
-    "build:ui": "pnpm -F nextdns-skills-build build-ui",
-    "build:integrations": "pnpm -F nextdns-skills-build build-integrations",
-    "build:frontend": "pnpm -F nextdns-skills-build build-frontend",
-    "update-counts": "pnpm -F nextdns-skills-scripts build && pnpm -F nextdns-skills-scripts update-counts",
-    "dev": "turbo dev",
-    "check-duplicates": "pnpm -F nextdns-skills-scripts build && pnpm -F nextdns-skills-scripts check-duplicates",
-    "check-tags": "pnpm -F nextdns-skills-scripts build && pnpm -F nextdns-skills-scripts check-tags",
-    "stats": "pnpm -F nextdns-skills-scripts build && pnpm -F nextdns-skills-scripts generate-stats --text",
-    "lint:quality": "pnpm run check-duplicates && pnpm run check-tags",
-    "rule-search": "pnpm -F nextdns-skills-build search",
-    "rule-export": "pnpm -F nextdns-skills-build export",
-    "test": "turbo test",
-    "test:coverage": "turbo test:coverage",
-    "types:check": "tsc -p tsconfig.json"
+    "build": "turbo run build",
+    "build:skills": "turbo run build-all",
+    "build:api": "turbo run build-api",
+    "build:cli": "turbo run build-cli",
+    "build:ui": "turbo run build-ui",
+    "build:integrations": "turbo run build-integrations",
+    "build:frontend": "turbo run build-frontend",
+    "update-counts": "turbo run update-counts",
+    "dev": "turbo run dev",
+    "check-duplicates": "turbo run check-duplicates",
+    "check-tags": "turbo run check-tags",
+    "stats": "turbo run generate-stats -- --text",
+    "lint:quality": "turbo run check-duplicates check-tags",
+    "rule-search": "turbo run search --",
+    "rule-export": "turbo run export --",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
+    "types:check": "turbo run types:check && tsc -p tsconfig.json"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.8",
-    "@types/node": "^25.5.0",
-    "case-police": "^2.2.0",
-    "markdown-link-check": "^3.14.2",
-    "markdownlint-cli": "^0.49.0",
-    "turbo": "^2.8.20",
-    "typescript": "^6.0.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "minimatch": ">=10.2.3"
-    }
+    "@biomejs/biome": "^2.5.6",
+    "@types/node": "^26.1.2",
+    "case-police": "^2.2.1",
+    "markdown-link-check": "^3.15.0",
+    "markdownlint-cli": "^0.49.1",
+    "turbo": "^2.10.7",
+    "typescript": "6.0.3"
   }
 }

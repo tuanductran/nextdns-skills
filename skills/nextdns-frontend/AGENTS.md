@@ -2,7 +2,7 @@
 
 **Version 1.0.0**  
 NextDNS Skills  
-March 2026
+August 2026
 
 > **Note:**  
 > This document is mainly for agents and LLMs to follow when maintaining,  
@@ -53,13 +53,13 @@ Best practices and guidelines for NextDNS frontend dashboard integration with Nu
    - 4.6 [SSE Alternatives: Polling and Long-Polling](#46-sse-alternatives-polling-and-long-polling)
    - 4.7 [SvelteKit Project Setup](#47-sveltekit-project-setup)
 5. [React Router](#5-react-router) — **MEDIUM**
-   - 5.1 [Analytics Charts (React Router v7)](#51-analytics-charts-react-router-v7)
+   - 5.1 [Analytics Charts (React Router v8)](#51-analytics-charts-react-router-v8)
    - 5.2 [API Key Proxy (BFF Pattern)](#52-api-key-proxy-bff-pattern)
-   - 5.3 [Data Revalidation Strategies (React Router v7)](#53-data-revalidation-strategies-react-router-v7)
-   - 5.4 [Error Handling (React Router v7)](#54-error-handling-react-router-v7)
-   - 5.5 [Log Streaming via SSE (React Router v7)](#55-log-streaming-via-sse-react-router-v7)
-   - 5.6 [Profile Management UI (React Router v7)](#56-profile-management-ui-react-router-v7)
-   - 5.7 [React Router v7 Project Setup](#57-react-router-v7-project-setup)
+   - 5.3 [Data Revalidation Strategies (React Router v8)](#53-data-revalidation-strategies-react-router-v8)
+   - 5.4 [Error Handling (React Router v8)](#54-error-handling-react-router-v8)
+   - 5.5 [Log Streaming via SSE (React Router v8)](#55-log-streaming-via-sse-react-router-v8)
+   - 5.6 [Profile Management UI (React Router v8)](#56-profile-management-ui-react-router-v8)
+   - 5.7 [React Router v8 Project Setup](#57-react-router-v8-project-setup)
 
 ---
 
@@ -1585,7 +1585,7 @@ Handlers. Server Actions are an alternative for forms.
 
 **Solution**: Call `router.refresh()` after the mutation to revalidate Server Component data:
 
-**Solution**: In Next.js 15, `params` in pages and Route Handlers is a **Promise**. Always await it:
+**Solution**: In Next.js 16, `params` in pages and Route Handlers is a **Promise**. Always await it:
 
 - [Next.js — Server and Client Components](https://nextjs.org/docs/app/getting-started/server-and-client-components)
 
@@ -1739,19 +1739,29 @@ export default function ProfilesPage() { ... } // ❌ Unnecessary client bundle
 
 **Impact: HIGH ()**
 
-Bootstrap a Next.js 15 App Router project configured to integrate with the NextDNS API
+Bootstrap a Next.js 16 App Router project configured to integrate with the NextDNS API
 
-Bootstrap a Next.js 15 App Router project configured to integrate with the NextDNS API
+Bootstrap a Next.js 16 App Router project configured to integrate with the NextDNS API
 
 A NextDNS Next.js frontend requires:
 
-1. A Next.js 15 project with TypeScript and the App Router enabled
+1. A Next.js 16 project with TypeScript and the App Router enabled
 
 2. Server-only environment variables (no `NEXT_PUBLIC_` prefix) for the API key
 
 3. A `lib/nextdns.ts` shared fetcher — used exclusively in Route Handlers and Server Components
 
 4. Optional: shadcn/ui for components, SWR or React Query for Client Component data fetching
+
+> **Breaking change from 15**: Next.js 16 deprecates `middleware.js`/`middleware.ts` in favor of
+
+> `proxy.ts` as the edge/origin boundary. This skill's Route Handler + Server Component patterns
+
+> (below) don't rely on middleware, so they're unaffected — but if an existing project uses
+
+> middleware to inject the `X-Api-Key` header or gate routes, migrate that logic to `proxy.ts`
+
+> before upgrading. Next.js 15 itself is still supported until October 21, 2026.
 
 **Solution**: `RouteContext` is globally available after running `next dev` or `next build` (type
 
@@ -2070,9 +2080,9 @@ setInterval(() => fetchLogs(), 1000); // ❌
 
 **Impact: MEDIUM (Without proper Server Component prefetching, Client Components show a loading spinner on every page navigation instead of instant data from the server)**
 
-Integrate TanStack Query v5 with Next.js 15 App Router for prefetching in Server Components and mutations in Client Components
+Integrate TanStack Query v5 with Next.js 16 App Router for prefetching in Server Components and mutations in Client Components
 
-Integrate TanStack Query v5 with Next.js 15 App Router for prefetching in Server Components and mutations in Client Components
+Integrate TanStack Query v5 with Next.js 16 App Router for prefetching in Server Components and mutations in Client Components
 
 TanStack Query v5 works alongside the Next.js App Router through the **hydration pattern**: Server
 
@@ -3244,15 +3254,19 @@ const source = new EventSource(
 
 **Impact: MEDIUM (Without server:defer, heavy analytics panels block the initial page render, causing visible layout shift and slow Time to First Byte on the NextDNS dashboard)**
 
-Use Astro 5 Server Islands (`server:defer`) to lazy-load NextDNS analytics panels without blocking the initial page render
+Use Astro 6 Server Islands (`server:defer`) to lazy-load NextDNS analytics panels without blocking the initial page render
 
-Use Astro 5 Server Islands (`server:defer`) to lazy-load NextDNS analytics panels without blocking the initial page render
+Use Astro 6 Server Islands (`server:defer`) to lazy-load NextDNS analytics panels without blocking the initial page render
 
 Astro 5 introduced **Server Islands** — a pattern where individual components can be deferred to
 
-load after the initial page HTML is sent to the browser. This is ideal for a NextDNS dashboard
+load after the initial page HTML is sent to the browser. The pattern carries over unchanged in
 
-where:
+**Astro 6** (current major as of March 2026), which adds Live Content Collections, a built-in
+
+Fonts API, and built-in CSP configuration — none of which change the Server Islands API below.
+
+This is ideal for a NextDNS dashboard where:
 
 - The **profile list** (fast, needed immediately) renders at page load
 
@@ -4388,13 +4402,13 @@ adapter: adapter({ fallback: 'index.html' });
 
 **Impact: MEDIUM**
 
-### 5.1 Analytics Charts (React Router v7)
+### 5.1 Analytics Charts (React Router v8)
 
 **Impact: MEDIUM ()**
 
-Fetch NextDNS analytics data in a React Router v7 `loader` and render interactive charts in React
+Fetch NextDNS analytics data in a React Router v8 `loader` and render interactive charts in React
 
-Fetch NextDNS analytics data in a React Router v7 `loader` and render interactive charts in React
+Fetch NextDNS analytics data in a React Router v8 `loader` and render interactive charts in React
 
 components
 
@@ -4430,7 +4444,7 @@ container or wrap in a client-only component that renders after mount.
 
 new one, keeping the URL clean.
 
-- [React Router v7 — Data Loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Data Loading](https://reactrouter.com/start/framework/data-loading)
 
 - [Recharts Documentation](https://recharts.org)
 
@@ -4529,15 +4543,15 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 
 **Impact: HIGH ()**
 
-Proxy all NextDNS API calls through React Router v7 resource routes to keep X-Api-Key server-side
+Proxy all NextDNS API calls through React Router v8 resource routes to keep X-Api-Key server-side
 
-Proxy all NextDNS API calls through React Router v7 resource routes to keep X-Api-Key server-side
+Proxy all NextDNS API calls through React Router v8 resource routes to keep X-Api-Key server-side
 
 only
 
 The NextDNS `X-Api-Key` grants full account access. It must **never** appear in browser-visible
 
-code. React Router v7 resource routes (route modules without a default component export) run
+code. React Router v8 resource routes (route modules without a default component export) run
 
 exclusively on the server and are the correct place to attach the key before forwarding requests to
 
@@ -4545,7 +4559,7 @@ exclusively on the server and are the correct place to attach the key before for
 
 bundles.
 
-- **`.server.ts` suffix**: Vite (used by React Router v7) strips files ending in `.server.ts` from
+- **`.server.ts` suffix**: Vite (used by React Router v8) strips files ending in `.server.ts` from
 
   client bundles, preventing accidental imports of server-only code.
 
@@ -4565,9 +4579,9 @@ Variables without the `VITE_` prefix are server-only and require restart to pick
 
 component export — a default export turns it into a UI route, not a resource route.
 
-- [React Router v7 — Resource Routes](https://reactrouter.com/how-to/resource-routes)
+- [React Router v8 — Resource Routes](https://reactrouter.com/how-to/resource-routes)
 
-- [React Router v7 — Data Loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Data Loading](https://reactrouter.com/start/framework/data-loading)
 
 - [NextDNS API — Authentication](https://nextdns.github.io/api/#authentication)
 
@@ -4685,13 +4699,13 @@ export default function Dashboard() {
 }
 ```
 
-### 5.3 Data Revalidation Strategies (React Router v7)
+### 5.3 Data Revalidation Strategies (React Router v8)
 
 **Impact: MEDIUM (Without shouldRevalidate or fetcher-based mutations, every navigation triggers a full loader re-run, causing unnecessary API calls and UI flicker)**
 
-Control when React Router v7 re-runs loaders and implement background mutations with fetchers
+Control when React Router v8 re-runs loaders and implement background mutations with fetchers
 
-Control when React Router v7 re-runs loaders and implement background mutations with fetchers
+Control when React Router v8 re-runs loaders and implement background mutations with fetchers
 
 By default, React Router re-runs all active loaders after every action. For a NextDNS dashboard
 
@@ -4713,13 +4727,13 @@ Use `fetcher.submit` for mutations that should not navigate away from the curren
 
 Render the profile list immediately while analytics loads in the background:
 
-- [React Router v7 — Data loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Data loading](https://reactrouter.com/start/framework/data-loading)
 
-- [React Router v7 — Fetchers](https://reactrouter.com/api/hooks/useFetcher)
+- [React Router v8 — Fetchers](https://reactrouter.com/api/hooks/useFetcher)
 
-- [React Router v7 — Defer and Await](https://reactrouter.com/api/utils/data)
+- [React Router v8 — Defer and Await](https://reactrouter.com/api/utils/data)
 
-- [React Router v7 — Await](https://reactrouter.com/api/components/Await)
+- [React Router v8 — Await](https://reactrouter.com/api/components/Await)
 
 **Incorrect:**
 
@@ -4737,15 +4751,15 @@ await deleteProfile(id);
 navigate('.'); // ❌ Use fetcher.submit instead
 ```
 
-### 5.4 Error Handling (React Router v7)
+### 5.4 Error Handling (React Router v8)
 
 **Impact: MEDIUM ()**
 
-Map NextDNS API errors to React Router v7 error boundaries and inline component feedback
+Map NextDNS API errors to React Router v8 error boundaries and inline component feedback
 
-Map NextDNS API errors to React Router v7 error boundaries and inline component feedback
+Map NextDNS API errors to React Router v8 error boundaries and inline component feedback
 
-React Router v7 provides two error-handling mechanisms:
+React Router v8 provides two error-handling mechanisms:
 
 1. **`ErrorBoundary` export** in a route module — catches errors thrown by `loader` or `action` and
 
@@ -4787,11 +4801,11 @@ just from `root.tsx`.
 
 `null` is valid for success; returning `{ error: '...' }` gives `actionData` to the component.
 
-- [React Router v7 — Error Boundaries](https://reactrouter.com/how-to/error-boundary)
+- [React Router v8 — Error Boundaries](https://reactrouter.com/how-to/error-boundary)
 
-- [React Router v7 — Actions](https://reactrouter.com/start/framework/actions)
+- [React Router v8 — Actions](https://reactrouter.com/start/framework/actions)
 
-- [React Router v7 — `data()` utility](https://reactrouter.com/api/utils/data)
+- [React Router v8 — `data()` utility](https://reactrouter.com/api/utils/data)
 
 - [NextDNS API — Error Responses](https://nextdns.github.io/api/)
 
@@ -4953,19 +4967,19 @@ export function ErrorBoundary() {
 }
 ```
 
-### 5.5 Log Streaming via SSE (React Router v7)
+### 5.5 Log Streaming via SSE (React Router v8)
 
 **Impact: MEDIUM ()**
 
-Proxy the NextDNS real-time log stream through a React Router v7 resource route and consume it in a
+Proxy the NextDNS real-time log stream through a React Router v8 resource route and consume it in a
 
-Proxy the NextDNS real-time log stream through a React Router v7 resource route and consume it in a
+Proxy the NextDNS real-time log stream through a React Router v8 resource route and consume it in a
 
 React component
 
 The NextDNS API exposes a Server-Sent Events (SSE) stream at `/logs/stream`. The API key must be
 
-added on the server side. A React Router v7 resource route (a route module without a default
+added on the server side. A React Router v8 resource route (a route module without a default
 
 component export) proxies the upstream SSE stream as a `ReadableStream` response. The React
 
@@ -4995,7 +5009,7 @@ deployment platform does not buffer streaming responses (Vercel: use Edge Functi
 
 `useEffect` (client-only lifecycle) — never call it at module level or during SSR.
 
-- [React Router v7 — Resource Routes](https://reactrouter.com/how-to/resource-routes)
+- [React Router v8 — Resource Routes](https://reactrouter.com/how-to/resource-routes)
 
 - [MDN — EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
 
@@ -5117,17 +5131,17 @@ useEffect(() => {
 }, []);
 ```
 
-### 5.6 Profile Management UI (React Router v7)
+### 5.6 Profile Management UI (React Router v8)
 
 **Impact: MEDIUM ()**
 
-Build NextDNS profile list, create, update, and delete flows using React Router v7 `loader` and
+Build NextDNS profile list, create, update, and delete flows using React Router v8 `loader` and
 
-Build NextDNS profile list, create, update, and delete flows using React Router v7 `loader` and
+Build NextDNS profile list, create, update, and delete flows using React Router v8 `loader` and
 
 `action` functions
 
-React Router v7 uses `loader` (server-side data fetching) and `action` (server-side mutations) in
+React Router v8 uses `loader` (server-side data fetching) and `action` (server-side mutations) in
 
 route modules. All NextDNS API calls must go through `loader`/`action` because they run only on the
 
@@ -5135,7 +5149,7 @@ server and have access to `process.env.NEXTDNS_API_KEY`. The component receives 
 
 prop automatically typed by the framework.
 
-- **`loader` for GET, `action` for mutations**: This is the React Router v7 convention. `loader`
+- **`loader` for GET, `action` for mutations**: This is the React Router v8 convention. `loader`
 
   runs on GET requests; `action` handles POST, PATCH, DELETE, PUT form submissions.
 
@@ -5159,9 +5173,9 @@ prop automatically typed by the framework.
 
 revalidation.
 
-- [React Router v7 — Data Loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Data Loading](https://reactrouter.com/start/framework/data-loading)
 
-- [React Router v7 — Actions](https://reactrouter.com/start/framework/actions)
+- [React Router v8 — Actions](https://reactrouter.com/start/framework/actions)
 
 - [NextDNS API — Profiles](https://nextdns.github.io/api/#profiles)
 
@@ -5275,23 +5289,33 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 }
 ```
 
-### 5.7 React Router v7 Project Setup
+### 5.7 React Router v8 Project Setup
 
 **Impact: HIGH ()**
 
-Bootstrap a React Router v7 project with SSR enabled, TypeScript, and secure environment variable
+Bootstrap a React Router v8 project with SSR enabled, TypeScript, and secure environment variable
 
-Bootstrap a React Router v7 project with SSR enabled, TypeScript, and secure environment variable
+Bootstrap a React Router v8 project with SSR enabled, TypeScript, and secure environment variable
 
 handling for NextDNS API integration
 
-React Router v7 is a full-stack React framework (evolved from Remix). It uses **Vite** as its build
+React Router v8 is a full-stack React framework (evolved from Remix). It uses **Vite** as its build
 
 tool and supports multiple rendering modes: SSR, CSR, and static pre-rendering. For NextDNS
 
 integration, **SSR must be enabled** so that `loader` and `action` functions run on the server where
 
 `process.env.NEXTDNS_API_KEY` is available.
+
+> **Breaking change from v7**: v8 removed the `react-router-dom` package entirely — only
+
+> `react-router` exists now, and the package is **ESM-only**. It also raises peer minimums (Node
+
+> 22.22+, React 19.2.7+, Vite 7+). If migrating an existing v7 project, replace any
+
+> `from 'react-router-dom'` import with `from 'react-router'` and confirm your Node/React/Vite
+
+> versions meet the new floor before upgrading.
 
 **Symptoms**: Network tab shows requests to `api.nextdns.io` from the browser.
 
@@ -5303,11 +5327,11 @@ client-side data loading which exposes the API key.
 
 under `app/routes/+types/` based on your route config.
 
-- [React Router v7 — Getting Started](https://reactrouter.com/start/framework/installation)
+- [React Router v8 — Getting Started](https://reactrouter.com/start/framework/installation)
 
-- [React Router v7 — Rendering Modes](https://reactrouter.com/start/framework/rendering)
+- [React Router v8 — Rendering Modes](https://reactrouter.com/start/framework/rendering)
 
-- [React Router v7 — Route Configuration](https://reactrouter.com/start/framework/routing)
+- [React Router v8 — Route Configuration](https://reactrouter.com/start/framework/routing)
 
 - [NextDNS API Reference](https://nextdns.github.io/api/)
 

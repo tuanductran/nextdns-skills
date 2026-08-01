@@ -1,5 +1,5 @@
 ---
-title: 'React Router v7 Project Setup'
+title: 'React Router v8 Project Setup'
 impact: HIGH
 impactDescription:
   'A misconfigured project disables SSR, causing loaders to run in the browser and exposing API keys
@@ -16,17 +16,23 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# React router v7 project setup
+# React router v8 project setup
 
-Bootstrap a React Router v7 project with SSR enabled, TypeScript, and secure environment variable
+Bootstrap a React Router v8 project with SSR enabled, TypeScript, and secure environment variable
 handling for NextDNS API integration
 
 ## Overview
 
-React Router v7 is a full-stack React framework (evolved from Remix). It uses **Vite** as its build
+React Router v8 is a full-stack React framework (evolved from Remix). It uses **Vite** as its build
 tool and supports multiple rendering modes: SSR, CSR, and static pre-rendering. For NextDNS
 integration, **SSR must be enabled** so that `loader` and `action` functions run on the server where
 `process.env.NEXTDNS_API_KEY` is available.
+
+> **Breaking change from v7**: v8 removed the `react-router-dom` package entirely — only
+> `react-router` exists now, and the package is **ESM-only**. It also raises peer minimums (Node
+> 22.22+, React 19.2.7+, Vite 7+). If migrating an existing v7 project, replace any
+> `from 'react-router-dom'` import with `from 'react-router'` and confirm your Node/React/Vite
+> versions meet the new floor before upgrading.
 
 ## Correct usage
 
@@ -138,7 +144,7 @@ under `app/routes/+types/` based on your route config.
 
 ## Reference
 
-- [React Router v7 — Getting Started](https://reactrouter.com/start/framework/installation)
-- [React Router v7 — Rendering Modes](https://reactrouter.com/start/framework/rendering)
-- [React Router v7 — Route Configuration](https://reactrouter.com/start/framework/routing)
+- [React Router v8 — Getting Started](https://reactrouter.com/start/framework/installation)
+- [React Router v8 — Rendering Modes](https://reactrouter.com/start/framework/rendering)
+- [React Router v8 — Route Configuration](https://reactrouter.com/start/framework/routing)
 - [NextDNS API Reference](https://nextdns.github.io/api/)

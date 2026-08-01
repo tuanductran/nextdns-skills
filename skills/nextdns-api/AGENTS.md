@@ -2,7 +2,7 @@
 
 **Version 1.0.0**  
 NextDNS Skills  
-March 2026
+August 2026
 
 > **Note:**  
 > This document is mainly for agents and LLMs to follow when maintaining,  
@@ -1552,6 +1552,18 @@ current settings and PATCH to update individual fields without affecting others.
 | `performance.ecs`             | boolean | Send EDNS Client Subnet for geo-aware answers                                                        |
 
 | `web3`                        | boolean | Enable Web3/blockchain domain resolution                                                             |
+
+> **Note**: The dashboard also exposes a "Bypass Age Verification" toggle (added August 2025). It
+
+> is **not confirmed** in the official API reference at the time of writing — no field name for it
+
+> could be verified from `nextdns.github.io/api`. Don't guess a field name (e.g.
+
+> `bypassAgeVerification`) for this setting; if you need to control it programmatically, inspect
+
+> the actual `GET .../settings` response for your profile to find the real field, since NextDNS may
+
+> not have documented it yet.
 
 - **PATCH only what changes**: Pass only the keys you want to update; unspecified keys retain their
 

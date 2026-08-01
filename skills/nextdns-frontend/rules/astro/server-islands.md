@@ -17,13 +17,15 @@ tags:
 
 # Server islands for analytics panels
 
-Use Astro 5 Server Islands (`server:defer`) to lazy-load NextDNS analytics panels without blocking the initial page render
+Use Astro 6 Server Islands (`server:defer`) to lazy-load NextDNS analytics panels without blocking the initial page render
 
 ## Overview
 
 Astro 5 introduced **Server Islands** — a pattern where individual components can be deferred to
-load after the initial page HTML is sent to the browser. This is ideal for a NextDNS dashboard
-where:
+load after the initial page HTML is sent to the browser. The pattern carries over unchanged in
+**Astro 6** (current major as of March 2026), which adds Live Content Collections, a built-in
+Fonts API, and built-in CSP configuration — none of which change the Server Islands API below.
+This is ideal for a NextDNS dashboard where:
 
 - The **profile list** (fast, needed immediately) renders at page load
 - The **analytics panels** (slow, can take 1–3 seconds) load after without blocking

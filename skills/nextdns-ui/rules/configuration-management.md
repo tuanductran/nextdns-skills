@@ -38,7 +38,11 @@ Manage your NextDNS profile settings, log storage, and performance optimizations
   - **Warning**: May break compatibility with services like **Yahoo! Mail**.
 - **Rewrites**: Manually redirect any domain or subdomain (for example, `local.home` to `192.168.1.1`).
 - **Bypass Age Verification**: Allows accessing content that requires age verification via DNS
-  identification.
+  identification (added August 2025).
+  - **Known limitation**: Community reports (NextDNS Help Center, early 2026) describe the feature
+    as inconsistent — it has been intermittently pulled from the dashboard due to bugs, and
+    behavior varies by site and country. Don't treat it as a guaranteed bypass; verify it still
+    works for the target site/region before relying on it.
 - **Web3**: Enable resolution of decentralised domains (HNS, ENS, and more).
 
 ## Maintenance

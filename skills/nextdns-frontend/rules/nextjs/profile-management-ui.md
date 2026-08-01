@@ -187,12 +187,12 @@ await fetch(`/api/profiles/${id}`, { method: 'DELETE' });
 router.refresh();
 ```
 
-### Issue: `params` type error in Next.js 15
+### Issue: `params` type error in Next.js 16
 
-**Solution**: In Next.js 15, `params` in pages and Route Handlers is a **Promise**. Always await it:
+**Solution**: In Next.js 16, `params` in pages and Route Handlers is a **Promise**. Always await it:
 
 ```tsx
-// ✅ Next.js 15
+// ✅ Next.js 16
 const { id } = await params;
 ```
 

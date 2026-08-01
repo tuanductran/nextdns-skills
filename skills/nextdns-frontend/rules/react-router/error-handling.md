@@ -1,5 +1,5 @@
 ---
-title: 'Error Handling (React Router v7)'
+title: 'Error Handling (React Router v8)'
 impact: MEDIUM
 impactDescription:
   'Unhandled loader or action errors crash the entire page; React Router error boundaries and typed
@@ -16,13 +16,13 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Error handling React router v7)
+# Error handling React router v8)
 
-Map NextDNS API errors to React Router v7 error boundaries and inline component feedback
+Map NextDNS API errors to React Router v8 error boundaries and inline component feedback
 
 ## Overview
 
-React Router v7 provides two error-handling mechanisms:
+React Router v8 provides two error-handling mechanisms:
 
 1. **`ErrorBoundary` export** in a route module — catches errors thrown by `loader` or `action` and
    renders a fallback UI. In Framework Mode, `ErrorBoundary` receives `error` as a typed prop via
@@ -216,7 +216,7 @@ just from `root.tsx`.
 
 ## Reference
 
-- [React Router v7 — Error Boundaries](https://reactrouter.com/how-to/error-boundary)
-- [React Router v7 — Actions](https://reactrouter.com/start/framework/actions)
-- [React Router v7 — `data()` utility](https://reactrouter.com/api/utils/data)
+- [React Router v8 — Error Boundaries](https://reactrouter.com/how-to/error-boundary)
+- [React Router v8 — Actions](https://reactrouter.com/start/framework/actions)
+- [React Router v8 — `data()` utility](https://reactrouter.com/api/utils/data)
 - [NextDNS API — Error Responses](https://nextdns.github.io/api/)

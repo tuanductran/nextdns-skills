@@ -17,7 +17,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 import { collectRuleFiles, parseFrontmatter } from './utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -79,11 +79,11 @@ function buildReport(): StatsReport {
       stat.total++;
       totalRules++;
 
-      const type = typeof fm['type'] === 'string' ? fm['type'] : '';
+      const type = typeof fm.type === 'string' ? fm.type : '';
       if (type === 'capability') stat.capability++;
       else if (type === 'efficiency') stat.efficiency++;
 
-      const impact = typeof fm['impact'] === 'string' ? fm['impact'].toUpperCase() : 'MEDIUM';
+      const impact = typeof fm.impact === 'string' ? fm.impact.toUpperCase() : 'MEDIUM';
       if (impact === 'HIGH') {
         stat.high++;
         impactDistribution.HIGH++;
@@ -95,7 +95,7 @@ function buildReport(): StatsReport {
         impactDistribution.MEDIUM++;
       }
 
-      const tags = Array.isArray(fm['tags']) ? (fm['tags'] as string[]) : [];
+      const tags = Array.isArray(fm.tags) ? (fm.tags as string[]) : [];
       if (tags.length === 0) {
         rulesWithNoTags.push(path.relative(REPO_ROOT, filePath));
       }

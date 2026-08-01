@@ -13,7 +13,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 import { SKILLS } from './config.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -116,16 +116,15 @@ function exportRules(): ExportRow[] {
     for (const filePath of collectMd(skillConfig.rulesDir)) {
       const content = fs.readFileSync(filePath, 'utf8');
       const fm = parseFm(content);
-      const tags = Array.isArray(fm['tags']) ? (fm['tags'] as string[]) : [];
+      const tags = Array.isArray(fm.tags) ? (fm.tags as string[]) : [];
 
       rows.push({
         skill: skillName,
         file: path.relative(REPO_ROOT, filePath),
-        title: typeof fm['title'] === 'string' ? fm['title'] : '',
-        type: typeof fm['type'] === 'string' ? fm['type'] : '',
-        impact: typeof fm['impact'] === 'string' ? fm['impact'].toUpperCase() : '',
-        impactDescription:
-          typeof fm['impactDescription'] === 'string' ? fm['impactDescription'] : '',
+        title: typeof fm.title === 'string' ? fm.title : '',
+        type: typeof fm.type === 'string' ? fm.type : '',
+        impact: typeof fm.impact === 'string' ? fm.impact.toUpperCase() : '',
+        impactDescription: typeof fm.impactDescription === 'string' ? fm.impactDescription : '',
         tags: tags.join(', '),
         tagCount: tags.length,
       });
@@ -180,5 +179,5 @@ if (outFile) {
   fs.writeFileSync(path.resolve(outFile), output, 'utf8');
   console.error(`✓ Exported ${rows.length} rules to ${outFile} (${format.toUpperCase()})`);
 } else {
-  process.stdout.write(output + '\n');
+  process.stdout.write(`${output}\n`);
 }

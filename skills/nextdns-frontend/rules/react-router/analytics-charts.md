@@ -1,5 +1,5 @@
 ---
-title: 'Analytics Charts (React Router v7)'
+title: 'Analytics Charts (React Router v8)'
 impact: MEDIUM
 impactDescription:
   'Fetching analytics data from the client exposes the API key; all NextDNS analytics requests must
@@ -16,9 +16,9 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Analytics charts React router v7)
+# Analytics charts React router v8)
 
-Fetch NextDNS analytics data in a React Router v7 `loader` and render interactive charts in React
+Fetch NextDNS analytics data in a React Router v8 `loader` and render interactive charts in React
 components
 
 ## Overview
@@ -145,6 +145,6 @@ new one, keeping the URL clean.
 
 ## Reference
 
-- [React Router v7 — Data Loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Data Loading](https://reactrouter.com/start/framework/data-loading)
 - [Recharts Documentation](https://recharts.org)
 - [NextDNS API — Analytics](https://nextdns.github.io/api/#analytics)

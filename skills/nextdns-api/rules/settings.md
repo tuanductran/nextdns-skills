@@ -115,6 +115,13 @@ await fetch('https://api.nextdns.io/profiles/abc123/settings', {
 | `performance.ecs`             | boolean | Send EDNS Client Subnet for geo-aware answers                                                        |
 | `web3`                        | boolean | Enable Web3/blockchain domain resolution                                                             |
 
+> **Note**: The dashboard also exposes a "Bypass Age Verification" toggle (added August 2025). It
+> is **not confirmed** in the official API reference at the time of writing — no field name for it
+> could be verified from `nextdns.github.io/api`. Don't guess a field name (e.g.
+> `bypassAgeVerification`) for this setting; if you need to control it programmatically, inspect
+> the actual `GET .../settings` response for your profile to find the real field, since NextDNS may
+> not have documented it yet.
+
 ## Do NOT Use
 
 ```javascript

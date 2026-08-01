@@ -2,7 +2,7 @@
 
 **Version 1.0.0**  
 NextDNS Skills  
-March 2026
+August 2026
 
 > **Note:**  
 > This document is mainly for agents and LLMs to follow when maintaining,  

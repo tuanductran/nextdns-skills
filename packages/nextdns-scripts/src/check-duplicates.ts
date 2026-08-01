@@ -12,7 +12,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 import { collectRuleFiles, parseFrontmatter } from './utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -58,8 +58,8 @@ function loadAllRules(): RuleEntry[] {
     for (const filePath of collectRuleFiles(rulesDir)) {
       const content = fs.readFileSync(filePath, 'utf8');
       const fm = parseFrontmatter(content);
-      const title = typeof fm['title'] === 'string' ? fm['title'] : '';
-      const tags = Array.isArray(fm['tags']) ? (fm['tags'] as string[]) : [];
+      const title = typeof fm.title === 'string' ? fm.title : '';
+      const tags = Array.isArray(fm.tags) ? (fm.tags as string[]) : [];
 
       // Determine subdir (first path component inside rules/)
       const rel = path.relative(path.join(dir, 'rules'), filePath);

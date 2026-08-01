@@ -1,8 +1,8 @@
 ---
 name: nextdns-frontend
 description:
-  Frontend integration for the NextDNS API using Nuxt 4, Next.js 15, Astro, SvelteKit, or React Router
-  v7. This skill covers secure API key proxying via the BFF pattern, profile management UI,
+  Frontend integration for the NextDNS API using Nuxt 4, Next.js 16, Astro, SvelteKit, or React Router
+  v8. This skill covers secure API key proxying via the BFF pattern, profile management UI,
   real-time SSE log streaming, analytics chart data preparation, and error handling. Use this skill
   when building a custom NextDNS dashboard or management interface with any popular full-stack
   framework. Triggers on tasks involving Nuxt, Vue, Next.js, Astro, React, SvelteKit, Svelte, React
@@ -17,7 +17,7 @@ metadata:
 
 # NextDNS frontend skills
 
-Nuxt, Next.js, Astro, SvelteKit, and React Router v7 patterns for building a secure, full-featured
+Nuxt, Next.js, Astro, SvelteKit, and React Router v8 patterns for building a secure, full-featured
 NextDNS management dashboard.
 
 ## Nuxt rules
@@ -36,12 +36,12 @@ Patterns for Nuxt 4 (Vue) projects.
 
 ## Next.js rules
 
-Patterns for Next.js 15 (React) projects using the App Router.
+Patterns for Next.js 16 (React) projects using the App Router.
 
 | Rule                                                           | Keywords                                                         | Description                                            |
 | -------------------------------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------ |
 | [api-proxy](rules/nextjs/api-proxy.md)                         | api key, bff, route handler, proxy, process.env, security        | Proxy X-Api-Key through Next.js Route Handlers (BFF)   |
-| [project-setup](rules/nextjs/project-setup.md)                 | next.js, setup, next.config, env vars, typescript, app router    | Bootstrap a Next.js 15 project for NextDNS integration |
+| [project-setup](rules/nextjs/project-setup.md)                 | next.js, setup, next.config, env vars, typescript, app router    | Bootstrap a Next.js 16 project for NextDNS integration |
 | [profile-management-ui](rules/nextjs/profile-management-ui.md) | profile, crud, server component, react, fetch                    | Build profile list, create, update, and delete flows   |
 | [logs-streaming](rules/nextjs/logs-streaming.md)               | logs, streaming, sse, readable stream, real-time, server-sent    | Proxy and consume the NextDNS SSE log stream           |
 | [analytics-charts](rules/nextjs/analytics-charts.md)           | analytics, charts, time series, dashboard, server component      | Fetch and render analytics and time-series data        |
@@ -60,7 +60,7 @@ Patterns for Astro (React islands) projects.
 | [logs-streaming](rules/astro/logs-streaming.md)               | logs, streaming, sse, readable stream, real-time, client:only        | Proxy and consume the NextDNS SSE log stream               |
 | [analytics-charts](rules/astro/analytics-charts.md)           | analytics, charts, time series, dashboard, react island, swr         | Fetch and render analytics and time-series data            |
 | [error-handling](rules/astro/error-handling.md)               | error handling, error page, astro actions, api errors, react island  | Map NextDNS API errors to Astro pages and React islands    |
-| [server-islands](rules/astro/server-islands.md)               | server islands, server:defer, lazy load, performance, astro 5        | Lazy-load analytics panels with Astro 5 Server Islands     |
+| [server-islands](rules/astro/server-islands.md)               | server islands, server:defer, lazy load, performance, astro 6        | Lazy-load analytics panels with Astro 6 Server Islands     |
 
 ## SvelteKit rules
 
@@ -76,14 +76,14 @@ Patterns for SvelteKit (Svelte 5) projects.
 | [error-handling](rules/sveltekit/error-handling.md)               | error handling, +error.svelte, error(), fail(), api errors         | Map NextDNS API errors to SvelteKit error boundaries      |
 | [websocket-alternative](rules/sveltekit/websocket-alternative.md) | polling, long-polling, cloudflare, edge, sse fallback, interval    | Polling-based log fetching for platforms without SSE      |
 
-## React router v7 rules
+## React router v8 rules
 
-Patterns for React Router v7 (formerly Remix) projects.
+Patterns for React Router v8 (formerly Remix) projects.
 
 | Rule                                                                 | Keywords                                                             | Description                                                 |
 | -------------------------------------------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------- |
 | [api-proxy](rules/react-router/api-proxy.md)                         | api key, bff, resource route, proxy, process.env, security           | Proxy X-Api-Key through React Router resource routes (BFF)  |
-| [project-setup](rules/react-router/project-setup.md)                 | react router, setup, react-router.config, ssr, environment variables | Bootstrap a React Router v7 project for NextDNS integration |
+| [project-setup](rules/react-router/project-setup.md)                 | react router, setup, react-router.config, ssr, environment variables | Bootstrap a React Router v8 project for NextDNS integration |
 | [profile-management-ui](rules/react-router/profile-management-ui.md) | profile, crud, loader, action, react, form                           | Build profile list, create, update, and delete flows        |
 | [logs-streaming](rules/react-router/logs-streaming.md)               | logs, streaming, sse, resource route, readable stream, real-time     | Proxy and consume the NextDNS SSE log stream                |
 | [analytics-charts](rules/react-router/analytics-charts.md)           | analytics, charts, time series, dashboard, loader, recharts          | Fetch and render analytics and time-series data             |
@@ -103,7 +103,7 @@ Patterns for React Router v7 (formerly Remix) projects.
 - [Astro Documentation](https://docs.astro.build)
 - [Astro React Integration](https://docs.astro.build/en/guides/integrations-guide/react/)
 - [SvelteKit Documentation](https://kit.svelte.dev/docs)
-- [React Router v7 Documentation](https://reactrouter.com/start/framework/installation)
+- [React Router v8 Documentation](https://reactrouter.com/start/framework/installation)
 - [NextDNS API Reference](https://nextdns.github.io/api/)
 - [VueUse](https://vueuse.org)
 - [TanStack Query](https://tanstack.com/query/latest)

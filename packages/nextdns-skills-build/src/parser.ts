@@ -235,7 +235,7 @@ export async function parseRuleFile(
 
   flushExample();
 
-  const ruleType = frontmatter['type'] as RuleType | undefined;
+  const ruleType = frontmatter.type as RuleType | undefined;
   const effectiveSectionMap = sectionMap ?? { capability: 1, efficiency: 2 };
   let section = 0;
 
@@ -246,16 +246,16 @@ export async function parseRuleFile(
   if (section === 0 && relativePath) {
     const parts = relativePath.replace(/\\/g, '/').split('/');
     if (parts.length > 1) {
-      outer: for (let len = parts.length - 1; len > 0; len--) {
+      for (let len = parts.length - 1; len > 0; len--) {
         const prefix = parts.slice(0, len).join('/');
         if (effectiveSectionMap[prefix] !== undefined) {
           section = effectiveSectionMap[prefix] ?? 0;
-          break outer;
+          break;
         }
         const dirName = parts[len - 1];
         if (dirName !== undefined && effectiveSectionMap[dirName] !== undefined) {
           section = effectiveSectionMap[dirName] ?? 0;
-          break outer;
+          break;
         }
       }
     }
@@ -273,17 +273,17 @@ export async function parseRuleFile(
     }
   }
 
-  if (frontmatter['section']) section = Number(frontmatter['section']) || section;
+  if (frontmatter.section) section = Number(frontmatter.section) || section;
 
   const validImpacts: ImpactLevel[] = ['HIGH', 'MEDIUM', 'LOW'];
-  const rawImpact = (frontmatter['impact'] as string | undefined) ?? 'MEDIUM';
+  const rawImpact = (frontmatter.impact as string | undefined) ?? 'MEDIUM';
   const impact: ImpactLevel = validImpacts.includes(rawImpact as ImpactLevel)
     ? (rawImpact as ImpactLevel)
     : 'MEDIUM';
 
-  const impactDescription = (frontmatter['impactDescription'] as string | undefined) ?? '';
+  const impactDescription = (frontmatter.impactDescription as string | undefined) ?? '';
 
-  const rawTags = frontmatter['tags'];
+  const rawTags = frontmatter.tags;
   const tags: string[] | undefined = Array.isArray(rawTags)
     ? (rawTags as unknown[]).filter((t): t is string => typeof t === 'string')
     : typeof rawTags === 'string'
@@ -294,7 +294,7 @@ export async function parseRuleFile(
   // assigning undefined to them. Use conditional spread for all optional fields.
   const rule: Rule = {
     id: '',
-    title: (frontmatter['title'] as string | undefined) ?? title,
+    title: (frontmatter.title as string | undefined) ?? title,
     section,
     impact,
     impactDescription,

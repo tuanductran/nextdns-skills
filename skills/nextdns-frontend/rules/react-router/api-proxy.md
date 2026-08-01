@@ -18,13 +18,13 @@ tags:
 
 # API key proxy (bff pattern)
 
-Proxy all NextDNS API calls through React Router v7 resource routes to keep X-Api-Key server-side
+Proxy all NextDNS API calls through React Router v8 resource routes to keep X-Api-Key server-side
 only
 
 ## Overview
 
 The NextDNS `X-Api-Key` grants full account access. It must **never** appear in browser-visible
-code. React Router v7 resource routes (route modules without a default component export) run
+code. React Router v8 resource routes (route modules without a default component export) run
 exclusively on the server and are the correct place to attach the key before forwarding requests to
 `api.nextdns.io`. Environment variables without the `VITE_` prefix are never included in client
 bundles.
@@ -149,7 +149,7 @@ export default function Dashboard() {
 
 ## Best practices
 
-- **`.server.ts` suffix**: Vite (used by React Router v7) strips files ending in `.server.ts` from
+- **`.server.ts` suffix**: Vite (used by React Router v8) strips files ending in `.server.ts` from
   client bundles, preventing accidental imports of server-only code.
 - **`process.env` in loaders/actions**: Server code (loaders, actions, resource routes) runs only on
   the server and has access to `process.env`. Never pass env vars to client components as props.
@@ -170,6 +170,6 @@ component export — a default export turns it into a UI route, not a resource r
 
 ## Reference
 
-- [React Router v7 — Resource Routes](https://reactrouter.com/how-to/resource-routes)
-- [React Router v7 — Data Loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Resource Routes](https://reactrouter.com/how-to/resource-routes)
+- [React Router v8 — Data Loading](https://reactrouter.com/start/framework/data-loading)
 - [NextDNS API — Authentication](https://nextdns.github.io/api/#authentication)

@@ -18,16 +18,22 @@ tags:
 
 # Project setup
 
-Bootstrap a Next.js 15 App Router project configured to integrate with the NextDNS API
+Bootstrap a Next.js 16 App Router project configured to integrate with the NextDNS API
 
 ## Overview
 
 A NextDNS Next.js frontend requires:
 
-1. A Next.js 15 project with TypeScript and the App Router enabled
+1. A Next.js 16 project with TypeScript and the App Router enabled
 2. Server-only environment variables (no `NEXT_PUBLIC_` prefix) for the API key
 3. A `lib/nextdns.ts` shared fetcher — used exclusively in Route Handlers and Server Components
 4. Optional: shadcn/ui for components, SWR or React Query for Client Component data fetching
+
+> **Breaking change from 15**: Next.js 16 deprecates `middleware.js`/`middleware.ts` in favor of
+> `proxy.ts` as the edge/origin boundary. This skill's Route Handler + Server Component patterns
+> (below) don't rely on middleware, so they're unaffected — but if an existing project uses
+> middleware to inject the `X-Api-Key` header or gate routes, migrate that logic to `proxy.ts`
+> before upgrading. Next.js 15 itself is still supported until October 21, 2026.
 
 ## Correct usage
 

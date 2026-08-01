@@ -18,7 +18,7 @@ tags:
 
 # TanStack Query v5 integration
 
-Integrate TanStack Query v5 with Next.js 15 App Router for prefetching in Server Components and mutations in Client Components
+Integrate TanStack Query v5 with Next.js 16 App Router for prefetching in Server Components and mutations in Client Components
 
 ## Overview
 

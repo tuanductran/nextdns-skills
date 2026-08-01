@@ -1,5 +1,5 @@
 ---
-title: 'Data Revalidation Strategies (React Router v7)'
+title: 'Data Revalidation Strategies (React Router v8)'
 impact: MEDIUM
 impactDescription: 'Without shouldRevalidate or fetcher-based mutations, every navigation triggers a full loader re-run, causing unnecessary API calls and UI flicker'
 type: efficiency
@@ -16,9 +16,9 @@ tags:
 
 <!-- @case-police-ignore Api -->
 
-# Data Revalidation Strategies (React Router v7)
+# Data Revalidation Strategies (React Router v8)
 
-Control when React Router v7 re-runs loaders and implement background mutations with fetchers
+Control when React Router v8 re-runs loaders and implement background mutations with fetchers
 
 ## Overview
 
@@ -247,7 +247,7 @@ navigate('.'); // ❌ Use fetcher.submit instead
 
 ## Reference
 
-- [React Router v7 — Data loading](https://reactrouter.com/start/framework/data-loading)
-- [React Router v7 — Fetchers](https://reactrouter.com/api/hooks/useFetcher)
-- [React Router v7 — Defer and Await](https://reactrouter.com/api/utils/data)
-- [React Router v7 — Await](https://reactrouter.com/api/components/Await)
+- [React Router v8 — Data loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Fetchers](https://reactrouter.com/api/hooks/useFetcher)
+- [React Router v8 — Defer and Await](https://reactrouter.com/api/utils/data)
+- [React Router v8 — Await](https://reactrouter.com/api/components/Await)
