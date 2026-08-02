@@ -111,7 +111,7 @@ If the installation fails, run the installer in debug mode:
 
 ### 1.2 Browser Native DoH Configuration
 
-**Impact: MEDIUM ()**
+**Impact: MEDIUM**
 
 Enables NextDNS protection in restricted environments without system-wide changes or administrative
 
@@ -313,7 +313,7 @@ If Firefox falls back to system DNS (when using "Increased Protection" mode):
 
 ### 1.3 DNSMasq Integration
 
-**Impact: MEDIUM ()**
+**Impact: MEDIUM**
 
 Enables DNSMasq and NextDNS to run together while preserving client reporting and conditional
 
@@ -687,7 +687,7 @@ After any firmware update:
 
 ### 1.7 Home Assistant Integration
 
-**Impact: MEDIUM ()**
+**Impact: MEDIUM**
 
 Enables automated DNS control and monitoring through Home Assistant smart home platform
 
@@ -1142,7 +1142,7 @@ add address=45.90.30.0 name=dns.nextdns.io
 
 ### 1.11 Mobile Native Encrypted DNS Configuration
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Enables NextDNS protection on mobile devices using built-in OS features without battery-draining
 
@@ -1292,7 +1292,7 @@ If you have a `.mobileconfig` file from NextDNS:
 
 ### 1.12 OpenWrt Integration
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Essential for deploying NextDNS on OpenWrt routers with proper installation methods and
 
@@ -1372,7 +1372,7 @@ This will output verbose information that can help identify the root cause of in
 
 ### 1.13 pfSense and OPNsense Integration
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Critical for deploying NextDNS on enterprise-grade firewalls with proper encrypted DNS configuration
 
@@ -1512,7 +1512,7 @@ OPNsense also supports the CLI installer:
 
 ### 1.14 Public DNS and AdGuard Home Integration
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Critical for unlinked device setup and AdGuard Home upstream configuration
 
@@ -1756,7 +1756,7 @@ Force devices to renew their DHCP lease:
 
 ### 1.16 Synology Integration (DSM and SRM)
 
-**Impact: MEDIUM ()**
+**Impact: MEDIUM**
 
 Essential for deploying NextDNS on Synology NAS (DSM) and routers (SRM) with proper SSH access and
 
@@ -1896,7 +1896,7 @@ This will output verbose information to help identify the problem.
 
 ### 1.17 Tailscale Integration
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Critical for protecting mesh VPN traffic with NextDNS filtering and enforcing DNS policies across
 
@@ -2040,7 +2040,7 @@ This prevents Tailscale from sending device names, operating systems, and other 
 
 ### 1.18 Ubiquiti (UniFi) Integration
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Essential for preventing DNS conflicts on Ubiquiti UniFi Dream Machines and Gateways
 

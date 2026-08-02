@@ -3,8 +3,7 @@
   "ui": "stream",
   "globalDependencies": [
     "tsconfig.json",
-    "oxfmt.config.ts",
-    "oxlint.config.ts",
+    "vite.config.ts",
     "pnpm-workspace.yaml"
   ],
   "tasks": {

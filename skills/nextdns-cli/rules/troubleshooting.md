@@ -6,7 +6,7 @@ type: capability
 tags:
   - diagnostic
   - connection test
-  - DNS leak
+  - dns leak
   - debug
 ---
 

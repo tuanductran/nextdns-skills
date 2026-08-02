@@ -9,7 +9,7 @@ tags:
   - cryptojacking
   - dns rebinding
   - security
-  - TLDs
+  - tlds
 ---
 
 # Security settings

@@ -386,7 +386,7 @@ Once installed as a service, use these commands to manage the NextDNS background
 
 ### 1.8 DD-WRT Installation
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Essential setup for NextDNS CLI on DD-WRT routers with persistent configuration
 
@@ -506,7 +506,7 @@ Common issues and solutions:
 
 ### 1.9 Docker Deployment
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Essential container deployment patterns for optimal DNS resolution and client tracking
 
@@ -602,7 +602,7 @@ Check logs for errors:
 
 ### 1.10 FreeBSD Installation
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Install and configure NextDNS CLI on FreeBSD using pkg or the ports collection
 
@@ -833,7 +833,7 @@ While the universal installer is recommended, some platforms have specific consi
 
 ### 1.13 macOS Installation
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Essential setup methods and configuration options for macOS systems
 
@@ -969,7 +969,7 @@ high-traffic environments.
 
 ### 1.15 NixOS Installation
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Install and configure NextDNS CLI on NixOS using declarative system configuration
 
@@ -1417,7 +1417,7 @@ NextDNS provides a diagnostic tool to help support staff:
 
 ### 1.22 Windows Installation
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Critical for proper NextDNS deployment on Windows systems
 

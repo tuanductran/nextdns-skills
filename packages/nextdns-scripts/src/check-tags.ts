@@ -194,6 +194,31 @@ function validateTags(): boolean {
           message: `Unexpected ALLCAPS tags (use lowercase or known acronyms): [${allcapsTags.join(', ')}]`,
         });
       }
+
+      // Title-case single-word tags that are not camelCase API names (e.g. Windows, Homebrew, Systray)
+      // camelCase (useFetch, runtimeConfig, createError, shouldRevalidate, ErrorBoundary) are allowed
+      // as they are framework API identifiers.
+      const titleCaseTags = tags.filter((t) => {
+        const words = t.split(/[\s-]/);
+        return words.some((w) => {
+          if (w.length < 2) return false;
+          const firstUpper = w[0] === w[0]?.toUpperCase() && w[0] !== w[0]?.toLowerCase();
+          if (!firstUpper) return false;
+          // Allow ALLCAPS (already caught above) and camelCase (has uppercase letter after position 0)
+          const isCamelCase = /[A-Z]/.test(w.slice(1));
+          if (isCamelCase) return false;
+          // Allow known acronyms
+          if (knownAcronyms.has(w.toLowerCase())) return false;
+          return true;
+        });
+      });
+      if (titleCaseTags.length > 0) {
+        errors.push({
+          file: rel,
+          level: 'warn',
+          message: `Title-case tags should be lowercase: [${titleCaseTags.join(', ')}]`,
+        });
+      }
     }
   }
 

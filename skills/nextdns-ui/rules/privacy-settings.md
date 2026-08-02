@@ -9,8 +9,8 @@ tags:
   - disguised trackers
   - privacy
   - oisd
-  - hostsVN
-  - Hagezi
+  - hostsvn
+  - hagezi
 ---
 
 # Privacy settings

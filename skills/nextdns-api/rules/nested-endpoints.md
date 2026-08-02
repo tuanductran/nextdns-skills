@@ -6,10 +6,10 @@ type: capability
 tags:
   - nested objects
   - child endpoints
-  - PATCH
-  - DELETE
-  - PUT
-  - POST
+  - patch
+  - delete
+  - put
+  - post
 ---
 
 <!-- @case-police-ignore Api -->

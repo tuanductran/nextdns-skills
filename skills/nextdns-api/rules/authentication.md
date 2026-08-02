@@ -5,8 +5,8 @@ impactDescription: 'Authenticate all NextDNS API requests with API key'
 type: capability
 tags:
   - authentication
-  - API key
-  - X-Api-Key
+  - api key
+  - x-api-key
   - authorization
   - security
 ---

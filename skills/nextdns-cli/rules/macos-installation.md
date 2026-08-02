@@ -7,11 +7,11 @@ impactDescription:
   failures, configuration issues, or suboptimal setup for their specific use case.'
 type: capability
 tags:
-  - macOS
-  - Homebrew
-  - App Store
+  - macos
+  - homebrew
+  - app store
   - installer
-  - Mac
+  - mac
   - installation
   - setup
 ---

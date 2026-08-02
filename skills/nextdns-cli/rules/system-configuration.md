@@ -6,7 +6,7 @@ type: capability
 tags:
   - activate
   - deactivate
-  - DNS resolver
+  - dns resolver
   - system dns
 ---
 

@@ -5,7 +5,7 @@ impactDescription: 'Create, read, update, and delete NextDNS profiles'
 type: capability
 tags:
   - profiles
-  - CRUD
+  - crud
   - create profile
   - update profile
   - delete profile

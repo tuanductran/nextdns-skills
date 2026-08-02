@@ -6,13 +6,13 @@ impactDescription:
   appropriate privileges and system integration'
 type: capability
 tags:
-  - Windows
-  - GUI
-  - CLI
+  - windows
+  - gui
+  - cli
   - installation
   - setup
-  - EXE
-  - Systray
+  - exe
+  - systray
 ---
 
 # Windows installation
