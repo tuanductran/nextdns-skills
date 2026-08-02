@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vite-plus/test';
 
 // ─── Tag validation rules (mirrors check-tags.ts logic) ──────────────────────
 

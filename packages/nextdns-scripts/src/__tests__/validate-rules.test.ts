@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vite-plus/test';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -41,15 +41,15 @@ function missingFields(fm: string): string[] {
 function invalidImpact(fm: string): string | null {
   const m = fm.match(/^impact:\s*(.*)/m);
   if (!m) return null;
-  const v = m[1].trim() as (typeof VALID_IMPACTS)[number];
-  return VALID_IMPACTS.includes(v) ? null : v;
+  const v = (m[1] ?? '').trim();
+  return (VALID_IMPACTS as readonly string[]).includes(v) ? null : v;
 }
 
 function invalidType(fm: string): string | null {
   const m = fm.match(/^type:\s*(.*)/m);
   if (!m) return null;
-  const v = m[1].trim() as (typeof VALID_TYPES)[number];
-  return VALID_TYPES.includes(v) ? null : v;
+  const v = (m[1] ?? '').trim();
+  return (VALID_TYPES as readonly string[]).includes(v) ? null : v;
 }
 
 function hasStringTags(fm: string): boolean {

@@ -1,8 +1,39 @@
 packages:
-  - 'packages/*'
+  - "packages/*"
 
 allowBuilds:
   esbuild: true
+  lefthook: true
+
+catalogs:
+  dev:
+    "@types/node": ^26.1.2
+    typescript: 6.0.3
+
+  test:
+    "@vitest/coverage-v8": 4.1.10
+    vitest: 4.1.10
+    vite: npm:@voidzero-dev/vite-plus-core@0.2.7
+    vite-plus: 0.2.7
+
+  lint:
+    case-police: ^2.2.1
+    knip: ^6.31.0
+    linkinator: ^8.0.3
+    markdownlint-cli: ^0.49.1
+
+  build:
+    lefthook: ^2.1.10
+    turbo: ^2.10.7
 
 overrides:
-  minimatch: '>=10.2.3'
+  minimatch: ">=10.2.3"
+  vite: catalog:test
+  vitest: catalog:test
+peerDependencyRules:
+  allowAny:
+    - vite
+    - vitest
+  allowedVersions:
+    vite: "*"
+    vitest: "*"

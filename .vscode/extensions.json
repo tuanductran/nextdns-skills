@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint",
+    "antfu.pnpm-catalog-lens",
+    "vercel.turbo-vsc",
+    "yoavbls.pretty-ts-errors",
+    "oxc.oxc-vscode"
+  ]
+}

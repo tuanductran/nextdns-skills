@@ -1,7 +1,8 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vite-plus/test';
+
 import { collectRuleFiles, parseFrontmatter, walkDir } from '../utils.js';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -78,9 +79,9 @@ type: capability
 ---
 # Body`;
     const fm = parseFrontmatter(md);
-    expect(fm.title).toBe('Authentication');
-    expect(fm.impact).toBe('HIGH');
-    expect(fm.type).toBe('capability');
+    expect(fm['title']).toBe('Authentication');
+    expect(fm['impact']).toBe('HIGH');
+    expect(fm['type']).toBe('capability');
   });
 
   it('parses YAML array fields', () => {
@@ -91,7 +92,7 @@ tags:
   - authentication
 ---`;
     const fm = parseFrontmatter(md);
-    expect(fm.tags).toEqual(['api', 'security', 'authentication']);
+    expect(fm['tags']).toEqual(['api', 'security', 'authentication']);
   });
 
   it('strips surrounding quotes from values', () => {
@@ -100,8 +101,8 @@ title: "Rate Limiting"
 impactDescription: 'Some description'
 ---`;
     const fm = parseFrontmatter(md);
-    expect(fm.title).toBe('Rate Limiting');
-    expect(fm.impactDescription).toBe('Some description');
+    expect(fm['title']).toBe('Rate Limiting');
+    expect(fm['impactDescription']).toBe('Some description');
   });
 
   it('handles multiple fields including mixed scalar and array', () => {
@@ -114,10 +115,10 @@ tags:
 type: efficiency
 ---`;
     const fm = parseFrontmatter(md);
-    expect(fm.title).toBe('My Rule');
-    expect(fm.impact).toBe('MEDIUM');
-    expect(fm.tags).toEqual(['one', 'two']);
-    expect(fm.type).toBe('efficiency');
+    expect(fm['title']).toBe('My Rule');
+    expect(fm['impact']).toBe('MEDIUM');
+    expect(fm['tags']).toEqual(['one', 'two']);
+    expect(fm['type']).toBe('efficiency');
   });
 
   it('returns empty object when closing --- is missing', () => {

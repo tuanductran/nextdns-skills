@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vite-plus/test';
+
 import { DEFAULT_SKILL, SKILLS, SKILLS_DIR } from '../config.js';
 
 describe('SKILLS registry', () => {
@@ -39,18 +40,24 @@ describe('SKILLS registry', () => {
   it('non-frontend skills have capability and efficiency sections', () => {
     const nonFrontend = ['nextdns-api', 'nextdns-cli', 'nextdns-ui', 'integrations'];
     for (const key of nonFrontend) {
-      const { sectionMap } = SKILLS[key];
-      expect(sectionMap.capability, `${key} capability section`).toBe(1);
-      expect(sectionMap.efficiency, `${key} efficiency section`).toBe(2);
+      const skill = SKILLS[key];
+      expect(skill).toBeDefined();
+      if (!skill) return;
+      const { sectionMap } = skill;
+      expect(sectionMap['capability'], `${key} capability section`).toBe(1);
+      expect(sectionMap['efficiency'], `${key} efficiency section`).toBe(2);
     }
   });
 
   it('nextdns-frontend has framework sections', () => {
-    const { sectionMap } = SKILLS['nextdns-frontend'];
-    expect(sectionMap.nuxt).toBe(1);
-    expect(sectionMap.nextjs).toBe(2);
-    expect(sectionMap.astro).toBe(3);
-    expect(sectionMap.sveltekit).toBe(4);
+    const skill = SKILLS['nextdns-frontend'];
+    expect(skill).toBeDefined();
+    if (!skill) return;
+    const { sectionMap } = skill;
+    expect(sectionMap['nuxt']).toBe(1);
+    expect(sectionMap['nextjs']).toBe(2);
+    expect(sectionMap['astro']).toBe(3);
+    expect(sectionMap['sveltekit']).toBe(4);
     expect(sectionMap['react-router']).toBe(5);
   });
 

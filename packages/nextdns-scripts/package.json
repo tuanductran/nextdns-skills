@@ -2,42 +2,47 @@
   "name": "nextdns-skills-scripts",
   "version": "1.0.0",
   "description": "Maintenance scripts for NextDNS Skills: validate rule integrity, sync counts, check duplicates/tags, and generate stats",
-  "type": "module",
+  "keywords": [
+    "maintenance",
+    "nextdns",
+    "scripts",
+    "skills",
+    "validation"
+  ],
+  "license": "MIT",
+  "bin": {
+    "nextdns-skills-scripts": "./bin/nextdns-skills-scripts.js"
+  },
   "files": [
+    "bin",
     "dist"
   ],
+  "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./dist/index.mjs"
     }
   },
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "types:check": "tsc --noEmit",
+    "build": "vp pack",
+    "check-duplicates": "nextdns-skills-scripts check-duplicates",
+    "check-tags": "nextdns-skills-scripts check-tags",
+    "dev": "vp pack --watch",
+    "generate-stats": "nextdns-skills-scripts generate-stats",
     "prepublishOnly": "pnpm build",
-    "validate-rules": "node dist/validate-rules.js",
-    "update-counts": "node dist/update-counts.js",
-    "check-duplicates": "node dist/check-duplicates.js",
-    "check-tags": "node dist/check-tags.js",
-    "generate-stats": "node dist/generate-stats.js",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test": "vp test run",
+    "test:coverage": "vp test run --coverage",
+    "test:watch": "vp test",
+    "types:check": "tsc --noEmit",
+    "update-counts": "nextdns-skills-scripts update-counts",
+    "validate-rules": "nextdns-skills-scripts validate-rules"
   },
-  "keywords": [
-    "nextdns",
-    "skills",
-    "scripts",
-    "validation",
-    "maintenance"
-  ],
-  "license": "MIT",
   "devDependencies": {
-    "@types/node": "^26.1.2",
-    "@vitest/coverage-v8": "^4.1.10",
-    "tsup": "^8.5.1",
-    "typescript": "6.0.3",
-    "vitest": "^4.1.10"
+    "@types/node": "catalog:dev",
+    "@vitest/coverage-v8": "catalog:test",
+    "typescript": "catalog:dev",
+    "vite": "catalog:test",
+    "vite-plus": "catalog:test",
+    "vitest": "catalog:test"
   }
 }

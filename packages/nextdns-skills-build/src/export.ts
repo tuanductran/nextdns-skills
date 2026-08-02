@@ -14,6 +14,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { SKILLS } from './config.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -116,15 +117,16 @@ function exportRules(): ExportRow[] {
     for (const filePath of collectMd(skillConfig.rulesDir)) {
       const content = fs.readFileSync(filePath, 'utf8');
       const fm = parseFm(content);
-      const tags = Array.isArray(fm.tags) ? (fm.tags as string[]) : [];
+      const tags = Array.isArray(fm['tags']) ? fm['tags'] : [];
 
       rows.push({
         skill: skillName,
         file: path.relative(REPO_ROOT, filePath),
-        title: typeof fm.title === 'string' ? fm.title : '',
-        type: typeof fm.type === 'string' ? fm.type : '',
-        impact: typeof fm.impact === 'string' ? fm.impact.toUpperCase() : '',
-        impactDescription: typeof fm.impactDescription === 'string' ? fm.impactDescription : '',
+        title: typeof fm['title'] === 'string' ? fm['title'] : '',
+        type: typeof fm['type'] === 'string' ? fm['type'] : '',
+        impact: typeof fm['impact'] === 'string' ? fm['impact'].toUpperCase() : '',
+        impactDescription:
+          typeof fm['impactDescription'] === 'string' ? fm['impactDescription'] : '',
         tags: tags.join(', '),
         tagCount: tags.length,
       });
@@ -148,7 +150,7 @@ function toJson(rows: ExportRow[]): string {
 }
 
 function toCsv(rows: ExportRow[]): string {
-  const headers = [
+  const headers: (keyof ExportRow)[] = [
     'skill',
     'file',
     'title',
@@ -164,10 +166,7 @@ function toCsv(rows: ExportRow[]): string {
       ? `"${s.replace(/"/g, '""')}"`
       : s;
   };
-  const lines = [
-    headers.join(','),
-    ...rows.map((r) => headers.map((h) => escape(r[h as keyof ExportRow])).join(',')),
-  ];
+  const lines = [headers.join(','), ...rows.map((r) => headers.map((h) => escape(r[h])).join(','))];
   return lines.join('\n');
 }
 

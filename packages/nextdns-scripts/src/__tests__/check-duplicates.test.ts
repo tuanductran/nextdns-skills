@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vite-plus/test';
 
 // ─── Normalize helper (same logic as check-duplicates.ts) ─────────────────
 
@@ -102,7 +102,7 @@ describe('duplicate detection logic', () => {
     ];
     const dups = detectDuplicates(rules);
     expect(dups).toHaveLength(1);
-    expect(dups[0].kind).toBe('error');
+    expect(dups[0]?.kind).toBe('error');
   });
 
   it('flags same title across different skills as WARN', () => {
@@ -122,7 +122,7 @@ describe('duplicate detection logic', () => {
     ];
     const dups = detectDuplicates(rules);
     expect(dups).toHaveLength(1);
-    expect(dups[0].kind).toBe('warn');
+    expect(dups[0]?.kind).toBe('warn');
   });
 
   it('marks framework variants in nextdns-frontend as INFO (expected)', () => {
@@ -148,7 +148,7 @@ describe('duplicate detection logic', () => {
     ];
     const dups = detectDuplicates(rules);
     expect(dups).toHaveLength(1);
-    expect(dups[0].kind).toBe('info');
+    expect(dups[0]?.kind).toBe('info');
   });
 
   it('does not confuse near-duplicates that share normalized form', () => {
@@ -167,6 +167,6 @@ describe('duplicate detection logic', () => {
       },
     ];
     const dups = detectDuplicates(rules);
-    expect(dups[0].kind).toBe('warn'); // across skills → warn, not error
+    expect(dups[0]?.kind).toBe('warn'); // across skills → warn, not error
   });
 });

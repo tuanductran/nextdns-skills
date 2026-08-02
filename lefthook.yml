@@ -1,0 +1,39 @@
+$schema: ./node_modules/lefthook/schema.json
+
+pre-commit:
+  parallel: true
+
+  jobs:
+    - name: vite-plus-staged
+      run: vp staged
+      stage_fixed: true
+
+    - name: lint:md
+      glob: "**/*.md"
+      run: pnpm run lint:md:fix
+      stage_fixed: true
+
+    - name: lint:syntax
+      glob: "skills/**/rules/**/*.md"
+      run: pnpm run lint:syntax:fix
+      stage_fixed: true
+
+pre-push:
+  parallel: true
+
+  jobs:
+    - name: types:check
+      run: pnpm run types:check
+
+    - name: lint:links
+      run: pnpm run lint:links
+
+post-merge:
+  jobs:
+    - name: install
+      glob:
+        - package.json
+        - pnpm-lock.yaml
+        - pnpm-workspace.yaml
+        - packages/*/package.json
+      run: pnpm install

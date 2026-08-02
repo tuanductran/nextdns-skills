@@ -14,6 +14,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { SKILLS } from './config.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -112,12 +113,12 @@ function search(): SearchResult[] {
       const content = fs.readFileSync(filePath, 'utf8');
       const fm = parseFm(content);
 
-      const title = typeof fm.title === 'string' ? fm.title : '';
-      const type = typeof fm.type === 'string' ? fm.type : '';
-      const impact = typeof fm.impact === 'string' ? fm.impact.toUpperCase() : '';
-      const tags = Array.isArray(fm.tags) ? (fm.tags as string[]) : [];
+      const title = typeof fm['title'] === 'string' ? fm['title'] : '';
+      const type = typeof fm['type'] === 'string' ? fm['type'] : '';
+      const impact = typeof fm['impact'] === 'string' ? fm['impact'].toUpperCase() : '';
+      const tags = Array.isArray(fm['tags']) ? fm['tags'] : [];
       const impactDescription =
-        typeof fm.impactDescription === 'string' ? fm.impactDescription : '';
+        typeof fm['impactDescription'] === 'string' ? fm['impactDescription'] : '';
 
       // Extract body (after frontmatter)
       const fmEnd = content.indexOf('\n---', 3);

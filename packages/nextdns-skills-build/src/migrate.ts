@@ -8,6 +8,7 @@
 import { existsSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+
 import { DEFAULT_SKILL, SKILLS } from './config.js';
 
 // Parse CLI args
@@ -111,4 +112,4 @@ TODO: step-by-step diagnostic guidance.
   }
 }
 
-migrate();
+void migrate();

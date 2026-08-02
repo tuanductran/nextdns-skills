@@ -4,9 +4,11 @@
  */
 
 import { relative } from 'node:path';
+
+import type { Rule } from './types.js';
+
 import { DEFAULT_SKILL, SKILLS } from './config.js';
 import { parseRuleFile } from './parser.js';
-import type { Rule } from './types.js';
 import { collectRuleFiles } from './utils.js';
 
 interface ValidationError {
@@ -102,4 +104,4 @@ async function validate() {
   }
 }
 
-validate();
+void validate();

@@ -1,10 +1,16 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "stream",
+  "globalDependencies": [
+    "tsconfig.json",
+    "oxfmt.config.ts",
+    "oxlint.config.ts",
+    "pnpm-workspace.yaml"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["src/**", "tsup.config.ts", "tsconfig.json", "package.json"],
+      "inputs": ["src/**", "bin/**", "tsdown.config.ts", "tsconfig.json", "package.json"],
       "outputs": ["dist/**"]
     },
     "dev": {
@@ -94,7 +100,11 @@
     "update-counts": {
       "dependsOn": ["build"],
       "inputs": ["$TURBO_ROOT$/skills/**/*.md"],
-      "outputs": ["$TURBO_ROOT$/README.md", "$TURBO_ROOT$/skills/*/AGENTS.md"]
+      "outputs": [
+        "$TURBO_ROOT$/README.md",
+        "$TURBO_ROOT$/AGENTS.md",
+        "$TURBO_ROOT$/skills/*/AGENTS.md"
+      ]
     },
     "search": {
       "dependsOn": ["build"],

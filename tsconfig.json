@@ -1,18 +1,35 @@
 {
   "compilerOptions": {
     "target": "ES2022",
+    "lib": ["ES2022"],
+
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "lib": ["ES2022"],
+    "moduleDetection": "force",
+
+    "types": ["node"],
+
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "verbatimModuleSyntax": true,
+
+    "noEmit": true,
+    "skipLibCheck": true,
+
+    "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
-    "types": ["node"],
-    "skipLibCheck": true,
-    "noEmit": true
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "useUnknownInCatchVariables": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true
   },
-  "include": ["packages/*/src/**/*.ts"],
-  "exclude": ["**/node_modules/**", "**/dist/**", "**/coverage/**", "packages/*/src/__tests__/**"]
+  "exclude": ["node_modules", "dist"]
 }

@@ -12,6 +12,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { walkDir } from './utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -109,7 +110,7 @@ function validateFieldValues(file: string, frontmatter: string): boolean {
   const impactMatch = frontmatter.match(/^impact:\s*(.*)/m);
   if (impactMatch) {
     const impact = (impactMatch[1] ?? '').trim();
-    if (!VALID_IMPACTS.includes(impact as ImpactLevel)) {
+    if (!(VALID_IMPACTS as readonly string[]).includes(impact)) {
       printError(
         `Invalid impact in ${file}: '${impact}'. Must be one of: ${VALID_IMPACTS.join(', ')}`
       );
@@ -120,7 +121,7 @@ function validateFieldValues(file: string, frontmatter: string): boolean {
   const typeMatch = frontmatter.match(/^type:\s*(.*)/m);
   if (typeMatch) {
     const type = (typeMatch[1] ?? '').trim();
-    if (!VALID_TYPES.includes(type as RuleType)) {
+    if (!(VALID_TYPES as readonly string[]).includes(type)) {
       printError(`Invalid type in ${file}: '${type}'. Must be one of: ${VALID_TYPES.join(', ')}`);
       errorsFound = true;
     }
