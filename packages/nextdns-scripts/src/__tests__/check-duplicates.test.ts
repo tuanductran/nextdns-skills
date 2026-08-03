@@ -1,16 +1,29 @@
 import { describe, expect, it } from 'vite-plus/test';
 
-// ─── Normalize helper (same logic as check-duplicates.ts) ─────────────────
+import {
+  checkDuplicateTags,
+  checkDuplicateTitles,
+  normalize,
+  type RuleEntry,
+} from '../check-duplicates.js';
 
-function normalize(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function makeRule(overrides: Partial<RuleEntry> = {}): RuleEntry {
+  const title = overrides.title ?? 'Authentication';
+  return {
+    file: 'skills/test/rules/auth.md',
+    skill: 'nextdns-api',
+    subdir: '',
+    title,
+    normalizedTitle: normalize(title),
+    tags: ['api', 'auth', 'security'],
+    tagKey: 'api|auth|security',
+    ...overrides,
+  };
 }
 
-// ─── Tests ────────────────────────────────────────────────────────────────────
+// ─── normalize ────────────────────────────────────────────────────────────────
 
 describe('normalize', () => {
   it('lowercases the title', () => {
@@ -29,144 +42,125 @@ describe('normalize', () => {
     expect(normalize('  Rule Title  ')).toBe('rule title');
   });
 
-  it('treats near-duplicate titles as equal after normalization', () => {
-    expect(normalize('Error Handling')).toBe(normalize('Error handling'));
-    expect(normalize('DNS Rewrites')).toBe(normalize('DNS rewrites'));
+  it('returns empty string for empty input', () => {
+    expect(normalize('')).toBe('');
   });
 
-  it('treats truly different titles as different', () => {
-    expect(normalize('Authentication')).not.toBe(normalize('Authorization'));
+  it('handles special chars only', () => {
+    expect(normalize('---')).toBe('');
   });
 });
 
-describe('duplicate detection logic', () => {
-  interface RuleStub {
-    skill: string;
-    subdir: string;
-    title: string;
-    normalizedTitle: string;
-  }
+// ─── checkDuplicateTitles ─────────────────────────────────────────────────────
 
-  function detectDuplicates(
-    rules: RuleStub[]
-  ): Array<{ group: RuleStub[]; kind: 'error' | 'warn' | 'info' }> {
-    const byTitle = new Map<string, RuleStub[]>();
-    for (const r of rules) {
-      const g = byTitle.get(r.normalizedTitle) ?? [];
-      g.push(r);
-      byTitle.set(r.normalizedTitle, g);
-    }
+describe('checkDuplicateTitles', () => {
+  it('returns zero errors/warnings for unique titles', () => {
+    const rules = [
+      makeRule({ title: 'Authentication', skill: 'nextdns-api' }),
+      makeRule({ title: 'Error Handling', skill: 'nextdns-api' }),
+    ];
+    const result = checkDuplicateTitles(rules);
+    expect(result.errors).toBe(0);
+    expect(result.warnings).toBe(0);
+  });
 
-    const results: Array<{ group: RuleStub[]; kind: 'error' | 'warn' | 'info' }> = [];
-    for (const [, group] of byTitle) {
-      if (group.length < 2) continue;
-      const skills = [...new Set(group.map((r) => r.skill))];
-      const isSingleSkill = skills.length === 1;
-      const isFrontendFrameworks =
-        skills.every((s) => s === 'nextdns-frontend') && group.every((r) => r.subdir !== '');
-
-      if (isFrontendFrameworks) results.push({ group, kind: 'info' });
-      else if (isSingleSkill) results.push({ group, kind: 'error' });
-      else results.push({ group, kind: 'warn' });
-    }
-    return results;
-  }
-
-  it('returns empty when no duplicates', () => {
-    const rules: RuleStub[] = [
-      {
-        skill: 'nextdns-api',
-        subdir: '',
+  it('counts an error for duplicate title within same skill', () => {
+    const rules = [
+      makeRule({
         title: 'Authentication',
-        normalizedTitle: 'authentication',
-      },
-      { skill: 'nextdns-cli', subdir: '', title: 'Installation', normalizedTitle: 'installation' },
+        skill: 'nextdns-api',
+        file: 'skills/nextdns-api/rules/a.md',
+      }),
+      makeRule({
+        title: 'Authentication',
+        skill: 'nextdns-api',
+        file: 'skills/nextdns-api/rules/b.md',
+      }),
     ];
-    expect(detectDuplicates(rules)).toHaveLength(0);
+    const result = checkDuplicateTitles(rules);
+    expect(result.errors).toBe(1);
+    expect(result.warnings).toBe(0);
   });
 
-  it('flags same title within same skill as ERROR', () => {
-    const rules: RuleStub[] = [
-      {
-        skill: 'nextdns-api',
-        subdir: '',
-        title: 'Security Settings',
-        normalizedTitle: 'security settings',
-      },
-      {
-        skill: 'nextdns-api',
-        subdir: '',
-        title: 'Security Settings',
-        normalizedTitle: 'security settings',
-      },
+  it('counts a warning for same title across different skills', () => {
+    const rules = [
+      makeRule({ title: 'Security Settings', skill: 'nextdns-api' }),
+      makeRule({ title: 'Security Settings', skill: 'nextdns-ui' }),
     ];
-    const dups = detectDuplicates(rules);
-    expect(dups).toHaveLength(1);
-    expect(dups[0]?.kind).toBe('error');
+    const result = checkDuplicateTitles(rules);
+    expect(result.errors).toBe(0);
+    expect(result.warnings).toBe(1);
   });
 
-  it('flags same title across different skills as WARN', () => {
-    const rules: RuleStub[] = [
-      {
+  it('treats frontend framework variants as expected (no error/warning)', () => {
+    const rules = [
+      makeRule({ title: 'Error Handling', skill: 'nextdns-frontend', subdir: 'nuxt' }),
+      makeRule({ title: 'Error Handling', skill: 'nextdns-frontend', subdir: 'nextjs' }),
+    ];
+    const result = checkDuplicateTitles(rules);
+    expect(result.errors).toBe(0);
+    expect(result.warnings).toBe(0);
+  });
+
+  it('handles empty rules list', () => {
+    const result = checkDuplicateTitles([]);
+    expect(result.errors).toBe(0);
+    expect(result.warnings).toBe(0);
+  });
+});
+
+// ─── checkDuplicateTags ───────────────────────────────────────────────────────
+
+describe('checkDuplicateTags', () => {
+  it('returns 0 for unique tag sets', () => {
+    const rules = [
+      makeRule({ tagKey: 'api|auth|security', tags: ['api', 'auth', 'security'] }),
+      makeRule({ tagKey: 'cli|dns|setup', tags: ['cli', 'dns', 'setup'] }),
+    ];
+    expect(checkDuplicateTags(rules)).toBe(0);
+  });
+
+  it('counts identical tag sets across different rules', () => {
+    const rules = [
+      makeRule({
         skill: 'nextdns-api',
-        subdir: '',
-        title: 'Privacy Settings',
-        normalizedTitle: 'privacy settings',
-      },
-      {
+        tagKey: 'api|auth|security',
+        tags: ['api', 'auth', 'security'],
+        file: 'a.md',
+      }),
+      makeRule({
         skill: 'nextdns-ui',
-        subdir: '',
-        title: 'Privacy Settings',
-        normalizedTitle: 'privacy settings',
-      },
+        tagKey: 'api|auth|security',
+        tags: ['api', 'auth', 'security'],
+        file: 'b.md',
+      }),
     ];
-    const dups = detectDuplicates(rules);
-    expect(dups).toHaveLength(1);
-    expect(dups[0]?.kind).toBe('warn');
+    expect(checkDuplicateTags(rules)).toBe(1);
   });
 
-  it('marks framework variants in nextdns-frontend as INFO (expected)', () => {
-    const rules: RuleStub[] = [
-      {
+  it('skips frontend framework subdirectory duplicates', () => {
+    const rules = [
+      makeRule({
         skill: 'nextdns-frontend',
         subdir: 'nuxt',
-        title: 'API Key Proxy (BFF Pattern)',
-        normalizedTitle: 'api key proxy bff pattern',
-      },
-      {
+        tagKey: 'api|auth|security',
+        tags: ['api', 'auth', 'security'],
+      }),
+      makeRule({
         skill: 'nextdns-frontend',
         subdir: 'nextjs',
-        title: 'API Key Proxy (BFF Pattern)',
-        normalizedTitle: 'api key proxy bff pattern',
-      },
-      {
-        skill: 'nextdns-frontend',
-        subdir: 'astro',
-        title: 'API Key Proxy (BFF Pattern)',
-        normalizedTitle: 'api key proxy bff pattern',
-      },
+        tagKey: 'api|auth|security',
+        tags: ['api', 'auth', 'security'],
+      }),
     ];
-    const dups = detectDuplicates(rules);
-    expect(dups).toHaveLength(1);
-    expect(dups[0]?.kind).toBe('info');
+    expect(checkDuplicateTags(rules)).toBe(0);
   });
 
-  it('does not confuse near-duplicates that share normalized form', () => {
-    const rules: RuleStub[] = [
-      {
-        skill: 'nextdns-api',
-        subdir: '',
-        title: 'DNS Rewrites',
-        normalizedTitle: normalize('DNS Rewrites'),
-      },
-      {
-        skill: 'nextdns-ui',
-        subdir: '',
-        title: 'DNS Rewrites',
-        normalizedTitle: normalize('DNS Rewrites'),
-      },
+  it('handles rules with empty tags', () => {
+    const rules = [
+      makeRule({ tagKey: '', tags: [], file: 'a.md' }),
+      makeRule({ tagKey: '', tags: [], file: 'b.md' }),
     ];
-    const dups = detectDuplicates(rules);
-    expect(dups[0]?.kind).toBe('warn'); // across skills → warn, not error
+    expect(checkDuplicateTags(rules)).toBe(0);
   });
 });

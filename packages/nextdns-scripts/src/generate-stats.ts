@@ -25,10 +25,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(__dirname, '../../..');
 const SKILLS_DIR = path.join(REPO_ROOT, 'skills');
 
-const args = process.argv.slice(2);
-const outputMode: 'json' | 'text' = args.includes('--text') ? 'text' : 'json';
-
-interface SkillStats {
+export interface SkillStats {
   name: string;
   total: number;
   capability: number;
@@ -38,7 +35,7 @@ interface SkillStats {
   low: number;
 }
 
-interface StatsReport {
+export interface StatsReport {
   generatedAt: string;
   totalRules: number;
   skills: SkillStats[];
@@ -47,11 +44,14 @@ interface StatsReport {
   rulesWithNoTags: string[];
 }
 
-function buildReport(): StatsReport {
+export function buildReport(
+  skillsDir: string = SKILLS_DIR,
+  repoRoot: string = REPO_ROOT
+): StatsReport {
   const skillDirs = fs
-    .readdirSync(SKILLS_DIR, { withFileTypes: true })
+    .readdirSync(skillsDir, { withFileTypes: true })
     .filter((e) => e.isDirectory())
-    .map((e) => ({ name: e.name, dir: path.join(SKILLS_DIR, e.name) }));
+    .map((e) => ({ name: e.name, dir: path.join(skillsDir, e.name) }));
 
   const tagCounts = new Map<string, number>();
   const rulesWithNoTags: string[] = [];
@@ -98,7 +98,7 @@ function buildReport(): StatsReport {
 
       const tags = Array.isArray(fm['tags']) ? fm['tags'] : [];
       if (tags.length === 0) {
-        rulesWithNoTags.push(path.relative(REPO_ROOT, filePath));
+        rulesWithNoTags.push(path.relative(repoRoot, filePath));
       }
       for (const tag of tags) {
         tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
@@ -123,7 +123,7 @@ function buildReport(): StatsReport {
   };
 }
 
-function printText(report: StatsReport): void {
+export function printText(report: StatsReport): void {
   const GREEN = '\x1b[0;32m';
   const BOLD = '\x1b[1m';
   const NC = '\x1b[0m';
@@ -156,10 +156,15 @@ function printText(report: StatsReport): void {
   }
 }
 
-const report = buildReport();
+/* ========= Entry Point ========= */
 
-if (outputMode === 'text') {
-  printText(report);
-} else {
-  console.log(JSON.stringify(report, null, 2));
+if (fileURLToPath(import.meta.url) === process.argv[1]) {
+  const args = process.argv.slice(2);
+  const outputMode: 'json' | 'text' = args.includes('--text') ? 'text' : 'json';
+  const report = buildReport();
+  if (outputMode === 'text') {
+    printText(report);
+  } else {
+    console.log(JSON.stringify(report, null, 2));
+  }
 }

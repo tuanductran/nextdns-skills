@@ -1,208 +1,104 @@
 import { describe, expect, it } from 'vite-plus/test';
 
-// ─── Tag validation rules (mirrors check-tags.ts logic) ──────────────────────
+import { KNOWN_ACRONYMS, MAX_TAGS, MIN_TAGS, validateFileTags } from '../check-tags.js';
 
-const MIN_TAGS = 3;
-const MAX_TAGS = 10;
-
-const KNOWN_ACRONYMS = new Set([
-  'cli',
-  'dns',
-  'api',
-  'sse',
-  'bff',
-  'tld',
-  'tlds',
-  'ecs',
-  'doh',
-  'dot',
-  'gui',
-  'nrd',
-  'ttl',
-  'jffs',
-  'ntp',
-  'vpn',
-  'mdm',
-  'lan',
-  'wan',
-  'ssh',
-  'nas',
-  'iot',
-  'tcp',
-  'udp',
-  'url',
-  'uri',
-  'http',
-  'https',
-  'html',
-  'json',
-  'yaml',
-  'csv',
-  'id',
-  'ip',
-  'ui',
-  'ux',
-  'ci',
-  'cd',
-  'pr',
-  'os',
-  'pc',
-  'tv',
-  'crud',
-  'patch',
-  'delete',
-  'put',
-  'post',
-  'get',
-  'rest',
-  'exe',
-  'msi',
-  'pkg',
-  'apk',
-  'iso',
-]);
-
-interface TagIssue {
-  level: 'error' | 'warn';
-  message: string;
-}
-
-function validateTags(tags: string[]): TagIssue[] {
-  const issues: TagIssue[] = [];
-
-  if (tags.length === 0) {
-    issues.push({ level: 'error', message: 'No tags defined (minimum 3 required)' });
-    return issues;
-  }
-
-  if (tags.length < MIN_TAGS) {
-    issues.push({ level: 'error', message: `Only ${tags.length} tag(s) — minimum is ${MIN_TAGS}` });
-  }
-
-  if (tags.length > MAX_TAGS) {
-    issues.push({
-      level: 'warn',
-      message: `${tags.length} tags — consider trimming to max ${MAX_TAGS}`,
-    });
-  }
-
-  const shortTags = tags.filter((t) => t.trim().length <= 1);
-  if (shortTags.length > 0) {
-    issues.push({ level: 'error', message: `Single-character tags: [${shortTags.join(', ')}]` });
-  }
-
-  const seen = new Set<string>();
-  const dupes: string[] = [];
-  for (const tag of tags) {
-    const key = tag.toLowerCase();
-    if (seen.has(key)) dupes.push(tag);
-    seen.add(key);
-  }
-  if (dupes.length > 0) {
-    issues.push({ level: 'error', message: `Duplicate tags: [${dupes.join(', ')}]` });
-  }
-
-  const allcapsTags = tags.filter((t) => {
-    if (/^[A-Z][A-Z]+-[A-Z][A-Z]+$/.test(t)) return false; // DD-WRT style
-    const stripped = t.replace(/[^a-zA-Z]/g, '');
-    if (stripped.length === 0) return false;
-    if (stripped === stripped.toUpperCase() && stripped.length > 2) {
-      return !KNOWN_ACRONYMS.has(stripped.toLowerCase());
-    }
-    return false;
+describe('validateFileTags — tag count', () => {
+  it('errors when no tags', () => {
+    const errs = validateFileTags([], 'test.md');
+    expect(errs).toHaveLength(1);
+    expect(errs[0]?.level).toBe('error');
+    expect(errs[0]?.message).toMatch(/minimum 3/);
   });
 
-  if (allcapsTags.length > 0) {
-    issues.push({ level: 'warn', message: `Unexpected ALLCAPS tags: [${allcapsTags.join(', ')}]` });
-  }
-
-  return issues;
-}
-
-// ─── Tests ────────────────────────────────────────────────────────────────────
-
-describe('validateTags — count rules', () => {
-  it('passes with exactly 3 tags', () => {
-    const issues = validateTags(['docker', 'container', 'deployment']);
-    expect(issues.filter((i) => i.level === 'error')).toHaveLength(0);
+  it('errors when below MIN_TAGS', () => {
+    const errs = validateFileTags(['dns', 'api'], 'test.md');
+    expect(errs.some((e) => e.message.includes(`minimum is ${MIN_TAGS}`))).toBe(true);
   });
 
-  it('passes with 10 tags', () => {
-    const tags = Array.from({ length: 10 }, (_, i) => `tag-${i}`);
-    expect(validateTags(tags).filter((i) => i.level === 'error')).toHaveLength(0);
+  it('warns when above MAX_TAGS', () => {
+    const tags = Array.from({ length: MAX_TAGS + 1 }, (_, i) => `tag${i}`);
+    const errs = validateFileTags(tags, 'test.md');
+    expect(errs.some((e) => e.level === 'warn' && e.message.includes('consider trimming'))).toBe(
+      true
+    );
   });
 
-  it('errors with 0 tags', () => {
-    const issues = validateTags([]);
-    expect(issues.some((i) => i.level === 'error')).toBe(true);
-  });
-
-  it('errors with only 1 tag', () => {
-    const issues = validateTags(['docker']);
-    expect(issues.some((i) => i.level === 'error' && i.message.includes('minimum'))).toBe(true);
-  });
-
-  it('errors with only 2 tags', () => {
-    const issues = validateTags(['docker', 'container']);
-    expect(issues.some((i) => i.level === 'error')).toBe(true);
-  });
-
-  it('warns with 11 tags', () => {
-    const tags = Array.from({ length: 11 }, (_, i) => `tag-${i}`);
-    expect(
-      validateTags(tags).some((i) => i.level === 'warn' && i.message.includes('trimming'))
-    ).toBe(true);
+  it('passes with exactly MIN_TAGS tags', () => {
+    const errs = validateFileTags(['dns', 'api', 'setup'], 'test.md');
+    expect(errs).toHaveLength(0);
   });
 });
 
-describe('validateTags — single character tags', () => {
+describe('validateFileTags — single-character tags', () => {
   it('errors on single-character tag', () => {
-    const issues = validateTags(['a', 'docker', 'container']);
-    expect(issues.some((i) => i.message.includes('Single-character'))).toBe(true);
+    const errs = validateFileTags(['a', 'dns', 'api'], 'test.md');
+    expect(errs.some((e) => e.message.includes('Single-character'))).toBe(true);
   });
 
-  it('allows two-character tags', () => {
-    const issues = validateTags(['ip', 'ui', 'ux']);
-    expect(issues.some((i) => i.message.includes('Single-character'))).toBe(false);
-  });
-});
-
-describe('validateTags — duplicate detection', () => {
-  it('errors on duplicate tags (case-insensitive)', () => {
-    const issues = validateTags(['docker', 'Docker', 'container']);
-    expect(issues.some((i) => i.message.includes('Duplicate'))).toBe(true);
-  });
-
-  it('passes with unique lowercase tags', () => {
-    const issues = validateTags(['docker', 'container', 'deployment']);
-    expect(issues.some((i) => i.message.includes('Duplicate'))).toBe(false);
+  it('does not error on two-character tag', () => {
+    const errs = validateFileTags(['ip', 'dns', 'api'], 'test.md');
+    expect(errs.every((e) => !e.message.includes('Single-character'))).toBe(true);
   });
 });
 
-describe('validateTags — ALLCAPS handling', () => {
-  it('allows known acronyms (CLI, DNS, API, etc.)', () => {
-    const issues = validateTags(['cli', 'dns', 'api']);
-    expect(issues.some((i) => i.message.includes('ALLCAPS'))).toBe(false);
+describe('validateFileTags — duplicate tags', () => {
+  it('errors on duplicate tag (case-insensitive)', () => {
+    const errs = validateFileTags(['dns', 'DNS', 'api'], 'test.md');
+    expect(errs.some((e) => e.message.includes('Duplicate tags'))).toBe(true);
   });
 
-  it('allows HTTP verbs (PATCH, DELETE, POST)', () => {
-    const issues = validateTags(['patch', 'delete', 'post']);
-    expect(issues.some((i) => i.message.includes('ALLCAPS'))).toBe(false);
+  it('passes with no duplicates', () => {
+    const errs = validateFileTags(['dns', 'api', 'setup'], 'test.md');
+    expect(errs).toHaveLength(0);
+  });
+});
+
+describe('validateFileTags — ALLCAPS tags', () => {
+  it('warns on unknown ALLCAPS tag', () => {
+    const errs = validateFileTags(['UNKNOWN', 'dns', 'api'], 'test.md');
+    expect(errs.some((e) => e.message.includes('ALLCAPS'))).toBe(true);
   });
 
-  it('allows hyphenated ALLCAPS brand names like DD-WRT', () => {
-    const issues = validateTags(['DD-WRT', 'router', 'installation']);
-    expect(issues.some((i) => i.message.includes('ALLCAPS'))).toBe(false);
+  it('allows known acronym in any casing (stored lowercase)', () => {
+    // Known acronyms in set are lowercase: 'cli', 'dns', 'api'
+    // When tags are already lowercase they should not trigger ALLCAPS check
+    const errs = validateFileTags(['cli', 'dns', 'api'], 'test.md');
+    expect(errs).toHaveLength(0);
   });
 
-  it('warns on unexpected ALLCAPS (e.g. FOOBAR)', () => {
-    const issues = validateTags(['FOOBAR', 'docker', 'container']);
-    expect(issues.some((i) => i.level === 'warn' && i.message.includes('ALLCAPS'))).toBe(true);
+  it('allows hyphenated all-caps brand names like DD-WRT', () => {
+    const errs = validateFileTags(['DD-WRT', 'dns', 'api'], 'test.md');
+    expect(errs.some((e) => e.message.includes('ALLCAPS'))).toBe(false);
+  });
+});
+
+describe('validateFileTags — title-case tags', () => {
+  it('warns on title-case word', () => {
+    const errs = validateFileTags(['Windows', 'dns', 'api'], 'test.md');
+    expect(errs.some((e) => e.message.includes('Title-case'))).toBe(true);
   });
 
-  it('allows camelCase proper nouns (runtimeConfig, useFetch)', () => {
-    // camelCase is not ALLCAPS — should not be flagged
-    const issues = validateTags(['runtimeConfig', 'useFetch', 'vue']);
-    expect(issues.some((i) => i.message.includes('ALLCAPS'))).toBe(false);
+  it('allows camelCase API identifiers', () => {
+    const errs = validateFileTags(['useFetch', 'runtimeConfig', 'api'], 'test.md');
+    expect(errs.every((e) => !e.message.includes('Title-case'))).toBe(true);
+  });
+
+  it('warns on title-case within hyphenated tag', () => {
+    const errs = validateFileTags(['App-Store', 'dns', 'api'], 'test.md');
+    expect(errs.some((e) => e.message.includes('Title-case'))).toBe(true);
+  });
+});
+
+describe('KNOWN_ACRONYMS', () => {
+  it('includes common networking acronyms', () => {
+    expect(KNOWN_ACRONYMS.has('dns')).toBe(true);
+    expect(KNOWN_ACRONYMS.has('api')).toBe(true);
+    expect(KNOWN_ACRONYMS.has('cli')).toBe(true);
+    expect(KNOWN_ACRONYMS.has('ssh')).toBe(true);
+  });
+
+  it('does not include arbitrary words', () => {
+    expect(KNOWN_ACRONYMS.has('windows')).toBe(false);
+    expect(KNOWN_ACRONYMS.has('homebrew')).toBe(false);
   });
 });

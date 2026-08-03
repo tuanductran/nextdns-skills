@@ -26,17 +26,22 @@ const BLUE = '\x1b[0;34m';
 const GREEN = '\x1b[0;32m';
 const NC = '\x1b[0m';
 
-interface RuleEntry {
+export interface RuleEntry {
   file: string;
   skill: string;
-  subdir: string; // e.g. "nuxt", "nextjs", "" for flat skills
+  subdir: string;
   title: string;
   normalizedTitle: string;
   tags: string[];
   tagKey: string;
 }
 
-function normalize(title: string): string {
+export interface DuplicateTitleResult {
+  errors: number;
+  warnings: number;
+}
+
+export function normalize(title: string): string {
   return title
     .toLowerCase()
     .replace(/[^a-z0-9\s]/g, '')
@@ -44,13 +49,13 @@ function normalize(title: string): string {
     .trim();
 }
 
-function loadAllRules(): RuleEntry[] {
+export function loadAllRules(skillsDir: string = SKILLS_DIR): RuleEntry[] {
   const entries: RuleEntry[] = [];
 
   const skillDirs = fs
-    .readdirSync(SKILLS_DIR, { withFileTypes: true })
+    .readdirSync(skillsDir, { withFileTypes: true })
     .filter((e) => e.isDirectory())
-    .map((e) => ({ name: e.name, dir: path.join(SKILLS_DIR, e.name) }));
+    .map((e) => ({ name: e.name, dir: path.join(skillsDir, e.name) }));
 
   for (const { name: skill, dir } of skillDirs) {
     const rulesDir = path.join(dir, 'rules');
@@ -62,13 +67,12 @@ function loadAllRules(): RuleEntry[] {
       const title = typeof fm['title'] === 'string' ? fm['title'] : '';
       const tags = Array.isArray(fm['tags']) ? fm['tags'] : [];
 
-      // Determine subdir (first path component inside rules/)
       const rel = path.relative(path.join(dir, 'rules'), filePath);
       const parts = rel.split(path.sep);
       const subdir = parts.length > 1 ? (parts[0] ?? '') : '';
 
       entries.push({
-        file: path.relative(REPO_ROOT, filePath),
+        file: path.relative(path.resolve(skillsDir, '../..'), filePath),
         skill,
         subdir,
         title,
@@ -82,7 +86,7 @@ function loadAllRules(): RuleEntry[] {
   return entries;
 }
 
-function checkDuplicateTitles(rules: RuleEntry[]): { errors: number; warnings: number } {
+export function checkDuplicateTitles(rules: RuleEntry[]): DuplicateTitleResult {
   console.log('🔍 Checking for duplicate titles...');
   let errors = 0;
   let warnings = 0;
@@ -106,21 +110,18 @@ function checkDuplicateTitles(rules: RuleEntry[]): { errors: number; warnings: n
       skills.every((s) => s === 'nextdns-frontend') && group.every((r) => r.subdir !== '');
 
     if (isFrontendFrameworks) {
-      // Expected pattern — same concept implemented per framework
       console.log(`\n${BLUE}ℹ️  Framework variants (expected): "${first.title}"${NC}`);
       for (const r of group) console.log(`  → ${r.file} [${r.subdir}]`);
       continue;
     }
 
     if (isSingleSkill) {
-      // Within same skill — likely unintentional
       console.log(
         `\n${RED}❌ ERROR — duplicate within skill "${first.skill}": "${first.title}"${NC}`
       );
       for (const r of group) console.log(`  → ${r.file}`);
       errors++;
     } else {
-      // Across different skills — may be intentional (same feature, different angle)
       console.log(
         `\n${YELLOW}⚠️  WARN — same title across skills [${skills.join(', ')}]: "${first.title}"${NC}`
       );
@@ -134,7 +135,7 @@ function checkDuplicateTitles(rules: RuleEntry[]): { errors: number; warnings: n
   return { errors, warnings };
 }
 
-function checkDuplicateTags(rules: RuleEntry[]): number {
+export function checkDuplicateTags(rules: RuleEntry[]): number {
   console.log('\n🔍 Checking for identical tag sets...');
   let issues = 0;
 
@@ -148,7 +149,6 @@ function checkDuplicateTags(rules: RuleEntry[]): number {
 
   for (const [tagKey, group] of byTagKey) {
     if (group.length < 2) continue;
-    // Skip expected framework duplicates
     if (group.every((r) => r.skill === 'nextdns-frontend' && r.subdir !== '')) continue;
     console.log(`\n${YELLOW}⚠️  Identical tag set: [${tagKey.replace(/\|/g, ', ')}]${NC}`);
     for (const r of group) console.log(`  → ${r.file} ("${r.title}")`);
@@ -159,25 +159,27 @@ function checkDuplicateTags(rules: RuleEntry[]): number {
   return issues;
 }
 
-// Main
-const rules = loadAllRules();
-console.log(`Loaded ${rules.length} rules\n`);
+// Run only when executed directly (not imported as a module in tests)
+if (fileURLToPath(import.meta.url) === process.argv[1]) {
+  const rules = loadAllRules();
+  console.log(`Loaded ${rules.length} rules\n`);
 
-const { errors, warnings } = checkDuplicateTitles(rules);
-const tagIssues = checkDuplicateTags(rules);
+  const { errors, warnings } = checkDuplicateTitles(rules);
+  const tagIssues = checkDuplicateTags(rules);
 
-console.log('\n──────────────────────────────');
-if (errors > 0) {
-  console.log(
-    `${RED}${errors} hard error(s), ${warnings} warning(s), ${tagIssues} tag issue(s).${NC}`
-  );
-  process.exit(1);
+  console.log('\n──────────────────────────────');
+  if (errors > 0) {
+    console.log(
+      `${RED}${errors} hard error(s), ${warnings} warning(s), ${tagIssues} tag issue(s).${NC}`
+    );
+    process.exit(1);
+  }
+  if (warnings + tagIssues > 0) {
+    console.log(
+      `${YELLOW}0 errors, ${warnings} warning(s), ${tagIssues} tag issue(s). No blocking issues.${NC}`
+    );
+  } else {
+    console.log(`${GREEN}✅ All clear!${NC}`);
+  }
+  process.exit(0);
 }
-if (warnings + tagIssues > 0) {
-  console.log(
-    `${YELLOW}0 errors, ${warnings} warning(s), ${tagIssues} tag issue(s). No blocking issues.${NC}`
-  );
-} else {
-  console.log(`${GREEN}✅ All clear!${NC}`);
-}
-process.exit(0);

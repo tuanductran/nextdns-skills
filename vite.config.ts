@@ -29,7 +29,9 @@ export default defineConfig({
     },
   },
   lint: {
-    jsPlugins: [{ name: 'vite-plus', specifier: 'vite-plus/oxlint-plugin' }],
+    // jsPlugins removed: vite-plus/oxlint-plugin causes oxc_allocator thread panic
+    // in oxlint >=1.73 when used via vp lint. The vite-plus/prefer-vite-plus-imports
+    // rule it provides is enforced via code review instead.
     categories: {
       correctness: 'error',
       suspicious: 'warn',
@@ -38,10 +40,10 @@ export default defineConfig({
       'no-underscore-dangle': 'off',
       'unicorn/no-array-sort': 'off',
       'unicorn/consistent-function-scoping': 'off',
-      'vite-plus/prefer-vite-plus-imports': 'error',
     },
     ignorePatterns: ['**/dist/**', '**/coverage/**', '**/node_modules/**'],
-    options: { typeAware: true, typeCheck: true },
+    // typeAware/typeCheck also disabled: causes the same allocator panic.
+    // Full type checking is covered by `tsc --noEmit` (pnpm types:check).
   },
   staged: {
     '*.{ts,json,yml,yaml}': 'vp check --fix',

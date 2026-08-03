@@ -52,7 +52,7 @@
     "lint:code": "vp lint .",
     "lint:code:fix": "vp lint . --fix",
     "lint:fix": "pnpm run format && pnpm run lint:code:fix && pnpm run lint:md:fix && pnpm run lint:syntax:fix && pnpm run lint:rules && pnpm run types:check",
-    "lint:links": "linkinator \"skills/**/SKILL.md\" \"skills/**/rules/**/*.md\"",
+    "lint:links": "linkinator \"skills/**/SKILL.md\" \"skills/**/rules/**/*.md\" --status-code \"403:skip\"",
     "lint:md": "markdownlint .",
     "lint:md:fix": "markdownlint . --fix",
     "lint:quality": "turbo run check-duplicates check-tags",

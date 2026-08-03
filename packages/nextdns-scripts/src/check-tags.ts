@@ -25,200 +25,205 @@ const YELLOW = '\x1b[0;33m';
 const GREEN = '\x1b[0;32m';
 const NC = '\x1b[0m';
 
-const MIN_TAGS = 3;
-const MAX_TAGS = 10;
+export const MIN_TAGS = 3;
+export const MAX_TAGS = 10;
 
-interface TagError {
+export interface TagError {
   file: string;
   level: 'error' | 'warn';
   message: string;
 }
 
-function validateTags(): boolean {
+export const KNOWN_ACRONYMS = new Set([
+  'cli',
+  'dns',
+  'api',
+  'sse',
+  'bff',
+  'tld',
+  'tlds',
+  'ecs',
+  'doh',
+  'dot',
+  'gui',
+  'nrd',
+  'ttl',
+  'jffs',
+  'ntp',
+  'vpn',
+  'mdm',
+  'lan',
+  'wan',
+  'ssh',
+  'nas',
+  'iot',
+  'tcp',
+  'udp',
+  'url',
+  'uri',
+  'http',
+  'https',
+  'html',
+  'json',
+  'yaml',
+  'csv',
+  'id',
+  'ip',
+  'ui',
+  'ux',
+  'ci',
+  'cd',
+  'pr',
+  'os',
+  'pc',
+  'tv',
+  'dga',
+  'ddns',
+  'csam',
+  'crud',
+  'dd-wrt',
+  'dd',
+  'patch',
+  'delete',
+  'put',
+  'post',
+  'get',
+  'rest',
+  'exe',
+  'msi',
+  'pkg',
+  'apk',
+  'dmg',
+  'iso',
+  'idn',
+  'isp',
+  'asn',
+  'mx',
+  'ptr',
+  'txt',
+  'cname',
+  'aaaa',
+  'spf',
+  'dkim',
+  'dmarc',
+  'dnssec',
+  'edns',
+]);
+
+/**
+ * Validate tags for a single rule file.
+ * Returns an array of TagError (may be empty if all valid).
+ */
+export function validateFileTags(tags: string[], rel: string): TagError[] {
+  const errors: TagError[] = [];
+
+  if (tags.length === 0) {
+    errors.push({ file: rel, level: 'error', message: 'No tags defined (minimum 3 required)' });
+    return errors;
+  }
+
+  if (tags.length < MIN_TAGS) {
+    errors.push({
+      file: rel,
+      level: 'error',
+      message: `Only ${tags.length} tag(s) — minimum is ${MIN_TAGS}`,
+    });
+  }
+
+  if (tags.length > MAX_TAGS) {
+    errors.push({
+      file: rel,
+      level: 'warn',
+      message: `${tags.length} tags — consider trimming to max ${MAX_TAGS} for signal clarity`,
+    });
+  }
+
+  const shortTags = tags.filter((t) => t.trim().length <= 1);
+  if (shortTags.length > 0) {
+    errors.push({
+      file: rel,
+      level: 'error',
+      message: `Single-character tags are not allowed: [${shortTags.join(', ')}]`,
+    });
+  }
+
+  const seen = new Set<string>();
+  const dupes: string[] = [];
+  for (const tag of tags) {
+    const key = tag.toLowerCase();
+    if (seen.has(key)) dupes.push(tag);
+    seen.add(key);
+  }
+  if (dupes.length > 0) {
+    errors.push({
+      file: rel,
+      level: 'error',
+      message: `Duplicate tags: [${dupes.join(', ')}]`,
+    });
+  }
+
+  // ALLCAPS tags that are not known acronyms
+  const allcapsTags = tags.filter((t) => {
+    if (/^[A-Z][A-Z]+-[A-Z][A-Z]+$/.test(t)) return false; // e.g. DD-WRT
+    const stripped = t.replace(/[^a-zA-Z]/g, '');
+    if (stripped.length === 0) return false;
+    if (stripped === stripped.toUpperCase() && stripped.length > 2) {
+      return !KNOWN_ACRONYMS.has(stripped.toLowerCase());
+    }
+    return false;
+  });
+  if (allcapsTags.length > 0) {
+    errors.push({
+      file: rel,
+      level: 'warn',
+      message: `Unexpected ALLCAPS tags (use lowercase or known acronyms): [${allcapsTags.join(', ')}]`,
+    });
+  }
+
+  // Title-case tags that are not camelCase API identifiers
+  const titleCaseTags = tags.filter((t) => {
+    const words = t.split(/[\s-]/);
+    return words.some((w) => {
+      if (w.length < 2) return false;
+      const firstUpper = w[0] === w[0]?.toUpperCase() && w[0] !== w[0]?.toLowerCase();
+      if (!firstUpper) return false;
+      const isCamelCase = /[A-Z]/.test(w.slice(1));
+      if (isCamelCase) return false;
+      if (KNOWN_ACRONYMS.has(w.toLowerCase())) return false;
+      return true;
+    });
+  });
+  if (titleCaseTags.length > 0) {
+    errors.push({
+      file: rel,
+      level: 'warn',
+      message: `Title-case tags should be lowercase: [${titleCaseTags.join(', ')}]`,
+    });
+  }
+
+  return errors;
+}
+
+export function validateTags(skillsDir: string = SKILLS_DIR): boolean {
   const errors: TagError[] = [];
 
   const skillDirs = fs
-    .readdirSync(SKILLS_DIR, { withFileTypes: true })
+    .readdirSync(skillsDir, { withFileTypes: true })
     .filter((e) => e.isDirectory())
-    .map((e) => path.join(SKILLS_DIR, e.name));
+    .map((e) => path.join(skillsDir, e.name));
+
+  const repoRoot = path.resolve(skillsDir, '../..');
 
   for (const skillDir of skillDirs) {
     const rulesDir = path.join(skillDir, 'rules');
     if (!fs.existsSync(rulesDir)) continue;
 
     for (const filePath of collectRuleFiles(rulesDir)) {
-      const rel = path.relative(REPO_ROOT, filePath);
+      const rel = path.relative(repoRoot, filePath);
       const content = fs.readFileSync(filePath, 'utf8');
       const fm = parseFrontmatter(content);
       const tags = Array.isArray(fm['tags']) ? fm['tags'] : [];
-
-      if (tags.length === 0) {
-        errors.push({ file: rel, level: 'error', message: 'No tags defined (minimum 3 required)' });
-        continue;
-      }
-
-      if (tags.length < MIN_TAGS) {
-        errors.push({
-          file: rel,
-          level: 'error',
-          message: `Only ${tags.length} tag(s) — minimum is ${MIN_TAGS}`,
-        });
-      }
-
-      if (tags.length > MAX_TAGS) {
-        errors.push({
-          file: rel,
-          level: 'warn',
-          message: `${tags.length} tags — consider trimming to max ${MAX_TAGS} for signal clarity`,
-        });
-      }
-
-      // Single-character tags
-      const shortTags = tags.filter((t) => t.trim().length <= 1);
-      if (shortTags.length > 0) {
-        errors.push({
-          file: rel,
-          level: 'error',
-          message: `Single-character tags are not allowed: [${shortTags.join(', ')}]`,
-        });
-      }
-
-      // Duplicate tags within the same rule
-      const seen = new Set<string>();
-      const dupes: string[] = [];
-      for (const tag of tags) {
-        const key = tag.toLowerCase();
-        if (seen.has(key)) dupes.push(tag);
-        seen.add(key);
-      }
-      if (dupes.length > 0) {
-        errors.push({
-          file: rel,
-          level: 'error',
-          message: `Duplicate tags: [${dupes.join(', ')}]`,
-        });
-      }
-
-      // Fully ALLCAPS tags that are not recognised acronyms
-      // Allows: camelCase (runtimeConfig), proper nouns (Windows), acronyms (CLI, DNS, API, SSE, BFF, TLDs, ECS, DoH, DoT, GUI, NRD, TTL, JFFS, NTP, VPN, MDM, MDM, LAN, WAN, SSH, RAM, CPU, NAS)
-      const knownAcronyms = new Set([
-        'cli',
-        'dns',
-        'api',
-        'sse',
-        'bff',
-        'tld',
-        'tlds',
-        'ecs',
-        'doh',
-        'dot',
-        'gui',
-        'nrd',
-        'ttl',
-        'jffs',
-        'ntp',
-        'vpn',
-        'mdm',
-        'lan',
-        'wan',
-        'ssh',
-        'nas',
-        'iot',
-        'tcp',
-        'udp',
-        'url',
-        'uri',
-        'http',
-        'https',
-        'html',
-        'json',
-        'yaml',
-        'csv',
-        'id',
-        'ip',
-        'ui',
-        'ux',
-        'ci',
-        'cd',
-        'pr',
-        'os',
-        'pc',
-        'tv',
-        'iot',
-        'dga',
-        'ddns',
-        'csam',
-        'crud',
-        'dd-wrt',
-        'dd',
-        'patch',
-        'delete',
-        'put',
-        'post',
-        'get',
-        'rest',
-        'exe',
-        'msi',
-        'pkg',
-        'apk',
-        'dmg',
-        'iso',
-        'idn',
-        'isp',
-        'asn',
-        'mx',
-        'ptr',
-        'txt',
-        'cname',
-        'aaaa',
-        'spf',
-        'dkim',
-        'dmarc',
-        'dnssec',
-        'edns',
-      ]);
-      // Special-case: allow hyphenated all-caps brand names like DD-WRT, WAN-LAN
-      const allcapsTags = tags.filter((t) => {
-        if (/^[A-Z][A-Z]+-[A-Z][A-Z]+$/.test(t)) return false; // e.g. DD-WRT
-        const stripped = t.replace(/[^a-zA-Z]/g, '');
-        if (stripped.length === 0) return false;
-        if (stripped === stripped.toUpperCase() && stripped.length > 2) {
-          return !knownAcronyms.has(stripped.toLowerCase());
-        }
-        return false;
-      });
-      if (allcapsTags.length > 0) {
-        errors.push({
-          file: rel,
-          level: 'warn',
-          message: `Unexpected ALLCAPS tags (use lowercase or known acronyms): [${allcapsTags.join(', ')}]`,
-        });
-      }
-
-      // Title-case single-word tags that are not camelCase API names (e.g. Windows, Homebrew, Systray)
-      // camelCase (useFetch, runtimeConfig, createError, shouldRevalidate, ErrorBoundary) are allowed
-      // as they are framework API identifiers.
-      const titleCaseTags = tags.filter((t) => {
-        const words = t.split(/[\s-]/);
-        return words.some((w) => {
-          if (w.length < 2) return false;
-          const firstUpper = w[0] === w[0]?.toUpperCase() && w[0] !== w[0]?.toLowerCase();
-          if (!firstUpper) return false;
-          // Allow ALLCAPS (already caught above) and camelCase (has uppercase letter after position 0)
-          const isCamelCase = /[A-Z]/.test(w.slice(1));
-          if (isCamelCase) return false;
-          // Allow known acronyms
-          if (knownAcronyms.has(w.toLowerCase())) return false;
-          return true;
-        });
-      });
-      if (titleCaseTags.length > 0) {
-        errors.push({
-          file: rel,
-          level: 'warn',
-          message: `Title-case tags should be lowercase: [${titleCaseTags.join(', ')}]`,
-        });
-      }
+      errors.push(...validateFileTags(tags, rel));
     }
   }
 
@@ -246,5 +251,7 @@ function validateTags(): boolean {
   return true;
 }
 
-const ok = validateTags();
-process.exit(ok ? 0 : 1);
+if (fileURLToPath(import.meta.url) === process.argv[1]) {
+  const ok = validateTags();
+  process.exit(ok ? 0 : 1);
+}
