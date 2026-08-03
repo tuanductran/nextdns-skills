@@ -1,5 +1,5 @@
 {
-  "$schema": "https://turbo.build/schema.json",
+  "$schema": "./node_modules/turbo/schema.json",
   "ui": "stream",
   "globalDependencies": ["tsconfig.json", "vite.config.ts", "pnpm-workspace.yaml"],
   "tasks": {
