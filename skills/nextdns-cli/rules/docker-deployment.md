@@ -8,7 +8,7 @@ type: capability
 tags:
   - docker
   - container
-  - DockerHub
+  - dockerhub
   - host network
   - port mapping
   - deployment

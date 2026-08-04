@@ -5,7 +5,7 @@ impactDescription: 'Managing NextDNS profile IDs and general configuration setti
 type: capability
 tags:
   - config
-  - profile ID
+  - profile id
   - configuration set
   - edit config
 ---

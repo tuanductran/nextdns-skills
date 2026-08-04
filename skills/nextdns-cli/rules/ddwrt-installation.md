@@ -7,13 +7,13 @@ impactDescription:
   sync issues.'
 type: capability
 tags:
-  - DD-WRT
-  - JFFS
+  - dd-wrt
+  - jffs
   - router
-  - NTP
+  - ntp
   - time sync
   - dnsmasq
-  - SSH
+  - ssh
   - router installation
 ---
 

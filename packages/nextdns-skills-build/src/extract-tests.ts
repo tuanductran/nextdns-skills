@@ -5,9 +5,12 @@
 
 import { writeFile } from 'node:fs/promises';
 import { relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import type { Rule, TestCase } from './types.js';
+
 import { DEFAULT_SKILL, SKILLS, TEST_CASES_FILE } from './config.js';
 import { parseRuleFile } from './parser.js';
-import type { Rule, TestCase } from './types.js';
 import { collectRuleFiles } from './utils.js';
 
 /**
@@ -93,4 +96,5 @@ async function extractTests() {
   }
 }
 
-extractTests();
+export const run = extractTests;
+if (fileURLToPath(import.meta.url) === process.argv[1]) void extractTests();

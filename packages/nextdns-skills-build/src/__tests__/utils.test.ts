@@ -1,7 +1,8 @@
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vite-plus/test';
+
 import { collectRuleFiles } from '../utils.js';
 
 function tmpDir(): string {
@@ -78,8 +79,8 @@ describe('collectRuleFiles', () => {
     write(dir, 'aaa.md');
     write(dir, 'mmm.md');
     const results = await collectRuleFiles(dir);
-    expect(path.basename(results[0])).toBe('aaa.md');
-    expect(path.basename(results[2])).toBe('zzz.md');
+    expect(path.basename(results[0]!)).toBe('aaa.md');
+    expect(path.basename(results[2]!)).toBe('zzz.md');
   });
 
   it('handles deeply nested subdirectories', async () => {

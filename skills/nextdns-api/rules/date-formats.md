@@ -5,8 +5,8 @@ impactDescription: 'Use correct date formats in query parameters'
 type: capability
 tags:
   - date format
-  - ISO 8601
-  - UNIX timestamp
+  - iso 8601
+  - unix timestamp
   - relative dates
   - date parsing
 ---

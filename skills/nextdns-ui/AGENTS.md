@@ -326,7 +326,7 @@ device to use DoH/DoT with your profile ID in the URL/hostname.
 
 ### 1.5 DNS Rewrites
 
-**Impact: MEDIUM ()**
+**Impact: MEDIUM**
 
 Override DNS resolution for specific hostnames from the NextDNS web dashboard
 
@@ -427,7 +427,7 @@ entry in the Rewrites tab.
 
 ### 1.6 Linked IP and DDNS
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Essential for router-level and legacy device support
 
@@ -1061,7 +1061,7 @@ Tips for getting the best performance and reliability out of your NextDNS config
 
 ### 2.4 Threat Modeling & Strategy
 
-**Impact: LOW ()**
+**Impact: LOW**
 
 Efficient approach to long-term DNS management
 

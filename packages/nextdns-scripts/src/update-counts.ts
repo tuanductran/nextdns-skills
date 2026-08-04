@@ -9,16 +9,16 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { walkDir } from './utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// dist/update-counts.js → ../../.. = repo root
 const REPO_ROOT = path.join(__dirname, '../../..');
 const SKILLS_DIR = path.join(REPO_ROOT, 'skills');
 
 /* ========= Types ========= */
 
-const CATEGORIES = [
+export const CATEGORIES = [
   'nextdns-api',
   'nextdns-cli',
   'nextdns-ui',
@@ -26,31 +26,32 @@ const CATEGORIES = [
   'nextdns-frontend',
 ] as const;
 
-type SkillCategory = (typeof CATEGORIES)[number];
+export type SkillCategory = (typeof CATEGORIES)[number];
 
 /* ========= Helpers ========= */
 
-function readFile(filePath: string): string | null {
+export function readFile(filePath: string): string | null {
   return fs.existsSync(filePath) ? fs.readFileSync(filePath, 'utf8') : null;
 }
 
-function writeFile(filePath: string, content: string): void {
+export function writeFile(filePath: string, content: string): void {
   fs.writeFileSync(filePath, content, 'utf8');
 }
 
-function getRuleCount(cat: SkillCategory): number | null {
-  const rulesPath = path.join(SKILLS_DIR, cat, 'rules');
+export function getRuleCount(cat: SkillCategory, skillsDir: string = SKILLS_DIR): number | null {
+  const rulesPath = path.join(skillsDir, cat, 'rules');
   if (!fs.existsSync(rulesPath) || !fs.statSync(rulesPath).isDirectory()) {
     return null;
   }
   return walkDir(rulesPath, (file) => file.endsWith('.md')).length;
 }
 
-function updateDocument(
+export function updateDocument(
   filePath: string,
   categories: readonly SkillCategory[],
   patternGenerator: (cat: SkillCategory) => RegExp,
-  name: string
+  name: string,
+  skillsDir: string = SKILLS_DIR
 ): void {
   const content = readFile(filePath);
   if (!content) {
@@ -62,7 +63,7 @@ function updateDocument(
   const logs: string[] = [];
 
   for (const cat of categories) {
-    const count = getRuleCount(cat);
+    const count = getRuleCount(cat, skillsDir);
     if (count === null) continue;
 
     const pattern = patternGenerator(cat);
@@ -86,26 +87,32 @@ function updateDocument(
 
 /* ========= Main Logic ========= */
 
-function updateCounts(): void {
-  // Update README.md — matches: | [Skill Name](skills/cat/SKILL.md) | **N** |
+export function updateCounts(repoRoot: string = REPO_ROOT, skillsDir: string = SKILLS_DIR): void {
   updateDocument(
-    path.join(REPO_ROOT, 'README.md'),
+    path.join(repoRoot, 'README.md'),
     CATEGORIES,
     (cat) =>
       new RegExp(
         `(\\|\\s+\\[.*?\\]\\(skills/${cat}/SKILL\\.md\\)\\s+\\|\\s+\\*\\*)\\d+(\\*\\*\\s+\\|)`,
         'g'
       ),
-    'README'
+    'README',
+    skillsDir
   );
 
-  // Update AGENTS.md — matches: nextdns-api/... # N rules
   updateDocument(
-    path.join(REPO_ROOT, 'AGENTS.md'),
+    path.join(repoRoot, 'AGENTS.md'),
     CATEGORIES,
     (cat) => new RegExp(`(${cat}/.*?# )\\d+( rules)`, 'g'),
-    'AGENTS'
+    'AGENTS',
+    skillsDir
   );
 }
 
-updateCounts();
+/* ========= Entry Point ========= */
+
+export function run(): void {
+  updateCounts();
+}
+
+if (fileURLToPath(import.meta.url) === process.argv[1]) run();

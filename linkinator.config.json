@@ -1,0 +1,34 @@
+{
+  "markdown": true,
+
+  "verbosity": "warning",
+
+  "concurrency": 100,
+
+  "timeout": 30000,
+
+  "retry": true,
+
+  "retryErrors": true,
+  "retryErrorsCount": 3,
+  "retryErrorsJitter": 5000,
+
+  "headers": {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Cache-Control": "no-cache"
+  },
+
+  "linksToSkip": [
+    "^http://localhost(:\\d+)?$",
+    "^https://example\\.com/?$",
+    "^https://test\\.nextdns\\.io/?$",
+    "YOUR_API_KEY",
+    "abc123"
+  ],
+
+  "statusCodes": {
+    "206": "ok"
+  }
+}

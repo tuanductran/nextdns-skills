@@ -5,11 +5,11 @@ impactDescription: 'Platform-specific installation and configuration requirement
 type: capability
 tags:
   - router
-  - OpenWrt
-  - pfSense
-  - Synology
-  - Ubiquiti
-  - UnifiOS
+  - openwrt
+  - pfsense
+  - synology
+  - ubiquiti
+  - unifiOS
 ---
 
 # Platform specific

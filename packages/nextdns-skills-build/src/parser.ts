@@ -4,12 +4,25 @@
 
 import { readFile } from 'node:fs/promises';
 import { basename } from 'node:path';
+
 import type { CodeExample, ImpactLevel, Rule, RuleType } from './types.js';
 
 export interface RuleFile {
   section: number;
   subsection?: number;
   rule: Rule;
+}
+
+function asString(value: unknown): string | undefined {
+  return typeof value === 'string' ? value : undefined;
+}
+
+function isRuleType(value: string): value is RuleType {
+  return value === 'capability' || value === 'efficiency';
+}
+
+function isImpactLevel(value: string): value is ImpactLevel {
+  return value === 'HIGH' || value === 'MEDIUM' || value === 'LOW';
 }
 
 function parseFrontmatter(text: string): Record<string, unknown> {
@@ -235,7 +248,8 @@ export async function parseRuleFile(
 
   flushExample();
 
-  const ruleType = frontmatter.type as RuleType | undefined;
+  const rawRuleType = asString(frontmatter['type']);
+  const ruleType = rawRuleType !== undefined && isRuleType(rawRuleType) ? rawRuleType : undefined;
   const effectiveSectionMap = sectionMap ?? { capability: 1, efficiency: 2 };
   let section = 0;
 
@@ -273,28 +287,25 @@ export async function parseRuleFile(
     }
   }
 
-  if (frontmatter.section) section = Number(frontmatter.section) || section;
+  if (frontmatter['section']) section = Number(frontmatter['section']) || section;
 
-  const validImpacts: ImpactLevel[] = ['HIGH', 'MEDIUM', 'LOW'];
-  const rawImpact = (frontmatter.impact as string | undefined) ?? 'MEDIUM';
-  const impact: ImpactLevel = validImpacts.includes(rawImpact as ImpactLevel)
-    ? (rawImpact as ImpactLevel)
-    : 'MEDIUM';
+  const rawImpact = asString(frontmatter['impact']) ?? 'MEDIUM';
+  const impact: ImpactLevel = isImpactLevel(rawImpact) ? rawImpact : 'MEDIUM';
 
-  const impactDescription = (frontmatter.impactDescription as string | undefined) ?? '';
+  const impactDescription = asString(frontmatter['impactDescription']) ?? '';
 
-  const rawTags = frontmatter.tags;
+  const rawTags = frontmatter['tags'];
   const tags: string[] | undefined = Array.isArray(rawTags)
-    ? (rawTags as unknown[]).filter((t): t is string => typeof t === 'string')
+    ? rawTags.filter((t): t is string => typeof t === 'string')
     : typeof rawTags === 'string'
-      ? (rawTags as string).split(',').map((t: string) => t.trim())
+      ? rawTags.split(',').map((t) => t.trim())
       : undefined;
 
   // With exactOptionalPropertyTypes, we must omit optional props instead of
   // assigning undefined to them. Use conditional spread for all optional fields.
   const rule: Rule = {
     id: '',
-    title: (frontmatter.title as string | undefined) ?? title,
+    title: asString(frontmatter['title']) ?? title,
     section,
     impact,
     impactDescription,

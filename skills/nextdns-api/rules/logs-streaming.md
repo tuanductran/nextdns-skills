@@ -7,9 +7,9 @@ tags:
   - SSE
   - real-time
   - streaming
-  - Server-sent events
+  - server-sent events
   - live logs
-  - EventSource
+  - eventsource
 ---
 
 <!-- @case-police-ignore Api -->

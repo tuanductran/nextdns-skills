@@ -473,7 +473,7 @@ from: 'now';
 
 ### 1.7 DNS Rewrites
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Manage custom DNS rewrite records via the NextDNS API
 
@@ -690,7 +690,7 @@ return data;
 
 ### 1.9 Logs Clear
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Permanently delete all stored DNS logs for a profile
 
@@ -1517,7 +1517,7 @@ const wrongId = 'myprofile'; // ❌
 
 ### 1.18 Profile Settings
 
-**Impact: HIGH ()**
+**Impact: HIGH**
 
 Manage profile-level settings via the NextDNS API
 

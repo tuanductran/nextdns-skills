@@ -12,21 +12,21 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
 import { walkDir } from './utils.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// dist/validate-rules.js → ../../.. = repo root
 const REPO_ROOT = path.join(__dirname, '../../..');
 const SKILLS_DIR = path.join(REPO_ROOT, 'skills');
 
 /* ========= Types ========= */
 
-type ImpactLevel = 'HIGH' | 'MEDIUM' | 'LOW';
-type RuleType = 'capability' | 'efficiency';
+export type ImpactLevel = 'HIGH' | 'MEDIUM' | 'LOW';
+export type RuleType = 'capability' | 'efficiency';
 
-const VALID_IMPACTS: readonly ImpactLevel[] = ['HIGH', 'MEDIUM', 'LOW'];
-const VALID_TYPES: readonly RuleType[] = ['capability', 'efficiency'];
-const REQUIRED_FIELDS = ['title', 'impact', 'impactDescription', 'type', 'tags'] as const;
+export const VALID_IMPACTS: readonly ImpactLevel[] = ['HIGH', 'MEDIUM', 'LOW'];
+export const VALID_TYPES: readonly RuleType[] = ['capability', 'efficiency'];
+export const REQUIRED_FIELDS = ['title', 'impact', 'impactDescription', 'type', 'tags'] as const;
 
 /* ========= Colors ========= */
 
@@ -46,7 +46,7 @@ function printSuccess(message: string): void {
 
 /* ========= Referential Integrity ========= */
 
-function checkUnregisteredRules(
+export function checkUnregisteredRules(
   skillFile: string,
   rulesDir: string,
   skillContent: string
@@ -68,7 +68,7 @@ function checkUnregisteredRules(
   return errorsFound;
 }
 
-function checkMissingReferences(
+export function checkMissingReferences(
   skillFile: string,
   rulesDir: string,
   skillContent: string
@@ -92,7 +92,7 @@ function checkMissingReferences(
 
 /* ========= Frontmatter Validation ========= */
 
-function validateRequiredFields(file: string, frontmatter: string): boolean {
+export function validateRequiredFields(file: string, frontmatter: string): boolean {
   let errorsFound = false;
   for (const field of REQUIRED_FIELDS) {
     if (!new RegExp(`^${field}:`, 'm').test(frontmatter)) {
@@ -103,13 +103,13 @@ function validateRequiredFields(file: string, frontmatter: string): boolean {
   return errorsFound;
 }
 
-function validateFieldValues(file: string, frontmatter: string): boolean {
+export function validateFieldValues(file: string, frontmatter: string): boolean {
   let errorsFound = false;
 
   const impactMatch = frontmatter.match(/^impact:\s*(.*)/m);
   if (impactMatch) {
     const impact = (impactMatch[1] ?? '').trim();
-    if (!VALID_IMPACTS.includes(impact as ImpactLevel)) {
+    if (!(VALID_IMPACTS as readonly string[]).includes(impact)) {
       printError(
         `Invalid impact in ${file}: '${impact}'. Must be one of: ${VALID_IMPACTS.join(', ')}`
       );
@@ -120,13 +120,12 @@ function validateFieldValues(file: string, frontmatter: string): boolean {
   const typeMatch = frontmatter.match(/^type:\s*(.*)/m);
   if (typeMatch) {
     const type = (typeMatch[1] ?? '').trim();
-    if (!VALID_TYPES.includes(type as RuleType)) {
+    if (!(VALID_TYPES as readonly string[]).includes(type)) {
       printError(`Invalid type in ${file}: '${type}'. Must be one of: ${VALID_TYPES.join(', ')}`);
       errorsFound = true;
     }
   }
 
-  // Tags must be YAML array format (- item lines), not a scalar string
   const tagsStringMatch = frontmatter.match(/^tags:\s*'(.*)'/m);
   if (tagsStringMatch) {
     printError(
@@ -138,7 +137,7 @@ function validateFieldValues(file: string, frontmatter: string): boolean {
   return errorsFound;
 }
 
-function validateContentStructure(file: string, content: string): boolean {
+export function validateContentStructure(file: string, content: string): boolean {
   const h1Match = content.match(/^#\s+.*$/m);
   if (h1Match) {
     const afterH1 = content.slice((h1Match.index ?? 0) + h1Match[0].length).trim();
@@ -152,11 +151,11 @@ function validateContentStructure(file: string, content: string): boolean {
 
 /* ========= Core Logic ========= */
 
-function validateReferentialIntegrity(): boolean {
+export function validateReferentialIntegrity(skillsDir: string = SKILLS_DIR): boolean {
   console.log('🔍 Checking referential integrity...');
   let hasErrors = false;
 
-  for (const skillFile of walkDir(SKILLS_DIR, (n) => n === 'SKILL.md')) {
+  for (const skillFile of walkDir(skillsDir, (n) => n === 'SKILL.md')) {
     const skillDir = path.dirname(skillFile);
     const rulesDir = path.join(skillDir, 'rules');
     const skillContent = fs.readFileSync(skillFile, 'utf8');
@@ -168,11 +167,11 @@ function validateReferentialIntegrity(): boolean {
   return !hasErrors;
 }
 
-function validateFrontmatter(): boolean {
+export function validateFrontmatter(skillsDir: string = SKILLS_DIR): boolean {
   console.log('\n🔍 Validating rule frontmatter and structure...');
   let totalErrors = 0;
 
-  const rules = walkDir(SKILLS_DIR, (n) => n.endsWith('.md')).filter((p) =>
+  const rules = walkDir(skillsDir, (n) => n.endsWith('.md')).filter((p) =>
     p.includes(`${path.sep}rules${path.sep}`)
   );
 
@@ -200,15 +199,19 @@ function validateFrontmatter(): boolean {
   return totalErrors === 0;
 }
 
-/* ========= Main ========= */
+/* ========= Entry Point ========= */
 
-const integrityOk = validateReferentialIntegrity();
-const frontmatterOk = validateFrontmatter();
+export function run(): void {
+  const integrityOk = validateReferentialIntegrity();
+  const frontmatterOk = validateFrontmatter();
 
-if (integrityOk && frontmatterOk) {
-  console.log(`\n${GREEN}✅ All validations passed!${NC}`);
-  process.exit(0);
+  if (integrityOk && frontmatterOk) {
+    console.log(`\n${GREEN}✅ All validations passed!${NC}`);
+    process.exit(0);
+  }
+
+  console.log(`\n${RED}❌ Validations failed.${NC}`);
+  process.exit(1);
 }
 
-console.log(`\n${RED}❌ Validations failed.${NC}`);
-process.exit(1);
+if (fileURLToPath(import.meta.url) === process.argv[1]) run();

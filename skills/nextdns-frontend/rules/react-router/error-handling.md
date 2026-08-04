@@ -8,7 +8,7 @@ type: efficiency
 tags:
   - error handling
   - error boundary
-  - ErrorBoundary
+  - error-boundary
   - loader errors
   - action errors
   - api errors

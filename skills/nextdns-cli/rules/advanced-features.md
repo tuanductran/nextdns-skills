@@ -5,7 +5,7 @@ impactDescription: 'Advanced routing, conditional forwarders, and caching config
 type: capability
 tags:
   - conditional forwarder
-  - MAC address
+  - mac address
   - subnet
   - routing
   - client detection

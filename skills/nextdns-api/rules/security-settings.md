@@ -7,11 +7,11 @@ tags:
   - security
   - threat intelligence
   - cryptojacking
-  - DNS rebinding
+  - dns rebinding
   - typosquatting
-  - DGA
-  - NRD
-  - CSAM
+  - dga
+  - nrd
+  - csam
 ---
 
 <!-- @case-police-ignore Api -->

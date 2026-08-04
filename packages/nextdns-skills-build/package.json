@@ -2,62 +2,67 @@
   "name": "nextdns-skills-build",
   "version": "1.0.0",
   "description": "Build tooling for NextDNS Skills: build AGENTS.md, validate, scaffold rules, search, and export",
-  "type": "module",
+  "keywords": [
+    "agents",
+    "dns",
+    "guidelines",
+    "llm",
+    "nextdns",
+    "skills"
+  ],
+  "license": "MIT",
+  "bin": {
+    "nextdns-skills-build": "./bin/nextdns-skills-build.js"
+  },
   "files": [
+    "bin",
     "dist"
   ],
+  "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./dist/index.mjs"
     },
     "./build": {
-      "import": "./dist/build.js"
+      "import": "./dist/build.mjs"
     },
     "./validate": {
-      "import": "./dist/validate.js"
+      "import": "./dist/validate.mjs"
     },
     "./search": {
-      "import": "./dist/search.js"
+      "import": "./dist/search.mjs"
     },
     "./export": {
-      "import": "./dist/export.js"
+      "import": "./dist/export.mjs"
     }
   },
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "types:check": "tsc --noEmit",
+    "build": "vp pack",
+    "build-agents": "nextdns-skills-build build",
+    "build-all": "nextdns-skills-build build --all",
+    "build-api": "nextdns-skills-build build --skill=nextdns-api",
+    "build-cli": "nextdns-skills-build build --skill=nextdns-cli",
+    "build-frontend": "nextdns-skills-build build --skill=nextdns-frontend",
+    "build-integrations": "nextdns-skills-build build --skill=integrations",
+    "build-ui": "nextdns-skills-build build --skill=nextdns-ui",
+    "dev": "vp pack --watch",
+    "export": "nextdns-skills-build export",
+    "extract-tests": "nextdns-skills-build extract-tests",
+    "migrate": "nextdns-skills-build migrate",
     "prepublishOnly": "pnpm build",
-    "build-agents": "node dist/build.js",
-    "build-all": "node dist/build.js --all",
-    "build-api": "node dist/build.js --skill=nextdns-api",
-    "build-cli": "node dist/build.js --skill=nextdns-cli",
-    "build-ui": "node dist/build.js --skill=nextdns-ui",
-    "build-integrations": "node dist/build.js --skill=integrations",
-    "build-frontend": "node dist/build.js --skill=nextdns-frontend",
-    "validate": "node dist/validate.js",
-    "extract-tests": "node dist/extract-tests.js",
-    "migrate": "node dist/migrate.js",
-    "search": "node dist/search.js",
-    "export": "node dist/export.js",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "search": "nextdns-skills-build search",
+    "test": "vp test run",
+    "test:coverage": "vp test run --coverage",
+    "test:watch": "vp test",
+    "types:check": "tsc --noEmit",
+    "validate": "nextdns-skills-build validate"
   },
-  "keywords": [
-    "nextdns",
-    "dns",
-    "skills",
-    "guidelines",
-    "llm",
-    "agents"
-  ],
-  "license": "MIT",
   "devDependencies": {
-    "@types/node": "^26.1.2",
-    "@vitest/coverage-v8": "^4.1.10",
-    "tsup": "^8.5.1",
-    "typescript": "6.0.3",
-    "vitest": "^4.1.10"
+    "@types/node": "catalog:dev",
+    "@vitest/coverage-v8": "catalog:test",
+    "typescript": "catalog:dev",
+    "vite": "catalog:test",
+    "vite-plus": "catalog:test",
+    "vitest": "catalog:test"
   }
 }
