@@ -201,7 +201,7 @@ export function validateFrontmatter(skillsDir: string = SKILLS_DIR): boolean {
 
 /* ========= Entry Point ========= */
 
-if (fileURLToPath(import.meta.url) === process.argv[1]) {
+export function run(): void {
   const integrityOk = validateReferentialIntegrity();
   const frontmatterOk = validateFrontmatter();
 
@@ -213,3 +213,5 @@ if (fileURLToPath(import.meta.url) === process.argv[1]) {
   console.log(`\n${RED}❌ Validations failed.${NC}`);
   process.exit(1);
 }
+
+if (fileURLToPath(import.meta.url) === process.argv[1]) run();

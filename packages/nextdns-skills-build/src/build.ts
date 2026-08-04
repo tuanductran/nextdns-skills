@@ -5,6 +5,7 @@
 
 import { readFile, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import type { Section } from './types.js';
 
@@ -292,4 +293,5 @@ async function build() {
   }
 }
 
-void build();
+export const run = build;
+if (fileURLToPath(import.meta.url) === process.argv[1]) void build();

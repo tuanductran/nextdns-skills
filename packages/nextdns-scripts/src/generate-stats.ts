@@ -158,7 +158,7 @@ export function printText(report: StatsReport): void {
 
 /* ========= Entry Point ========= */
 
-if (fileURLToPath(import.meta.url) === process.argv[1]) {
+export function run(): void {
   const args = process.argv.slice(2);
   const outputMode: 'json' | 'text' = args.includes('--text') ? 'text' : 'json';
   const report = buildReport();
@@ -168,3 +168,5 @@ if (fileURLToPath(import.meta.url) === process.argv[1]) {
     console.log(JSON.stringify(report, null, 2));
   }
 }
+
+if (fileURLToPath(import.meta.url) === process.argv[1]) run();

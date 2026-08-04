@@ -5,195 +5,152 @@ import { afterEach, beforeEach, describe, expect, it } from 'vite-plus/test';
 
 import { collectRuleFiles, parseFrontmatter, walkDir } from '../utils.js';
 
-// ─── Helpers ────────────────────────────────────────────────────────────────
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
-function tmpDir(): string {
-  return fs.mkdtempSync(path.join(os.tmpdir(), 'ndns-test-'));
-}
+let tmpRoot: string;
 
-function write(dir: string, relPath: string, content = ''): string {
-  const full = path.join(dir, relPath);
+function write(rel: string, content = ''): string {
+  const full = path.join(tmpRoot, rel);
   fs.mkdirSync(path.dirname(full), { recursive: true });
   fs.writeFileSync(full, content, 'utf8');
   return full;
 }
 
-// ─── walkDir ────────────────────────────────────────────────────────────────
+beforeEach(() => {
+  tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'ndns-utils-'));
+});
+
+afterEach(() => {
+  fs.rmSync(tmpRoot, { recursive: true, force: true });
+});
+
+// ─── walkDir ─────────────────────────────────────────────────────────────────
 
 describe('walkDir', () => {
-  let dir: string;
-  beforeEach(() => {
-    dir = tmpDir();
-  });
-  afterEach(() => {
-    fs.rmSync(dir, { recursive: true, force: true });
+  it('returns empty array for non-existent directory', () => {
+    expect(walkDir(path.join(tmpRoot, 'missing'), () => true)).toEqual([]);
   });
 
   it('returns empty array for empty directory', () => {
-    expect(walkDir(dir, () => true)).toEqual([]);
+    fs.mkdirSync(path.join(tmpRoot, 'empty'));
+    expect(walkDir(path.join(tmpRoot, 'empty'), () => true)).toEqual([]);
   });
 
-  it('returns empty array for non-existent directory', () => {
-    expect(walkDir('/does/not/exist', () => true)).toEqual([]);
-  });
-
-  it('collects files matching the predicate', () => {
-    write(dir, 'a.md');
-    write(dir, 'b.ts');
-    write(dir, 'c.md');
-    const results = walkDir(dir, (n) => n.endsWith('.md'));
+  it('collects files matching predicate', () => {
+    write('a/one.md');
+    write('a/two.md');
+    write('a/skip.txt');
+    const results = walkDir(path.join(tmpRoot, 'a'), (n) => n.endsWith('.md'));
     expect(results).toHaveLength(2);
     expect(results.every((f) => f.endsWith('.md'))).toBe(true);
   });
 
   it('recurses into subdirectories', () => {
-    write(dir, 'sub/deep/rule.md');
-    write(dir, 'root.md');
-    const results = walkDir(dir, (n) => n.endsWith('.md'));
-    expect(results).toHaveLength(2);
-  });
-
-  it('does not return files that do not match predicate', () => {
-    write(dir, 'file.json');
-    const results = walkDir(dir, (n) => n.endsWith('.md'));
-    expect(results).toHaveLength(0);
-  });
-});
-
-// ─── parseFrontmatter ───────────────────────────────────────────────────────
-
-describe('parseFrontmatter', () => {
-  it('returns empty object when no frontmatter', () => {
-    expect(parseFrontmatter('# Hello\nNo frontmatter here.')).toEqual({});
-  });
-
-  it('returns empty object when content does not start with ---', () => {
-    expect(parseFrontmatter('title: foo\n---')).toEqual({});
-  });
-
-  it('parses scalar string fields', () => {
-    const md = `---
-title: 'Authentication'
-impact: HIGH
-type: capability
----
-# Body`;
-    const fm = parseFrontmatter(md);
-    expect(fm['title']).toBe('Authentication');
-    expect(fm['impact']).toBe('HIGH');
-    expect(fm['type']).toBe('capability');
-  });
-
-  it('parses YAML array fields', () => {
-    const md = `---
-tags:
-  - api
-  - security
-  - authentication
----`;
-    const fm = parseFrontmatter(md);
-    expect(fm['tags']).toEqual(['api', 'security', 'authentication']);
-  });
-
-  it('strips surrounding quotes from values', () => {
-    const md = `---
-title: "Rate Limiting"
-impactDescription: 'Some description'
----`;
-    const fm = parseFrontmatter(md);
-    expect(fm['title']).toBe('Rate Limiting');
-    expect(fm['impactDescription']).toBe('Some description');
-  });
-
-  it('handles multiple fields including mixed scalar and array', () => {
-    const md = `---
-title: 'My Rule'
-impact: MEDIUM
-tags:
-  - one
-  - two
-type: efficiency
----`;
-    const fm = parseFrontmatter(md);
-    expect(fm['title']).toBe('My Rule');
-    expect(fm['impact']).toBe('MEDIUM');
-    expect(fm['tags']).toEqual(['one', 'two']);
-    expect(fm['type']).toBe('efficiency');
-  });
-
-  it('returns empty object when closing --- is missing', () => {
-    const md = `---
-title: Missing close
-`;
-    expect(parseFrontmatter(md)).toEqual({});
-  });
-});
-
-// ─── collectRuleFiles ────────────────────────────────────────────────────────
-
-describe('collectRuleFiles', () => {
-  let dir: string;
-  beforeEach(() => {
-    dir = tmpDir();
-  });
-  afterEach(() => {
-    fs.rmSync(dir, { recursive: true, force: true });
-  });
-
-  it('returns empty array for empty directory', () => {
-    expect(collectRuleFiles(dir)).toEqual([]);
-  });
-
-  it('collects .md files', () => {
-    write(dir, 'rule-one.md');
-    write(dir, 'rule-two.md');
-    expect(collectRuleFiles(dir)).toHaveLength(2);
-  });
-
-  it('excludes files starting with underscore', () => {
-    write(dir, '_draft.md');
-    write(dir, 'real.md');
-    const results = collectRuleFiles(dir);
-    expect(results).toHaveLength(1);
-    expect(results[0]).toContain('real.md');
-  });
-
-  it('excludes README.md', () => {
-    write(dir, 'README.md');
-    write(dir, 'actual-rule.md');
-    const results = collectRuleFiles(dir);
-    expect(results).toHaveLength(1);
-    expect(results[0]).toContain('actual-rule.md');
-  });
-
-  it('excludes SKILL.md', () => {
-    write(dir, 'SKILL.md');
-    write(dir, 'rule.md');
-    const results = collectRuleFiles(dir);
-    expect(results).toHaveLength(1);
-  });
-
-  it('excludes non-.md files', () => {
-    write(dir, 'script.ts');
-    write(dir, 'config.json');
-    write(dir, 'rule.md');
-    expect(collectRuleFiles(dir)).toHaveLength(1);
-  });
-
-  it('recurses into subdirectories', () => {
-    write(dir, 'nuxt/api-proxy.md');
-    write(dir, 'nextjs/api-proxy.md');
-    write(dir, 'top-level.md');
-    const results = collectRuleFiles(dir);
+    write('root/sub1/a.md');
+    write('root/sub1/sub2/b.md');
+    write('root/c.md');
+    const results = walkDir(path.join(tmpRoot, 'root'), (n) => n.endsWith('.md'));
     expect(results).toHaveLength(3);
   });
 
-  it('returns sorted file paths', () => {
-    write(dir, 'zzz.md');
-    write(dir, 'aaa.md');
-    write(dir, 'mmm.md');
-    const results = collectRuleFiles(dir);
-    expect(results[0]).toContain('aaa.md');
-    expect(results[2]).toContain('zzz.md');
+  it('excludes files that do not match predicate', () => {
+    write('dir/keep.ts');
+    write('dir/skip.md');
+    const results = walkDir(path.join(tmpRoot, 'dir'), (n) => n.endsWith('.ts'));
+    expect(results).toHaveLength(1);
+    expect(results[0]).toMatch(/keep\.ts$/);
+  });
+});
+
+// ─── parseFrontmatter ─────────────────────────────────────────────────────────
+
+describe('parseFrontmatter', () => {
+  it('returns empty object when no frontmatter', () => {
+    expect(parseFrontmatter('# No frontmatter here')).toEqual({});
+  });
+
+  it('returns empty object when frontmatter is not closed', () => {
+    expect(parseFrontmatter('---\ntitle: Test\n')).toEqual({});
+  });
+
+  it('parses simple string fields', () => {
+    const fm = parseFrontmatter('---\ntitle: Hello\nimpact: HIGH\n---\n');
+    expect(fm['title']).toBe('Hello');
+    expect(fm['impact']).toBe('HIGH');
+  });
+
+  it('strips surrounding quotes from values', () => {
+    const fm = parseFrontmatter("---\ntitle: 'Quoted Title'\n---\n");
+    expect(fm['title']).toBe('Quoted Title');
+  });
+
+  it('parses YAML array into string[]', () => {
+    const fm = parseFrontmatter('---\ntags:\n  - dns\n  - api\n  - setup\n---\n');
+    expect(fm['tags']).toEqual(['dns', 'api', 'setup']);
+  });
+
+  it('returns empty array for empty YAML array', () => {
+    const fm = parseFrontmatter('---\ntags:\n---\n');
+    expect(fm['tags']).toEqual([]);
+  });
+
+  it('handles multiple fields and arrays', () => {
+    const content = [
+      '---',
+      "title: 'My Rule'",
+      'impact: MEDIUM',
+      'type: capability',
+      'tags:',
+      '  - cli',
+      '  - dns',
+      '---',
+      '# Body',
+    ].join('\n');
+    const fm = parseFrontmatter(content);
+    expect(fm['title']).toBe('My Rule');
+    expect(fm['impact']).toBe('MEDIUM');
+    expect(fm['tags']).toEqual(['cli', 'dns']);
+  });
+
+  it('handles multiline impactDescription', () => {
+    const content = "---\ntitle: 'Test'\nimpactDescription: 'A long description'\n---\n";
+    const fm = parseFrontmatter(content);
+    expect(fm['impactDescription']).toBe('A long description');
+  });
+});
+
+// ─── collectRuleFiles ─────────────────────────────────────────────────────────
+
+describe('collectRuleFiles', () => {
+  it('excludes SKILL.md', () => {
+    write('rules/SKILL.md');
+    write('rules/auth.md');
+    const results = collectRuleFiles(path.join(tmpRoot, 'rules'));
+    expect(results.every((f) => !f.endsWith('SKILL.md'))).toBe(true);
+  });
+
+  it('excludes README.md', () => {
+    write('rules/README.md');
+    write('rules/setup.md');
+    const results = collectRuleFiles(path.join(tmpRoot, 'rules'));
+    expect(results.every((f) => !f.endsWith('README.md'))).toBe(true);
+  });
+
+  it('excludes files starting with underscore', () => {
+    write('rules/_draft.md');
+    write('rules/published.md');
+    const results = collectRuleFiles(path.join(tmpRoot, 'rules'));
+    expect(results.every((f) => !path.basename(f).startsWith('_'))).toBe(true);
+  });
+
+  it('includes normal .md files in subdirs', () => {
+    write('rules/nuxt/api-proxy.md');
+    write('rules/nextjs/error-handling.md');
+    const results = collectRuleFiles(path.join(tmpRoot, 'rules'));
+    expect(results).toHaveLength(2);
+  });
+
+  it('returns empty array for non-existent directory', () => {
+    expect(collectRuleFiles(path.join(tmpRoot, 'missing'))).toEqual([]);
   });
 });

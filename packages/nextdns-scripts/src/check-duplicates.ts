@@ -159,8 +159,7 @@ export function checkDuplicateTags(rules: RuleEntry[]): number {
   return issues;
 }
 
-// Run only when executed directly (not imported as a module in tests)
-if (fileURLToPath(import.meta.url) === process.argv[1]) {
+export function run(): void {
   const rules = loadAllRules();
   console.log(`Loaded ${rules.length} rules\n`);
 
@@ -183,3 +182,6 @@ if (fileURLToPath(import.meta.url) === process.argv[1]) {
   }
   process.exit(0);
 }
+
+// Run only when executed directly (not imported as a module in tests)
+if (fileURLToPath(import.meta.url) === process.argv[1]) run();

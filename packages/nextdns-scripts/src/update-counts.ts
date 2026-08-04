@@ -111,6 +111,8 @@ export function updateCounts(repoRoot: string = REPO_ROOT, skillsDir: string = S
 
 /* ========= Entry Point ========= */
 
-if (fileURLToPath(import.meta.url) === process.argv[1]) {
+export function run(): void {
   updateCounts();
 }
+
+if (fileURLToPath(import.meta.url) === process.argv[1]) run();

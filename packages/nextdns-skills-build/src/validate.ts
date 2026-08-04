@@ -4,6 +4,7 @@
  */
 
 import { relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import type { Rule } from './types.js';
 
@@ -11,7 +12,7 @@ import { DEFAULT_SKILL, SKILLS } from './config.js';
 import { parseRuleFile } from './parser.js';
 import { collectRuleFiles } from './utils.js';
 
-interface ValidationError {
+export interface ValidationError {
   file: string;
   ruleId?: string;
   message: string;
@@ -20,7 +21,7 @@ interface ValidationError {
 /**
  * Validate a rule
  */
-function validateRule(rule: Rule, file: string): ValidationError[] {
+export function validateRule(rule: Rule, file: string): ValidationError[] {
   const errors: ValidationError[] = [];
 
   if (!rule.title || rule.title.trim().length === 0) {
@@ -104,4 +105,8 @@ async function validate() {
   }
 }
 
-void validate();
+export function run(): void {
+  void validate();
+}
+
+if (fileURLToPath(import.meta.url) === process.argv[1]) run();

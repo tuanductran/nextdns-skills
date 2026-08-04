@@ -5,6 +5,7 @@
 
 import { writeFile } from 'node:fs/promises';
 import { relative } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import type { Rule, TestCase } from './types.js';
 
@@ -95,4 +96,5 @@ async function extractTests() {
   }
 }
 
-void extractTests();
+export const run = extractTests;
+if (fileURLToPath(import.meta.url) === process.argv[1]) void extractTests();

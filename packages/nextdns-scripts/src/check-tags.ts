@@ -251,7 +251,9 @@ export function validateTags(skillsDir: string = SKILLS_DIR): boolean {
   return true;
 }
 
-if (fileURLToPath(import.meta.url) === process.argv[1]) {
+export function run(): void {
   const ok = validateTags();
   process.exit(ok ? 0 : 1);
 }
+
+if (fileURLToPath(import.meta.url) === process.argv[1]) run();

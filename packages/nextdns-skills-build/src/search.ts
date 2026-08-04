@@ -42,7 +42,7 @@ if (!query && !filterTag && !filterSkill && !filterImpact) {
 }
 
 /* ---- Types ---- */
-interface SearchResult {
+export interface SearchResult {
   skill: string;
   file: string;
   title: string;
@@ -53,7 +53,7 @@ interface SearchResult {
 }
 
 /* ---- Frontmatter parser (inline, no external dep) ---- */
-function parseFm(content: string): Record<string, string | string[]> {
+export function parseFm(content: string): Record<string, string | string[]> {
   if (!content.startsWith('---')) return {};
   const end = content.indexOf('\n---', 3);
   if (end === -1) return {};
@@ -91,7 +91,7 @@ function parseFm(content: string): Record<string, string | string[]> {
 }
 
 /* ---- Search ---- */
-function search(): SearchResult[] {
+export function search(): SearchResult[] {
   const results: SearchResult[] = [];
 
   const targetSkills = filterSkill
@@ -180,37 +180,41 @@ function collectMd(dir: string): string[] {
   return out;
 }
 
-/* ---- Output ---- */
-const results = search();
+export function run(): void {
+  /* ---- Output ---- */
+  const results = search();
 
-if (jsonOutput) {
-  console.log(JSON.stringify(results, null, 2));
-  process.exit(0);
+  if (jsonOutput) {
+    console.log(JSON.stringify(results, null, 2));
+    process.exit(0);
+  }
+
+  if (results.length === 0) {
+    console.log('No rules matched your search criteria.');
+    process.exit(0);
+  }
+
+  const GREEN = '\x1b[0;32m';
+  const YELLOW = '\x1b[0;33m';
+  const BOLD = '\x1b[1m';
+  const DIM = '\x1b[2m';
+  const NC = '\x1b[0m';
+
+  const impactColor = (i: string) =>
+    i === 'HIGH' ? '\x1b[0;31m' : i === 'MEDIUM' ? YELLOW : '\x1b[0;34m';
+
+  console.log(`\n${BOLD}Found ${results.length} result(s):${NC}\n`);
+
+  for (const r of results) {
+    const ic = impactColor(r.impact);
+    console.log(`${BOLD}${r.title}${NC}`);
+    console.log(`  ${DIM}${r.file}${NC}`);
+    console.log(`  Skill: ${GREEN}${r.skill}${NC}  Type: ${r.type}  Impact: ${ic}${r.impact}${NC}`);
+    if (r.tags.length > 0)
+      console.log(`  Tags: ${r.tags.slice(0, 6).join(', ')}${r.tags.length > 6 ? '…' : ''}`);
+    console.log(`  Matched on: ${r.matchedOn.join(', ')}`);
+    console.log('');
+  }
 }
 
-if (results.length === 0) {
-  console.log('No rules matched your search criteria.');
-  process.exit(0);
-}
-
-const GREEN = '\x1b[0;32m';
-const YELLOW = '\x1b[0;33m';
-const BOLD = '\x1b[1m';
-const DIM = '\x1b[2m';
-const NC = '\x1b[0m';
-
-const impactColor = (i: string) =>
-  i === 'HIGH' ? '\x1b[0;31m' : i === 'MEDIUM' ? YELLOW : '\x1b[0;34m';
-
-console.log(`\n${BOLD}Found ${results.length} result(s):${NC}\n`);
-
-for (const r of results) {
-  const ic = impactColor(r.impact);
-  console.log(`${BOLD}${r.title}${NC}`);
-  console.log(`  ${DIM}${r.file}${NC}`);
-  console.log(`  Skill: ${GREEN}${r.skill}${NC}  Type: ${r.type}  Impact: ${ic}${r.impact}${NC}`);
-  if (r.tags.length > 0)
-    console.log(`  Tags: ${r.tags.slice(0, 6).join(', ')}${r.tags.length > 6 ? '…' : ''}`);
-  console.log(`  Matched on: ${r.matchedOn.join(', ')}`);
-  console.log('');
-}
+if (fileURLToPath(import.meta.url) === process.argv[1]) run();

@@ -8,6 +8,7 @@
 import { existsSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { DEFAULT_SKILL, SKILLS } from './config.js';
 
@@ -112,4 +113,5 @@ TODO: step-by-step diagnostic guidance.
   }
 }
 
-void migrate();
+export const run = migrate;
+if (fileURLToPath(import.meta.url) === process.argv[1]) void migrate();

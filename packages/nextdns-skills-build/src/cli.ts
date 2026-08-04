@@ -2,10 +2,9 @@
 /**
  * Unified CLI entrypoint for nextdns-skills-build.
  *
- * Each subcommand module below is a self-invoking script that reads its
- * own arguments from `process.argv.slice(2)`. This wrapper strips the
- * subcommand name off `process.argv` before dynamically importing the
- * target module, so existing module code needs no changes.
+ * Each subcommand module exports a run() function. This wrapper strips
+ * the subcommand name from process.argv before importing and calling run(),
+ * so modules remain importable in tests without executing CLI logic.
  *
  * Usage:
  *   nextdns-skills-build <command> [options]
@@ -47,10 +46,12 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  // Re-slice argv so the target module's own `process.argv.slice(2)` sees `rest`.
+  // Re-slice argv so each module's process.argv.slice(2) sees only `rest`
   process.argv = [process.argv[0] ?? 'node', process.argv[1] ?? 'nextdns-skills-build', ...rest];
 
-  await import(modulePath);
+  // Call the exported run() function explicitly — no side-effect import.
+  const mod = (await import(modulePath)) as { run: () => void | Promise<void> };
+  await mod.run();
 }
 
 void main();
