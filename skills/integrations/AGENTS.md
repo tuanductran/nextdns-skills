@@ -1877,7 +1877,7 @@ hostname. Configure the endpoint in the operating system, browser, router, or MD
 
 owns DNS resolution for the intended traffic.
 
-**Correct: Use the CLI for a router or Unix host that needs local network features**
+**Correct: Use the CLI for a router or UNIX host that needs local network features**
 
 ```bash
 # ✅ Use a placeholder profile ID and let the CLI manage local DNS integration.
