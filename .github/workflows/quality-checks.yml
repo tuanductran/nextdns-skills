@@ -5,11 +5,15 @@ on:
     branches: [main, develop]
     paths:
       - 'skills/**/rules/**/*.md'
+      - '.agents/**/*.md'
+      - 'AGENTS.md'
       - 'packages/**'
   pull_request:
     branches: [main, develop]
     paths:
       - 'skills/**/rules/**/*.md'
+      - '.agents/**/*.md'
+      - 'AGENTS.md'
       - 'packages/**'
 
 concurrency:
@@ -41,6 +45,9 @@ jobs:
 
       - name: Build packages
         run: pnpm build
+
+      - name: Lint Markdown documentation and agent workflows
+        run: pnpm lint:md
 
       - name: Check duplicate rule titles and tag sets
         run: pnpm check-duplicates

@@ -25,6 +25,12 @@ For the most reliable results, prefix your prompts with:
 use nextdns skill, <your request here>
 ```
 
+### Agent workflows
+
+Repository-specific procedures for adding rules, researching NextDNS behavior, reviewing changes,
+and preparing commits live in [.agents/workflows/](.agents/workflows/). These Markdown files are
+reusable instructions for coding agents; they are not automatically executed GitHub Actions.
+
 ---
 
 ## Available skills

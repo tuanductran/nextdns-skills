@@ -28,6 +28,8 @@ Thumbs.db
 
 # 🤖 AI agent workspaces
 .agent/
+.agents/memory/
+.agents/logs/
 .gemini/
 .gemini-agent/
 
