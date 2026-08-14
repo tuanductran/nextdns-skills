@@ -10,6 +10,9 @@ tags:
   - performance
   - cache boost
   - cname flattening
+  - profile sharing
+  - age verification
+  - web3
 ---
 
 # Configuration management
@@ -22,28 +25,42 @@ Manage your NextDNS profile settings, log storage, and performance optimizations
 
 - **Profile Name**: Use descriptive names like "Router - Stable" or "Browser - Aggressive".
 - **Logs Enabled**: Toggle on/off log recording.
-- **Log Retention**: Choose how long to keep logs (from 1 hour to 3 months).
-- **Log Storage Location**: **Switzerland** is often recommended by privacy enthusiasts due to their
-  strong data protection laws.
-- **Block Page**: Display a dedicated page when a site is blocked.
-  - **Caution**: This setting can break **PayPal 2FA**, **iCloud Private Relay**, **Microsoft
-    Teams**, and **Yahoo! Mail**. Only enable if you have installed the NextDNS Root CA.
+- **Privacy adjustments**: Choose independently whether to retain client IP addresses and queried
+  domains in logs.
+- **Log Retention**: Choose a retention window from **1 hour** through **2 years**. Treat retention
+  and storage location as profile settings, not as proof that a particular legal or privacy regime
+  applies to every deployment.
+- **Log Storage Location**: Select the location exposed by the dashboard for the profile.
+- **Block Page**: Display a page when a domain is blocked. This can slightly increase page-load time
+  and may produce HTTPS warnings. When disabled, blocked queries are answered with the unspecified
+  address `0.0.0.0` or `::`.
+- **Log operations**: Use **Download logs** for export and treat **Clear logs** as destructive because
+  it permanently removes the profile's stored logs.
 
 ## Performance and advanced
 
 - **Anonymized EDNS Client Subnet**: Often enabled by default to improve CDN routing without
   exposing your full IP.
 - **Cache Boost**: Recommended for performance. It tells clients to keep DNS answers longer.
-- **CNAME Flattening**: Reduces the number of DNS queries.
-  - **Warning**: May break compatibility with services like **Yahoo! Mail**.
-- **Rewrites**: Manually redirect any domain or subdomain (for example, `local.home` to `192.168.1.1`).
-- **Bypass Age Verification**: Allows accessing content that requires age verification via DNS
-  identification (added August 2025).
-  - **Known limitation**: Community reports (NextDNS Help Center, early 2026) describe the feature
-    as inconsistent — it has been intermittently pulled from the dashboard due to bugs, and
-    behavior varies by site and country. Don't treat it as a guaranteed bypass; verify it still
-    works for the target site/region before relying on it.
-- **Web3**: Enable resolution of decentralised domains (HNS, ENS, and more).
+- **CNAME Flattening**: Prevent CNAME-chasing resolvers from making unnecessary intermediate
+  queries that can pollute logs.
+- **Rewrites**: Override DNS responses for a domain and its subdomains. Local IP addresses are
+  supported as answers.
+- **Bypass Age Verification (beta)**: Acknowledge the legal-age requirement before enabling the
+  dashboard's age-verification bypass feature. Do not present this beta feature as a universal
+  content-access guarantee.
+- **Web3 (beta)**: Enable the dashboard's unfiltered gateway for decentralized naming and content
+  systems such as ENS, Unstoppable Domains, Handshake, and IPFS. Browsers may require a trailing `/`
+  when opening a Web3 domain directly.
+
+## Sharing and lifecycle
+
+- **Access (beta)**: Invite another person with editing or viewing-only access to the profile. Share
+  access deliberately because an editor can change filtering and logging behavior.
+- **Duplicate**: Copy all profile settings to a new profile before experimenting with a high-impact
+  change.
+- **Delete**: Deleting a profile also permanently deletes its associated logs. Confirm the target
+  profile before using this action.
 
 ## Maintenance
 
@@ -52,4 +69,5 @@ Manage your NextDNS profile settings, log storage, and performance optimizations
 
 ## Reference
 
+- [NextDNS Dashboard](https://my.nextdns.io/)
 - [NextDNS Help Center](https://help.nextdns.io)

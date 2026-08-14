@@ -7,7 +7,7 @@ description:
 license: MIT
 metadata:
   author: tuanductran
-  version: '1.0.1'
+  version: '1.1.0'
 ---
 
 # NextDNS web UI skills
@@ -21,8 +21,8 @@ metadata:
 | [parental-control](rules/parental-control.md)                 | apps and games, categories, recreation time, restricted mode | Set up restrictions for family members    |
 | [ddns-settings](rules/ddns-settings.md)                       | linked ip, ddns, noip, dynamic dns, router                 | Manage network IP linking and dynamic DNS |
 | [denylist-allowlist](rules/denylist-allowlist.md)             | block domain, allow domain, allowlist, fixing breakage     | Manually manage domain accessibility      |
-| [analytics-logs](rules/analytics-logs.md)                     | monitoring, logs, blocked queries, identifier              | Monitor network activity and troubleshoot |
-| [configuration-management](rules/configuration-management.md) | profile name, log location, performance, cache boost       | Manage profile global settings            |
+| [analytics-logs](rules/analytics-logs.md)                     | monitoring, logs, blocked queries, device filter, time range, DNSSEC, encrypted DNS | Interpret dashboard analytics and troubleshoot recent events |
+| [configuration-management](rules/configuration-management.md) | profile name, log location, retention, performance, cache boost, profile sharing, age verification, web3 | Manage profile settings and lifecycle safely |
 | [web3-settings](rules/web3-settings.md)                       | web3, blockchain, ens, unstoppable domains                 | Enable resolution for blockchain domains  |
 | [rewrites](rules/rewrites.md)                                 | rewrites, custom dns, hostname override, local dns, cname  | Override DNS resolution for hostnames     |
 | [root-ca-installation](rules/root-ca-installation.md)         | root ca, certificate, block page, https, ssl, windows, macos, ios, android | Install Root CA to enable HTTPS block pages |

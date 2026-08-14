@@ -55,47 +55,67 @@ Visibility and troubleshooting tools
 
 Monitor your network activity and troubleshoot issues through real-time logs and detailed analytics.
 
-- **Real-time Monitoring**: See every DNS query hitting the NextDNS resolver.
+- **Real-time Monitoring**: See recent DNS events hitting the NextDNS resolver.
 
-- **Search and Filter**:
+- **Search and Filter**: Select a device scope such as **All devices** and search the log list for a
 
-  - **Blocked Queries Only**: Quickly identify what is being blocked.
+  domain or event. Keep account-wide filtering separate from per-device identification.
 
-  - **Raw DNS Logs**: View absolute DNS record details.
+- **Event inspection**: Expand an individual log row to inspect the event details exposed by the UI,
 
-- **Identification**: To find out **why** a domain is blocked, hover over the information icon
+  including the queried domain, source or device context, and relative time.
 
-  (**ⓘ**) next to the query. It will tell you the specific blocklist or security feature
+- **Identification**: To find out **why** a domain is blocked, use the event details and the profile's
 
-  responsible.
+  blocking controls to distinguish a blocklist, security feature, parental-control rule, or manual
 
-- **Direct Action**: You can allow or block domains directly from the log entry using the checkmark
+  deny rule.
 
-  or cross icons.
+- **Direct Action**: If the current UI exposes allow or block actions from a log entry, confirm the
 
-- **Reloading**: Use the reload icon to check for the most recent queries after making configuration
+  target domain and profile before applying the action.
 
-  changes.
+- **Reloading**: Refresh the log view after making configuration changes and verify that new events
 
-- **Global Overview**: Track total queries and the percentage of blocked requests.
+  use the intended profile and device scope.
 
-- **Insights**:
+Use the device selector and time-range selector before interpreting any chart. The dashboard can
 
-  - **Top Domains**: Identify the most requested domains.
+show a global view such as **All devices** over a recent period, but the selected scope changes the
 
-  - **Top Reasons**: See which rules are triggering the most blocks.
+meaning of every count.
 
-  - **Top Clients**: Identify which devices are the most active on your network.
+- **Global Overview**: Track total queries, blocked queries, and the blocked-query percentage.
 
-- **Retention**: Data in the Analytics tab respects your chosen retention period in Settings.
+- **Resolved versus blocked domains**: Compare domains resolved without a block to domains blocked
 
-- Periodically check the **Blocked Queries Only** filter to ensure no essential services are being
+  by Security, Privacy, Parental Control, or a manual deny rule.
 
-  blocked.
+- **Insights**: Review blocked reasons, devices, client IPs, root-domain aggregates, GAFAM dominance,
 
-- Use the **Analytics** to understand the traffic patterns on your network and identify potential
+  encrypted-DNS percentage, DNSSEC validation percentage, and traffic destinations by country.
 
-  issues (like a device making excessive requests).
+- **Retention**: Analytics and logs are bounded by the profile's retention and privacy settings;
+
+  do not infer historical completeness when retention or client-IP logging is limited.
+
+A domain count is not the same as a unique application or user count. Root-domain aggregates combine
+
+subdomains, IP sections may contain multiple addresses for one network, and **Unidentified devices**
+
+indicate that the selected connection did not provide a usable device identity. Use the Setup page's
+
+identification instructions before treating device-level analytics as complete.
+
+- Periodically use the device scope and search controls to inspect recent events and ensure that no
+
+  essential services are being blocked.
+
+- Use **Analytics** to understand traffic patterns, compare resolved and blocked domains, and identify
+
+  potential issues such as a device making excessive requests.
+
+- [NextDNS Dashboard](https://my.nextdns.io/)
 
 - [NextDNS Help Center](https://help.nextdns.io)
 
@@ -113,17 +133,27 @@ Manage your NextDNS profile settings, log storage, and performance optimizations
 
 - **Logs Enabled**: Toggle on/off log recording.
 
-- **Log Retention**: Choose how long to keep logs (from 1 hour to 3 months).
+- **Privacy adjustments**: Choose independently whether to retain client IP addresses and queried
 
-- **Log Storage Location**: **Switzerland** is often recommended by privacy enthusiasts due to their
+  domains in logs.
 
-  strong data protection laws.
+- **Log Retention**: Choose a retention window from **1 hour** through **2 years**. Treat retention
 
-- **Block Page**: Display a dedicated page when a site is blocked.
+  and storage location as profile settings, not as proof that a particular legal or privacy regime
 
-  - **Caution**: This setting can break **PayPal 2FA**, **iCloud Private Relay**, **Microsoft
+  applies to every deployment.
 
-    Teams**, and **Yahoo! Mail**. Only enable if you have installed the NextDNS Root CA.
+- **Log Storage Location**: Select the location exposed by the dashboard for the profile.
+
+- **Block Page**: Display a page when a domain is blocked. This can slightly increase page-load time
+
+  and may produce HTTPS warnings. When disabled, blocked queries are answered with the unspecified
+
+  address `0.0.0.0` or `::`.
+
+- **Log operations**: Use **Download logs** for export and treat **Clear logs** as destructive because
+
+  it permanently removes the profile's stored logs.
 
 - **Anonymized EDNS Client Subnet**: Often enabled by default to improve CDN routing without
 
@@ -131,29 +161,43 @@ Manage your NextDNS profile settings, log storage, and performance optimizations
 
 - **Cache Boost**: Recommended for performance. It tells clients to keep DNS answers longer.
 
-- **CNAME Flattening**: Reduces the number of DNS queries.
+- **CNAME Flattening**: Prevent CNAME-chasing resolvers from making unnecessary intermediate
 
-  - **Warning**: May break compatibility with services like **Yahoo! Mail**.
+  queries that can pollute logs.
 
-- **Rewrites**: Manually redirect any domain or subdomain (for example, `local.home` to `192.168.1.1`).
+- **Rewrites**: Override DNS responses for a domain and its subdomains. Local IP addresses are
 
-- **Bypass Age Verification**: Allows accessing content that requires age verification via DNS
+  supported as answers.
 
-  identification (added August 2025).
+- **Bypass Age Verification (beta)**: Acknowledge the legal-age requirement before enabling the
 
-  - **Known limitation**: Community reports (NextDNS Help Center, early 2026) describe the feature
+  dashboard's age-verification bypass feature. Do not present this beta feature as a universal
 
-    as inconsistent — it has been intermittently pulled from the dashboard due to bugs, and
+  content-access guarantee.
 
-    behavior varies by site and country. Don't treat it as a guaranteed bypass; verify it still
+- **Web3 (beta)**: Enable the dashboard's unfiltered gateway for decentralized naming and content
 
-    works for the target site/region before relying on it.
+  systems such as ENS, Unstoppable Domains, Handshake, and IPFS. Browsers may require a trailing `/`
 
-- **Web3**: Enable resolution of decentralised domains (HNS, ENS, and more).
+  when opening a Web3 domain directly.
+
+- **Access (beta)**: Invite another person with editing or viewing-only access to the profile. Share
+
+  access deliberately because an editor can change filtering and logging behavior.
+
+- **Duplicate**: Copy all profile settings to a new profile before experimenting with a high-impact
+
+  change.
+
+- **Delete**: Deleting a profile also permanently deletes its associated logs. Confirm the target
+
+  profile before using this action.
 
 - **Set-and-Forget**: If you want a trouble-free experience, stick to the **NORMAL** or **PRO**
 
   blocklists and avoid aggressive security settings like "Block Newly Registered Domains".
+
+- [NextDNS Dashboard](https://my.nextdns.io/)
 
 - [NextDNS Help Center](https://help.nextdns.io)
 
