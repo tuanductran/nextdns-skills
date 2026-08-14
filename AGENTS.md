@@ -10,8 +10,8 @@ across the NextDNS ecosystem via domain-specific context injection:
 - **NextDNS API**: Programmatic configuration, analytics, and log management.
 - **NextDNS CLI**: Deployment, system configuration, and monitoring.
 - **NextDNS Web UI**: Strategic configuration and dashboard-based management.
-- **Integrations**: Third-party platform connections (OpenWrt, pfSense, Tailscale, and more).
-- **NextDNS Frontend**: Nuxt 4, Next.js 15, Astro, SvelteKit, and React Router v7 patterns.
+- **Integrations**: Third-party platform connections and transport-selection guidance (OpenWrt, pfSense, Tailscale, and more).
+- **NextDNS Frontend**: Nuxt 4, Next.js 16, Astro, SvelteKit, and React Router v8 patterns.
 
 ## Repository architecture
 
@@ -27,7 +27,7 @@ nextdns-skills/
 │   ├── nextdns-ui/               # 16 rules — Web dashboard strategy
 │   │   ├── SKILL.md
 │   │   └── rules/
-│   ├── integrations/             # 20 rules — Platform connectivity
+│   ├── integrations/             # 21 rules — Platform connectivity and transport selection
 │   │   ├── SKILL.md
 │   │   └── rules/
 │   └── nextdns-frontend/         # 35 rules — Frontend frameworks

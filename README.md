@@ -34,8 +34,8 @@ use nextdns skill, <your request here>
 | [**NextDNS API**](skills/nextdns-api/SKILL.md) | **23** | Authentication, profile management, analytics, and logs. |
 | [**NextDNS CLI**](skills/nextdns-cli/SKILL.md) | **24** | Installation, system-wide configuration, and client monitoring. |
 | [**NextDNS Web UI**](skills/nextdns-ui/SKILL.md) | **16** | Strategic configuration, content filtering, and security modeling. |
-| [**Integrations**](skills/integrations/SKILL.md) | **20** | Third-party platform connectivity (OpenWrt, pfSense, Tailscale, and more). |
-| [**NextDNS Frontend**](skills/nextdns-frontend/SKILL.md) | **35** | Nuxt 4, Next.js 15, Astro, SvelteKit, and React Router v7: BFF proxy, profile UI, SSE logs, analytics. |
+| [**Integrations**](skills/integrations/SKILL.md) | **21** | Third-party platform connectivity and NextDNS transport selection. |
+| [**NextDNS Frontend**](skills/nextdns-frontend/SKILL.md) | **35** | Nuxt 4, Next.js 16, Astro, SvelteKit, and React Router v8: BFF proxy, profile UI, SSE logs, analytics. |
 
 ---
 

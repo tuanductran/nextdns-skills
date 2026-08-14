@@ -3,12 +3,13 @@ name: integrations
 description:
   NextDNS integration guides for third-party platforms and services. This skill should be used when
   integrating NextDNS with routers, home automation systems, network management platforms, or other
-  third-party services. Triggers on tasks involving Tailscale, Home Assistant, Ubiquiti, pfSense,
-  OpenWrt, or other platform-specific NextDNS configurations.
+  third-party services. It also guides transport selection across DoH, DoT, DoQ, DoH3, IPv6, and
+  legacy DNS. Triggers on tasks involving Tailscale, Home Assistant, Ubiquiti, pfSense, OpenWrt,
+  NextDNS transport selection, or other platform-specific NextDNS configurations.
 license: MIT
 metadata:
   author: tuanductran
-  version: '1.0.1'
+  version: '1.1.0'
 ---
 
 # NextDNS integration skills
@@ -18,6 +19,7 @@ metadata:
 | Rule                                                                       | Keywords                                                                                                                     | Description                                                                                                                      |
 | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | [Browser Native DoH Configuration](rules/browsers.md)                      | browser, chrome, edge, firefox, doh, dns-over-https, secure-dns, encrypted-dns, corporate, proxy                             | Configure DNS-over-HTTPS directly in browsers for encrypted DNS without system-wide changes or admin privileges                  |
+| [Select a NextDNS Transport and Setup Method](rules/transport-selection.md) | transport selection, encrypted dns, legacy dns, doh, dot, doq, doh3, linked ip                                               | Choose a compatible transport and profile-association method before configuring a device or network                              |
 | [DNSMasq Integration](rules/dnsmasq-integration.md)                        | dnsmasq, dns, router, client reporting, conditional configuration, port configuration, setup-router                          | Configure DNSMasq and NextDNS to run together while maintaining client reporting and conditional configuration features          |
 | [Mobile Native Encrypted DNS Configuration](rules/mobile-native.md)        | mobile, android, ios, iphone, ipad, private-dns, dot, dns-over-tls, configuration-profile, mobileconfig, native, lightweight | Configure native encrypted DNS on Android and iOS devices without battery-draining background apps                               |
 | [OpenWrt Integration](rules/openwrt.md)                                    | openwrt, router, installation, upgrade, troubleshooting, ssh, luci                                                           | Installation, upgrade, and troubleshooting guidance for NextDNS on OpenWrt routers                                               |
