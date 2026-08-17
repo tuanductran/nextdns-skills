@@ -1,0 +1,81 @@
+# Contributing
+
+Thank you for improving **NextDNS Skills**. The repository is a source-grounded knowledge collection, so a useful contribution must be correct, discoverable, privacy-safe, and reproducible. Read the root [AGENTS.md](../AGENTS.md) first, then read the nearest generated skill context and the matching procedure in [.agents/workflows/](../.agents/workflows/).
+
+## Choose the change type
+
+| Change | Canonical files | Required follow-up |
+| :--- | :--- | :--- |
+| Add or revise domain guidance | `skills/{skill}/rules/*.md` | Update `skills/{skill}/SKILL.md`, rebuild generated `AGENTS.md`, and run rule validation |
+| Change skill metadata or routing | `skills/{skill}/SKILL.md` | Check rule registration, counts, tags, and generated output |
+| Change agent procedure | `.agents/workflows/*.md` and root `AGENTS.md` | Keep the procedure reusable, explicit, and free of account data |
+| Change public project guidance | `docs/*.md` or `README.md` | Check links and Markdown; update the documentation index when adding a document |
+| Change build or validation behavior | `packages/`, root scripts, or CI | Add or update tests, document the command, and run the full relevant quality gate |
+
+## Add or revise a rule
+
+Start with [templates/rule-template.md](../templates/rule-template.md). Use a kebab-case filename, a frontmatter `title` that exactly matches the H1 heading, an impact level, one-sentence impact description, a rule type, and three to ten unique tags. Keep the required sections in the order specified by [AGENTS.md](../AGENTS.md).
+
+Place the rule in the category that owns the behavior. Register it in that category's `SKILL.md` in the same commit. Do not edit `skills/*/AGENTS.md` by hand: those files are generated from source rules. Rebuild them with `pnpm build:skills` after source changes.
+
+A good rule explains the decision it helps an agent make, gives a safe correct example, identifies unsafe or unsupported behavior, and includes a troubleshooting path. Use placeholders such as `YOUR_API_KEY`, `abc123`, `example.com`, and `192.0.2.10`. Never paste a live profile ID, API key, email address, public IP address, DNS log, cookie, browser session, or account screenshot.
+
+## Research and references
+
+Prefer official NextDNS API, CLI, Help Center, and dashboard documentation. Use secondary sources only when they add implementation context that an official source does not provide. Distinguish the status of each statement:
+
+| Status | Meaning | How to write it |
+| :--- | :--- | :--- |
+| Official fact | Directly stated by an authoritative source | Link the source and avoid extending its claim |
+| Repository fact | Verified from this repository or its tests | Link the owning file or command |
+| Observation | Seen in a browser or dashboard at a specific time | Record only generalized behavior and observation date |
+| Inference | A reasoned conclusion from facts | Label it as an inference and explain the uncertainty |
+| Proposal | Future behavior or design choice | Label it as proposed; do not present it as supported behavior |
+
+If a source is protected, rate-limited, a file download, or an API endpoint that needs credentials, record that limitation rather than replacing it with a guessed URL. Follow [DOCUMENTATION.md](DOCUMENTATION.md) for link and source handling.
+
+## Local development sequence
+
+Install the locked dependencies and inspect the repository status before editing:
+
+```bash
+pnpm install --frozen-lockfile
+git status --short
+```
+
+After editing, run the smallest useful checks first. For rule or manifest changes, rebuild the generated output and run the complete gate:
+
+```bash
+pnpm build:skills
+pnpm lint:fix
+pnpm lint:all
+pnpm check-duplicates
+pnpm check-tags
+pnpm update-counts
+pnpm test
+git diff --check
+```
+
+For documentation-only changes, `pnpm lint:md`, `pnpm lint:links`, and `git diff --check` are the minimum checks. Add `pnpm lint:all` when the change touches referenced URLs or CI. If a remote service returns 403, 429, 5xx, or a download response, record the exception and do not treat the response as proof that the documentation is invalid without further review.
+
+## Pull request expectations
+
+A pull request should explain the user or maintenance problem, summarize the change, identify the canonical files, and include validation evidence. For a rule change, mention the source used, the manifest update, the generated output rebuild, and any known external-link exceptions. For an account-backed observation, state that the content was generalized and contains no account data.
+
+| Review question | Required answer |
+| :--- | :--- |
+| What problem does this solve? | A concise user or maintenance outcome |
+| Where is the source of truth? | Exact rule, manifest, package, schema, or docs path |
+| What was generated? | Generated `AGENTS.md` files, if any |
+| How was it tested? | Commands and meaningful results |
+| Are any links exceptional? | Protected, rate-limited, download, redirect, or unresolved links |
+| Could the diff contain PII or secrets? | Explicitly reviewed; use safe placeholders only |
+
+## Commit and release hygiene
+
+Use a conventional commit such as `feat(cli): add platform guidance`, `docs: explain contributor workflow`, or `fix(ui): refresh stale reference`. Keep unrelated changes in separate commits. Before pushing, follow [.agents/workflows/release-check.md](../.agents/workflows/release-check.md), confirm the working tree is clean except for the intended commit, and never push a change that contains credentials or live account data.
+
+## Code of conduct and security
+
+Be precise, respectful, and transparent about uncertainty. Do not use an issue or pull request to disclose credentials, private logs, or account identifiers. Report a suspected security issue privately through the repository's configured security channel rather than publishing exploit details in a rule or documentation example.
+

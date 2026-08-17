@@ -31,6 +31,19 @@ Repository-specific procedures for adding rules, researching NextDNS behavior, r
 and preparing commits live in [.agents/workflows/](.agents/workflows/). These Markdown files are
 reusable instructions for coding agents; they are not automatically executed GitHub Actions.
 
+## Documentation and project policies
+
+| Topic | Document |
+| :--- | :--- |
+| Project documentation index | [docs/README.md](docs/README.md) |
+| Project roadmap | [docs/ROADMAP.md](docs/ROADMAP.md) |
+| Architecture and source boundaries | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
+| Contribution workflow | [CONTRIBUTING.md](CONTRIBUTING.md) |
+| Documentation standards | [docs/DOCUMENTATION.md](docs/DOCUMENTATION.md) |
+| Security policy | [SECURITY.md](SECURITY.md) |
+| Code of conduct | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
+| Change history | [CHANGELOG.md](CHANGELOG.md) |
+
 ---
 
 ## Available skills

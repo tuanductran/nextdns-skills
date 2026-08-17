@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Contributor guide
+    url: https://github.com/tuanductran/nextdns-skills/blob/main/docs/CONTRIBUTING.md
+    about: Read the contribution workflow before opening a change request.
+  - name: Security policy
+    url: https://github.com/tuanductran/nextdns-skills/blob/main/SECURITY.md
+    about: Report sensitive security concerns without publishing secrets or private data.
+  - name: Project roadmap
+    url: https://github.com/tuanductran/nextdns-skills/blob/main/docs/ROADMAP.md
+    about: Check current priorities and acceptance criteria.
