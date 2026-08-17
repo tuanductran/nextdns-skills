@@ -78,7 +78,7 @@ echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
 
 ```bash
 # ✅ Universal installer (detects ARM architecture automatically)
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 When prompted:
@@ -158,7 +158,7 @@ sudo dhclient -r && sudo dhclient
 ### Issue: debug installation failure
 
 ```bash
-DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+DEBUG=1 sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ## Reference

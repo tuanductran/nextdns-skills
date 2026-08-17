@@ -1009,7 +1009,7 @@ The device may have cached the old DNS assignment. Force a DHCP renewal or recon
 
 pick up the new profile assignment.
 
-- [NextDNS CLI — Conditional Profile](https://github.com/nextdns/nextdns/wiki/Conditional-Profile)
+- [NextDNS CLI — Conditional Profile](https://github.com/nextdns/nextdns)
 
 - [NextDNS-Config Guidelines](https://github.com/yokoffing/NextDNS-Config)
 

@@ -55,7 +55,7 @@ sudo rm -f /etc/resolv.conf
 echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
 
 # ✅ Install NextDNS CLI
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 Answer the installer prompts:

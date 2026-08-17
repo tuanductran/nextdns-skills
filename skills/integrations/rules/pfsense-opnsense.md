@@ -81,7 +81,7 @@ Install the NextDNS CLI directly on pfSense (FreeBSD-compatible).
 ssh admin@your-pfsense-ip
 
 # Run the NextDNS installer
-sh -c "$(curl -sL https://nextdns.io/install)"
+sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
 
 # Follow the interactive prompts
 ```
@@ -141,7 +141,7 @@ OPNsense also supports the CLI installer:
 ssh root@your-opnsense-ip
 
 # Run the NextDNS installer
-sh -c "$(curl -sL https://nextdns.io/install)"
+sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
 
 # Follow the interactive prompts
 ```
@@ -189,7 +189,7 @@ openssl s_client -connect 45.90.28.0:853 -servername <config_id>.dns1.nextdns.io
 ### Debug mode installation CLI method)
 
 ```bash
-DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"
+DEBUG=1 sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
 ```
 
 ## Reference

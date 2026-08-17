@@ -163,6 +163,6 @@ revalidation.
 
 ## Reference
 
-- [React Router v8 — Data Loading](https://reactrouter.com/start/framework/data-loading)
-- [React Router v8 — Actions](https://reactrouter.com/start/framework/actions)
+- [React Router v8 — Data Loading](https://reactrouter.com/)
+- [React Router v8 — Actions](https://reactrouter.com/)
 - [NextDNS API — Profiles](https://nextdns.github.io/api/#profiles)

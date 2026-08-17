@@ -21,7 +21,7 @@ To keep the NextDNS CLI secure and feature-rich, you should periodically check f
 The easiest way to upgrade is to simply re-run the universal installation script:
 
 ```bash
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 The installer will detect your existing installation and offer an **Upgrade** option if a newer
@@ -32,7 +32,7 @@ version is available. It will preserve your configuration settings.
 To remove NextDNS CLI from your system, use the same universal script:
 
 ```bash
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 1. Select the **Uninstall** option from the menu.

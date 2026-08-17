@@ -30,7 +30,7 @@ For modern versions of OpenWrt:
 
 1. Enable SSH.
 2. Install curl: `opkg update && opkg install curl`.
-3. Run installer: `sh -c "$(curl -sL https://nextdns.io/install)"`.
+3. Run installer: `sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"`.
 4. Alternatively, use the LuCI GUI: `opkg install luci-app-nextdns`.
 
 ### pfSense
@@ -79,4 +79,4 @@ Windows network adapter DNS settings.
 
 ## Reference
 
-- [NextDNS CLI - Router Setup](https://github.com/nextdns/nextdns/wiki/Router-Setup)
+- [NextDNS CLI - Router Setup](https://github.com/nextdns/nextdns)

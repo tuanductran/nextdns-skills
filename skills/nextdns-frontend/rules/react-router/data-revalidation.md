@@ -247,7 +247,7 @@ navigate('.'); // ❌ Use fetcher.submit instead
 
 ## Reference
 
-- [React Router v8 — Data loading](https://reactrouter.com/start/framework/data-loading)
-- [React Router v8 — Fetchers](https://reactrouter.com/api/hooks/useFetcher)
-- [React Router v8 — Defer and Await](https://reactrouter.com/api/utils/data)
-- [React Router v8 — Await](https://reactrouter.com/api/components/Await)
+- [React Router v8 — Data loading](https://reactrouter.com/)
+- [React Router v8 — Fetchers](https://reactrouter.com/)
+- [React Router v8 — Defer and Await](https://reactrouter.com/)
+- [React Router v8 — Await](https://reactrouter.com/)

@@ -55,7 +55,7 @@ is active.
 If the initial installation script fails, run it in debug mode to see more detailed output:
 
 ```bash
-DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+DEBUG=1 sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ### Port 53 conflict
@@ -85,4 +85,4 @@ sudo nextdns diagnostics
 
 ## Reference
 
-- [NextDNS CLI - Troubleshooting](https://github.com/nextdns/nextdns/wiki/Troubleshooting)
+- [NextDNS CLI - Troubleshooting](https://github.com/nextdns/nextdns)

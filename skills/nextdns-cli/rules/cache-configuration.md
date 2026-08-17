@@ -67,4 +67,4 @@ nextdns status
 
 ## Reference
 
-- [NextDNS CLI Wiki - Cache Configuration](https://github.com/nextdns/nextdns/wiki/Cache-Configuration)
+- [NextDNS CLI Wiki - Cache Configuration](https://github.com/nextdns/nextdns)

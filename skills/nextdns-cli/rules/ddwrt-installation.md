@@ -54,7 +54,7 @@ enabled will erase JFFS contents on every reboot.
 Connect to your DD-WRT router via SSH and run the universal installer:
 
 ```bash
-sh -c "$(curl -sL https://nextdns.io/install)"
+sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
 ```
 
 The installer will:
@@ -69,7 +69,7 @@ The installer will:
 To upgrade an existing NextDNS CLI installation, re-run the same installer command:
 
 ```bash
-sh -c "$(curl -sL https://nextdns.io/install)"
+sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
 ```
 
 The installer automatically detects existing installations and performs an upgrade.
@@ -118,7 +118,7 @@ If you encounter issues during installation, run the installer in debug mode to 
 diagnostic output:
 
 ```bash
-DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"
+DEBUG=1 sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
 ```
 
 Common issues and solutions:
@@ -130,4 +130,4 @@ Common issues and solutions:
 
 ## Reference
 
-- [NextDNS CLI - DD-WRT](https://github.com/nextdns/nextdns/wiki/DD-WRT)
+- [NextDNS CLI - DD-WRT](https://github.com/nextdns/nextdns)

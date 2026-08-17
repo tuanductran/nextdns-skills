@@ -27,7 +27,7 @@ Strategic deployment of NextDNS on Ubiquiti EdgeRouter (EdgeOS) and Firewalla ha
 ### 2. Install
 
 ```bash
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ## Firewalla (gold/purple/blue plus)
@@ -42,7 +42,7 @@ Firewalla runs a customized Ubuntu-based OS. You can install the CLI directly on
 ### 2. Install
 
 ```bash
-sh -c "$(curl -sL https://nextdns.io/install)"
+sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
 ```
 
 ## Critical configuration
@@ -55,5 +55,5 @@ installer typically handles `dnsmasq` integration automatically.
 
 ## Reference
 
-- [NextDNS CLI Wiki - EdgeOS](https://github.com/nextdns/nextdns/wiki/EdgeOS)
-- [NextDNS CLI Wiki - Firewalla](https://github.com/nextdns/nextdns/wiki/Firewalla)
+- [NextDNS CLI Wiki - EdgeOS](https://github.com/nextdns/nextdns)
+- [NextDNS CLI Wiki - Firewalla](https://github.com/nextdns/nextdns)

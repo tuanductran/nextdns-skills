@@ -68,7 +68,7 @@ choose the router setup option.
 opkg update && opkg install curl
 
 # ✅ Run the universal installer
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 When the installer prompts:
@@ -97,7 +97,7 @@ To upgrade NextDNS CLI to a newer version:
 
 ```bash
 # Re-run the installer and select "Upgrade"
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ## Post-firmware-update recovery
@@ -130,11 +130,11 @@ ls -la /etc/rc.d/ | grep adguardhome
 ### Issue: debug mode installation
 
 ```bash
-DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+DEBUG=1 sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ## Reference
 
-- [NextDNS CLI Wiki — OpenWrt](https://github.com/nextdns/nextdns/wiki/OpenWrt)
+- [NextDNS CLI Wiki — OpenWrt](https://github.com/nextdns/nextdns)
 - [GL.iNet Docs — Interface guide](https://docs.gl-inet.com/router/en/4/interface_guide/)
 - [GL.iNet AdGuard Home Docs](https://docs.gl-inet.com/router/en/4/interface_guide/adguardhome/)

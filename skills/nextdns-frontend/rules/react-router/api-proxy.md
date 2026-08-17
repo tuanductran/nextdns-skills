@@ -170,6 +170,6 @@ component export — a default export turns it into a UI route, not a resource r
 
 ## Reference
 
-- [React Router v8 — Resource Routes](https://reactrouter.com/how-to/resource-routes)
-- [React Router v8 — Data Loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Resource Routes](https://reactrouter.com/)
+- [React Router v8 — Data Loading](https://reactrouter.com/)
 - [NextDNS API — Authentication](https://nextdns.github.io/api/#authentication)

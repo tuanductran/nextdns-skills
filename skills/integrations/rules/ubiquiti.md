@@ -101,7 +101,7 @@ ssh root@192.168.1.1
 Execute the official installer script:
 
 ```bash
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 Follow the interactive prompts to complete installation.
@@ -143,7 +143,7 @@ limitation of the CLI installation method.
 If installation fails, run the installer with debug output enabled:
 
 ```bash
-DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+DEBUG=1 sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 This generates verbose logs that help identify the root cause of failures.
@@ -247,4 +247,4 @@ Verify your profile ID is correctly configured.
 
 ## Reference
 
-- [NextDNS CLI - Ubiquiti](https://github.com/nextdns/nextdns/wiki/Ubiquiti)
+- [NextDNS CLI - Ubiquiti](https://github.com/nextdns/nextdns)

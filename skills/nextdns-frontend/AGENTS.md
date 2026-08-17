@@ -4444,7 +4444,7 @@ container or wrap in a client-only component that renders after mount.
 
 new one, keeping the URL clean.
 
-- [React Router v8 — Data Loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Data Loading](https://reactrouter.com/)
 
 - [Recharts Documentation](https://recharts.org)
 
@@ -4579,9 +4579,9 @@ Variables without the `VITE_` prefix are server-only and require restart to pick
 
 component export — a default export turns it into a UI route, not a resource route.
 
-- [React Router v8 — Resource Routes](https://reactrouter.com/how-to/resource-routes)
+- [React Router v8 — Resource Routes](https://reactrouter.com/)
 
-- [React Router v8 — Data Loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Data Loading](https://reactrouter.com/)
 
 - [NextDNS API — Authentication](https://nextdns.github.io/api/#authentication)
 
@@ -4727,13 +4727,13 @@ Use `fetcher.submit` for mutations that should not navigate away from the curren
 
 Render the profile list immediately while analytics loads in the background:
 
-- [React Router v8 — Data loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Data loading](https://reactrouter.com/)
 
-- [React Router v8 — Fetchers](https://reactrouter.com/api/hooks/useFetcher)
+- [React Router v8 — Fetchers](https://reactrouter.com/)
 
-- [React Router v8 — Defer and Await](https://reactrouter.com/api/utils/data)
+- [React Router v8 — Defer and Await](https://reactrouter.com/)
 
-- [React Router v8 — Await](https://reactrouter.com/api/components/Await)
+- [React Router v8 — Await](https://reactrouter.com/)
 
 **Incorrect:**
 
@@ -4801,11 +4801,11 @@ just from `root.tsx`.
 
 `null` is valid for success; returning `{ error: '...' }` gives `actionData` to the component.
 
-- [React Router v8 — Error Boundaries](https://reactrouter.com/how-to/error-boundary)
+- [React Router v8 — Error Boundaries](https://reactrouter.com/)
 
-- [React Router v8 — Actions](https://reactrouter.com/start/framework/actions)
+- [React Router v8 — Actions](https://reactrouter.com/)
 
-- [React Router v8 — `data()` utility](https://reactrouter.com/api/utils/data)
+- [React Router v8 — `data()` utility](https://reactrouter.com/)
 
 - [NextDNS API — Error Responses](https://nextdns.github.io/api/)
 
@@ -5009,7 +5009,7 @@ deployment platform does not buffer streaming responses (Vercel: use Edge Functi
 
 `useEffect` (client-only lifecycle) — never call it at module level or during SSR.
 
-- [React Router v8 — Resource Routes](https://reactrouter.com/how-to/resource-routes)
+- [React Router v8 — Resource Routes](https://reactrouter.com/)
 
 - [MDN — EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
 
@@ -5173,9 +5173,9 @@ prop automatically typed by the framework.
 
 revalidation.
 
-- [React Router v8 — Data Loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Data Loading](https://reactrouter.com/)
 
-- [React Router v8 — Actions](https://reactrouter.com/start/framework/actions)
+- [React Router v8 — Actions](https://reactrouter.com/)
 
 - [NextDNS API — Profiles](https://nextdns.github.io/api/#profiles)
 
@@ -5327,11 +5327,11 @@ client-side data loading which exposes the API key.
 
 under `app/routes/+types/` based on your route config.
 
-- [React Router v8 — Getting Started](https://reactrouter.com/start/framework/installation)
+- [React Router v8 — Getting Started](https://reactrouter.com/)
 
-- [React Router v8 — Rendering Modes](https://reactrouter.com/start/framework/rendering)
+- [React Router v8 — Rendering Modes](https://reactrouter.com/)
 
-- [React Router v8 — Route Configuration](https://reactrouter.com/start/framework/routing)
+- [React Router v8 — Route Configuration](https://reactrouter.com/)
 
 - [NextDNS API Reference](https://nextdns.github.io/api/)
 

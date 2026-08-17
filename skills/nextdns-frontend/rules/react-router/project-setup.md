@@ -144,7 +144,7 @@ under `app/routes/+types/` based on your route config.
 
 ## Reference
 
-- [React Router v8 — Getting Started](https://reactrouter.com/start/framework/installation)
-- [React Router v8 — Rendering Modes](https://reactrouter.com/start/framework/rendering)
-- [React Router v8 — Route Configuration](https://reactrouter.com/start/framework/routing)
+- [React Router v8 — Getting Started](https://reactrouter.com/)
+- [React Router v8 — Rendering Modes](https://reactrouter.com/)
+- [React Router v8 — Route Configuration](https://reactrouter.com/)
 - [NextDNS API Reference](https://nextdns.github.io/api/)

@@ -103,7 +103,7 @@ Patterns for React Router v8 (formerly Remix) projects.
 - [Astro Documentation](https://docs.astro.build)
 - [Astro React Integration](https://docs.astro.build/en/guides/integrations-guide/react/)
 - [SvelteKit Documentation](https://kit.svelte.dev/docs)
-- [React Router v8 Documentation](https://reactrouter.com/start/framework/installation)
+- [React Router v8 Documentation](https://reactrouter.com/)
 - [NextDNS API Reference](https://nextdns.github.io/api/)
 - [VueUse](https://vueuse.org)
 - [TanStack Query](https://tanstack.com/query/latest)

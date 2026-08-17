@@ -51,4 +51,4 @@ are respected before any network query.
 
 ## Reference
 
-- [NextDNS CLI Wiki - Split-Horizon](https://github.com/nextdns/nextdns/wiki/Split-Horizon)
+- [NextDNS CLI Wiki - Split-Horizon](https://github.com/nextdns/nextdns)

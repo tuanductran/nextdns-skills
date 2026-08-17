@@ -216,7 +216,7 @@ just from `root.tsx`.
 
 ## Reference
 
-- [React Router v8 — Error Boundaries](https://reactrouter.com/how-to/error-boundary)
-- [React Router v8 — Actions](https://reactrouter.com/start/framework/actions)
-- [React Router v8 — `data()` utility](https://reactrouter.com/api/utils/data)
+- [React Router v8 — Error Boundaries](https://reactrouter.com/)
+- [React Router v8 — Actions](https://reactrouter.com/)
+- [React Router v8 — `data()` utility](https://reactrouter.com/)
 - [NextDNS API — Error Responses](https://nextdns.github.io/api/)

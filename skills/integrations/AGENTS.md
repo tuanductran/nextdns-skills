@@ -82,7 +82,7 @@ client identification.
 
    ```bash
 
-   sh -c "$(curl -sL https://nextdns.io/install)"
+   sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
 
    ```
 
@@ -106,7 +106,7 @@ For the best experience on AsusWRT-Merlin:
 
 If the installation fails, run the installer in debug mode:
 
-- [NextDNS CLI Wiki - AsusWRT-Merlin](https://github.com/nextdns/nextdns/wiki/AsusWRT-Merlin)
+- [NextDNS CLI Wiki - AsusWRT-Merlin](https://github.com/nextdns/nextdns)
 
 - [SNBForums NextDNS Thread](https://www.snbforums.com/threads/nextdns-installer.61002/)
 
@@ -408,7 +408,7 @@ If `-setup-router` fails or doesn't configure properly:
 
 - Ensure you have appropriate permissions to modify DNSMasq configuration
 
-- [NextDNS CLI - DNSMasq](https://github.com/nextdns/nextdns/wiki/DNSMasq)
+- [NextDNS CLI - DNSMasq](https://github.com/nextdns/nextdns)
 
 ### 1.4 Docker Compose Deployment
 
@@ -444,7 +444,7 @@ conditional profiles.
 
 - [NextDNS CLI Docker Hub](https://hub.docker.com/r/nextdns/nextdns)
 
-- [NextDNS CLI Wiki — Docker](https://github.com/nextdns/nextdns/wiki/Docker)
+- [NextDNS CLI Wiki — Docker](https://github.com/nextdns/nextdns)
 
 - [Docker Compose Documentation](https://docs.docker.com/compose/)
 
@@ -624,9 +624,9 @@ to ensure Firewalla/EdgeRouter can map internal IP addresses to hostnames in you
 
 installer typically handles `dnsmasq` integration automatically.
 
-- [NextDNS CLI Wiki - EdgeOS](https://github.com/nextdns/nextdns/wiki/EdgeOS)
+- [NextDNS CLI Wiki - EdgeOS](https://github.com/nextdns/nextdns)
 
-- [NextDNS CLI Wiki - Firewalla](https://github.com/nextdns/nextdns/wiki/Firewalla)
+- [NextDNS CLI Wiki - Firewalla](https://github.com/nextdns/nextdns)
 
 ### 1.6 GL.iNet Router Integration
 
@@ -680,7 +680,7 @@ GL.iNet firmware updates often re-enable AdGuard Home and may remove the NextDNS
 
 After any firmware update:
 
-- [NextDNS CLI Wiki — OpenWrt](https://github.com/nextdns/nextdns/wiki/OpenWrt)
+- [NextDNS CLI Wiki — OpenWrt](https://github.com/nextdns/nextdns)
 
 - [GL.iNet Documentation](https://docs.gl-inet.com/)
 
@@ -1321,7 +1321,7 @@ This method works on all OpenWrt versions and provides the most reliable install
 
 | 3    | Install curl: `opkg update && opkg install curl`                                    |
 
-| 4    | Run the NextDNS installer: `sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'` |
+| 4    | Run the NextDNS installer: `sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'` |
 
 | 5    | Follow the on-screen instructions to complete setup                                 |
 
@@ -1347,7 +1347,7 @@ To upgrade an existing NextDNS installation on OpenWrt:
 
    ```bash
 
-   sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+   sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 
    ```
 
@@ -1369,7 +1369,7 @@ This will output verbose information that can help identify the root cause of in
 
 - **Package not available**: For Method B, verify your OpenWrt version is 19.07.01-rc2 or later
 
-- [NextDNS CLI - OpenWrt](https://github.com/nextdns/nextdns/wiki/OpenWrt)
+- [NextDNS CLI - OpenWrt](https://github.com/nextdns/nextdns)
 
 ### 1.13 pfSense and OPNsense Integration
 
@@ -2080,7 +2080,7 @@ This will output verbose information to help identify the problem.
 
 **Cause:** DHCP clients are not using the Synology device as their DNS server.
 
-- [NextDNS CLI - Synology](https://github.com/nextdns/nextdns/wiki/Synology)
+- [NextDNS CLI - Synology](https://github.com/nextdns/nextdns)
 
 **Solution:**
 
@@ -2328,7 +2328,7 @@ repositories may be archived:
 
 | **Conflicts**          | None                | Must disable UniFi filtering |
 
-- [NextDNS CLI - Ubiquiti](https://github.com/nextdns/nextdns/wiki/Ubiquiti)
+- [NextDNS CLI - Ubiquiti](https://github.com/nextdns/nextdns)
 
 **Benefits**:**
 

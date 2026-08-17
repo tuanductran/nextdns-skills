@@ -145,6 +145,6 @@ new one, keeping the URL clean.
 
 ## Reference
 
-- [React Router v8 — Data Loading](https://reactrouter.com/start/framework/data-loading)
+- [React Router v8 — Data Loading](https://reactrouter.com/)
 - [Recharts Documentation](https://recharts.org)
 - [NextDNS API — Analytics](https://nextdns.github.io/api/#analytics)

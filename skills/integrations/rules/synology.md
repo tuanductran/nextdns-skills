@@ -57,7 +57,7 @@ ssh admin@synology-nas-ip
 
 ```bash
 # Run the NextDNS installer
-sh -c "$(curl -sL https://nextdns.io/install)"
+sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
 
 # Follow the interactive prompts:
 # - Enter your NextDNS Configuration ID
@@ -104,7 +104,7 @@ ssh root@synology-router-ip
 
 ```bash
 # Run the NextDNS installer
-sh -c "$(curl -sL https://nextdns.io/install)"
+sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
 
 # Follow the interactive prompts
 ```
@@ -174,7 +174,7 @@ NextDNS is active.
 If the installation fails or you encounter issues, run the installer in debug mode:
 
 ```bash
-DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"
+DEBUG=1 sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
 ```
 
 This will output verbose information to help identify the problem.
@@ -215,4 +215,4 @@ nextdns restart
 
 ## Reference
 
-- [NextDNS CLI - Synology](https://github.com/nextdns/nextdns/wiki/Synology)
+- [NextDNS CLI - Synology](https://github.com/nextdns/nextdns)

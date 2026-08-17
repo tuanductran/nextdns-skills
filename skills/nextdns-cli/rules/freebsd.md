@@ -30,7 +30,7 @@ systemd. The standard universal installer also works on FreeBSD as an alternativ
 
 ```bash
 # ✅ Simplest method — handles binary, service registration, and activation
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 Follow the interactive prompts to set your profile ID and install mode (host or router).
@@ -112,7 +112,7 @@ yum install nextdns   # ❌
 pkg upgrade nextdns
 
 # Or re-run the universal installer and select "Upgrade"
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ## Uninstall
@@ -137,7 +137,7 @@ pkg delete nextdns
 **Solution**: Run as root or with `sudo`:
 
 ```bash
-sudo sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sudo sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ### Issue: service NOT persisting after reboot
@@ -155,11 +155,11 @@ grep nextdns /etc/rc.conf
 
 ```bash
 # Run installer in debug mode
-sh -c 'DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'DEBUG=1 sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ## Reference
 
-- [NextDNS CLI Wiki — FreeBSD](https://github.com/nextdns/nextdns/wiki/FreeBSD)
+- [NextDNS CLI Wiki — FreeBSD](https://github.com/nextdns/nextdns)
 - [FreeBSD pkg Documentation](https://docs.freebsd.org/en/books/handbook/ports/#pkgng-intro)
 - [FreeBSD Ports Collection](https://docs.freebsd.org/en/books/handbook/ports/#ports-using)

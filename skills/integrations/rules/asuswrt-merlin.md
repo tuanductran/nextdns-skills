@@ -29,7 +29,7 @@ client identification.
    ```
 3. **Run Installer**:
    ```bash
-   sh -c "$(curl -sL https://nextdns.io/install)"
+   sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
    ```
 4. **Follow Prompts**:
    - Enter your **Profile ID**.
@@ -50,10 +50,10 @@ For the best experience on AsusWRT-Merlin:
 If the installation fails, run the installer in debug mode:
 
 ```bash
-DEBUG=1 sh -c "$(curl -sL https://nextdns.io/install)"
+DEBUG=1 sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"
 ```
 
 ## Reference
 
-- [NextDNS CLI Wiki - AsusWRT-Merlin](https://github.com/nextdns/nextdns/wiki/AsusWRT-Merlin)
+- [NextDNS CLI Wiki - AsusWRT-Merlin](https://github.com/nextdns/nextdns)
 - [SNBForums NextDNS Thread](https://www.snbforums.com/threads/nextdns-installer.61002/)

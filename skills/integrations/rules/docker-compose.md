@@ -212,5 +212,5 @@ nslookup example.com 127.0.0.1
 ## Reference
 
 - [NextDNS CLI Docker Hub](https://hub.docker.com/r/nextdns/nextdns)
-- [NextDNS CLI Wiki — Docker](https://github.com/nextdns/nextdns/wiki/Docker)
+- [NextDNS CLI Wiki — Docker](https://github.com/nextdns/nextdns)
 - [Docker Compose Documentation](https://docs.docker.com/compose/)

@@ -24,7 +24,7 @@ The following command works for most Linux distributions (Debian, Ubuntu, CentOS
 macOS, and many routers:
 
 ```bash
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ### Installation workflow

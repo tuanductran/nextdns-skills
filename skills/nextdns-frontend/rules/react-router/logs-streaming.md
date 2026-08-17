@@ -173,6 +173,6 @@ deployment platform does not buffer streaming responses (Vercel: use Edge Functi
 
 ## Reference
 
-- [React Router v8 — Resource Routes](https://reactrouter.com/how-to/resource-routes)
+- [React Router v8 — Resource Routes](https://reactrouter.com/)
 - [MDN — EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource)
 - [NextDNS API — Log Streaming](https://nextdns.github.io/api/#logs)

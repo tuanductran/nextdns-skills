@@ -43,32 +43,23 @@ sudo nextdns install \
 Useful for lightweight Docker hosts or Alpine-based routers.
 
 ```bash
-# ✅ Add NextDNS repository
-sudo wget -O /etc/apk/keys/nextdns.pub https://repo.nextdns.io/nextdns.pub
-echo https://repo.nextdns.io/apk | sudo tee -a /etc/apk/repositories >/dev/null
+# ✅ Use the official installer; it detects Alpine and configures the apk path
+sudo sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 
-# ✅ Install via apk
-sudo apk update
-sudo apk add nextdns
-
-# ✅ Configure for router setup
+# The installer detects Alpine, installs the package, and then prompts for profile/setup.
+# For a non-interactive follow-up configuration:
 sudo nextdns install -profile abc123 -setup-router
 ```
 
 ### 3. Rpm-based (fedora/centos/rhel)
 
-Manual repo setup if the installer script fails.
+Manual RPM repository setup if the official installer script fails. The legacy `/rpm` URL is not a repository definition; use the downloaded `nextdns.repo` file instead.
 
 ```bash
-# ✅ Create repo file
-cat <<EOF | sudo tee /etc/yum.repos.d/nextdns.repo
-[nextdns]
-name=NextDNS Repository
-baseurl=https://repo.nextdns.io/rpm
-enabled=1
-gpgcheck=1
-gpgkey=https://repo.nextdns.io/nextdns.pub
-EOF
+# ✅ Install the official repository definition
+sudo mkdir -p /etc/yum.repos.d
+sudo curl -Ls https://repo.nextdns.io/nextdns.repo \
+  -o /etc/yum.repos.d/nextdns.repo
 
 # ✅ Install
 sudo dnf install nextdns

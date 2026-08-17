@@ -46,7 +46,7 @@ For advanced users, server deployments, or automated setups, the CLI method prov
 ### Download
 
 Download the latest Windows binary from
-[GitHub Releases](https://github.com/nextdns/nextdns/releases).
+[NextDNS CLI tags](https://github.com/nextdns/nextdns/tags).
 
 ### Installation steps
 
@@ -85,4 +85,4 @@ After installation, verify NextDNS is running:
 
 ## Reference
 
-- [NextDNS CLI - Windows](https://github.com/nextdns/nextdns/wiki/Windows)
+- [NextDNS CLI - Windows](https://github.com/nextdns/nextdns)

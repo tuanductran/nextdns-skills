@@ -70,4 +70,4 @@ sudo nextdns config set -profile 10.0.4.0/24:123456
 
 ## Reference
 
-- [NextDNS CLI Wiki - Conditional Profile](https://github.com/nextdns/nextdns/wiki/Conditional-Profile)
+- [NextDNS CLI Wiki - Conditional Profile](https://github.com/nextdns/nextdns)

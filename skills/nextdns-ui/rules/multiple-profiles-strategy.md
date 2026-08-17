@@ -144,5 +144,5 @@ pick up the new profile assignment.
 
 ## Reference
 
-- [NextDNS CLI — Conditional Profile](https://github.com/nextdns/nextdns/wiki/Conditional-Profile)
+- [NextDNS CLI — Conditional Profile](https://github.com/nextdns/nextdns)
 - [NextDNS-Config Guidelines](https://github.com/yokoffing/NextDNS-Config)

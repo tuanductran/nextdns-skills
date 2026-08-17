@@ -70,7 +70,7 @@ netstat -tlnp 2>/dev/null | grep :53
 opkg update && opkg install curl
 
 # ✅ Run the universal NextDNS installer
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 During installation:
@@ -103,14 +103,14 @@ After any firmware update:
 
 # ✅ Reinstall NextDNS CLI
 opkg update && opkg install curl
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ## Upgrading NextDNS CLI
 
 ```bash
 # Re-run the installer and select "Upgrade" when prompted
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ## Troubleshooting
@@ -144,11 +144,11 @@ nextdns log
 ### Issue: debug installation failure
 
 ```bash
-DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+DEBUG=1 sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ## Reference
 
-- [NextDNS CLI Wiki — OpenWrt](https://github.com/nextdns/nextdns/wiki/OpenWrt)
+- [NextDNS CLI Wiki — OpenWrt](https://github.com/nextdns/nextdns)
 - [GL.iNet Documentation](https://docs.gl-inet.com/)
 - [GL.iNet Forum — NextDNS discussion](https://forum.gl-inet.com/)

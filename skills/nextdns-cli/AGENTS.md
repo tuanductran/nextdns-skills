@@ -125,30 +125,21 @@ sudo nextdns install \
 **Correct: 2. Alpine Linux (manual apk)**
 
 ```bash
-# ✅ Add NextDNS repository
-sudo wget -O /etc/apk/keys/nextdns.pub https://repo.nextdns.io/nextdns.pub
-echo https://repo.nextdns.io/apk | sudo tee -a /etc/apk/repositories >/dev/null
+# ✅ Use the official installer; it detects Alpine and configures the apk path
+sudo sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 
-# ✅ Install via apk
-sudo apk update
-sudo apk add nextdns
-
-# ✅ Configure for router setup
+# The installer detects Alpine, installs the package, and then prompts for profile/setup.
+# For a non-interactive follow-up configuration:
 sudo nextdns install -profile abc123 -setup-router
 ```
 
 **Correct: 3. Rpm-based (fedora/centos/rhel)**
 
 ```bash
-# ✅ Create repo file
-cat <<EOF | sudo tee /etc/yum.repos.d/nextdns.repo
-[nextdns]
-name=NextDNS Repository
-baseurl=https://repo.nextdns.io/rpm
-enabled=1
-gpgcheck=1
-gpgkey=https://repo.nextdns.io/nextdns.pub
-EOF
+# ✅ Install the official repository definition
+sudo mkdir -p /etc/yum.repos.d
+sudo curl -Ls https://repo.nextdns.io/nextdns.repo \
+  -o /etc/yum.repos.d/nextdns.repo
 
 # ✅ Install
 sudo dnf install nextdns
@@ -258,7 +249,7 @@ This ensures:
 
 Check cache performance via status:
 
-- [NextDNS CLI Wiki - Cache Configuration](https://github.com/nextdns/nextdns/wiki/Cache-Configuration)
+- [NextDNS CLI Wiki - Cache Configuration](https://github.com/nextdns/nextdns)
 
 ### 1.5 CLI Configuration File Format
 
@@ -308,7 +299,7 @@ distinguish between clients and apply specific filtering policies beyond the def
 
 - **Reporting**: Combine with `-report-client-info` to see client names in the dashboard.
 
-- [NextDNS CLI Wiki - Conditional Profile](https://github.com/nextdns/nextdns/wiki/Conditional-Profile)
+- [NextDNS CLI Wiki - Conditional Profile](https://github.com/nextdns/nextdns)
 
 **Correct: Implementation via CLI**
 
@@ -502,7 +493,7 @@ Common issues and solutions:
 
 - **dnsmasq conflicts**: Check `/tmp/dnsmasq.conf` for conflicts with existing rules
 
-- [NextDNS CLI - DD-WRT](https://github.com/nextdns/nextdns/wiki/DD-WRT)
+- [NextDNS CLI - DD-WRT](https://github.com/nextdns/nextdns)
 
 ### 1.9 Docker Deployment
 
@@ -598,7 +589,7 @@ If port 53 is already in use:
 
 Check logs for errors:
 
-- [NextDNS CLI - Docker](https://github.com/nextdns/nextdns/wiki/Docker)
+- [NextDNS CLI - Docker](https://github.com/nextdns/nextdns)
 
 ### 1.10 FreeBSD Installation
 
@@ -622,7 +613,7 @@ systemd. The standard universal installer also works on FreeBSD as an alternativ
 
 **Solution**: Verify `nextdns_enable="YES"` is present in `/etc/rc.conf`:
 
-- [NextDNS CLI Wiki — FreeBSD](https://github.com/nextdns/nextdns/wiki/FreeBSD)
+- [NextDNS CLI Wiki — FreeBSD](https://github.com/nextdns/nextdns)
 
 - [FreeBSD pkg Documentation](https://docs.freebsd.org/en/books/handbook/ports/#pkgng-intro)
 
@@ -632,7 +623,7 @@ systemd. The standard universal installer also works on FreeBSD as an alternativ
 
 ```bash
 # ✅ Simplest method — handles binary, service registration, and activation
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 Follow the interactive prompts to set your profile ID and install mode (host or router).
@@ -765,7 +756,7 @@ GL.iNet firmware updates may remove the NextDNS CLI installation. After a firmwa
 
 **Solution**: Verify the disable command ran successfully:
 
-- [NextDNS CLI Wiki — OpenWrt](https://github.com/nextdns/nextdns/wiki/OpenWrt)
+- [NextDNS CLI Wiki — OpenWrt](https://github.com/nextdns/nextdns)
 
 - [GL.iNet Docs — Interface guide](https://docs.gl-inet.com/router/en/4/interface_guide/)
 
@@ -939,7 +930,7 @@ If issues persist after troubleshooting, contact the NextDNS support team:
 
 - Keep NextDNS CLI updated by periodically re-running the installer
 
-- [NextDNS CLI - macOS](https://github.com/nextdns/nextdns/wiki/macOS)
+- [NextDNS CLI - macOS](https://github.com/nextdns/nextdns)
 
 ### 1.14 Monitoring
 
@@ -977,7 +968,7 @@ Install and configure NextDNS CLI on NixOS using declarative system configuratio
 
 NixOS manages system state declaratively through `/etc/nixos/configuration.nix`. The standard
 
-`sh -c "$(curl -sL https://nextdns.io/install)"` installer **will not persist** across
+`sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"` installer **will not persist** across
 
 `nixos-rebuild switch` because NixOS regenerates system files from configuration. Always use the
 
@@ -997,7 +988,7 @@ Upgrades are handled by the Nix package manager. Update the package in your chan
 
 **Solution**: Ensure `-auto-activate` is in `arguments`, or set `networking.nameservers` explicitly:
 
-- [NextDNS CLI Wiki — Nix](https://github.com/nextdns/nextdns/wiki/Nix)
+- [NextDNS CLI Wiki — Nix](https://github.com/nextdns/nextdns)
 
 - [NixOS Manual — Services](https://nixos.org/manual/nixos/stable/)
 
@@ -1090,7 +1081,7 @@ sudo nixos-rebuild switch
 
 ```bash
 # ❌ Running the imperative installer on NixOS
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 # Changes will be overwritten on the next nixos-rebuild switch
 
 # ❌ Manually editing /etc/resolv.conf or systemd-resolved on NixOS
@@ -1119,7 +1110,7 @@ For modern versions of OpenWrt:
 
 2. Install curl: `opkg update && opkg install curl`.
 
-3. Run installer: `sh -c "$(curl -sL https://nextdns.io/install)"`.
+3. Run installer: `sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"`.
 
 4. Alternatively, use the LuCI GUI: `opkg install luci-app-nextdns`.
 
@@ -1165,7 +1156,7 @@ Windows network adapter DNS settings.
 
 | Linux    | Package Manager / Installer | N/A                  |
 
-- [NextDNS CLI - Router Setup](https://github.com/nextdns/nextdns/wiki/Router-Setup)
+- [NextDNS CLI - Router Setup](https://github.com/nextdns/nextdns)
 
 ### 1.17 Profile Configuration
 
@@ -1307,7 +1298,7 @@ Use the `-forwarder` flag to point specific domains to a local resolver.
 
 are respected before any network query.
 
-- [NextDNS CLI Wiki - Split-Horizon](https://github.com/nextdns/nextdns/wiki/Split-Horizon)
+- [NextDNS CLI Wiki - Split-Horizon](https://github.com/nextdns/nextdns)
 
 ### 1.20 System Configuration
 
@@ -1413,7 +1404,7 @@ If you are at a hotel or airport and cannot connect:
 
 NextDNS provides a diagnostic tool to help support staff:
 
-- [NextDNS CLI - Troubleshooting](https://github.com/nextdns/nextdns/wiki/Troubleshooting)
+- [NextDNS CLI - Troubleshooting](https://github.com/nextdns/nextdns)
 
 ### 1.22 Windows Installation
 
@@ -1451,7 +1442,7 @@ For advanced users, server deployments, or automated setups, the CLI method prov
 
 Download the latest Windows binary from
 
-[GitHub Releases](https://github.com/nextdns/nextdns/releases).
+[NextDNS CLI tags](https://github.com/nextdns/nextdns/tags).
 
 1. **Create Directory**: Create a dedicated folder for the NextDNS binary:
 
@@ -1487,7 +1478,7 @@ Download the latest Windows binary from
 
 After installation, verify NextDNS is running:
 
-- [NextDNS CLI - Windows](https://github.com/nextdns/nextdns/wiki/Windows)
+- [NextDNS CLI - Windows](https://github.com/nextdns/nextdns)
 
 ---
 

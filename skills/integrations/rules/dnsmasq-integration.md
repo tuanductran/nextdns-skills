@@ -132,4 +132,4 @@ If `-setup-router` fails or doesn't configure properly:
 
 ## Reference
 
-- [NextDNS CLI - DNSMasq](https://github.com/nextdns/nextdns/wiki/DNSMasq)
+- [NextDNS CLI - DNSMasq](https://github.com/nextdns/nextdns)

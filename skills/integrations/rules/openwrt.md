@@ -38,7 +38,7 @@ This method works on all OpenWrt versions and provides the most reliable install
 | 1    | Enable SSH in the Web GUI: Navigate to **System → Administration**                  |
 | 2    | Connect to your router via SSH                                                      |
 | 3    | Install curl: `opkg update && opkg install curl`                                    |
-| 4    | Run the NextDNS installer: `sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'` |
+| 4    | Run the NextDNS installer: `sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'` |
 | 5    | Follow the on-screen instructions to complete setup                                 |
 
 ### Method b: luci app (version 19.07.01-rc2+)
@@ -59,7 +59,7 @@ To upgrade an existing NextDNS installation on OpenWrt:
 
 1. Re-run the installer script:
    ```bash
-   sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+   sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
    ```
 2. The installer will detect the existing installation and offer an upgrade option if a new version
    is available.
@@ -72,7 +72,7 @@ If the installation fails or encounters errors, run the installer in debug mode 
 logs:
 
 ```conf
-DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+DEBUG=1 sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 This will output verbose information that can help identify the root cause of installation issues.
@@ -96,7 +96,7 @@ ssh root@192.168.1.1
 opkg update && opkg install curl
 
 # Run NextDNS installer
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 
 # Follow the prompts to complete installation
 ```
@@ -105,16 +105,16 @@ sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
 
 ```bash
 # Run installer with debug output
-DEBUG=1 sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+DEBUG=1 sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ### Upgrade existing installation
 
 ```bash
 # Re-run the installer to upgrade
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 ```
 
 ## Reference
 
-- [NextDNS CLI - OpenWrt](https://github.com/nextdns/nextdns/wiki/OpenWrt)
+- [NextDNS CLI - OpenWrt](https://github.com/nextdns/nextdns)

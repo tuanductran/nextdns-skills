@@ -20,7 +20,7 @@ Install and configure NextDNS CLI on NixOS using declarative system configuratio
 ## Overview
 
 NixOS manages system state declaratively through `/etc/nixos/configuration.nix`. The standard
-`sh -c "$(curl -sL https://nextdns.io/install)"` installer **will not persist** across
+`sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"` installer **will not persist** across
 `nixos-rebuild switch` because NixOS regenerates system files from configuration. Always use the
 native `services.nextdns` NixOS module instead.
 
@@ -113,7 +113,7 @@ sudo nixos-rebuild switch
 
 ```bash
 # ❌ Running the imperative installer on NixOS
-sh -c 'sh -c "$(curl -sL https://nextdns.io/install)"'
+sh -c 'sh -c "$(curl -sL https://raw.githubusercontent.com/nextdns/nextdns/master/install.sh)"'
 # Changes will be overwritten on the next nixos-rebuild switch
 
 # ❌ Manually editing /etc/resolv.conf or systemd-resolved on NixOS
@@ -174,6 +174,6 @@ networking.nameservers = [ "127.0.0.1" ];
 
 ## Reference
 
-- [NextDNS CLI Wiki — Nix](https://github.com/nextdns/nextdns/wiki/Nix)
+- [NextDNS CLI Wiki — Nix](https://github.com/nextdns/nextdns)
 - [NixOS Manual — Services](https://nixos.org/manual/nixos/stable/)
 - [NextDNS CLI GitHub](https://github.com/nextdns/nextdns)

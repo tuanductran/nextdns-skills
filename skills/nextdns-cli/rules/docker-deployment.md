@@ -163,4 +163,4 @@ docker logs nextdns
 
 ## Reference
 
-- [NextDNS CLI - Docker](https://github.com/nextdns/nextdns/wiki/Docker)
+- [NextDNS CLI - Docker](https://github.com/nextdns/nextdns)
