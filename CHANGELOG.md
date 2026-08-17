@@ -10,7 +10,7 @@ This file records user-facing, contributor-facing, and distribution-relevant cha
 - Project roadmap covering documentation, coverage, developer experience, evaluation, and distribution priorities.
 - Public architecture, contribution, and documentation standards.
 - Root contribution, security, and code-of-conduct entry points.
-- Planned GitHub issue and pull-request templates.
+- GitHub issue and pull-request templates.
 
 ### Changed
 
