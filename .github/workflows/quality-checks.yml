@@ -46,6 +46,9 @@ jobs:
       - name: Build packages
         run: pnpm build
 
+      - name: Audit dependencies
+        run: pnpm audit:dependencies
+
       - name: Lint Markdown documentation and agent workflows
         run: pnpm lint:md
 

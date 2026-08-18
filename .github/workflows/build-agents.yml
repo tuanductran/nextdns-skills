@@ -49,7 +49,7 @@ jobs:
 
       - name: Build AGENTS.md (single skill)
         if: ${{ github.event.inputs.skill != '' }}
-        run: pnpm nextdns-skills-build build --skill=${{ github.event.inputs.skill }}
+        run: node packages/nextdns-skills-build/dist/cli.mjs build --skill=${{ github.event.inputs.skill }}
 
       - name: Commit and push AGENTS.md changes
         run: |

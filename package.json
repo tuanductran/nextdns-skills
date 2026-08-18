@@ -46,6 +46,7 @@
     "check-duplicates": "turbo run check-duplicates",
     "check-tags": "turbo run check-tags",
     "audit": "node packages/nextdns-scripts/dist/cli.mjs audit",
+    "audit:dependencies": "pnpm audit --audit-level=low",
     "dev": "turbo run dev",
     "format": "vp fmt",
     "format:check": "vp fmt --check",

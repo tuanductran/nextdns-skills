@@ -46,7 +46,9 @@ minimumReleaseAgeExclude:
   - jscpd@5.0.16
 
 overrides:
+  esbuild: "0.28.2"
   minimatch: ">=10.2.6"
+  nanoid: "3.3.18"
   vite: catalog:test
   vitest: catalog:test
 peerDependencyRules:

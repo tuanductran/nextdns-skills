@@ -53,6 +53,7 @@ After editing, run the smallest useful checks first. For rule or manifest change
 pnpm build:skills
 pnpm build:check
 pnpm run audit
+pnpm audit:dependencies
 pnpm lint:duplicates
 pnpm lint:fix
 pnpm lint:all
