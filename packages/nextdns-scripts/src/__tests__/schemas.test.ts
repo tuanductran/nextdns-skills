@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { parseAuditReport, parseStatsReport } from '../core/schemas.js';
+import { parseAuditReport, parsePackageMetadata, parseStatsReport } from '../core/schemas.js';
 
 const validStatistics = {
   generatedAt: '2026-08-18T00:00:00.000Z',
@@ -110,5 +110,15 @@ describe('schema parsing', () => {
 
     expect(report.skills[0]?.name).toBe('nextdns-api');
     expect(report.impactDistribution.HIGH).toBe(1);
+  });
+
+  it('accepts package metadata with an optional version', () => {
+    expect(parsePackageMetadata({ version: '0.4.0' })).toEqual({ version: '0.4.0' });
+    expect(parsePackageMetadata({})).toEqual({});
+  });
+
+  it('rejects malformed package metadata', () => {
+    expect(() => parsePackageMetadata(null)).toThrow();
+    expect(() => parsePackageMetadata({ version: 4 })).toThrow();
   });
 });

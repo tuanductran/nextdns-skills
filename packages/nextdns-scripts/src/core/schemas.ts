@@ -1,6 +1,11 @@
 import * as v from 'valibot';
 
 const CountSchema = v.pipe(v.number(), v.integer(), v.minValue(0));
+const NonEmptyStringSchema = v.pipe(v.string(), v.minLength(1));
+
+export const PackageMetadataSchema = v.object({
+  version: v.optional(NonEmptyStringSchema),
+});
 
 const AuditCheckNameSchema = v.picklist([
   'referential-integrity',
@@ -53,10 +58,15 @@ export const AuditReportSchema = v.object({
   statistics: StatsReportSchema,
 });
 
+export type PackageMetadata = v.InferOutput<typeof PackageMetadataSchema>;
 export type AuditCheck = v.InferOutput<typeof AuditCheckSchema>;
 export type AuditReport = v.InferOutput<typeof AuditReportSchema>;
 export type SkillStats = v.InferOutput<typeof SkillStatsSchema>;
 export type StatsReport = v.InferOutput<typeof StatsReportSchema>;
+
+export function parsePackageMetadata(input: unknown): PackageMetadata {
+  return v.parse(PackageMetadataSchema, input);
+}
 
 export function parseAuditReport(input: unknown): AuditReport {
   return v.parse(AuditReportSchema, input);

@@ -3,7 +3,9 @@ import { describe, expect, it } from 'vitest';
 import {
   AuditCheckSchema,
   AuditReportSchema,
+  PackageMetadataSchema,
   parseAuditReport,
+  parsePackageMetadata,
   parseStatsReport,
   SkillStatsSchema,
   StatsReportSchema,
@@ -15,10 +17,12 @@ describe('maintenance package public schema API', () => {
     expect(AuditReportSchema).toBeDefined();
     expect(SkillStatsSchema).toBeDefined();
     expect(StatsReportSchema).toBeDefined();
+    expect(PackageMetadataSchema).toBeDefined();
   });
 
   it('exports callable report parsers from the package root', () => {
     expect(typeof parseAuditReport).toBe('function');
     expect(typeof parseStatsReport).toBe('function');
+    expect(typeof parsePackageMetadata).toBe('function');
   });
 });

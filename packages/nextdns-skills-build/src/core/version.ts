@@ -1,9 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-interface PackageMetadata {
-  version?: unknown;
-}
+import { parsePackageMetadata } from './data-schemas.js';
 
 export function getPackageVersion(): string {
   const packagePaths = [
@@ -13,6 +11,10 @@ export function getPackageVersion(): string {
   const packagePath = packagePaths.find((candidate) => existsSync(candidate));
   if (!packagePath) return '0.0.0';
 
-  const metadata = JSON.parse(readFileSync(packagePath, 'utf8')) as PackageMetadata;
-  return typeof metadata.version === 'string' ? metadata.version : '0.0.0';
+  try {
+    const metadata = parsePackageMetadata(JSON.parse(readFileSync(packagePath, 'utf8')));
+    return metadata.version ?? '0.0.0';
+  } catch {
+    return '0.0.0';
+  }
 }

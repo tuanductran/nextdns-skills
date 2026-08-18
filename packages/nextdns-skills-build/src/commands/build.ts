@@ -11,6 +11,7 @@ import type { Section } from '../core/types.js';
 
 import { parseBuildCliOptions, type BuildCliOptions } from '../core/cli-validation.js';
 import { DEFAULT_SKILL, SKILLS, type SkillConfig } from '../core/config.js';
+import { parseBuildMetadata, type BuildMetadata } from '../core/data-schemas.js';
 import { parseRuleFile, type RuleFile } from '../core/parser.js';
 import { collectRuleFiles } from '../core/utils.js';
 
@@ -29,13 +30,7 @@ function incrementVersion(version: string): string {
  */
 function generateMarkdown(
   sections: Section[],
-  metadata: {
-    version: string;
-    organization: string;
-    date: string;
-    abstract: string;
-    references?: { title: string; url: string }[];
-  },
+  metadata: BuildMetadata,
   skillConfig: SkillConfig
 ): string {
   let md = `# ${skillConfig.title}\n\n`;
@@ -192,16 +187,10 @@ async function buildSkill(skillConfig: SkillConfig, options: BuildCliOptions) {
   const sections = Array.from(sectionsMap.values()).sort((a, b) => a.number - b.number);
 
   // Read metadata
-  let metadata: {
-    version: string;
-    organization: string;
-    date: string;
-    abstract: string;
-    references?: { title: string; url: string }[];
-  };
+  let metadata: BuildMetadata;
   try {
     const metadataContent = await readFile(skillConfig.metadataFile, 'utf-8');
-    metadata = JSON.parse(metadataContent);
+    metadata = parseBuildMetadata(JSON.parse(metadataContent));
   } catch {
     metadata = {
       version: '1.0.0',

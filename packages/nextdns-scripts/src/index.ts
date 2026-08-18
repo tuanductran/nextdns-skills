@@ -10,10 +10,12 @@ export { formatAuditText, runAudit } from './commands/audit.js';
 export {
   AuditCheckSchema,
   AuditReportSchema,
+  PackageMetadataSchema,
   parseAuditReport,
+  parsePackageMetadata,
   parseStatsReport,
   SkillStatsSchema,
   StatsReportSchema,
 } from './core/schemas.js';
-export type { SkillStats, StatsReport } from './core/schemas.js';
+export type { PackageMetadata, SkillStats, StatsReport } from './core/schemas.js';
 export { getPackageVersion } from './core/version.js';

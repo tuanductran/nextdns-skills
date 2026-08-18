@@ -26,7 +26,24 @@ export type {
   SearchCliOptions,
   SkillCommandCliOptions,
 } from './core/cli-validation.js';
-export type { Frontmatter, FrontmatterValue } from './core/markdown.js';
+export {
+  BuildMetadataSchema,
+  FrontmatterSchema,
+  FrontmatterValueSchema,
+  PackageMetadataSchema,
+  parseBuildMetadata,
+  parsePackageMetadata,
+} from './core/data-schemas.js';
+export type {
+  BuildMetadata,
+  Frontmatter,
+  FrontmatterValue,
+  PackageMetadata,
+} from './core/data-schemas.js';
+export type {
+  Frontmatter as MarkdownFrontmatter,
+  FrontmatterValue as MarkdownFrontmatterValue,
+} from './core/markdown.js';
 export { collectMarkdownFiles, parseFrontmatter } from './core/markdown.js';
 export type { RuleFile } from './core/parser.js';
 export { parseRuleFile } from './core/parser.js';

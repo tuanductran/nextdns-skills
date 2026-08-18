@@ -1,8 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-export type FrontmatterValue = string | string[];
-export type Frontmatter = Record<string, FrontmatterValue>;
+import { parseFrontmatter as validateFrontmatter, type Frontmatter } from './data-schemas.js';
+
+export type { Frontmatter, FrontmatterValue } from './data-schemas.js';
 
 export function parseFrontmatter(content: string): Frontmatter {
   if (!content.startsWith('---')) return {};
@@ -45,7 +46,7 @@ export function parseFrontmatter(content: string): Frontmatter {
   }
 
   if (inArray && currentKey) result[currentKey] = arrayValues.slice();
-  return result;
+  return validateFrontmatter(result);
 }
 
 export function collectMarkdownFiles(dir: string): string[] {
