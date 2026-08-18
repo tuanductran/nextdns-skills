@@ -11,9 +11,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { checkDuplicateTags, checkDuplicateTitles, loadAllRules } from './check-duplicates.js';
+import { validateTags } from './check-tags.js';
 import { buildReport, type StatsReport } from './generate-stats.js';
 import { validateFrontmatter, validateReferentialIntegrity } from './validate-rules.js';
-import { validateTags } from './check-tags.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.join(__dirname, '../../..');
@@ -47,7 +47,10 @@ function suppressOutput<T>(fn: () => T): T {
   }
 }
 
-export function runAudit(skillsDir: string = SKILLS_DIR, repoRoot: string = REPO_ROOT): AuditReport {
+export function runAudit(
+  skillsDir: string = SKILLS_DIR,
+  repoRoot: string = REPO_ROOT
+): AuditReport {
   const rules = suppressOutput(() => loadAllRules(skillsDir));
   const duplicateTitles = suppressOutput(() => checkDuplicateTitles(rules));
   const duplicateTags = suppressOutput(() => checkDuplicateTags(rules));
