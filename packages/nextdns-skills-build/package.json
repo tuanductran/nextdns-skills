@@ -1,7 +1,7 @@
 {
   "name": "nextdns-skills-build",
   "version": "1.0.0",
-  "description": "Build tooling for NextDNS Skills: build AGENTS.md, validate, scaffold rules, search, and export",
+  "description": "Build tooling for NextDNS Skills: build and check AGENTS.md, validate, scaffold rules, search, and export",
   "keywords": [
     "agents",
     "dns",
@@ -40,6 +40,7 @@
     "build": "vp pack",
     "build-agents": "nextdns-skills-build build",
     "build-all": "nextdns-skills-build build --all",
+    "build-check": "nextdns-skills-build build --all --check",
     "build-api": "nextdns-skills-build build --skill=nextdns-api",
     "build-cli": "nextdns-skills-build build --skill=nextdns-cli",
     "build-frontend": "nextdns-skills-build build --skill=nextdns-frontend",

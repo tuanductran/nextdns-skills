@@ -12,12 +12,15 @@
  *   nextdns-skills-scripts <command> [options]
  */
 
+import { getPackageVersion } from './version.js';
+
 const COMMANDS: Record<string, string> = {
   'validate-rules': './validate-rules.mjs',
   'update-counts': './update-counts.mjs',
   'check-duplicates': './check-duplicates.mjs',
   'check-tags': './check-tags.mjs',
   'generate-stats': './generate-stats.mjs',
+  audit: './audit.mjs',
 };
 
 const HELP = `Usage: nextdns-skills-scripts <command> [options]
@@ -28,11 +31,21 @@ Commands:
   check-duplicates    Check for duplicate/identical tag sets across rules
   check-tags          Check tag hygiene across rules
   generate-stats      Print repository-wide rule statistics (--text)
+  audit               Run the complete maintenance audit (--json)
 
-Run without a command, or with --help, to see this message.`;
+Options:
+  --version           Print the package version
+  --help              Show this help message
+
+Run without a command to see this message.`;
 
 async function main(): Promise<void> {
   const [subcommand, ...rest] = process.argv.slice(2);
+
+  if (subcommand === '--version' || subcommand === '-v') {
+    console.log(getPackageVersion());
+    return;
+  }
 
   if (!subcommand || subcommand === '--help' || subcommand === '-h') {
     console.log(HELP);

@@ -129,6 +129,7 @@ statistics.
 | `check-duplicates` | Duplicate title detection |
 | `check-tags` | Tag hygiene validation |
 | `generate-stats` | Statistics report (`--text`) |
+| `audit` | Combined structured maintenance audit (`--json`) |
 
 **Package scripts:**
 
@@ -167,7 +168,7 @@ Also exposes a programmatic API.
 
 | Command | Description |
 | :--- | :--- |
-| `build` | Build AGENTS.md (`--all` or `--skill=<name>`) |
+| `build` | Build AGENTS.md (`--all`, `--skill=<name>`, or `--check`) |
 | `validate` | Validate rule frontmatter and structure |
 | `search` | Search rules (`--query=`, `--tag=`, `--skill=`, `--impact=`, `--json`) |
 | `export` | Export rules to JSON/CSV (`--format=`, `--out=`, `--skill=`) |
@@ -180,6 +181,7 @@ Also exposes a programmatic API.
 | :--- | :--- |
 | `build` | `tsdown` — compile to `dist/` |
 | `build-all` | Build AGENTS.md for all skills |
+| `build-check` | Verify all generated AGENTS.md files are up to date |
 | `build-api` | Build `nextdns-api` only |
 | `build-cli` | Build `nextdns-cli` only |
 | `build-frontend` | Build `nextdns-frontend` only |

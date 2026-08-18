@@ -47,6 +47,8 @@ After editing, run the smallest useful checks first. For rule or manifest change
 
 ```bash
 pnpm build:skills
+pnpm build:check
+pnpm run audit
 pnpm lint:fix
 pnpm lint:all
 pnpm check-duplicates
@@ -56,7 +58,7 @@ pnpm test
 git diff --check
 ```
 
-For documentation-only changes, `pnpm lint:md`, `pnpm lint:links`, and `git diff --check` are the minimum checks. Add `pnpm lint:all` when the change touches referenced URLs or CI. If a remote service returns 403, 429, 5xx, or a download response, record the exception and do not treat the response as proof that the documentation is invalid without further review.
+For documentation-only changes, `pnpm lint:md`, `pnpm lint:links`, and `git diff --check` are the minimum checks. For package or generated-output changes, also run `pnpm run audit` and `pnpm build:check`. Add `pnpm lint:all` when the change touches referenced URLs or CI. If a remote service returns 403, 429, 5xx, or a download response, record the exception and do not treat the response as proof that the documentation is invalid without further review.
 
 ## Pull request expectations
 

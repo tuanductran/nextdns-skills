@@ -1,7 +1,7 @@
 {
   "name": "nextdns-skills-scripts",
   "version": "1.0.0",
-  "description": "Maintenance scripts for NextDNS Skills: validate rule integrity, sync counts, check duplicates/tags, and generate stats",
+  "description": "Maintenance scripts for NextDNS Skills: audit, validate rule integrity, sync counts, check duplicates/tags, and generate stats",
   "keywords": [
     "maintenance",
     "nextdns",
@@ -27,6 +27,7 @@
     "build": "vp pack",
     "check-duplicates": "nextdns-skills-scripts check-duplicates",
     "check-tags": "nextdns-skills-scripts check-tags",
+    "audit": "nextdns-skills-scripts audit",
     "dev": "vp pack --watch",
     "generate-stats": "nextdns-skills-scripts generate-stats",
     "prepublishOnly": "pnpm build",

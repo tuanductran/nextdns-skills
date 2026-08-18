@@ -16,6 +16,7 @@ import { collectRuleFiles } from './utils.js';
 // Parse command line arguments
 const args = process.argv.slice(2);
 const upgradeVersion = args.includes('--upgrade-version');
+const checkOnly = args.includes('--check');
 const skillArg = args.find((arg) => arg.startsWith('--skill='));
 const skillName = skillArg ? (skillArg.split('=')[1] ?? null) : null;
 const buildAll = args.includes('--all');
@@ -248,9 +249,24 @@ async function buildSkill(skillConfig: SkillConfig) {
   // Generate markdown
   const markdown = generateMarkdown(sections, metadata, skillConfig);
 
-  // Write output
-  await writeFile(skillConfig.outputFile, markdown, 'utf-8');
+  // Write output or verify generated output without mutating the repository.
+  if (checkOnly) {
+    let existing = '';
+    try {
+      existing = await readFile(skillConfig.outputFile, 'utf-8');
+    } catch {
+      // A missing generated file is a drift failure.
+    }
+    if (existing !== markdown) {
+      console.error(`  ✗ Generated output is out of date: ${skillConfig.outputFile}`);
+      process.exitCode = 1;
+      return;
+    }
+    console.log(`  ✓ Generated output is up to date: ${skillConfig.outputFile}`);
+    return;
+  }
 
+  await writeFile(skillConfig.outputFile, markdown, 'utf-8');
   console.log(`  ✓ Built AGENTS.md with ${sections.length} sections and ${ruleData.length} rules`);
 }
 

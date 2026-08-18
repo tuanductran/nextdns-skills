@@ -19,3 +19,4 @@ export type {
   Section,
 } from './types.js';
 export { collectRuleFiles } from './utils.js';
+export { getPackageVersion } from './version.js';

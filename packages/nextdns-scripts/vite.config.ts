@@ -10,6 +10,7 @@ export default defineConfig({
       'check-duplicates': 'src/check-duplicates.ts',
       'check-tags': 'src/check-tags.ts',
       'generate-stats': 'src/generate-stats.ts',
+      audit: 'src/audit.ts',
     },
     format: ['esm'],
     target: 'node20',

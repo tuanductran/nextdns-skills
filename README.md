@@ -85,7 +85,9 @@ Rules are categorized into two types to guide AI precision:
 | **Check broken links** | `pnpm run lint:links` |
 | **Check duplicate titles** | `pnpm check-duplicates` |
 | **Check tag hygiene** | `pnpm check-tags` |
+| **Run package audit** | `pnpm run audit` |
 | **Build all skills** | `pnpm build:skills` |
+| **Check generated output** | `pnpm build:check` |
 | **Sync rule counts** | `pnpm update-counts` |
 | **Statistics report** | `pnpm stats` |
 | **Search rules** | `pnpm rule-search -- --query=<text>` |

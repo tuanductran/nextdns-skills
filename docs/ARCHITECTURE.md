@@ -45,7 +45,7 @@ The diagram is conceptual. It describes ownership and dependency direction, not 
 | Skill manifests | `skills/*/SKILL.md` | Define activation metadata, categories, versions, and rule registration | Update with any rule addition or removal |
 | Domain rules | `skills/*/rules/` | Provide the knowledge injected into agents | Edit directly using the rule template |
 | Generated output | `skills/*/AGENTS.md` | Aggregate rules for agent consumption | Never edit by hand; run `pnpm build:skills` |
-| Validation packages | `packages/nextdns-skills-build`, `packages/nextdns-scripts` | Build, validate, search, export, test, and check content quality | Change code with tests and type-checking |
+| Validation packages | `packages/nextdns-skills-build`, `packages/nextdns-scripts` | Build, validate, search, export, audit, test, and check content quality | Change code with tests and type-checking |
 | Structural schema | `data/schemas/profile.json` | Define profile data shape used by relevant guidance | Update together with structural changes |
 
 ## Skill categories
@@ -70,9 +70,10 @@ The root package uses pnpm scripts and Turbo to coordinate the two workspace pac
 | :--- | :--- |
 | Public docs only | `pnpm lint:md`, `pnpm lint:links`, `git diff --check` |
 | Rule content | `pnpm build:skills`, `pnpm lint:rules`, `pnpm lint:all`, `pnpm test` |
-| Manifest or counts | `pnpm build:skills`, `pnpm update-counts`, `pnpm check-duplicates`, `pnpm check-tags` |
+| Manifest or counts | `pnpm build:skills`, `pnpm build:check`, `pnpm update-counts`, `pnpm check-duplicates`, `pnpm check-tags` |
 | TypeScript or package code | `pnpm lint`, `pnpm types:check`, `pnpm test` |
 | CI or workflow changes | Applicable checks plus a review of changed paths and permissions |
+| Package or generated-output API | `pnpm run audit`, `pnpm build:check`, package tests, and type-check |
 
 A link check is evidence about an external service at a point in time, not a guarantee that a URL will remain available. Treat protected pages, rate limits, downloads, redirects, and transient server errors as distinct categories. Replace a genuinely stale canonical link; document an expected exception instead of deleting useful source context.
 

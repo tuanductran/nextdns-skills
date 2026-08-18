@@ -11,10 +11,14 @@ This file records user-facing, contributor-facing, and distribution-relevant cha
 - Public architecture, contribution, and documentation standards.
 - Root contribution, security, and code-of-conduct entry points.
 - GitHub issue and pull-request templates.
+- A structured `audit` command with JSON output for maintenance quality gates.
+- `build --check` and root `pnpm build:check` for generated-output drift detection.
+- `--version` support and version helpers for both package CLIs.
 
 ### Changed
 
 - Documentation now distinguishes public project guidance, agent context, agent workflows, source rules, and generated output.
+- Package documentation now covers audit, public API metadata, and generated-output checks.
 
 ### Maintenance notes
 

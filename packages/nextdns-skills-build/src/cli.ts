@@ -10,6 +10,8 @@
  *   nextdns-skills-build <command> [options]
  */
 
+import { getPackageVersion } from './version.js';
+
 const COMMANDS: Record<string, string> = {
   build: './build.mjs',
   validate: './validate.mjs',
@@ -22,17 +24,26 @@ const COMMANDS: Record<string, string> = {
 const HELP = `Usage: nextdns-skills-build <command> [options]
 
 Commands:
-  build             Build AGENTS.md files from rule sources (--all | --skill=<name>)
+  build             Build AGENTS.md files from rule sources (--all | --skill=<name> | --check)
   validate          Validate rule frontmatter and structure
   search            Search rules (--query=, --tag=, --skill=, --impact=, --json)
   export            Export rules to JSON/CSV (--format=, --out=, --skill=)
   extract-tests     Extract test cases from rules for LLM evaluation
   migrate           Scaffold a new rule file from a template
 
-Run without a command, or with --help, to see this message.`;
+Options:
+  --version         Print the package version
+  --help            Show this help message
+
+Run without a command to see this message.`;
 
 async function main(): Promise<void> {
   const [subcommand, ...rest] = process.argv.slice(2);
+
+  if (subcommand === '--version' || subcommand === '-v') {
+    console.log(getPackageVersion());
+    return;
+  }
 
   if (!subcommand || subcommand === '--help' || subcommand === '-h') {
     console.log(HELP);
