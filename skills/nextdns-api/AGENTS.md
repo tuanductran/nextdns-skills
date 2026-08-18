@@ -473,7 +473,7 @@ from: 'now';
 
 ### 1.7 DNS Rewrites
 
-**Impact: HIGH**
+**Impact: HIGH (Incorrect rewrite payload returns 400 errors and custom DNS records fail to resolve)**
 
 Manage custom DNS rewrite records via the NextDNS API
 
@@ -690,7 +690,7 @@ return data;
 
 ### 1.9 Logs Clear
 
-**Impact: HIGH**
+**Impact: HIGH (Clearing logs is permanent and irreversible — there is no confirmation prompt or undo)**
 
 Permanently delete all stored DNS logs for a profile
 
@@ -1517,7 +1517,7 @@ const wrongId = 'myprofile'; // ❌
 
 ### 1.18 Profile Settings
 
-**Impact: HIGH**
+**Impact: HIGH (Misconfigured settings silently affect log retention, privacy, and DNS performance across all queries)**
 
 Manage profile-level settings via the NextDNS API
 

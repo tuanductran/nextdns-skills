@@ -66,6 +66,14 @@ nextdns-skills/
 │   │   ├── tsconfig.json
 │   │   ├── vite.config.ts
 │   │   └── vitest.config.ts
+│   ├── nextdns-markdown/          # Shared remark AST and frontmatter utilities
+│   │   ├── dist/                       # index.mjs and declarations
+│   │   ├── src/
+│   │   │   ├── index.ts
+│   │   │   └── __tests__/
+│   │   ├── tsconfig.json
+│   │   ├── vite.config.ts
+│   │   └── package.json
 │   └── nextdns-skills-build/     # Build tooling and programmatic API
 │       ├── dist/                       # index.mjs, cli.mjs, shared chunks
 │       ├── src/
@@ -89,9 +97,13 @@ nextdns-skills/
 
 ## Package architecture
 
-Both packages declare their package-manager `bin` metadata directly as `./dist/cli.mjs`; no
+The two CLI packages declare their package-manager `bin` metadata directly as `./dist/cli.mjs`; no
 checked-in `bin/` directory or wrapper is required. The pack step grants execute permission to the
 CLI artifact and pnpm creates its `.bin` shim from the package metadata.
+
+The shared `nextdns-markdown` package owns unified/remark parsing, YAML normalization, MDAST
+traversal helpers, and Valibot frontmatter validation. The two CLI packages consume it rather than
+maintaining separate line-based frontmatter parsers.
 
 Within each TypeScript package, reusable modules live in `src/core/`, CLI implementations live in
 `src/commands/`, and `src/cli.ts` is the only dispatcher. The Vite-Plus pack configuration emits only

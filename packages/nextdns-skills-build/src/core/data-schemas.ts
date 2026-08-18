@@ -1,9 +1,9 @@
+import { FrontmatterSchema, FrontmatterValueSchema } from 'nextdns-markdown';
 import * as v from 'valibot';
 
-const NonEmptyStringSchema = v.pipe(v.string(), v.minLength(1));
+export { FrontmatterSchema, FrontmatterValueSchema } from 'nextdns-markdown';
 
-export const FrontmatterValueSchema = v.union([v.string(), v.array(v.string())]);
-export const FrontmatterSchema = v.record(v.string(), FrontmatterValueSchema);
+const NonEmptyStringSchema = v.pipe(v.string(), v.minLength(1));
 
 export const BuildMetadataSchema = v.object({
   version: NonEmptyStringSchema,
@@ -25,8 +25,8 @@ export const PackageMetadataSchema = v.object({
 });
 
 export type BuildMetadata = v.InferOutput<typeof BuildMetadataSchema>;
-export type FrontmatterValue = v.InferOutput<typeof FrontmatterValueSchema>;
 export type Frontmatter = v.InferOutput<typeof FrontmatterSchema>;
+export type FrontmatterValue = v.InferOutput<typeof FrontmatterValueSchema>;
 export type PackageMetadata = v.InferOutput<typeof PackageMetadataSchema>;
 
 export function parseBuildMetadata(input: unknown): BuildMetadata {

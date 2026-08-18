@@ -38,6 +38,7 @@
     "validate-rules": "nextdns-skills-scripts validate-rules"
   },
   "dependencies": {
+    "nextdns-markdown": "workspace:*",
     "valibot": "catalog:runtime"
   },
   "devDependencies": {

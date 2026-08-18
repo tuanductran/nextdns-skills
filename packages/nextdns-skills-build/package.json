@@ -46,6 +46,7 @@
     "validate": "nextdns-skills-build validate"
   },
   "dependencies": {
+    "nextdns-markdown": "workspace:*",
     "valibot": "catalog:runtime"
   },
   "devDependencies": {

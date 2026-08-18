@@ -112,7 +112,7 @@ If the installation fails, run the installer in debug mode:
 
 ### 1.2 Browser Native DoH Configuration
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Configuring DNS-over-HTTPS directly in browsers enables encrypted DNS without system-wide changes or requiring administrator privileges. Without this guidance, users in restricted environments may be unable to leverage NextDNS protection when software installation is blocked.)**
 
 Enables NextDNS protection in restricted environments without system-wide changes or administrative
 
@@ -314,7 +314,7 @@ If Firefox falls back to system DNS (when using "Increased Protection" mode):
 
 ### 1.3 DNSMasq Integration
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Running DNSMasq alongside NextDNS without proper configuration can result in loss of client reporting and conditional configuration features. This guidance ensures both services work together seamlessly while maintaining full NextDNS functionality.)**
 
 Enables DNSMasq and NextDNS to run together while preserving client reporting and conditional
 
@@ -688,7 +688,7 @@ After any firmware update:
 
 ### 1.7 Home Assistant Integration
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Without this integration guidance, users cannot leverage Home Assistant for automated DNS control and monitoring. This prevents the creation of time-based parental controls, smart blocking rules, and real-time analytics tracking for home automation systems.)**
 
 Enables automated DNS control and monitoring through Home Assistant smart home platform
 
@@ -1143,7 +1143,7 @@ add address=45.90.30.0 name=dns.nextdns.io
 
 ### 1.11 Mobile Native Encrypted DNS Configuration
 
-**Impact: HIGH**
+**Impact: HIGH (Native encrypted DNS support on mobile devices provides lightweight protection without battery-draining background apps. Without this guidance, users may unnecessarily install third-party apps when the OS provides built-in encrypted DNS capabilities.)**
 
 Enables NextDNS protection on mobile devices using built-in OS features without battery-draining
 
@@ -1293,7 +1293,7 @@ If you have a `.mobileconfig` file from NextDNS:
 
 ### 1.12 OpenWrt Integration
 
-**Impact: HIGH**
+**Impact: HIGH (Proper installation and configuration of NextDNS on OpenWrt routers ensures network-wide DNS protection. Without this guidance, users may struggle with installation methods, upgrades, or troubleshooting issues specific to OpenWrt environments.)**
 
 Essential for deploying NextDNS on OpenWrt routers with proper installation methods and
 
@@ -1373,7 +1373,7 @@ This will output verbose information that can help identify the root cause of in
 
 ### 1.13 pfSense and OPNsense Integration
 
-**Impact: HIGH**
+**Impact: HIGH (Proper configuration of NextDNS on pfSense and OPNsense firewalls enables network-wide DNS protection with encrypted DNS transport. Without this guidance, users may face CNAME chasing issues on pfSense or fail to leverage OPNsense's native DoT capabilities.)**
 
 Critical for deploying NextDNS on enterprise-grade firewalls with proper encrypted DNS configuration
 
@@ -1513,7 +1513,7 @@ OPNsense also supports the CLI installer:
 
 ### 1.14 Public DNS and AdGuard Home Integration
 
-**Impact: HIGH**
+**Impact: HIGH (Without proper public DNS and AdGuard Home configuration, users may experience degraded performance, connectivity issues, or inability to leverage NextDNS features for unlinked devices and third-party DNS forwarders.)**
 
 Critical for unlinked device setup and AdGuard Home upstream configuration
 
@@ -1958,7 +1958,7 @@ cannot be kept current. Prefer an encrypted transport or a local CLI deployment 
 
 ### 1.17 Synology Integration (DSM and SRM)
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Proper installation of NextDNS on Synology devices (DSM NAS and SRM routers) enables network-wide DNS protection. Without this guidance, users may struggle with SSH access, especially the critical step of enabling the admin user on SRM for root access.)**
 
 Essential for deploying NextDNS on Synology NAS (DSM) and routers (SRM) with proper SSH access and
 
@@ -2098,7 +2098,7 @@ This will output verbose information to help identify the problem.
 
 ### 1.18 Tailscale Integration
 
-**Impact: HIGH**
+**Impact: HIGH (Without proper Tailscale integration, users cannot protect their mesh VPN traffic with NextDNS filtering. This leaves devices vulnerable to threats when accessing resources through Tailscale tunnels and prevents centralized DNS policy enforcement across distributed networks.)**
 
 Critical for protecting mesh VPN traffic with NextDNS filtering and enforcing DNS policies across
 
@@ -2242,7 +2242,7 @@ This prevents Tailscale from sending device names, operating systems, and other 
 
 ### 1.19 Ubiquiti (UniFi) Integration
 
-**Impact: HIGH**
+**Impact: HIGH (Without proper Ubiquiti integration guidance, users risk conflicts between NextDNS and UniFi's built-in filtering features, leading to DNS resolution failures and network outages. This rule prevents critical misconfigurations on UDM/UXG devices that could disrupt network-wide DNS services.)**
 
 Essential for preventing DNS conflicts on Ubiquiti UniFi Dream Machines and Gateways
 

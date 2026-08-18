@@ -377,7 +377,7 @@ Once installed as a service, use these commands to manage the NextDNS background
 
 ### 1.8 DD-WRT Installation
 
-**Impact: HIGH**
+**Impact: HIGH (Without proper JFFS setup and installation procedures, NextDNS CLI will fail to persist on DD-WRT routers, causing DNS configuration loss after reboots and potential certificate errors due to time sync issues.)**
 
 Essential setup for NextDNS CLI on DD-WRT routers with persistent configuration
 
@@ -497,7 +497,7 @@ Common issues and solutions:
 
 ### 1.9 Docker Deployment
 
-**Impact: HIGH**
+**Impact: HIGH (Proper Docker deployment ensures NextDNS CLI runs efficiently with correct network configuration for host detection and client IP visibility)**
 
 Essential container deployment patterns for optimal DNS resolution and client tracking
 
@@ -593,7 +593,7 @@ Check logs for errors:
 
 ### 1.10 FreeBSD Installation
 
-**Impact: HIGH**
+**Impact: HIGH (FreeBSD uses rc.conf for service management — missing the rc.conf entry leaves the daemon non-persistent across reboots)**
 
 Install and configure NextDNS CLI on FreeBSD using pkg or the ports collection
 
@@ -824,7 +824,7 @@ While the universal installer is recommended, some platforms have specific consi
 
 ### 1.13 macOS Installation
 
-**Impact: HIGH**
+**Impact: HIGH (Proper installation and configuration of NextDNS CLI on macOS systems ensures optimal DNS protection and performance. Without following these guidelines, users may encounter installation failures, configuration issues, or suboptimal setup for their specific use case.)**
 
 Essential setup methods and configuration options for macOS systems
 
@@ -960,7 +960,7 @@ high-traffic environments.
 
 ### 1.15 NixOS Installation
 
-**Impact: HIGH**
+**Impact: HIGH (NixOS uses declarative configuration — imperative install commands are silently overwritten on rebuild)**
 
 Install and configure NextDNS CLI on NixOS using declarative system configuration
 
@@ -1408,7 +1408,7 @@ NextDNS provides a diagnostic tool to help support staff:
 
 ### 1.22 Windows Installation
 
-**Impact: HIGH**
+**Impact: HIGH (Proper Windows-specific installation procedures ensure NextDNS CLI is correctly deployed with appropriate privileges and system integration)**
 
 Critical for proper NextDNS deployment on Windows systems
 

@@ -14,7 +14,7 @@ Thank you for improving **NextDNS Skills**. The repository is a source-grounded 
 | Change public project guidance | `docs/*.md` or `README.md` | Check links and Markdown; update the documentation index when adding a document |
 | Change build or validation behavior | `packages/`, root scripts, or CI | Add or update tests, document the command, and run the full relevant quality gate |
 
-Within a TypeScript package, keep reusable code under `src/core/`, one responsibility per CLI module under `src/commands/`, and dispatch only from `src/cli.ts`. Vite may flatten compiled entry names under `dist/`; update the package's Vite entries, CLI registry, and public exports together when moving a module. Build-package CLI inputs must pass through [`core/cli-validation.ts`](../packages/nextdns-skills-build/src/core/cli-validation.ts) so runtime parsing remains consistent for direct commands and programmatic consumers.
+Within a TypeScript package, keep reusable code under `src/core/`, one responsibility per CLI module under `src/commands/`, and dispatch only from `src/cli.ts`. Vite may flatten compiled entry names under `dist/`; update the package's Vite entries, CLI registry, and public exports together when moving a module. Shared Markdown parsing belongs in [`nextdns-markdown`](../packages/nextdns-markdown/src/index.ts); keep its unified/remark AST and Valibot frontmatter behavior covered before changing build or maintenance consumers. Build-package CLI inputs must pass through [`core/cli-validation.ts`](../packages/nextdns-skills-build/src/core/cli-validation.ts) so runtime parsing remains consistent for direct commands and programmatic consumers.
 
 ## Add or revise a rule
 

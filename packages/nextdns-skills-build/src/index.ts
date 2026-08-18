@@ -32,6 +32,7 @@ export {
   FrontmatterValueSchema,
   PackageMetadataSchema,
   parseBuildMetadata,
+  parseFrontmatter,
   parsePackageMetadata,
 } from './core/data-schemas.js';
 export type {
@@ -43,8 +44,21 @@ export type {
 export type {
   Frontmatter as MarkdownFrontmatter,
   FrontmatterValue as MarkdownFrontmatterValue,
+  MarkdownCodeBlock,
+  MarkdownLink,
 } from './core/markdown.js';
-export { collectMarkdownFiles, parseFrontmatter } from './core/markdown.js';
+export {
+  collectCodeBlocks,
+  collectLinks,
+  collectMarkdownFiles,
+  findFirstHeading,
+  findHeadings,
+  getDocumentNodes,
+  getText,
+  parseFrontmatterNode,
+  parseMarkdown,
+  parseMarkdownFrontmatter,
+} from './core/markdown.js';
 export type { RuleFile } from './core/parser.js';
 export { parseRuleFile } from './core/parser.js';
 export type {

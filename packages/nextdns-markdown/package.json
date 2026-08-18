@@ -1,0 +1,50 @@
+{
+  "name": "nextdns-markdown",
+  "version": "1.0.0",
+  "description": "Shared Markdown AST and frontmatter utilities for NextDNS Skills tooling",
+  "keywords": [
+    "markdown",
+    "mdast",
+    "nextdns",
+    "remark",
+    "yaml"
+  ],
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "prepublishOnly": "pnpm build",
+    "test": "vp test run",
+    "test:coverage": "vp test run --coverage",
+    "test:watch": "vp test",
+    "types:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "mdast-util-to-string": "catalog:runtime",
+    "remark-frontmatter": "catalog:runtime",
+    "remark-gfm": "catalog:runtime",
+    "remark-parse": "catalog:runtime",
+    "unified": "catalog:runtime",
+    "valibot": "catalog:runtime",
+    "yaml": "catalog:runtime"
+  },
+  "devDependencies": {
+    "@types/mdast": "catalog:dev",
+    "@types/node": "catalog:dev",
+    "@vitest/coverage-v8": "catalog:test",
+    "typescript": "catalog:dev",
+    "vite": "catalog:test",
+    "vite-plus": "catalog:test",
+    "vitest": "catalog:test"
+  }
+}

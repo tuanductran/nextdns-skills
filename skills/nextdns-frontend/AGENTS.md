@@ -69,7 +69,7 @@ Best practices and guidelines for NextDNS frontend dashboard integration with Nu
 
 ### 1.1 Analytics Charts
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Fetching analytics without date range parameters returns all-time data, causing slow responses and misleading charts)**
 
 Fetch NextDNS time-series analytics and render them as charts in a Nuxt dashboard
 
@@ -233,7 +233,7 @@ await useFetch('https://api.nextdns.io/profiles/abc123/analytics/status', {
 
 ### 1.2 API Key Proxy (BFF Pattern)
 
-**Impact: HIGH**
+**Impact: HIGH (Placing X-Api-Key in client-side code exposes the key to all users via browser DevTools and network requests)**
 
 Proxy all NextDNS API calls through Nuxt server routes to keep X-Api-Key server-side only
 
@@ -360,7 +360,7 @@ const { data } = await useFetch('https://api.nextdns.io/profiles', {
 
 ### 1.3 Error Handling
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Unhandled API errors silently fail or show raw JSON to users, breaking the UI feedback loop)**
 
 Map NextDNS API errors to user-friendly Nuxt UI notifications
 
@@ -522,7 +522,7 @@ if (response.status !== 200) handleError() // ❌ Misses 200-with-errors case
 
 ### 1.4 Profile Management UI
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Direct mutation without optimistic updates causes jarring UI flicker and inconsistent state)**
 
 Build profile list, create, update, and delete flows with Nuxt 4 composables
 
@@ -678,7 +678,7 @@ profiles.value.push({ id: 'unknown', name }); // ❌ ID is server-generated
 
 ### 1.5 Project Setup
 
-**Impact: HIGH**
+**Impact: HIGH (Missing server-only runtime config or incorrect module setup causes API key leaks and broken API calls)**
 
 Bootstrap a Nuxt 4 project configured to integrate with the NextDNS API
 
@@ -845,7 +845,7 @@ const apiKey = useRuntimeConfig().public.nextdnsApiKey; // ❌ exposed to browse
 
 ### 1.6 Real-Time Log Streaming
 
-**Impact: HIGH**
+**Impact: HIGH (Connecting EventSource directly to api.nextdns.io from the browser exposes the API key in every SSE request URL or header)**
 
 Proxy the NextDNS SSE log stream through a Nuxt server route and consume it in Vue
 
@@ -1072,7 +1072,7 @@ useMutation({
 
 ### 2.1 Analytics Charts
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Fetching analytics without date range parameters returns all-time data, causing slow responses and misleading charts)**
 
 Fetch NextDNS time-series analytics and render them as charts in a Next.js dashboard
 
@@ -1231,7 +1231,7 @@ useEffect(() => {
 
 ### 2.2 API Key Proxy (BFF Pattern)
 
-**Impact: HIGH**
+**Impact: HIGH (Placing X-Api-Key in client-side code exposes the key to all users via browser DevTools and network requests)**
 
 Proxy all NextDNS API calls through Next.js Route Handlers to keep X-Api-Key server-side only
 
@@ -1360,7 +1360,7 @@ const res = await fetch('https://api.nextdns.io/profiles', {
 
 ### 2.3 Error Handling
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Unhandled API errors silently fail or show raw JSON to users, breaking the UI feedback loop)**
 
 Map NextDNS API errors to user-friendly React and Next.js error UI
 
@@ -1559,7 +1559,7 @@ return NextResponse.json(err, { status: 500 }); // ❌ May leak internal details
 
 ### 2.4 Profile Management UI
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Fetching data in Client Components instead of Server Components adds unnecessary JavaScript and exposes fetching logic to the browser)**
 
 Build profile list, create, update, and delete flows using Next.js App Router patterns
 
@@ -1737,7 +1737,7 @@ export default function ProfilesPage() { ... } // ❌ Unnecessary client bundle
 
 ### 2.5 Project Setup
 
-**Impact: HIGH**
+**Impact: HIGH (Missing server-only env vars or incorrect App Router setup causes API key leaks and broken Route Handlers)**
 
 Bootstrap a Next.js 16 App Router project configured to integrate with the NextDNS API
 
@@ -1902,7 +1902,7 @@ export default { output: 'export' }; // ❌ Breaks all Route Handlers
 
 ### 2.6 Real-Time Log Streaming
 
-**Impact: HIGH**
+**Impact: HIGH (Connecting EventSource directly to api.nextdns.io from the browser exposes the API key in every SSE request URL or header)**
 
 Proxy the NextDNS SSE log stream through a Next.js Route Handler and consume it in React
 
@@ -2129,7 +2129,7 @@ export default async function Page() {
 
 ### 3.1 Analytics Charts
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Fetching analytics without date range parameters returns all-time data, causing slow responses and misleading charts)**
 
 Fetch NextDNS time-series analytics and render them as charts in an Astro + React dashboard
 
@@ -2303,7 +2303,7 @@ useEffect(() => {
 
 ### 3.2 API Key Proxy (BFF Pattern)
 
-**Impact: HIGH**
+**Impact: HIGH (Using the PUBLIC_ prefix on the API key exposes it in the client bundle, granting every browser user full access to the NextDNS account)**
 
 Proxy all NextDNS API calls through Astro API endpoints to keep X-Api-Key server-side only
 
@@ -2451,7 +2451,7 @@ const res = await fetch('https://api.nextdns.io/profiles', {
 
 ### 3.3 Error Handling
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Unhandled API errors silently fail or show raw JSON to users, breaking the UI feedback loop)**
 
 Map NextDNS API errors to user-friendly Astro pages and React island notifications
 
@@ -2673,7 +2673,7 @@ return new Response(JSON.stringify(err), { status: 500 }); // ❌ May leak inter
 
 ### 3.4 Profile Management UI
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Mounting React components without client directives renders them as static HTML with no interactivity, silently breaking delete and update flows)**
 
 Build profile list, create, update, and delete flows using Astro pages and React islands
 
@@ -2873,7 +2873,7 @@ useEffect(() => {
 
 ### 3.5 Project Setup
 
-**Impact: HIGH**
+**Impact: HIGH (Omitting the SSR adapter or using the PUBLIC_ prefix on secret keys causes API endpoints to fail in production and API keys to leak to the browser)**
 
 Bootstrap an Astro project with React integration configured to integrate with the NextDNS API
 
@@ -3062,7 +3062,7 @@ export default defineConfig({ output: 'static' }); // ❌ API endpoints become b
 
 ### 3.6 Real-Time Log Streaming
 
-**Impact: HIGH**
+**Impact: HIGH (Connecting EventSource directly to api.nextdns.io from the browser exposes the API key in every SSE request URL or header)**
 
 Proxy the NextDNS SSE log stream through an Astro API endpoint and consume it in a React island
 
@@ -3497,7 +3497,7 @@ useEffect(() => {
 
 ### 4.1 Analytics Charts (SvelteKit)
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Fetching analytics data from client-side code exposes the API key; all NextDNS analytics requests must go through server load functions)**
 
 Fetch NextDNS analytics data in `+page.server.ts` and render interactive charts in Svelte components
 
@@ -3630,7 +3630,7 @@ pnpm add svelte-chartjs chart.js
 
 ### 4.2 API Key Proxy (BFF Pattern)
 
-**Impact: HIGH**
+**Impact: HIGH (Placing X-Api-Key in client-side code exposes the key to all users via browser DevTools and network requests)**
 
 Proxy all NextDNS API calls through SvelteKit `+server.ts` routes to keep X-Api-Key server-side only
 
@@ -3773,7 +3773,7 @@ import { NEXTDNS_API_KEY } from '$env/static/private'; // ❌ Build error
 
 ### 4.3 Error Handling (SvelteKit)
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Unhandled API errors crash pages or silently swallow failures; SvelteKit error boundaries and the error() helper must be used correctly to surface useful feedback)**
 
 Map NextDNS API errors to SvelteKit error responses and Svelte component-level feedback
 
@@ -3939,7 +3939,7 @@ try {
 
 ### 4.4 Log Streaming via SSE (SvelteKit)
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Opening the NextDNS log stream directly from the browser exposes the API key; streaming must be proxied through a SvelteKit +server.ts route)**
 
 Proxy the NextDNS real-time log stream through a SvelteKit `+server.ts` route and consume it in a
 
@@ -4076,7 +4076,7 @@ export const GET: RequestHandler = async ({ params }) => {
 
 ### 4.5 Profile Management UI (SvelteKit)
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Using +page.ts instead of +page.server.ts for data loading leaks API calls to the browser and may expose authentication context)**
 
 Build NextDNS profile list, create, update, and delete flows using SvelteKit load functions and form
 
@@ -4273,7 +4273,7 @@ If you need true SSE on Cloudflare Workers, use `TransformStream` to prevent res
 
 ### 4.7 SvelteKit Project Setup
 
-**Impact: HIGH**
+**Impact: HIGH (A misconfigured project exposes API keys or breaks server-side rendering, making the NextDNS dashboard insecure or non-functional)**
 
 Bootstrap a SvelteKit project with TypeScript, an SSR adapter, and secure environment variable
 
@@ -4404,7 +4404,7 @@ adapter: adapter({ fallback: 'index.html' });
 
 ### 5.1 Analytics Charts (React Router v8)
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Fetching analytics data from the client exposes the API key; all NextDNS analytics requests must be made in server loaders)**
 
 Fetch NextDNS analytics data in a React Router v8 `loader` and render interactive charts in React
 
@@ -4541,7 +4541,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 
 ### 5.2 API Key Proxy (BFF Pattern)
 
-**Impact: HIGH**
+**Impact: HIGH (Placing X-Api-Key in client-side code exposes the key to all users via browser DevTools and network requests)**
 
 Proxy all NextDNS API calls through React Router v8 resource routes to keep X-Api-Key server-side
 
@@ -4753,7 +4753,7 @@ navigate('.'); // ❌ Use fetcher.submit instead
 
 ### 5.4 Error Handling (React Router v8)
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Unhandled loader or action errors crash the entire page; React Router error boundaries and typed error responses must be used to isolate failures)**
 
 Map NextDNS API errors to React Router v8 error boundaries and inline component feedback
 
@@ -4969,7 +4969,7 @@ export function ErrorBoundary() {
 
 ### 5.5 Log Streaming via SSE (React Router v8)
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Opening the NextDNS log stream directly from the browser exposes the API key; streaming must be proxied through a React Router resource route)**
 
 Proxy the NextDNS real-time log stream through a React Router v8 resource route and consume it in a
 
@@ -5133,7 +5133,7 @@ useEffect(() => {
 
 ### 5.6 Profile Management UI (React Router v8)
 
-**Impact: MEDIUM**
+**Impact: MEDIUM (Using clientLoader instead of loader for API-key-protected data fetches the key on the browser and exposes it via DevTools network requests)**
 
 Build NextDNS profile list, create, update, and delete flows using React Router v8 `loader` and
 
@@ -5291,7 +5291,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 
 ### 5.7 React Router v8 Project Setup
 
-**Impact: HIGH**
+**Impact: HIGH (A misconfigured project disables SSR, causing loaders to run in the browser and exposing API keys via client-side network requests)**
 
 Bootstrap a React Router v8 project with SSR enabled, TypeScript, and secure environment variable
 

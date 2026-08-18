@@ -204,6 +204,27 @@ const x: string = "hello";
     const { rule } = await parseRuleFile(file, SECTION_MAP);
     expect(rule.examples).toHaveLength(0);
   });
+
+  it('keeps prose after a section code block as additional text', async () => {
+    const content = makeRule(
+      {},
+      `
+## Correct Usage
+
+### API request
+
+\`\`\`bash
+curl https://api.nextdns.io
+\`\`\`
+
+Explain why this request is correct.
+`
+    );
+    const file = write(dir, 'rule.md', content);
+    const { rule } = await parseRuleFile(file, SECTION_MAP);
+
+    expect(rule.examples[0]?.additionalText).toContain('Explain why this request is correct.');
+  });
 });
 
 describe('parseRuleFile — section mapping', () => {
