@@ -83,7 +83,9 @@ nextdns-skills/
 
 The two CLI packages declare their package-manager `bin` metadata directly as `./dist/cli.mjs`; no
 checked-in `bin/` directory or wrapper is required. The pack step grants execute permission to the
-CLI artifact and pnpm creates its `.bin` shim from the package metadata.
+CLI artifact and pnpm creates its `.bin` shim from the package metadata. Repository automation invokes
+`node dist/cli.mjs` (or the root package's direct `packages/*/dist/cli.mjs` path) instead of relying on a
+self-referential workspace bin shim during fresh CI installs.
 
 The shared `nextdns-markdown` package owns unified/remark parsing, YAML normalization, MDAST
 traversal helpers, and Valibot frontmatter validation. The two CLI packages consume it rather than

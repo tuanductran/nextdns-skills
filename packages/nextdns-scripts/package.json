@@ -24,18 +24,18 @@
   },
   "scripts": {
     "build": "vp pack",
-    "check-duplicates": "nextdns-skills-scripts check-duplicates",
-    "check-tags": "nextdns-skills-scripts check-tags",
-    "audit": "nextdns-skills-scripts audit",
+    "check-duplicates": "node dist/cli.mjs check-duplicates",
+    "check-tags": "node dist/cli.mjs check-tags",
+    "audit": "node dist/cli.mjs audit",
     "dev": "vp pack --watch",
-    "generate-stats": "nextdns-skills-scripts generate-stats",
+    "generate-stats": "node dist/cli.mjs generate-stats",
     "prepublishOnly": "pnpm build",
     "test": "vp test run",
     "test:coverage": "vp test run --coverage",
     "test:watch": "vp test",
     "types:check": "tsc --noEmit",
-    "update-counts": "nextdns-skills-scripts update-counts",
-    "validate-rules": "nextdns-skills-scripts validate-rules"
+    "update-counts": "node dist/cli.mjs update-counts",
+    "validate-rules": "node dist/cli.mjs validate-rules"
   },
   "dependencies": {
     "nextdns-markdown": "workspace:*",
