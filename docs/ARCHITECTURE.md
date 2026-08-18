@@ -1,5 +1,7 @@
 # Architecture
 
+**Last reviewed:** 2026-08-18
+
 NextDNS Skills is a monorepo that turns structured Markdown rules into agent-consumable context. The repository separates human-facing project documentation, agent context, domain source rules, generated output, validation tooling, and profile schemas. This separation keeps edits reviewable and prevents a generated file from becoming an accidental source of truth.
 
 ## Source-of-truth boundary
@@ -64,7 +66,7 @@ The root README is the public inventory for rule counts. If a rule is added or r
 
 ## Build and validation flow
 
-The root package uses pnpm scripts and Turbo to coordinate the two workspace packages. `nextdns-skills-build` compiles rules into generated context and validates structure. `nextdns-skills-scripts` checks rule integrity, tags, duplicates, statistics, and counts. The root scripts compose these checks with formatting, type-checking, Markdown lint, link validation, and tests.
+The root package uses pnpm scripts and Turbo to coordinate the two workspace packages. `nextdns-skills-build` compiles rules into generated context and validates structure. `nextdns-skills-scripts` provides focused maintenance commands and the combined `audit` aggregator. The audit runs referential-integrity, frontmatter, tags, duplicate-title, and duplicate-tag checks, then includes generated statistics in its `AuditReport`. Its public package surface exports `runAudit`, `formatAuditText`, `AuditCheck`, and `AuditReport` from [`src/index.ts`](../packages/nextdns-scripts/src/index.ts). The root scripts compose these checks with formatting, type-checking, Markdown lint, link validation, and tests.
 
 | Change | Minimum build or validation |
 | :--- | :--- |
@@ -73,9 +75,9 @@ The root package uses pnpm scripts and Turbo to coordinate the two workspace pac
 | Manifest or counts | `pnpm build:skills`, `pnpm build:check`, `pnpm update-counts`, `pnpm check-duplicates`, `pnpm check-tags` |
 | TypeScript or package code | `pnpm lint`, `pnpm types:check`, `pnpm test` |
 | CI or workflow changes | Applicable checks plus a review of changed paths and permissions |
-| Package or generated-output API | `pnpm run audit`, `pnpm build:check`, package tests, and type-check |
+| Package or generated-output API | `pnpm run audit -- --json`, `pnpm build:check`, package tests, and type-check |
 
-A link check is evidence about an external service at a point in time, not a guarantee that a URL will remain available. Treat protected pages, rate limits, downloads, redirects, and transient server errors as distinct categories. Replace a genuinely stale canonical link; document an expected exception instead of deleting useful source context.
+The combined audit is a repository-content check, not an external-link check. It returns a human-readable summary by default or a machine-readable report with `--json`; it exits non-zero when any required check fails. It does not rebuild generated files or replace `build:check`, Markdown lint, link validation, rule validation, or tests. A link check is evidence about an external service at a point in time, not a guarantee that a URL will remain available. Treat protected pages, rate limits, downloads, redirects, and transient server errors as distinct categories. Replace a genuinely stale canonical link; document an expected exception instead of deleting useful source context.
 
 ## Data and privacy boundaries
 

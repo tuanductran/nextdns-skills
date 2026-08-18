@@ -1,5 +1,7 @@
 # Contributing
 
+**Last reviewed:** 2026-08-18
+
 Thank you for improving **NextDNS Skills**. The repository is a source-grounded knowledge collection, so a useful contribution must be correct, discoverable, privacy-safe, and reproducible. Read the root [AGENTS.md](../AGENTS.md) first, then read the nearest generated skill context and the matching procedure in [.agents/workflows/](../.agents/workflows/).
 
 ## Choose the change type
@@ -60,6 +62,12 @@ git diff --check
 
 For documentation-only changes, `pnpm lint:md`, `pnpm lint:links`, and `git diff --check` are the minimum checks. For package or generated-output changes, also run `pnpm run audit` and `pnpm build:check`. Add `pnpm lint:all` when the change touches referenced URLs or CI. If a remote service returns 403, 429, 5xx, or a download response, record the exception and do not treat the response as proof that the documentation is invalid without further review.
 
+### Run the combined audit
+
+`pnpm run audit` invokes the `audit` command from [`nextdns-skills-scripts`](../packages/nextdns-scripts/src/audit.ts). It aggregates five repository checks: referential integrity, frontmatter validity, tag hygiene, duplicate titles, and duplicate tag sets. Duplicate-title findings are split into errors and warnings; only errors make that check fail. Duplicate tag sets are counted as warnings in the report, but any duplicate makes the `duplicate-tags` check fail. The command exits with status `0` only when every check passes and exits with status `1` when any check fails.
+
+Use `pnpm run audit -- --json` when CI, scripts, or a reviewer needs a machine-readable [`AuditReport`](../packages/nextdns-scripts/src/audit.ts). The report includes the generation timestamp, current rule count, per-check pass/error/warning counts, and aggregate statistics. Treat `generatedAt` and `ruleCount` as run-time values rather than stable documentation facts. The combined audit complements, but does not replace, `pnpm build:check`, Markdown and link linting, rule validation, or the test suite.
+
 ## Pull request expectations
 
 A pull request should explain the user or maintenance problem, summarize the change, identify the canonical files, and include validation evidence. For a rule change, mention the source used, the manifest update, the generated output rebuild, and any known external-link exceptions. For an account-backed observation, state that the content was generalized and contains no account data.
@@ -69,7 +77,7 @@ A pull request should explain the user or maintenance problem, summarize the cha
 | What problem does this solve? | A concise user or maintenance outcome |
 | Where is the source of truth? | Exact rule, manifest, package, schema, or docs path |
 | What was generated? | Generated `AGENTS.md` files, if any |
-| How was it tested? | Commands and meaningful results |
+| How was it tested? | Commands and meaningful results; for package or validation changes include `pnpm run audit -- --json` and the relevant tests |
 | Are any links exceptional? | Protected, rate-limited, download, redirect, or unresolved links |
 | Could the diff contain PII or secrets? | Explicitly reviewed; use safe placeholders only |
 

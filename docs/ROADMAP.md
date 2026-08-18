@@ -12,16 +12,16 @@ The project should preserve its central contract: provide concise, source-ground
 
 ## Current baseline
 
-The repository currently publishes five skill categories covering API, CLI, Web UI, integrations, and frontend patterns. The rule counts and category descriptions are maintained in the root README and should be treated as the public inventory.[1] The repository also has build tooling, rule validation, duplicate-title checks, tag checks, Markdown linting, link validation, tests, and agent workflows for repeatable changes.[2] [3] [4]
+The repository currently publishes five skill categories covering API, CLI, Web UI, integrations, and frontend patterns. The rule counts and category descriptions are maintained in the root README and should be treated as the public inventory.[1] The repository also has build tooling, rule validation, the combined `audit` command, duplicate-title checks, tag checks, Markdown linting, link validation, tests, and agent workflows for repeatable changes.[2] [3] [4] The audit is a repository-content aggregator with human-readable and JSON output; its stable checks are referential integrity, frontmatter, tags, duplicate titles, and duplicate tag sets.
 
 | Area | Current state | Planning implication |
 | :--- | :--- | :--- |
 | Domain coverage | Five skill categories with source rules and generated context | Prioritize freshness and cross-category consistency before adding large new categories |
 | Source discipline | Rules contain references and use official NextDNS sources where available | Make source status, observation date, and stale-link handling more explicit |
 | Agent workflow | `.agents/workflows/` covers adding rules, research, review, and release checks | Keep agent procedures separate from public contributor documentation |
-| Build pipeline | Generated output is rebuilt from source rules; validation and tests run through pnpm/Turbo | Treat generated drift as a release blocker |
+| Build pipeline | Generated output is rebuilt from source rules; validation, the combined audit, and tests run through pnpm/Turbo | Treat generated drift and failed audit checks as release blockers |
 | Privacy and safety | Root guidance prohibits credentials, live profile data, logs, cookies, and session data | Add automated and reviewer checks to preserve zero-PII content |
-| Public documentation | README explains installation and development commands, but the project had no public docs index or roadmap | Establish `docs/` as the human-facing documentation layer |
+| Public documentation | README and `docs/` explain installation, development commands, audit usage, architecture, and maintenance standards | Keep the audit contract documented without hardcoding volatile counts or report timestamps |
 
 ## Priorities
 
@@ -61,15 +61,15 @@ P1 should favor maintenance of high-impact rules over indiscriminate expansion. 
 
 ### P2 — Improve developer experience and evaluation
 
-P2 should turn recurring maintenance work into discoverable, reproducible operations. The project already has rule search, export, statistics, test extraction, templates, and schemas; the next step is to document their expected inputs and outputs and add representative fixtures where behavior is easy to regress.
+P2 should turn recurring maintenance work into discoverable, reproducible operations. The project already has rule search, export, statistics, test extraction, templates, schemas, and a combined audit with JSON output; the next step is to document their expected inputs and outputs and add representative fixtures where behavior is easy to regress. The audit baseline was implemented in commit [`17c759b`](https://github.com/tuanductran/nextdns-skills/commit/17c759b), which also added malformed-frontmatter coverage to the maintenance package tests.
 
 | Work item | Expected improvement | Exit evidence |
 | :--- | :--- | :--- |
-| Rule authoring examples | Fewer malformed frontmatter and unregistered rules | Example-driven template guidance plus a passing validation fixture |
+| Rule authoring examples | Fewer malformed frontmatter and unregistered rules | Example-driven template guidance plus a passing validation fixture; malformed-frontmatter audit coverage is now present in [`audit.test.ts`](../packages/nextdns-scripts/src/__tests__/audit.test.ts) |
 | Schema and export guide | Consumers can use `data/schemas/profile.json` and exported JSON/CSV safely | Documented field ownership, placeholder policy, and a sample generated artifact |
 | Browser link audit | Link failures are classified instead of treated as one undifferentiated error | Reproducible command or script with categories for 200/304, redirects, protected pages, downloads, rate limits, and real failures |
 | Evaluation fixtures | Changes to rule content can be judged against representative prompts | Extracted tests include expected coverage and at least one negative case for high-risk rules |
-| Contributor diagnostics | Failed validation points to the owning file and repair path | CI output links to the relevant docs and workflow procedure |
+| Combined audit and contributor diagnostics | One command summarizes repository integrity and provides machine-readable evidence for CI and reviews | `pnpm run audit -- --json` reports five stable checks; package exports and tests cover `AuditReport`; failed checks still link back to the owning validator and repair path |
 
 ### P3 — Improve distribution and release transparency
 
@@ -91,7 +91,7 @@ This sequence deliberately avoids a calendar commitment. External documentation,
 
 ## Definition of done for roadmap items
 
-A roadmap item is complete only when its implementation is present in the canonical location, its public documentation explains the behavior, generated outputs are rebuilt where applicable, and the relevant checks pass. Changes that affect domain guidance must include a source or an explicit statement that the content is an inference or proposal. Changes that touch account-backed observations must include a privacy review and must not include live identifiers or session artifacts.
+A roadmap item is complete only when its implementation is present in the canonical location, its public documentation explains the behavior, generated outputs are rebuilt where applicable, and the relevant checks pass. For audit-related work, the evidence must include the command mode used, the stable check contract, relevant package tests, and a clean distinction between audit results and generated-output or link checks. Changes that affect domain guidance must include a source or an explicit statement that the content is an inference or proposal. Changes that touch account-backed observations must include a privacy review and must not include live identifiers or session artifacts.
 
 A completed item should be linked from the relevant section of this file to a commit, pull request, issue, or test artifact. If no such evidence exists, the item should remain marked as planned rather than completed.
 
