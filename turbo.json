@@ -20,12 +20,12 @@
     },
     "test": {
       "dependsOn": ["^build"],
-      "inputs": ["src/**", "vitest.config.ts"],
+      "inputs": ["src/**", "vite.config.ts", "tsconfig.json", "package.json"],
       "outputs": []
     },
     "test:coverage": {
       "dependsOn": ["^build"],
-      "inputs": ["src/**", "vitest.config.ts"],
+      "inputs": ["src/**", "vite.config.ts", "tsconfig.json", "package.json"],
       "outputs": ["coverage/**"]
     },
     "build-all": {

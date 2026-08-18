@@ -45,8 +45,6 @@
     "@types/node": "catalog:dev",
     "@vitest/coverage-v8": "catalog:test",
     "typescript": "catalog:dev",
-    "vite": "catalog:test",
-    "vite-plus": "catalog:test",
-    "vitest": "catalog:test"
+    "vite-plus": "catalog:test"
   }
 }
