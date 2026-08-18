@@ -29,53 +29,80 @@ const validChecks = [
   { name: 'duplicate-tags', passed: true, errors: 0, warnings: 0 },
 ];
 
+function validAuditReport(overrides: Record<string, unknown> = {}) {
+  return {
+    generatedAt: '2026-08-18T00:00:00.000Z',
+    passed: true,
+    ruleCount: 1,
+    checks: validChecks,
+    statistics: validStatistics,
+    ...overrides,
+  };
+}
+
 describe('schema parsing', () => {
   it('accepts a complete audit report', () => {
-    const report = parseAuditReport({
-      generatedAt: '2026-08-18T00:00:00.000Z',
-      passed: true,
-      ruleCount: 1,
-      checks: validChecks,
-      statistics: validStatistics,
-    });
+    const report = parseAuditReport(validAuditReport());
 
     expect(report.statistics.totalRules).toBe(1);
     expect(report.checks).toHaveLength(5);
   });
 
+  it.each([validChecks.slice(0, 4), [...validChecks, ...validChecks.slice(0, 1)]])(
+    'rejects an audit report with %s checks',
+    (checks) => {
+      expect(() => parseAuditReport(validAuditReport({ checks }))).toThrow();
+    }
+  );
+
   it('rejects an unknown audit check name', () => {
     expect(() =>
-      parseAuditReport({
-        generatedAt: '2026-08-18T00:00:00.000Z',
-        passed: false,
-        ruleCount: 1,
-        checks: [
-          ...validChecks.slice(0, 4),
-          { name: 'unknown-check', passed: false, errors: 1, warnings: 0 },
-        ],
-        statistics: validStatistics,
-      })
+      parseAuditReport(
+        validAuditReport({
+          passed: false,
+          checks: [
+            ...validChecks.slice(0, 4),
+            { name: 'unknown-check', passed: false, errors: 1, warnings: 0 },
+          ],
+        })
+      )
     ).toThrow();
   });
 
   it('rejects missing nested statistics', () => {
+    const { statistics, ...reportWithoutStatistics } = validAuditReport();
+
+    expect(statistics).toBeDefined();
+    expect(() => parseAuditReport(reportWithoutStatistics)).toThrow();
+  });
+
+  it('rejects wrong primitive types', () => {
+    expect(() => parseAuditReport(validAuditReport({ passed: 'true' }))).toThrow();
+    expect(() => parseAuditReport(validAuditReport({ ruleCount: '1' }))).toThrow();
+  });
+
+  it('rejects non-integer or negative counters', () => {
+    expect(() => parseStatsReport({ ...validStatistics, totalRules: 1.5 })).toThrow();
     expect(() =>
-      parseAuditReport({
-        generatedAt: '2026-08-18T00:00:00.000Z',
-        passed: true,
-        ruleCount: 1,
-        checks: validChecks,
+      parseStatsReport({
+        ...validStatistics,
+        impactDistribution: { HIGH: -1, MEDIUM: 0, LOW: 0 },
       })
     ).toThrow();
   });
 
-  it('rejects negative counters', () => {
+  it('rejects incomplete nested skill statistics', () => {
     expect(() =>
       parseStatsReport({
         ...validStatistics,
-        totalRules: -1,
+        skills: [{ name: 'nextdns-api', total: 1 }],
       })
     ).toThrow();
+  });
+
+  it('rejects unknown input', () => {
+    expect(() => parseAuditReport(null)).toThrow();
+    expect(() => parseStatsReport('not-a-report')).toThrow();
   });
 
   it('returns type-safe stats data for a valid report', () => {

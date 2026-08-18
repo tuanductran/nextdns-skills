@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import { formatAuditText, runAudit } from '../commands/audit.js';
+import { parseAuditReport } from '../core/schemas.js';
 import { getPackageVersion } from '../core/version.js';
 
 function createFixture(rule: string, skill = '[Example](rules/example.md)') {
@@ -50,6 +51,13 @@ describe('runAudit', () => {
     expect(report.checks).toHaveLength(5);
     expect(report.checks.every((auditCheck) => auditCheck.passed)).toBe(true);
     expect(report.statistics.totalRules).toBe(report.ruleCount);
+  });
+
+  it('round-trips the repository report through the Valibot schema', () => {
+    const report = runAudit();
+    const parsed = parseAuditReport(JSON.parse(JSON.stringify(report)));
+
+    expect(parsed).toEqual(report);
   });
 
   it('formats a concise human-readable summary', () => {
