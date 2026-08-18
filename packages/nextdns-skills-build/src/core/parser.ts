@@ -7,6 +7,8 @@ import { basename } from 'node:path';
 
 import type { CodeExample, ImpactLevel, Rule, RuleType } from './types.js';
 
+import { parseFrontmatter } from './markdown.js';
+
 export interface RuleFile {
   section: number;
   subsection?: number;
@@ -23,40 +25,6 @@ function isRuleType(value: string): value is RuleType {
 
 function isImpactLevel(value: string): value is ImpactLevel {
   return value === 'HIGH' || value === 'MEDIUM' || value === 'LOW';
-}
-
-function parseFrontmatter(text: string): Record<string, unknown> {
-  const result: Record<string, unknown> = {};
-  let currentKey = '';
-  let inArray = false;
-  const arrayValues: string[] = [];
-
-  for (const line of text.split('\n')) {
-    const arrayItemMatch = line.match(/^\s+-\s+(.+)/);
-    if (arrayItemMatch) {
-      if (inArray) arrayValues.push((arrayItemMatch[1] ?? '').trim().replace(/^["']|["']$/g, ''));
-      continue;
-    }
-    if (inArray && currentKey) {
-      result[currentKey] = arrayValues.slice();
-      inArray = false;
-      arrayValues.length = 0;
-    }
-    const colonIdx = line.indexOf(':');
-    if (colonIdx === -1) continue;
-    const key = line.slice(0, colonIdx).trim();
-    const value = line.slice(colonIdx + 1).trim();
-    if (!key) continue;
-    if (value === '') {
-      currentKey = key;
-      inArray = true;
-    } else {
-      currentKey = key;
-      result[key] = value.replace(/^["']|["']$/g, '');
-    }
-  }
-  if (inArray && currentKey) result[currentKey] = arrayValues.slice();
-  return result;
 }
 
 /** Build a CodeExample omitting undefined optional fields (exactOptionalPropertyTypes). */
@@ -87,7 +55,7 @@ export async function parseRuleFile(
   if (content.startsWith('---')) {
     const frontmatterEnd = content.indexOf('\n---', 3);
     if (frontmatterEnd !== -1) {
-      frontmatter = parseFrontmatter(content.slice(3, frontmatterEnd).trim());
+      frontmatter = parseFrontmatter(content.slice(0, frontmatterEnd + 4));
       contentStart = frontmatterEnd + 4;
     }
   }
