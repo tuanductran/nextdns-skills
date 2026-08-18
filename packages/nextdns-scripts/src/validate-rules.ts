@@ -126,10 +126,11 @@ export function validateFieldValues(file: string, frontmatter: string): boolean 
     }
   }
 
-  const tagsStringMatch = frontmatter.match(/^tags:\s*'(.*)'/m);
-  if (tagsStringMatch) {
+  const tagsLineMatch = frontmatter.match(/^tags:[ \t]*(.*)$/m);
+  const inlineTags = tagsLineMatch?.[1]?.trim() ?? '';
+  if (inlineTags !== '') {
     printError(
-      `Invalid tags format in ${file}: tags must be a YAML array ('- item' format), not a string`
+      `Invalid tags format in ${file}: tags must be a YAML array ('- item' format), not a scalar`
     );
     errorsFound = true;
   }
