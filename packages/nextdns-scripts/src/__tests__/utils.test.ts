@@ -3,7 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vite-plus/test';
 
-import { collectRuleFiles, parseFrontmatter, walkDir } from '../utils.js';
+import { collectRuleFiles, parseFrontmatter, walkDir } from '../core/utils.js';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 

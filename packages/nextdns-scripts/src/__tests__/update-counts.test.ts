@@ -3,7 +3,13 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vite-plus/test';
 
-import { CATEGORIES, getRuleCount, readFile, updateDocument, writeFile } from '../update-counts.js';
+import {
+  CATEGORIES,
+  getRuleCount,
+  readFile,
+  updateDocument,
+  writeFile,
+} from '../commands/update-counts.js';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 

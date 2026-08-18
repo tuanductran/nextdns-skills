@@ -85,6 +85,7 @@ Rules are categorized into two types to guide AI precision:
 | **Check broken links** | `pnpm run lint:links` |
 | **Check duplicate titles** | `pnpm check-duplicates` |
 | **Check tag hygiene** | `pnpm check-tags` |
+| **Check duplicate code** | `pnpm lint:duplicates` |
 | **Run package audit** | `pnpm run audit` |
 | **Build all skills** | `pnpm build:skills` |
 | **Check generated output** | `pnpm build:check` |
@@ -94,6 +95,10 @@ Rules are categorized into two types to guide AI precision:
 | **Export rules (JSON/CSV)** | `pnpm rule-export -- --format=csv` |
 | **Run tests** | `pnpm test` |
 | **Run tests with coverage** | `pnpm test:coverage` |
+
+### TypeScript package layout
+
+Reusable TypeScript logic belongs in `packages/*/src/core/`, CLI responsibilities belong in `packages/*/src/commands/`, and `packages/*/src/cli.ts` is the dispatcher. The duplicate-code policy is maintained in [`.jscpd.json`](.jscpd.json) and runs through `pnpm lint:duplicates`.
 
 ### Adding new rules
 

@@ -5,10 +5,12 @@
  * external consumers can import them with full TypeScript types.
  */
 
-export type { SkillConfig } from './config.js';
-export { BUILD_DIR, DEFAULT_SKILL, SKILLS, SKILLS_DIR } from './config.js';
-export type { RuleFile } from './parser.js';
-export { parseRuleFile } from './parser.js';
+export type { SkillConfig } from './core/config.js';
+export { BUILD_DIR, DEFAULT_SKILL, SKILLS, SKILLS_DIR } from './core/config.js';
+export type { Frontmatter, FrontmatterValue } from './core/markdown.js';
+export { collectMarkdownFiles, parseFrontmatter } from './core/markdown.js';
+export type { RuleFile } from './core/parser.js';
+export { parseRuleFile } from './core/parser.js';
 export type {
   CodeExample,
   DocumentReference,
@@ -17,6 +19,6 @@ export type {
   Rule,
   RuleType,
   Section,
-} from './types.js';
-export { collectRuleFiles } from './utils.js';
-export { getPackageVersion } from './version.js';
+} from './core/types.js';
+export { collectRuleFiles } from './core/utils.js';
+export { getPackageVersion } from './core/version.js';

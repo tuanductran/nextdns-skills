@@ -2,14 +2,14 @@
  * Configuration for the build tooling
  */
 
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { getRepositoryRoot } from './paths.js';
 
 // Base paths
-export const SKILLS_DIR = join(__dirname, '../../..', 'skills');
-export const BUILD_DIR = join(__dirname, '..');
+export const REPO_ROOT = getRepositoryRoot(import.meta.url);
+export const SKILLS_DIR = join(REPO_ROOT, 'skills');
+export const BUILD_DIR = join(REPO_ROOT, 'packages/nextdns-skills-build');
 
 // Skill configurations
 export interface SkillConfig {

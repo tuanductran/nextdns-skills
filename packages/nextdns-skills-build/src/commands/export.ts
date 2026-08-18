@@ -15,10 +15,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { SKILLS } from './config.js';
+import { SKILLS } from '../core/config.js';
+import { collectMarkdownFiles, parseFrontmatter } from '../core/markdown.js';
+import { getRepositoryRoot } from '../core/paths.js';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.join(__dirname, '../../..');
+const REPO_ROOT = getRepositoryRoot(import.meta.url);
 
 export function run(): void {
   /* ---- CLI args ---- */
@@ -45,60 +46,6 @@ export function run(): void {
     tagCount: number;
   }
 
-  /* ---- Inline frontmatter parser ---- */
-  function parseFm(content: string): Record<string, string | string[]> {
-    if (!content.startsWith('---')) return {};
-    const end = content.indexOf('\n---', 3);
-    if (end === -1) return {};
-    const block = content.slice(3, end).trim();
-    const result: Record<string, string | string[]> = {};
-    let curKey = '';
-    let inArr = false;
-    const arr: string[] = [];
-    for (const line of block.split('\n')) {
-      const item = line.match(/^\s+-\s+(.+)/);
-      if (item) {
-        if (inArr) arr.push((item[1] ?? '').trim().replace(/^["']|["']$/g, ''));
-        continue;
-      }
-      if (inArr && curKey) {
-        result[curKey] = arr.slice();
-        inArr = false;
-        arr.length = 0;
-      }
-      const ci = line.indexOf(':');
-      if (ci === -1) continue;
-      const k = line.slice(0, ci).trim();
-      const v = line.slice(ci + 1).trim();
-      if (!k) continue;
-      if (v === '') {
-        curKey = k;
-        inArr = true;
-      } else {
-        result[k] = v.replace(/^["']|["']$/g, '');
-      }
-    }
-    if (inArr && curKey) result[curKey] = arr.slice();
-    return result;
-  }
-
-  function collectMd(dir: string): string[] {
-    const out: string[] = [];
-    if (!fs.existsSync(dir)) return out;
-    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-      const full = path.join(dir, entry.name);
-      if (entry.isDirectory()) out.push(...collectMd(full));
-      else if (
-        entry.name.endsWith('.md') &&
-        !entry.name.startsWith('_') &&
-        entry.name !== 'README.md'
-      ) {
-        out.push(full);
-      }
-    }
-    return out.sort();
-  }
-
   /* ---- Export ---- */
   function exportRules(): ExportRow[] {
     const rows: ExportRow[] = [];
@@ -115,9 +62,9 @@ export function run(): void {
     }
 
     for (const [skillName, skillConfig] of targetSkills) {
-      for (const filePath of collectMd(skillConfig.rulesDir)) {
+      for (const filePath of collectMarkdownFiles(skillConfig.rulesDir)) {
         const content = fs.readFileSync(filePath, 'utf8');
-        const fm = parseFm(content);
+        const fm = parseFrontmatter(content);
         const tags = Array.isArray(fm['tags']) ? fm['tags'] : [];
 
         rows.push({

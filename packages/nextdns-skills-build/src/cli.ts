@@ -10,7 +10,7 @@
  *   nextdns-skills-build <command> [options]
  */
 
-import { getPackageVersion } from './version.js';
+import { getPackageVersion } from './core/version.js';
 
 const COMMANDS: Record<string, string> = {
   build: './build.mjs',

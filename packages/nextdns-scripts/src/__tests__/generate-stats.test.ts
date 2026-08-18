@@ -3,7 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vite-plus/test';
 
-import { buildReport } from '../generate-stats.js';
+import { buildReport } from '../commands/generate-stats.js';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 

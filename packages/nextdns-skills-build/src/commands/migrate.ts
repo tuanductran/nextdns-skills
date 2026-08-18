@@ -10,7 +10,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { DEFAULT_SKILL, SKILLS } from './config.js';
+import { DEFAULT_SKILL, SKILLS } from '../core/config.js';
 
 // Parse CLI args
 const args = process.argv.slice(2);

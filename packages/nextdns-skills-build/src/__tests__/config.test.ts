@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vite-plus/test';
 
-import { DEFAULT_SKILL, SKILLS, SKILLS_DIR } from '../config.js';
+import { DEFAULT_SKILL, SKILLS, SKILLS_DIR } from '../core/config.js';
 
 describe('SKILLS registry', () => {
   it('defines all five expected skills', () => {

@@ -105,6 +105,11 @@ Both packages use a static `bin/` entrypoint checked into git that imports `dist
 runtime. This means pnpm creates the `.bin` symlink during `pnpm install` before `dist/` is built
 — the same pattern Vite uses for `bin/vite.js`.
 
+Within each TypeScript package, reusable modules live in `src/core/`, CLI implementations live in
+`src/commands/`, and `src/cli.ts` is the only dispatcher. Vite flattens named pack entries into
+`dist/*.mjs`, so moving a command requires updating its source import paths, Vite entry, CLI map,
+and any public package export together.
+
 ### `nextdns-scripts` (package name: `nextdns-skills-scripts`)
 
 Maintenance scripts: validate rule integrity, sync rule counts, check duplicates and tags, print
@@ -297,7 +302,8 @@ Run before finalising any changes:
 | :--- | :--- |
 | `pnpm lint:fix` | Auto-fix formatting (`oxfmt`), code (`oxlint`), markdown, and syntax |
 | `pnpm lint:rules` | Validate frontmatter and referential integrity via Turbo |
-| `pnpm lint:all` | Full check including external link validation |
+| `pnpm lint:all` | Full check including external link and duplicate-code validation |
+| `pnpm lint:duplicates` | Detect duplicate production TypeScript blocks using `.jscpd.json` |
 | `pnpm check-duplicates` | Detect duplicate titles (ERROR within skill, WARN across) |
 | `pnpm check-tags` | Validate tag count (3–10), uniqueness, and casing |
 | `pnpm update-counts` | Sync rule counts in README.md |

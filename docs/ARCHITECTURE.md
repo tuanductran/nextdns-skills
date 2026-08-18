@@ -48,6 +48,8 @@ The diagram is conceptual. It describes ownership and dependency direction, not 
 | Domain rules | `skills/*/rules/` | Provide the knowledge injected into agents | Edit directly using the rule template |
 | Generated output | `skills/*/AGENTS.md` | Aggregate rules for agent consumption | Never edit by hand; run `pnpm build:skills` |
 | Validation packages | `packages/nextdns-skills-build`, `packages/nextdns-scripts` | Build, validate, search, export, audit, test, and check content quality | Change code with tests and type-checking |
+| TypeScript package layout | `packages/*/src/core`, `packages/*/src/commands`, `packages/*/src/cli.ts` | Keep shared libraries, CLI commands, and dispatchers separate | Put reusable logic in `core/`; put one CLI responsibility per `commands/` module |
+| Duplicate-code policy | `.jscpd.json`, `pnpm lint:duplicates` | Detect repeated production TypeScript blocks without scanning generated or test artifacts | Adjust the config deliberately; do not silence a clone by moving it into another command |
 | Structural schema | `data/schemas/profile.json` | Define profile data shape used by relevant guidance | Update together with structural changes |
 
 ## Skill categories
@@ -66,18 +68,19 @@ The root README is the public inventory for rule counts. If a rule is added or r
 
 ## Build and validation flow
 
-The root package uses pnpm scripts and Turbo to coordinate the two workspace packages. `nextdns-skills-build` compiles rules into generated context and validates structure. `nextdns-skills-scripts` provides focused maintenance commands and the combined `audit` aggregator. The audit runs referential-integrity, frontmatter, tags, duplicate-title, and duplicate-tag checks, then includes generated statistics in its `AuditReport`. Its public package surface exports `runAudit`, `formatAuditText`, `AuditCheck`, and `AuditReport` from [`src/index.ts`](../packages/nextdns-scripts/src/index.ts). The root scripts compose these checks with formatting, type-checking, Markdown lint, link validation, and tests.
+The root package uses pnpm scripts and Turbo to coordinate the two workspace packages. Each TypeScript package separates reusable modules under `src/core/`, command implementations under `src/commands/`, and the dispatcher under `src/cli.ts`; Vite may flatten those source entries into named files under `dist/`, so package exports and CLI maps remain the compiled boundary. `nextdns-skills-build` compiles rules into generated context and validates structure. `nextdns-skills-scripts` provides focused maintenance commands and the combined `audit` aggregator. The audit runs referential-integrity, frontmatter, tags, duplicate-title, and duplicate-tag checks, then includes generated statistics in its `AuditReport`. Its public package surface exports `runAudit`, `formatAuditText`, `AuditCheck`, and `AuditReport` from [`src/index.ts`](../packages/nextdns-scripts/src/index.ts). The root scripts compose these checks with formatting, type-checking, Markdown lint, link validation, duplicate-code detection, and tests.
 
 | Change | Minimum build or validation |
 | :--- | :--- |
 | Public docs only | `pnpm lint:md`, `pnpm lint:links`, `git diff --check` |
 | Rule content | `pnpm build:skills`, `pnpm lint:rules`, `pnpm lint:all`, `pnpm test` |
 | Manifest or counts | `pnpm build:skills`, `pnpm build:check`, `pnpm update-counts`, `pnpm check-duplicates`, `pnpm check-tags` |
-| TypeScript or package code | `pnpm lint`, `pnpm types:check`, `pnpm test` |
+| TypeScript or package code | `pnpm lint`, `pnpm types:check`, `pnpm lint:duplicates`, `pnpm test` |
 | CI or workflow changes | Applicable checks plus a review of changed paths and permissions |
-| Package or generated-output API | `pnpm run audit -- --json`, `pnpm build:check`, package tests, and type-check |
+| Package or generated-output API | `pnpm run audit -- --json`, `pnpm lint:duplicates`, `pnpm build:check`, package tests, and type-check |
 
-The combined audit is a repository-content check, not an external-link check. It returns a human-readable summary by default or a machine-readable report with `--json`; it exits non-zero when any required check fails. It does not rebuild generated files or replace `build:check`, Markdown lint, link validation, rule validation, or tests. A link check is evidence about an external service at a point in time, not a guarantee that a URL will remain available. Treat protected pages, rate limits, downloads, redirects, and transient server errors as distinct categories. Replace a genuinely stale canonical link; document an expected exception instead of deleting useful source context.
+The combined audit is a repository-content check, not an external-link or duplicate-code check. It returns a human-readable summary by default or a machine-readable report with `--json`; it exits non-zero when any required check fails. The separate `pnpm lint:duplicates` command runs [jscpd v5](https://jscpd.dev/getting-started/configuration) with the committed [`.jscpd.json`](../.jscpd.json) policy, scanning maintained production TypeScript while excluding generated output, dependencies, coverage, and tests.
+The policy starts with a five-percent duplication threshold and should be tightened or refactored deliberately as the baseline improves. The audit and jscpd check do not rebuild generated files or replace `build:check`, Markdown lint, link validation, rule validation, or tests. A link check is evidence about an external service at a point in time, not a guarantee that a URL will remain available. Treat protected pages, rate limits, downloads, redirects, and transient server errors as distinct categories. Replace a genuinely stale canonical link; document an expected exception instead of deleting useful source context.
 
 ## Data and privacy boundaries
 
@@ -87,5 +90,6 @@ Profile schema changes require extra care. Update `data/schemas/profile.json`, r
 
 ## Change propagation
 
-A rule change propagates through the following path: source rule, parent manifest, generated skill context, README counts when the rule inventory changes, and quality gates. A package or validation change propagates through the package source, compiled `dist/` output when tracked by the project, tests, and the relevant contributor documentation. A public documentation change usually stops at `docs/` and README, unless it changes a procedure or canonical fact that also belongs in `AGENTS.md` or `.agents/workflows/`.
+A rule change propagates through the following path: source rule, parent manifest, generated skill context, README counts when the rule inventory changes, and quality gates. A package or validation change propagates through the package source, compiled `dist/` output when tracked by the project, tests, duplicate-code policy when relevant, and the relevant contributor documentation.
+A public documentation change usually stops at `docs/` and README, unless it changes a procedure or canonical fact that also belongs in `AGENTS.md` or `.agents/workflows/`.
 

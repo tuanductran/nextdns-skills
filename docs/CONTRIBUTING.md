@@ -14,6 +14,8 @@ Thank you for improving **NextDNS Skills**. The repository is a source-grounded 
 | Change public project guidance | `docs/*.md` or `README.md` | Check links and Markdown; update the documentation index when adding a document |
 | Change build or validation behavior | `packages/`, root scripts, or CI | Add or update tests, document the command, and run the full relevant quality gate |
 
+Within a TypeScript package, keep reusable code under `src/core/`, one responsibility per CLI module under `src/commands/`, and dispatch only from `src/cli.ts`. Vite may flatten compiled entry names under `dist/`; update the package's Vite entries, CLI registry, and public exports together when moving a module.
+
 ## Add or revise a rule
 
 Start with [templates/rule-template.md](../templates/rule-template.md). Use a kebab-case filename, a frontmatter `title` that exactly matches the H1 heading, an impact level, one-sentence impact description, a rule type, and three to ten unique tags. Keep the required sections in the order specified by [AGENTS.md](../AGENTS.md).
@@ -51,6 +53,7 @@ After editing, run the smallest useful checks first. For rule or manifest change
 pnpm build:skills
 pnpm build:check
 pnpm run audit
+pnpm lint:duplicates
 pnpm lint:fix
 pnpm lint:all
 pnpm check-duplicates
@@ -60,13 +63,17 @@ pnpm test
 git diff --check
 ```
 
-For documentation-only changes, `pnpm lint:md`, `pnpm lint:links`, and `git diff --check` are the minimum checks. For package or generated-output changes, also run `pnpm run audit` and `pnpm build:check`. Add `pnpm lint:all` when the change touches referenced URLs or CI. If a remote service returns 403, 429, 5xx, or a download response, record the exception and do not treat the response as proof that the documentation is invalid without further review.
+For documentation-only changes, `pnpm lint:md`, `pnpm lint:links`, and `git diff --check` are the minimum checks. For package or generated-output changes, also run `pnpm run audit`, `pnpm lint:duplicates`, and `pnpm build:check`. Add `pnpm lint:all` when the change touches referenced URLs or CI. If a remote service returns 403, 429, 5xx, or a download response, record the exception and do not treat the response as proof that the documentation is invalid without further review.
 
 ### Run the combined audit
 
-`pnpm run audit` invokes the `audit` command from [`nextdns-skills-scripts`](../packages/nextdns-scripts/src/audit.ts). It aggregates five repository checks: referential integrity, frontmatter validity, tag hygiene, duplicate titles, and duplicate tag sets. Duplicate-title findings are split into errors and warnings; only errors make that check fail. Duplicate tag sets are counted as warnings in the report, but any duplicate makes the `duplicate-tags` check fail. The command exits with status `0` only when every check passes and exits with status `1` when any check fails.
+`pnpm run audit` invokes the `audit` command from [`nextdns-skills-scripts`](../packages/nextdns-scripts/src/commands/audit.ts). It aggregates five repository checks: referential integrity, frontmatter validity, tag hygiene, duplicate titles, and duplicate tag sets. Duplicate-title findings are split into errors and warnings; only errors make that check fail. Duplicate tag sets are counted as warnings in the report, but any duplicate makes the `duplicate-tags` check fail. The command exits with status `0` only when every check passes and exits with status `1` when any check fails.
 
-Use `pnpm run audit -- --json` when CI, scripts, or a reviewer needs a machine-readable [`AuditReport`](../packages/nextdns-scripts/src/audit.ts). The report includes the generation timestamp, current rule count, per-check pass/error/warning counts, and aggregate statistics. Treat `generatedAt` and `ruleCount` as run-time values rather than stable documentation facts. The combined audit complements, but does not replace, `pnpm build:check`, Markdown and link linting, rule validation, or the test suite.
+Use `pnpm run audit -- --json` when CI, scripts, or a reviewer needs a machine-readable [`AuditReport`](../packages/nextdns-scripts/src/commands/audit.ts). The report includes the generation timestamp, current rule count, per-check pass/error/warning counts, and aggregate statistics. Treat `generatedAt` and `ruleCount` as run-time values rather than stable documentation facts. The combined audit complements, but does not replace, `pnpm build:check`, Markdown and link linting, duplicate-code scanning, rule validation, or the test suite.
+
+### Run the duplicate-code check
+
+`pnpm lint:duplicates` runs jscpd v5 using the committed [`.jscpd.json`](../.jscpd.json) policy. The scan covers maintained production TypeScript, requires at least eight lines and 80 tokens for a candidate clone, ignores tests and generated artifacts, and fails when duplicated lines exceed five percent. Review a reported clone before raising the threshold; prefer extracting shared logic into `src/core/` when the duplication represents the same behavior. See the [official jscpd configuration guide](https://jscpd.dev/getting-started/configuration) for the underlying option semantics.
 
 ## Pull request expectations
 
@@ -77,7 +84,7 @@ A pull request should explain the user or maintenance problem, summarize the cha
 | What problem does this solve? | A concise user or maintenance outcome |
 | Where is the source of truth? | Exact rule, manifest, package, schema, or docs path |
 | What was generated? | Generated `AGENTS.md` files, if any |
-| How was it tested? | Commands and meaningful results; for package or validation changes include `pnpm run audit -- --json` and the relevant tests |
+| How was it tested? | Commands and meaningful results; for package or validation changes include `pnpm run audit -- --json`, `pnpm lint:duplicates`, and the relevant tests |
 | Are any links exceptional? | Protected, rate-limited, download, redirect, or unresolved links |
 | Could the diff contain PII or secrets? | Explicitly reviewed; use safe placeholders only |
 

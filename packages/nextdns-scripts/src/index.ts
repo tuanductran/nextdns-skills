@@ -4,7 +4,7 @@
  * Re-exports shared utilities so other packages and tests can import
  * them without going through the dist paths directly.
  */
-export { collectRuleFiles, parseFrontmatter, walkDir } from './utils.js';
-export type { AuditCheck, AuditReport } from './audit.js';
-export { formatAuditText, runAudit } from './audit.js';
-export { getPackageVersion } from './version.js';
+export { collectRuleFiles, parseFrontmatter, walkDir } from './core/utils.js';
+export type { AuditCheck, AuditReport } from './commands/audit.js';
+export { formatAuditText, runAudit } from './commands/audit.js';
+export { getPackageVersion } from './core/version.js';

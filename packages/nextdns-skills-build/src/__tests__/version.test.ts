@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { getPackageVersion } from '../version.js';
+import { getPackageVersion } from '../core/version.js';
 
 describe('getPackageVersion', () => {
   it('returns a semantic package version', () => {

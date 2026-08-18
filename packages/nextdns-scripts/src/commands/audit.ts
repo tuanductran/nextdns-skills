@@ -10,13 +10,13 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { getRepositoryRoot } from '../core/paths.js';
 import { checkDuplicateTags, checkDuplicateTitles, loadAllRules } from './check-duplicates.js';
 import { validateTags } from './check-tags.js';
 import { buildReport, type StatsReport } from './generate-stats.js';
 import { validateFrontmatter, validateReferentialIntegrity } from './validate-rules.js';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.join(__dirname, '../../..');
+const REPO_ROOT = getRepositoryRoot(import.meta.url);
 const SKILLS_DIR = path.join(REPO_ROOT, 'skills');
 
 export interface AuditCheck {

@@ -7,11 +7,11 @@ import { writeFile } from 'node:fs/promises';
 import { relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import type { Rule, TestCase } from './types.js';
+import type { Rule, TestCase } from '../core/types.js';
 
-import { DEFAULT_SKILL, SKILLS, TEST_CASES_FILE } from './config.js';
-import { parseRuleFile } from './parser.js';
-import { collectRuleFiles } from './utils.js';
+import { DEFAULT_SKILL, SKILLS, TEST_CASES_FILE } from '../core/config.js';
+import { parseRuleFile } from '../core/parser.js';
+import { collectRuleFiles } from '../core/utils.js';
 
 /**
  * Extract test cases from a rule.

@@ -7,11 +7,11 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import type { Section } from './types.js';
+import type { Section } from '../core/types.js';
 
-import { DEFAULT_SKILL, SKILLS, type SkillConfig } from './config.js';
-import { parseRuleFile, type RuleFile } from './parser.js';
-import { collectRuleFiles } from './utils.js';
+import { DEFAULT_SKILL, SKILLS, type SkillConfig } from '../core/config.js';
+import { parseRuleFile, type RuleFile } from '../core/parser.js';
+import { collectRuleFiles } from '../core/utils.js';
 
 // Parse command line arguments
 const args = process.argv.slice(2);

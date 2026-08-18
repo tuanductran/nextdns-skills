@@ -12,7 +12,7 @@
  *   nextdns-skills-scripts <command> [options]
  */
 
-import { getPackageVersion } from './version.js';
+import { getPackageVersion } from './core/version.js';
 
 const COMMANDS: Record<string, string> = {
   'validate-rules': './validate-rules.mjs',

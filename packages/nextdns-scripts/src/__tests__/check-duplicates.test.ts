@@ -5,7 +5,7 @@ import {
   checkDuplicateTitles,
   normalize,
   type RuleEntry,
-} from '../check-duplicates.js';
+} from '../commands/check-duplicates.js';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 

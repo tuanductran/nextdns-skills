@@ -13,10 +13,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { walkDir } from './utils.js';
+import { getRepositoryRoot } from '../core/paths.js';
+import { walkDir } from '../core/utils.js';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.join(__dirname, '../../..');
+const REPO_ROOT = getRepositoryRoot(import.meta.url);
 const SKILLS_DIR = path.join(REPO_ROOT, 'skills');
 
 /* ========= Types ========= */

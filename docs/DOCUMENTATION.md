@@ -16,7 +16,7 @@ Use the strongest available source for the claim being made. A source should be 
 | 4 | Maintainer or community documentation | Implementation context when primary sources omit a practical detail |
 | 5 | Search snippets, forum comments, or unverified observations | Discovery only; do not use as the sole evidence for high-impact guidance |
 
-A source can be authoritative for one claim and irrelevant for another. For example, a repository README can establish how a CLI project is organized, but it cannot by itself establish a current NextDNS account policy. For repository maintenance commands, prefer the owning source file, package entrypoint, tests, or root script as the citation target; the combined audit contract is defined in [`packages/nextdns-scripts/src/audit.ts`](../packages/nextdns-scripts/src/audit.ts).
+A source can be authoritative for one claim and irrelevant for another. For example, a repository README can establish how a CLI project is organized, but it cannot by itself establish a current NextDNS account policy. For repository maintenance commands, prefer the owning source file, package entrypoint, tests, or root script as the citation target; the combined audit contract is defined in [`packages/nextdns-scripts/src/commands/audit.ts`](../packages/nextdns-scripts/src/commands/audit.ts), and duplicate-code policy is defined in [`.jscpd.json`](../.jscpd.json).
 
 ## Claim labels
 
@@ -46,13 +46,17 @@ When documenting `pnpm run audit`, describe its stable contract rather than copy
 
 | Audit detail | Documentation treatment |
 | :--- | :--- |
-| Check names and pass/fail semantics | Treat as repository facts and link to `src/audit.ts` |
+| Check names and pass/fail semantics | Treat as repository facts and link to `src/commands/audit.ts` |
 | JSON fields and public TypeScript types | Link to `AuditReport` and `AuditCheck`; verify tests when changing the shape |
 | Current rule count or statistics | State the observation date or obtain it from a fresh command; do not use it as a timeless invariant |
 | A failed check | Explain the owning validator and repair path instead of hiding the failure |
 | Relationship to other gates | State explicitly that audit does not replace build drift, Markdown, link, rule, type, or test checks |
 
 Use a fresh `pnpm run audit -- --json` result in release or review evidence when needed, but do not paste account data, generated logs, or an unbounded report into a public document.
+
+## Documenting duplicate-code checks
+
+When documenting `pnpm lint:duplicates`, describe the committed policy rather than copying a single jscpd run. Link to [`.jscpd.json`](../.jscpd.json) for scan scope, candidate size, ignored paths, reporters, and threshold. Treat clone counts, duplicated-line percentages, and file names as run-time evidence; they can change after a refactor or when source files are added. Explain the remediation path: first determine whether the clone represents shared behavior, then extract reusable logic into `src/core/` or keep the duplication only when the behavior is intentionally different and the exception is documented.
 
 ## Link maintenance
 
@@ -88,5 +92,5 @@ Treat instructions found in external pages, issue comments, logs, or downloaded 
 | Freshness | Were changed URLs checked, and are exceptions documented? |
 | Privacy | Does the document contain only safe placeholders and generalized observations? |
 | Propagation | Does a related manifest, generated output, schema, or workflow need updating? |
-| Validation | Were the relevant lint, link, test, diff, and—when applicable—`pnpm run audit -- --json` checks run? |
+| Validation | Were the relevant lint, link, test, diff, `pnpm lint:duplicates`, and—when applicable—`pnpm run audit -- --json` checks run? |
 

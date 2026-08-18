@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vite-plus/test';
 
-import { KNOWN_ACRONYMS, MAX_TAGS, MIN_TAGS, validateFileTags } from '../check-tags.js';
+import { KNOWN_ACRONYMS, MAX_TAGS, MIN_TAGS, validateFileTags } from '../commands/check-tags.js';
 
 describe('validateFileTags — tag count', () => {
   it('errors when no tags', () => {

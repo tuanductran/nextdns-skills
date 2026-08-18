@@ -12,7 +12,7 @@ The project should preserve its central contract: provide concise, source-ground
 
 ## Current baseline
 
-The repository currently publishes five skill categories covering API, CLI, Web UI, integrations, and frontend patterns. The rule counts and category descriptions are maintained in the root README and should be treated as the public inventory.[1] The repository also has build tooling, rule validation, the combined `audit` command, duplicate-title checks, tag checks, Markdown linting, link validation, tests, and agent workflows for repeatable changes.[2] [3] [4] The audit is a repository-content aggregator with human-readable and JSON output; its stable checks are referential integrity, frontmatter, tags, duplicate titles, and duplicate tag sets.
+The repository currently publishes five skill categories covering API, CLI, Web UI, integrations, and frontend patterns. The rule counts and category descriptions are maintained in the root README and should be treated as the public inventory.[1] The repository also has build tooling, rule validation, the combined `audit` command, duplicate-title checks, tag checks, jscpd duplicate-code scanning, Markdown linting, link validation, tests, and agent workflows for repeatable changes.[2] [3] [4] The audit is a repository-content aggregator with human-readable and JSON output; its stable checks are referential integrity, frontmatter, tags, duplicate titles, and duplicate tag sets. TypeScript packages now separate shared code under `src/core/` from CLI modules under `src/commands/`.
 
 | Area | Current state | Planning implication |
 | :--- | :--- | :--- |
@@ -61,7 +61,7 @@ P1 should favor maintenance of high-impact rules over indiscriminate expansion. 
 
 ### P2 — Improve developer experience and evaluation
 
-P2 should turn recurring maintenance work into discoverable, reproducible operations. The project already has rule search, export, statistics, test extraction, templates, schemas, and a combined audit with JSON output; the next step is to document their expected inputs and outputs and add representative fixtures where behavior is easy to regress. The audit baseline was implemented in commit [`17c759b`](https://github.com/tuanductran/nextdns-skills/commit/17c759b), which also added malformed-frontmatter coverage to the maintenance package tests.
+P2 should turn recurring maintenance work into discoverable, reproducible operations. The project already has rule search, export, statistics, test extraction, templates, schemas, a combined audit with JSON output, and a jscpd duplicate-code gate; the next step is to document their expected inputs and outputs and add representative fixtures where behavior is easy to regress. The audit baseline was implemented in commit [`17c759b`](https://github.com/tuanductran/nextdns-skills/commit/17c759b), which also added malformed-frontmatter coverage to the maintenance package tests. The current package layout keeps shared logic in `core/`, command modules in `commands/`, and dispatcher behavior in `cli.ts`.
 
 | Work item | Expected improvement | Exit evidence |
 | :--- | :--- | :--- |
@@ -70,6 +70,7 @@ P2 should turn recurring maintenance work into discoverable, reproducible operat
 | Browser link audit | Link failures are classified instead of treated as one undifferentiated error | Reproducible command or script with categories for 200/304, redirects, protected pages, downloads, rate limits, and real failures |
 | Evaluation fixtures | Changes to rule content can be judged against representative prompts | Extracted tests include expected coverage and at least one negative case for high-risk rules |
 | Combined audit and contributor diagnostics | One command summarizes repository integrity and provides machine-readable evidence for CI and reviews | `pnpm run audit -- --json` reports five stable checks; package exports and tests cover `AuditReport`; failed checks still link back to the owning validator and repair path |
+| Duplicate-code policy and package layout | Repeated production TypeScript logic is visible, and shared code has an obvious home | `.jscpd.json` defines the scan scope and threshold; `pnpm lint:duplicates` passes; `src/core/` and `src/commands/` boundaries are documented and tested |
 
 ### P3 — Improve distribution and release transparency
 

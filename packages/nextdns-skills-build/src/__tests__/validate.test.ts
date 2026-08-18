@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vite-plus/test';
 
-import type { Rule } from '../types.js';
+import type { Rule } from '../core/types.js';
 
-import { validateRule, type ValidationError } from '../validate.js';
+import { validateRule, type ValidationError } from '../commands/validate.js';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 

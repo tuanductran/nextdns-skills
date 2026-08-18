@@ -12,7 +12,7 @@ import {
   validateContentStructure,
   validateFieldValues,
   validateRequiredFields,
-} from '../validate-rules.js';
+} from '../commands/validate-rules.js';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 

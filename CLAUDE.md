@@ -45,12 +45,9 @@ nextdns-skills/
 │   │   ├── src/
 │   │   │   ├── cli.ts
 │   │   │   ├── index.ts
-│   │   │   ├── validate-rules.ts
-│   │   │   ├── update-counts.ts
-│   │   │   ├── check-duplicates.ts
-│   │   │   ├── check-tags.ts
-│   │   │   ├── generate-stats.ts
-│   │   │   └── utils.ts
+│   │   │   ├── commands/       # validate-rules, update-counts, checks, audit
+│   │   │   ├── core/            # shared utilities and version helpers
+│   │   │   └── __tests__/
 │   │   ├── tsconfig.json
 │   │   ├── vite.config.ts
 │   │   └── vitest.config.ts
@@ -60,16 +57,9 @@ nextdns-skills/
 │       ├── src/
 │       │   ├── cli.ts
 │       │   ├── index.ts
-│       │   ├── build.ts
-│       │   ├── validate.ts
-│       │   ├── parser.ts
-│       │   ├── config.ts
-│       │   ├── types.ts
-│       │   ├── search.ts
-│       │   ├── export.ts
-│       │   ├── extract-tests.ts
-│       │   ├── migrate.ts
-│       │   └── utils.ts
+│       │   ├── commands/       # build, validate, search, export, migrate
+│       │   ├── core/            # config, parser, types, markdown, paths
+│       │   └── __tests__/
 │       ├── tsconfig.json
 │       ├── vite.config.ts
 │       └── vitest.config.ts
@@ -92,7 +82,8 @@ runtime. This means pnpm creates the `.bin` symlink during `pnpm install` before
 ### `nextdns-scripts` (package name: `nextdns-skills-scripts`)
 
 Maintenance scripts: validate rule integrity, sync rule counts, check duplicates and tags, print
-statistics.
+statistics, and run the combined audit. Shared modules are under `src/core/`; CLI commands are
+under `src/commands/`.
 
 **Exports:**
 
@@ -113,6 +104,7 @@ statistics.
 | `check-duplicates` | Duplicate title detection |
 | `check-tags` | Tag hygiene validation |
 | `generate-stats` | Statistics report (`--text`) |
+| `audit` | Combined structured maintenance audit (`--json`) |
 
 **Package scripts:**
 
@@ -180,7 +172,9 @@ Also exposes a programmatic API.
 
 ### TypeScript conventions
 
-Both packages share one root `tsconfig.json` extended by each package. Enforced settings:
+Both packages share one root `tsconfig.json` extended by each package. Reusable modules belong in
+`src/core/`, command implementations belong in `src/commands/`, and `src/cli.ts` is the dispatcher.
+Enforced settings:
 
 - `strict: true`, `noUncheckedIndexedAccess: true`, `exactOptionalPropertyTypes: true`
 - `verbatimModuleSyntax: true` — always use `import type` for type-only imports
@@ -279,7 +273,8 @@ Run before finalising any changes:
 | :--- | :--- |
 | `pnpm lint:fix` | Auto-fix formatting (`oxfmt`), code (`oxlint`), markdown, and syntax |
 | `pnpm lint:rules` | Validate frontmatter and referential integrity via Turbo |
-| `pnpm lint:all` | Full check including external link validation |
+| `pnpm lint:all` | Full check including external link and duplicate-code validation |
+| `pnpm lint:duplicates` | Detect duplicate production TypeScript blocks using `.jscpd.json` |
 | `pnpm check-duplicates` | Detect duplicate titles (ERROR within skill, WARN across) |
 | `pnpm check-tags` | Validate tag count (3–10), uniqueness, and casing |
 | `pnpm update-counts` | Sync rule counts in README.md |

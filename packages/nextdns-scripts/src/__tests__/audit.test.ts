@@ -3,8 +3,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
-import { formatAuditText, runAudit } from '../audit.js';
-import { getPackageVersion } from '../version.js';
+import { formatAuditText, runAudit } from '../commands/audit.js';
+import { getPackageVersion } from '../core/version.js';
 
 function createFixture(rule: string, skill = '[Example](rules/example.md)') {
   const root = mkdtempSync(join(tmpdir(), 'nextdns-audit-'));
@@ -21,7 +21,7 @@ function createFixture(rule: string, skill = '[Example](rules/example.md)') {
   };
 }
 
-function check(report: ReturnType<typeof runAudit>, name: string) {
+function findCheck(report: ReturnType<typeof runAudit>, name: string) {
   const result = report.checks.find((item) => item.name === name);
   if (!result) throw new Error(`Missing audit check: ${name}`);
   return result;
@@ -48,7 +48,7 @@ describe('runAudit', () => {
     expect(report.passed).toBe(true);
     expect(report.ruleCount).toBeGreaterThan(0);
     expect(report.checks).toHaveLength(5);
-    expect(report.checks.every((check) => check.passed)).toBe(true);
+    expect(report.checks.every((auditCheck) => auditCheck.passed)).toBe(true);
     expect(report.statistics.totalRules).toBe(report.ruleCount);
   });
 
@@ -85,7 +85,7 @@ describe('runAudit', () => {
     try {
       const report = runAudit(fixture.skillsDir, fixture.root);
       expect(report.passed).toBe(false);
-      expect(check(report, 'frontmatter').passed).toBe(false);
+      expect(findCheck(report, 'frontmatter').passed).toBe(false);
     } finally {
       fixture.cleanup();
     }
@@ -96,7 +96,7 @@ describe('runAudit', () => {
     try {
       const report = runAudit(fixture.skillsDir, fixture.root);
       expect(report.passed).toBe(false);
-      expect(check(report, 'referential-integrity').passed).toBe(false);
+      expect(findCheck(report, 'referential-integrity').passed).toBe(false);
     } finally {
       fixture.cleanup();
     }
@@ -114,9 +114,9 @@ describe('runAudit', () => {
     try {
       const report = runAudit(fixture.skillsDir, fixture.root);
       expect(report.passed).toBe(false);
-      expect(check(report, 'duplicate-titles').passed).toBe(false);
-      expect(check(report, 'duplicate-titles').errors).toBeGreaterThan(0);
-      expect(check(report, 'duplicate-tags').warnings).toBeGreaterThan(0);
+      expect(findCheck(report, 'duplicate-titles').passed).toBe(false);
+      expect(findCheck(report, 'duplicate-titles').errors).toBeGreaterThan(0);
+      expect(findCheck(report, 'duplicate-tags').warnings).toBeGreaterThan(0);
     } finally {
       fixture.cleanup();
     }
