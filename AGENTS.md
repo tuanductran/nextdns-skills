@@ -61,14 +61,11 @@ nextdns-skills/
 │   │   ├── src/
 │   │   │   ├── cli.ts
 │   │   │   ├── index.ts
-│   │   │   ├── validate-rules.ts
-│   │   │   ├── update-counts.ts
-│   │   │   ├── check-duplicates.ts
-│   │   │   ├── check-tags.ts
-│   │   │   ├── generate-stats.ts
-│   │   │   └── utils.ts
+│   │   │   ├── commands/       # validate-rules, update-counts, checks, audit
+│   │   │   ├── core/            # shared utilities, schemas, paths, version
+│   │   │   └── __tests__/
 │   │   ├── tsconfig.json
-│   │   ├── tsdown.config.ts
+│   │   ├── vite.config.ts
 │   │   └── vitest.config.ts
 │   └── nextdns-skills-build/     # Build tooling and programmatic API
 │       ├── bin/
@@ -76,18 +73,11 @@ nextdns-skills/
 │       ├── src/
 │       │   ├── cli.ts
 │       │   ├── index.ts
-│       │   ├── build.ts
-│       │   ├── validate.ts
-│       │   ├── parser.ts
-│       │   ├── config.ts
-│       │   ├── types.ts
-│       │   ├── search.ts
-│       │   ├── export.ts
-│       │   ├── extract-tests.ts
-│       │   ├── migrate.ts
-│       │   └── utils.ts
+│       │   ├── commands/       # build, validate, search, export, migrate
+│       │   ├── core/            # config, parser, types, markdown, paths
+│       │   └── __tests__/
 │       ├── tsconfig.json
-│       ├── tsdown.config.ts
+│       ├── vite.config.ts
 │       └── vitest.config.ts
 ├── templates/
 │   ├── rule-template.md
@@ -113,7 +103,8 @@ and any public package export together.
 ### `nextdns-scripts` (package name: `nextdns-skills-scripts`)
 
 Maintenance scripts: validate rule integrity, sync rule counts, check duplicates and tags, print
-statistics.
+statistics, run the combined audit, and expose Valibot schemas for report consumers. Shared modules
+are under `src/core/`; CLI commands are under `src/commands/`.
 
 **Exports:**
 
@@ -309,6 +300,7 @@ Run before finalising any changes:
 | `pnpm update-counts` | Sync rule counts in README.md |
 | `pnpm types:check` | Type-check all packages via Turbo |
 | `pnpm test` | Run Vitest across both packages |
+| `src/core/schemas.ts` | Valibot runtime schemas and parsers for audit/statistics report boundaries |
 | `pnpm test:coverage` | Run tests with v8 coverage report |
 
 ## Building AGENTS.md

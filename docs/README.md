@@ -10,7 +10,7 @@ This directory contains the public documentation for **NextDNS Skills**. It is i
 | Understand source, generated output, and CI | [ARCHITECTURE.md](ARCHITECTURE.md) | Contributors and reviewers |
 | Add a rule or prepare a pull request | [CONTRIBUTING.md](CONTRIBUTING.md) | Contributors |
 | Write or review reliable documentation | [DOCUMENTATION.md](DOCUMENTATION.md) | Authors and reviewers |
-| Run or consume the repository audit | [CONTRIBUTING.md](CONTRIBUTING.md) and [`audit.ts`](../packages/nextdns-scripts/src/audit.ts) | Maintainers and package contributors |
+| Run or consume the repository audit | [CONTRIBUTING.md](CONTRIBUTING.md), [`audit.ts`](../packages/nextdns-scripts/src/commands/audit.ts), and [`schemas.ts`](../packages/nextdns-scripts/src/core/schemas.ts) | Maintainers and package contributors |
 
 ## Documentation boundaries
 

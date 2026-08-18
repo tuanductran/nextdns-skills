@@ -47,12 +47,14 @@ When documenting `pnpm run audit`, describe its stable contract rather than copy
 | Audit detail | Documentation treatment |
 | :--- | :--- |
 | Check names and pass/fail semantics | Treat as repository facts and link to `src/commands/audit.ts` |
-| JSON fields and public TypeScript types | Link to `AuditReport` and `AuditCheck`; verify tests when changing the shape |
+| JSON fields and public TypeScript types | Link to `AuditReport`, `AuditCheck`, and the public Valibot schemas; verify schema tests when changing the shape |
 | Current rule count or statistics | State the observation date or obtain it from a fresh command; do not use it as a timeless invariant |
 | A failed check | Explain the owning validator and repair path instead of hiding the failure |
 | Relationship to other gates | State explicitly that audit does not replace build drift, Markdown, link, rule, type, or test checks |
 
 Use a fresh `pnpm run audit -- --json` result in release or review evidence when needed, but do not paste account data, generated logs, or an unbounded report into a public document.
+
+Runtime schemas are repository facts, not a replacement for semantic validators. The Valibot schemas in [`packages/nextdns-scripts/src/core/schemas.ts`](../packages/nextdns-scripts/src/core/schemas.ts) validate the shape and primitive invariants of audit/statistics reports; the existing rule validators still own frontmatter semantics, cross-file references, tags, and content structure. Document `parseAuditReport` and `parseStatsReport` as the safe boundary for unknown JSON, and do not claim that schema parsing proves a rule is semantically correct.
 
 ## Documenting duplicate-code checks
 

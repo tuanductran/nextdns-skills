@@ -38,6 +38,9 @@
     "update-counts": "nextdns-skills-scripts update-counts",
     "validate-rules": "nextdns-skills-scripts validate-rules"
   },
+  "dependencies": {
+    "valibot": "catalog:runtime"
+  },
   "devDependencies": {
     "@types/node": "catalog:dev",
     "@vitest/coverage-v8": "catalog:test",

@@ -20,29 +20,13 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { getRepositoryRoot } from '../core/paths.js';
+import { parseStatsReport, type SkillStats, type StatsReport } from '../core/schemas.js';
 import { collectRuleFiles, parseFrontmatter } from '../core/utils.js';
 
 const REPO_ROOT = getRepositoryRoot(import.meta.url);
 const SKILLS_DIR = path.join(REPO_ROOT, 'skills');
 
-export interface SkillStats {
-  name: string;
-  total: number;
-  capability: number;
-  efficiency: number;
-  high: number;
-  medium: number;
-  low: number;
-}
-
-export interface StatsReport {
-  generatedAt: string;
-  totalRules: number;
-  skills: SkillStats[];
-  impactDistribution: { HIGH: number; MEDIUM: number; LOW: number };
-  topTags: Array<{ tag: string; count: number }>;
-  rulesWithNoTags: string[];
-}
+export type { SkillStats, StatsReport } from '../core/schemas.js';
 
 export function buildReport(
   skillsDir: string = SKILLS_DIR,
@@ -113,14 +97,14 @@ export function buildReport(
     .slice(0, 20)
     .map(([tag, count]) => ({ tag, count }));
 
-  return {
+  return parseStatsReport({
     generatedAt: new Date().toISOString(),
     totalRules,
     skills,
     impactDistribution,
     topTags,
     rulesWithNoTags,
-  };
+  });
 }
 
 export function printText(report: StatsReport): void {

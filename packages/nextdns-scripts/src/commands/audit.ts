@@ -11,28 +11,16 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { getRepositoryRoot } from '../core/paths.js';
+import { parseAuditReport, type AuditCheck, type AuditReport } from '../core/schemas.js';
 import { checkDuplicateTags, checkDuplicateTitles, loadAllRules } from './check-duplicates.js';
 import { validateTags } from './check-tags.js';
-import { buildReport, type StatsReport } from './generate-stats.js';
+import { buildReport } from './generate-stats.js';
 import { validateFrontmatter, validateReferentialIntegrity } from './validate-rules.js';
 
 const REPO_ROOT = getRepositoryRoot(import.meta.url);
 const SKILLS_DIR = path.join(REPO_ROOT, 'skills');
 
-export interface AuditCheck {
-  name: 'referential-integrity' | 'frontmatter' | 'tags' | 'duplicate-titles' | 'duplicate-tags';
-  passed: boolean;
-  errors: number;
-  warnings: number;
-}
-
-export interface AuditReport {
-  generatedAt: string;
-  passed: boolean;
-  ruleCount: number;
-  checks: AuditCheck[];
-  statistics: StatsReport;
-}
+export type { AuditCheck, AuditReport } from '../core/schemas.js';
 
 function suppressOutput<T>(fn: () => T): T {
   const log = console.log;
@@ -91,13 +79,13 @@ export function runAudit(
     },
   ];
 
-  return {
+  return parseAuditReport({
     generatedAt: new Date().toISOString(),
     passed: checks.every((check) => check.passed),
     ruleCount: rules.length,
     checks,
     statistics: buildReport(skillsDir, repoRoot),
-  };
+  });
 }
 
 export function formatAuditText(report: AuditReport): string {

@@ -82,8 +82,8 @@ runtime. This means pnpm creates the `.bin` symlink during `pnpm install` before
 ### `nextdns-scripts` (package name: `nextdns-skills-scripts`)
 
 Maintenance scripts: validate rule integrity, sync rule counts, check duplicates and tags, print
-statistics, and run the combined audit. Shared modules are under `src/core/`; CLI commands are
-under `src/commands/`.
+statistics, run the combined audit, and expose Valibot schemas for report consumers. Shared modules
+are under `src/core/`; CLI commands are under `src/commands/`.
 
 **Exports:**
 
@@ -119,6 +119,7 @@ under `src/commands/`.
 | `test` | `vitest run` |
 | `test:coverage` | `vitest run --coverage` |
 | `types:check` | `tsc --noEmit` |
+| `schema API` | `src/core/schemas.ts` exports Valibot report schemas and safe parsers |
 
 ### `nextdns-skills-build`
 
