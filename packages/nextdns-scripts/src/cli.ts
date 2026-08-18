@@ -2,25 +2,30 @@
 /**
  * Unified CLI entrypoint for nextdns-skills-scripts.
  *
- * Each subcommand module exports a run() function that contains the
- * logic previously executed as a top-level side-effect. This wrapper
- * strips the subcommand name off `process.argv` before dynamically
- * importing the target module and calling run(), so the isMain guard
- * inside each module is never the dispatch mechanism.
+ * Each subcommand module exports a run() function. The static command
+ * registry bundles every supported command into the single dist/cli.mjs
+ * executable, while command modules remain importable in tests without
+ * executing CLI logic.
  *
  * Usage:
  *   nextdns-skills-scripts <command> [options]
  */
 
+import { run as runAudit } from './commands/audit.js';
+import { run as runCheckDuplicates } from './commands/check-duplicates.js';
+import { run as runCheckTags } from './commands/check-tags.js';
+import { run as runGenerateStats } from './commands/generate-stats.js';
+import { run as runUpdateCounts } from './commands/update-counts.js';
+import { run as runValidateRules } from './commands/validate-rules.js';
 import { getPackageVersion } from './core/version.js';
 
-const COMMANDS: Record<string, string> = {
-  'validate-rules': './validate-rules.mjs',
-  'update-counts': './update-counts.mjs',
-  'check-duplicates': './check-duplicates.mjs',
-  'check-tags': './check-tags.mjs',
-  'generate-stats': './generate-stats.mjs',
-  audit: './audit.mjs',
+const COMMANDS: Record<string, () => void | Promise<void>> = {
+  'validate-rules': runValidateRules,
+  'update-counts': runUpdateCounts,
+  'check-duplicates': runCheckDuplicates,
+  'check-tags': runCheckTags,
+  'generate-stats': runGenerateStats,
+  audit: runAudit,
 };
 
 const HELP = `Usage: nextdns-skills-scripts <command> [options]
@@ -52,21 +57,16 @@ async function main(): Promise<void> {
     process.exit(subcommand ? 0 : 1);
   }
 
-  const modulePath = COMMANDS[subcommand];
-  if (!modulePath) {
+  const command = COMMANDS[subcommand];
+  if (!command) {
     console.error(`Unknown command: ${subcommand}\n`);
     console.log(HELP);
     process.exit(1);
   }
 
-  // Re-slice argv so each module's process.argv.slice(2) sees only `rest`
+  // Re-slice argv so the selected command sees only its own options.
   process.argv = [process.argv[0] ?? 'node', process.argv[1] ?? 'nextdns-skills-scripts', ...rest];
-
-  // Import the module and call its exported run() function explicitly.
-  // We no longer rely on top-level side-effects so that modules remain
-  // importable in tests without executing CLI logic.
-  const mod = (await import(modulePath)) as { run: () => void };
-  mod.run();
+  await command();
 }
 
 void main();

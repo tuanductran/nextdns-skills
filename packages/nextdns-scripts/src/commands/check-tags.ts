@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * Validate tag hygiene across all rule files.
  *
@@ -12,7 +11,6 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { getRepositoryRoot } from '../core/paths.js';
 import { collectRuleFiles, parseFrontmatter } from '../core/utils.js';
@@ -255,5 +253,3 @@ export function run(): void {
   const ok = validateTags();
   process.exit(ok ? 0 : 1);
 }
-
-if (fileURLToPath(import.meta.url) === process.argv[1]) run();

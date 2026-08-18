@@ -56,8 +56,7 @@ nextdns-skills/
 │           └── sveltekit/
 ├── packages/
 │   ├── nextdns-scripts/          # Validation and maintenance scripts
-│   │   ├── bin/
-│   │   │   └── nextdns-skills-scripts.js   # Static entrypoint (checked into git)
+│   │   ├── dist/                       # index.mjs, cli.mjs, shared chunks
 │   │   ├── src/
 │   │   │   ├── cli.ts
 │   │   │   ├── index.ts
@@ -68,8 +67,7 @@ nextdns-skills/
 │   │   ├── vite.config.ts
 │   │   └── vitest.config.ts
 │   └── nextdns-skills-build/     # Build tooling and programmatic API
-│       ├── bin/
-│       │   └── nextdns-skills-build.js     # Static entrypoint (checked into git)
+│       ├── dist/                       # index.mjs, cli.mjs, shared chunks
 │       ├── src/
 │       │   ├── cli.ts
 │       │   ├── index.ts
@@ -91,14 +89,15 @@ nextdns-skills/
 
 ## Package architecture
 
-Both packages use a static `bin/` entrypoint checked into git that imports `dist/cli.mjs` at
-runtime. This means pnpm creates the `.bin` symlink during `pnpm install` before `dist/` is built
-— the same pattern Vite uses for `bin/vite.js`.
+Both packages declare their package-manager `bin` metadata directly as `./dist/cli.mjs`; no
+checked-in `bin/` directory or wrapper is required. The pack step grants execute permission to the
+CLI artifact and pnpm creates its `.bin` shim from the package metadata.
 
 Within each TypeScript package, reusable modules live in `src/core/`, CLI implementations live in
-`src/commands/`, and `src/cli.ts` is the only dispatcher. Vite flattens named pack entries into
-`dist/*.mjs`, so moving a command requires updating its source import paths, Vite entry, CLI map,
-and any public package export together.
+`src/commands/`, and `src/cli.ts` is the only dispatcher. The Vite-Plus pack configuration emits only
+`dist/index.mjs` and `dist/cli.mjs` plus shared chunks. The dispatcher statically imports the supported
+commands, so command modules are bundled into `dist/cli.mjs` rather than emitted as unused standalone
+files.
 
 ### `nextdns-scripts` (package name: `nextdns-skills-scripts`)
 
@@ -131,12 +130,12 @@ are under `src/core/`; CLI commands are under `src/commands/`.
 
 | Script | Description |
 | :--- | :--- |
-| `build` | `tsdown` — compile to `dist/` |
-| `validate-rules` | Run validate-rules via bin |
-| `update-counts` | Run update-counts via bin |
-| `check-duplicates` | Run check-duplicates via bin |
-| `check-tags` | Run check-tags via bin |
-| `generate-stats` | Run generate-stats via bin |
+| `build` | `vp pack` — compile only `index.mjs`, `cli.mjs`, and required shared chunks to `dist/` |
+| `validate-rules` | Run validate-rules through `dist/cli.mjs` |
+| `update-counts` | Run update-counts through `dist/cli.mjs` |
+| `check-duplicates` | Run check-duplicates through `dist/cli.mjs` |
+| `check-tags` | Run check-tags through `dist/cli.mjs` |
+| `generate-stats` | Run generate-stats through `dist/cli.mjs` |
 | `test` | `vitest run` |
 | `test:coverage` | `vitest run --coverage` |
 | `types:check` | `tsc --noEmit` |
@@ -151,11 +150,7 @@ Also exposes a programmatic API.
 ```json
 {
   "exports": {
-    ".":          { "import": "./dist/index.mjs"    },
-    "./build":    { "import": "./dist/build.mjs"    },
-    "./validate": { "import": "./dist/validate.mjs" },
-    "./search":   { "import": "./dist/search.mjs"   },
-    "./export":   { "import": "./dist/export.mjs"   }
+    ".": { "import": "./dist/index.mjs" }
   }
 }
 ```
@@ -175,7 +170,7 @@ Also exposes a programmatic API.
 
 | Script | Description |
 | :--- | :--- |
-| `build` | `tsdown` — compile to `dist/` |
+| `build` | `vp pack` — compile only `index.mjs`, `cli.mjs`, and required shared chunks to `dist/` |
 | `build-all` | Build AGENTS.md for all skills |
 | `build-check` | Verify all generated AGENTS.md files are up to date |
 | `build-api` | Build `nextdns-api` only |

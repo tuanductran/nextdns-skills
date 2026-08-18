@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * Sync rule counts in README.md and AGENTS.md.
  *
@@ -8,7 +7,6 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { getRepositoryRoot } from '../core/paths.js';
 import { walkDir } from '../core/utils.js';
@@ -114,5 +112,3 @@ export function updateCounts(repoRoot: string = REPO_ROOT, skillsDir: string = S
 export function run(): void {
   updateCounts();
 }
-
-if (fileURLToPath(import.meta.url) === process.argv[1]) run();

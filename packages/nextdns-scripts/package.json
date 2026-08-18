@@ -11,10 +11,9 @@
   ],
   "license": "MIT",
   "bin": {
-    "nextdns-skills-scripts": "./bin/nextdns-skills-scripts.js"
+    "nextdns-skills-scripts": "./dist/cli.mjs"
   },
   "files": [
-    "bin",
     "dist"
   ],
   "type": "module",

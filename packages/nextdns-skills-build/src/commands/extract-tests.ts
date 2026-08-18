@@ -1,11 +1,9 @@
-#!/usr/bin/env node
 /**
  * Extract test cases from NextDNS skill rules for LLM evaluation
  */
 
 import { writeFile } from 'node:fs/promises';
 import { relative } from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import type { Rule, TestCase } from '../core/types.js';
 
@@ -96,4 +94,3 @@ async function extractTests() {
 }
 
 export const run = extractTests;
-if (fileURLToPath(import.meta.url) === process.argv[1]) void extractTests();

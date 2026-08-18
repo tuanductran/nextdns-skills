@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * Export all NextDNS skill rules to a structured JSON or CSV file.
  *
@@ -13,7 +12,6 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { parseExportCliOptions } from '../core/cli-validation.js';
 import { SKILLS } from '../core/config.js';
@@ -133,5 +131,3 @@ export function run(): void {
     process.stdout.write(`${output}\n`);
   }
 }
-
-if (fileURLToPath(import.meta.url) === process.argv[1]) run();

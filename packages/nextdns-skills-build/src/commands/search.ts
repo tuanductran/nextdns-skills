@@ -12,7 +12,6 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { parseSearchCliOptions } from '../core/cli-validation.js';
 import { SKILLS } from '../core/config.js';
@@ -155,5 +154,3 @@ export function run(): void {
     console.log('');
   }
 }
-
-if (fileURLToPath(import.meta.url) === process.argv[1]) run();

@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * Run the complete repository maintenance audit.
  *
@@ -8,7 +7,6 @@
  */
 
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { getRepositoryRoot } from '../core/paths.js';
 import { parseAuditReport, type AuditCheck, type AuditReport } from '../core/schemas.js';
@@ -114,5 +112,3 @@ export function run(): void {
   }
   process.exitCode = report.passed ? 0 : 1;
 }
-
-if (fileURLToPath(import.meta.url) === process.argv[1]) run();

@@ -1,14 +1,11 @@
-#!/usr/bin/env node
-
 /**
  * Scaffolding tool to create a new NextDNS skill rule file from a template.
- * Usage: node bin/cli.js migrate --skill=nextdns-api --name=my-rule [--type=capability] [--impact=HIGH]
+ * Usage: nextdns-skills-build migrate --skill=nextdns-api --name=my-rule [--type=capability] [--impact=HIGH]
  */
 
 import { existsSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { parseMigrateCliOptions } from '../core/cli-validation.js';
 import { SKILLS } from '../core/config.js';
@@ -26,7 +23,7 @@ async function migrate() {
 
     if (!ruleName) {
       console.error(
-        'Usage: node bin/cli.js migrate --skill=<skill> --name=<rule-name> [--type=capability|efficiency] [--impact=HIGH|MEDIUM|LOW]'
+        'Usage: nextdns-skills-build migrate --skill=<skill> --name=<rule-name> [--type=capability|efficiency] [--impact=HIGH|MEDIUM|LOW]'
       );
       console.error('\nAvailable skills:', Object.keys(SKILLS).join(', '));
       process.exit(1);
@@ -105,4 +102,3 @@ TODO: step-by-step diagnostic guidance.
 }
 
 export const run = migrate;
-if (fileURLToPath(import.meta.url) === process.argv[1]) void migrate();

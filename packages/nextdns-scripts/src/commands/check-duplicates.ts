@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /**
  * Detect duplicate rule titles and heavily-overlapping tag sets across all skill categories.
  *
@@ -12,7 +11,6 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { getRepositoryRoot } from '../core/paths.js';
 import { collectRuleFiles, parseFrontmatter } from '../core/utils.js';
@@ -184,4 +182,3 @@ export function run(): void {
 }
 
 // Run only when executed directly (not imported as a module in tests)
-if (fileURLToPath(import.meta.url) === process.argv[1]) run();

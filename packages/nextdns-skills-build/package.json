@@ -12,28 +12,15 @@
   ],
   "license": "MIT",
   "bin": {
-    "nextdns-skills-build": "./bin/nextdns-skills-build.js"
+    "nextdns-skills-build": "./dist/cli.mjs"
   },
   "files": [
-    "bin",
     "dist"
   ],
   "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.mjs"
-    },
-    "./build": {
-      "import": "./dist/build.mjs"
-    },
-    "./validate": {
-      "import": "./dist/validate.mjs"
-    },
-    "./search": {
-      "import": "./dist/search.mjs"
-    },
-    "./export": {
-      "import": "./dist/export.mjs"
     }
   },
   "scripts": {

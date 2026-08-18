@@ -5,7 +5,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["src/**", "bin/**", "tsdown.config.ts", "tsconfig.json", "package.json"],
+      "inputs": ["src/**", "vite.config.ts", "tsconfig.json", "package.json"],
       "outputs": ["dist/**"]
     },
     "dev": {

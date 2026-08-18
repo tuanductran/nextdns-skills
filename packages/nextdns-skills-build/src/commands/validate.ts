@@ -1,10 +1,8 @@
-#!/usr/bin/env node
 /**
  * Validate NextDNS skill rule files follow the correct structure
  */
 
 import { relative } from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import type { Rule } from '../core/types.js';
 
@@ -107,5 +105,3 @@ async function validate() {
 export function run(): void {
   void validate();
 }
-
-if (fileURLToPath(import.meta.url) === process.argv[1]) run();
