@@ -14,6 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { parseSearchCliOptions } from '../core/cli-validation.js';
 import { SKILLS } from '../core/config.js';
 import { collectMarkdownFiles, parseFrontmatter } from '../core/markdown.js';
 import { getRepositoryRoot } from '../core/paths.js';
@@ -32,22 +33,12 @@ export interface SearchResult {
 
 export { parseFrontmatter as parseFm };
 
-function getArg(argv: string[], name: string): string | undefined {
-  const found = argv.find((arg) => arg.startsWith(`--${name}=`));
-  return found ? found.split('=').slice(1).join('=') : undefined;
-}
-
 export function search(argv: string[] = process.argv.slice(2)): SearchResult[] {
-  const query = getArg(argv, 'query')?.toLowerCase();
-  const filterTag = getArg(argv, 'tag')?.toLowerCase();
-  const filterSkill = getArg(argv, 'skill')?.toLowerCase();
-  const filterImpact = getArg(argv, 'impact')?.toUpperCase();
-
-  if (!query && !filterTag && !filterSkill && !filterImpact) {
-    throw new Error(
-      'Usage: nextdns-skills-build search [--query=<text>] [--tag=<tag>] [--skill=<name>] [--impact=HIGH|MEDIUM|LOW] [--json]'
-    );
-  }
+  const options = parseSearchCliOptions(argv);
+  const query = options.query?.toLowerCase();
+  const filterTag = options.tag?.toLowerCase();
+  const filterSkill = options.skill?.toLowerCase();
+  const filterImpact = options.impact;
 
   const results: SearchResult[] = [];
   const targetSkills = filterSkill
@@ -119,7 +110,9 @@ export function search(argv: string[] = process.argv.slice(2)): SearchResult[] {
 export function run(): void {
   const argv = process.argv.slice(2);
   let results: SearchResult[];
+  let outputJson = false;
   try {
+    outputJson = parseSearchCliOptions(argv).json;
     results = search(argv);
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
@@ -127,7 +120,7 @@ export function run(): void {
     return;
   }
 
-  if (argv.includes('--json')) {
+  if (outputJson) {
     console.log(JSON.stringify(results, null, 2));
     return;
   }

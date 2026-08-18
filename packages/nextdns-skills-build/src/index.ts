@@ -7,6 +7,25 @@
 
 export type { SkillConfig } from './core/config.js';
 export { BUILD_DIR, DEFAULT_SKILL, SKILLS, SKILLS_DIR } from './core/config.js';
+export {
+  BuildCliOptionsSchema,
+  ExportCliOptionsSchema,
+  MigrateCliOptionsSchema,
+  SearchCliOptionsSchema,
+  SkillCommandCliOptionsSchema,
+  parseBuildCliOptions,
+  parseExportCliOptions,
+  parseMigrateCliOptions,
+  parseSearchCliOptions,
+  parseSkillCommandCliOptions,
+} from './core/cli-validation.js';
+export type {
+  BuildCliOptions,
+  ExportCliOptions,
+  MigrateCliOptions,
+  SearchCliOptions,
+  SkillCommandCliOptions,
+} from './core/cli-validation.js';
 export type { Frontmatter, FrontmatterValue } from './core/markdown.js';
 export { collectMarkdownFiles, parseFrontmatter } from './core/markdown.js';
 export type { RuleFile } from './core/parser.js';

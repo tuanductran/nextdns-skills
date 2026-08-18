@@ -14,7 +14,7 @@ Thank you for improving **NextDNS Skills**. The repository is a source-grounded 
 | Change public project guidance | `docs/*.md` or `README.md` | Check links and Markdown; update the documentation index when adding a document |
 | Change build or validation behavior | `packages/`, root scripts, or CI | Add or update tests, document the command, and run the full relevant quality gate |
 
-Within a TypeScript package, keep reusable code under `src/core/`, one responsibility per CLI module under `src/commands/`, and dispatch only from `src/cli.ts`. Vite may flatten compiled entry names under `dist/`; update the package's Vite entries, CLI registry, and public exports together when moving a module.
+Within a TypeScript package, keep reusable code under `src/core/`, one responsibility per CLI module under `src/commands/`, and dispatch only from `src/cli.ts`. Vite may flatten compiled entry names under `dist/`; update the package's Vite entries, CLI registry, and public exports together when moving a module. Build-package CLI inputs must pass through [`core/cli-validation.ts`](../packages/nextdns-skills-build/src/core/cli-validation.ts) so runtime parsing remains consistent for direct commands and programmatic consumers.
 
 ## Add or revise a rule
 
@@ -70,6 +70,10 @@ For documentation-only changes, `pnpm lint:md`, `pnpm lint:links`, and `git diff
 `pnpm run audit` invokes the `audit` command from [`nextdns-skills-scripts`](../packages/nextdns-scripts/src/commands/audit.ts). It aggregates five repository checks: referential integrity, frontmatter validity, tag hygiene, duplicate titles, and duplicate tag sets. Duplicate-title findings are split into errors and warnings; only errors make that check fail. Duplicate tag sets are counted as warnings in the report, but any duplicate makes the `duplicate-tags` check fail. The command exits with status `0` only when every check passes and exits with status `1` when any check fails.
 
 Use `pnpm run audit -- --json` when CI, scripts, or a reviewer needs a machine-readable [`AuditReport`](../packages/nextdns-scripts/src/commands/audit.ts). The report includes the generation timestamp, current rule count, per-check pass/error/warning counts, and aggregate statistics. Treat `generatedAt` and `ruleCount` as run-time values rather than stable documentation facts. The public [`schemas.ts`](../packages/nextdns-scripts/src/core/schemas.ts) exports Valibot schemas and `parseAuditReport`/`parseStatsReport` helpers for consumers that receive report JSON from an external process. The combined audit complements, but does not replace, `pnpm build:check`, Markdown and link linting, duplicate-code scanning, rule validation, or the test suite.
+
+### Validate CLI input
+
+The build package validates raw CLI arguments at runtime with Valibot before reading rules or mutating files. The shared parser rejects unknown and duplicate options, missing option values, unknown skill names, invalid impact/type/format values, non-kebab-case migration names, and incompatible `build --all` plus `--skill` combinations. Search requires at least one filter, while `export` and skill-scoped commands preserve their documented defaults. Consumers that invoke commands programmatically should use the public parser exports from [`src/index.ts`](../packages/nextdns-skills-build/src/index.ts), not duplicate `process.argv` parsing.
 
 ### Run the duplicate-code check
 

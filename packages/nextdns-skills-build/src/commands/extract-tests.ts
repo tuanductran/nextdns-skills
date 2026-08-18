@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 
 import type { Rule, TestCase } from '../core/types.js';
 
+import { parseSkillCommandCliOptions } from '../core/cli-validation.js';
 import { DEFAULT_SKILL, SKILLS, TEST_CASES_FILE } from '../core/config.js';
 import { parseRuleFile } from '../core/parser.js';
 import { collectRuleFiles } from '../core/utils.js';
@@ -55,10 +56,8 @@ function extractTestCases(rule: Rule): TestCase[] {
  */
 async function extractTests() {
   try {
-    // Support --skill= flag (same as build.ts)
-    const args = process.argv.slice(2);
-    const skillArg = args.find((a) => a.startsWith('--skill='));
-    const skillName = skillArg ? (skillArg.split('=')[1] ?? DEFAULT_SKILL) : DEFAULT_SKILL;
+    const { skill: requestedSkill } = parseSkillCommandCliOptions(process.argv.slice(2));
+    const skillName = requestedSkill ?? DEFAULT_SKILL;
     const skillConfig = SKILLS[skillName];
     if (!skillConfig) {
       console.error(`Unknown skill: ${skillName}`);

@@ -10,22 +10,13 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { DEFAULT_SKILL, SKILLS } from '../core/config.js';
-
-// Parse CLI args
-const args = process.argv.slice(2);
-function getArg(name: string): string | undefined {
-  const arg = args.find((a) => a.startsWith(`--${name}=`));
-  return arg ? (arg.split('=')[1] ?? undefined) : undefined;
-}
-
-const skillName = getArg('skill') ?? DEFAULT_SKILL;
-const ruleName = getArg('name');
-const ruleType = getArg('type') ?? 'capability';
-const ruleImpact = getArg('impact') ?? 'MEDIUM';
+import { parseMigrateCliOptions } from '../core/cli-validation.js';
+import { SKILLS } from '../core/config.js';
 
 async function migrate() {
   try {
+    const options = parseMigrateCliOptions(process.argv.slice(2));
+    const { skill: skillName, name: ruleName, type: ruleType, impact: ruleImpact } = options;
     const skill = SKILLS[skillName];
     if (!skill) {
       console.error(`Unknown skill: ${skillName}`);

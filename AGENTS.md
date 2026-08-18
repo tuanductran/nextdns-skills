@@ -62,7 +62,7 @@ nextdns-skills/
 │   │   │   ├── cli.ts
 │   │   │   ├── index.ts
 │   │   │   ├── commands/       # validate-rules, update-counts, checks, audit
-│   │   │   ├── core/            # shared utilities, schemas, paths, version
+│   │   │   ├── core/            # shared utilities, schemas, CLI validation, paths, version
 │   │   │   └── __tests__/
 │   │   ├── tsconfig.json
 │   │   ├── vite.config.ts
@@ -74,7 +74,7 @@ nextdns-skills/
 │       │   ├── cli.ts
 │       │   ├── index.ts
 │       │   ├── commands/       # build, validate, search, export, migrate
-│       │   ├── core/            # config, parser, types, markdown, paths
+│       │   ├── core/            # config, parser, types, markdown, CLI validation, paths
 │       │   └── __tests__/
 │       ├── tsconfig.json
 │       ├── vite.config.ts

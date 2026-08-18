@@ -124,7 +124,8 @@ are under `src/core/`; CLI commands are under `src/commands/`.
 ### `nextdns-skills-build`
 
 Build tooling: compile rule files into `AGENTS.md`, validate, scaffold, search, and export rules.
-Also exposes a programmatic API.
+It validates CLI options with Valibot before filesystem work and exposes the same parsers through its
+programmatic API.
 
 **Exports:**
 

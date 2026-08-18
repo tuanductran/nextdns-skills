@@ -15,6 +15,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { parseExportCliOptions } from '../core/cli-validation.js';
 import { SKILLS } from '../core/config.js';
 import { collectMarkdownFiles, parseFrontmatter } from '../core/markdown.js';
 import { getRepositoryRoot } from '../core/paths.js';
@@ -22,17 +23,17 @@ import { getRepositoryRoot } from '../core/paths.js';
 const REPO_ROOT = getRepositoryRoot(import.meta.url);
 
 export function run(): void {
-  /* ---- CLI args ---- */
-  const argv = process.argv.slice(2);
-  function getArg(name: string): string | undefined {
-    const a = argv.find((x) => x.startsWith(`--${name}=`));
-    return a ? a.split('=').slice(1).join('=') : undefined;
+  let options: ReturnType<typeof parseExportCliOptions>;
+  try {
+    options = parseExportCliOptions(process.argv.slice(2));
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exitCode = 1;
+    return;
   }
 
-  const format: 'json' | 'csv' = getArg('format') === 'csv' ? 'csv' : 'json';
-  const outFile = getArg('out');
-  const skillArg = getArg('skill');
-  const buildAll = !skillArg;
+  const { format, out: outFile, skill: skillArg } = options;
+  const buildAll = skillArg === undefined;
 
   /* ---- Types ---- */
   interface ExportRow {

@@ -9,17 +9,10 @@ import { fileURLToPath } from 'node:url';
 
 import type { Section } from '../core/types.js';
 
+import { parseBuildCliOptions, type BuildCliOptions } from '../core/cli-validation.js';
 import { DEFAULT_SKILL, SKILLS, type SkillConfig } from '../core/config.js';
 import { parseRuleFile, type RuleFile } from '../core/parser.js';
 import { collectRuleFiles } from '../core/utils.js';
-
-// Parse command line arguments
-const args = process.argv.slice(2);
-const upgradeVersion = args.includes('--upgrade-version');
-const checkOnly = args.includes('--check');
-const skillArg = args.find((arg) => arg.startsWith('--skill='));
-const skillName = skillArg ? (skillArg.split('=')[1] ?? null) : null;
-const buildAll = args.includes('--all');
 
 /**
  * Increment a semver-style version string (e.g., "0.1.0" -> "0.1.1", "1.0" -> "1.1")
@@ -134,7 +127,7 @@ function generateMarkdown(
 /**
  * Build a single skill
  */
-async function buildSkill(skillConfig: SkillConfig) {
+async function buildSkill(skillConfig: SkillConfig, options: BuildCliOptions) {
   console.log(`\nBuilding ${skillConfig.name}...`);
   console.log(`  Rules directory: ${skillConfig.rulesDir}`);
   console.log(`  Output file: ${skillConfig.outputFile}`);
@@ -222,7 +215,7 @@ async function buildSkill(skillConfig: SkillConfig) {
   }
 
   // Upgrade version if flag is passed
-  if (upgradeVersion) {
+  if (options.upgradeVersion) {
     const oldVersion = metadata.version;
     metadata.version = incrementVersion(oldVersion);
     console.log(`  Upgrading version: ${oldVersion} -> ${metadata.version}`);
@@ -250,7 +243,7 @@ async function buildSkill(skillConfig: SkillConfig) {
   const markdown = generateMarkdown(sections, metadata, skillConfig);
 
   // Write output or verify generated output without mutating the repository.
-  if (checkOnly) {
+  if (options.check) {
     let existing = '';
     try {
       existing = await readFile(skillConfig.outputFile, 'utf-8');
@@ -273,24 +266,26 @@ async function buildSkill(skillConfig: SkillConfig) {
 /**
  * Main build function
  */
-async function build() {
+async function build(
+  options: BuildCliOptions = parseBuildCliOptions(process.argv.slice(2))
+): Promise<void> {
   try {
     console.log('Building AGENTS.md from rules...');
 
-    if (buildAll) {
+    if (options.all) {
       // Build all skills
       for (const skill of Object.values(SKILLS)) {
-        await buildSkill(skill);
+        await buildSkill(skill, options);
       }
-    } else if (skillName) {
+    } else if (options.skill) {
       // Build specific skill
-      const skill = SKILLS[skillName];
+      const skill = SKILLS[options.skill];
       if (!skill) {
-        console.error(`Unknown skill: ${skillName}`);
+        console.error(`Unknown skill: ${options.skill}`);
         console.error(`Available skills: ${Object.keys(SKILLS).join(', ')}`);
         process.exit(1);
       }
-      await buildSkill(skill);
+      await buildSkill(skill, options);
     } else {
       // Build default skill (backwards compatibility)
       const defaultSkill = SKILLS[DEFAULT_SKILL];
@@ -299,7 +294,7 @@ async function build() {
         console.error(`Available skills: ${Object.keys(SKILLS).join(', ')}`);
         process.exit(1);
       }
-      await buildSkill(defaultSkill);
+      await buildSkill(defaultSkill, options);
     }
 
     console.log('\n✓ Build complete');

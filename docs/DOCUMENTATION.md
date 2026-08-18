@@ -56,6 +56,10 @@ Use a fresh `pnpm run audit -- --json` result in release or review evidence when
 
 Runtime schemas are repository facts, not a replacement for semantic validators. The Valibot schemas in [`packages/nextdns-scripts/src/core/schemas.ts`](../packages/nextdns-scripts/src/core/schemas.ts) validate the shape and primitive invariants of audit/statistics reports; the existing rule validators still own frontmatter semantics, cross-file references, tags, and content structure. Document `parseAuditReport` and `parseStatsReport` as the safe boundary for unknown JSON, and do not claim that schema parsing proves a rule is semantically correct.
 
+## Documenting CLI runtime validation
+
+When documenting build commands, link accepted flags and validation behavior to [`packages/nextdns-skills-build/src/core/cli-validation.ts`](../packages/nextdns-skills-build/src/core/cli-validation.ts). State whether a command accepts defaults, requires a filter, restricts an option to an enum, validates a skill name, or rejects incompatible flags. Explain that CLI validation protects the argument boundary before filesystem reads or writes; it does not replace rule parsing, frontmatter validation, generated-output checks, or semantic content checks.
+
 ## Documenting duplicate-code checks
 
 When documenting `pnpm lint:duplicates`, describe the committed policy rather than copying a single jscpd run. Link to [`.jscpd.json`](../.jscpd.json) for scan scope, candidate size, ignored paths, reporters, and threshold. Treat clone counts, duplicated-line percentages, and file names as run-time evidence; they can change after a refactor or when source files are added. Explain the remediation path: first determine whether the clone represents shared behavior, then extract reusable logic into `src/core/` or keep the duplication only when the behavior is intentionally different and the exception is documented.
