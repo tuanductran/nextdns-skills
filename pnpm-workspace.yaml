@@ -33,7 +33,7 @@ catalogs:
     yaml: 2.9.0
 
   build:
-    lefthook: ^2.1.10
+    lefthook: ^2.2.2
     turbo: ^2.10.8
 
 minimumReleaseAgeExclude:
