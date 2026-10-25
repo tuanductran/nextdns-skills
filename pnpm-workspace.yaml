@@ -29,7 +29,7 @@ catalogs:
     remark-gfm: 4.0.1
     remark-parse: 11.0.0
     unified: 11.0.5
-    valibot: 1.4.2
+    valibot: 1.5.0
     yaml: 2.9.0
 
   build:
